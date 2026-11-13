@@ -30,7 +30,7 @@ body,
   width: 100vw;
   height: 100vh;
   overflow: hidden;
-  background: radial-gradient(circle at center, #081226 0%, #03060f 100%);
+  background-color: #03060f;
 }
 
 .cesium-Viewport {
@@ -47,30 +47,262 @@ body,
   display: block;
 }
 
-/* Top HUD Header */
+/* Top HUD Header — No backdrop-filter blur over WebGL canvas to avoid GPU compositor readback */
 .hud-header {
   position: absolute;
   top: 16px;
   left: 16px;
   right: 16px;
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: space-between;
   pointer-events: none;
   z-index: 10;
+}
+
+.hud-left-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  pointer-events: auto;
+}
+
+.hud-top-row {
+  display: flex;
+  align-items: stretch;
+  gap: 8px;
 }
 
 .hud-brand {
   display: flex;
   flex-direction: column;
   gap: 4px;
-  background: rgba(7, 13, 28, 0.78);
-  backdrop-filter: blur(12px);
+  background: rgba(7, 13, 28, 0.94);
   border: 1px solid rgba(56, 189, 248, 0.25);
   border-radius: 12px;
   padding: 10px 16px;
-  pointer-events: auto;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.45);
+}
+
+.hud-action-buttons {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.hud-action-btn {
+  height: 100%;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0 14px;
+  background: rgba(7, 13, 28, 0.94);
+  border: 1px solid rgba(148, 163, 184, 0.25);
+  border-radius: 12px;
+  color: #e2e8f0;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  cursor: pointer;
+}
+
+.hud-action-btn:hover {
+  border-color: #38bdf8;
+  color: #38bdf8;
+  background: #0f172a;
+}
+
+.hud-action-btn.active {
+  border-color: #38bdf8;
+  color: #38bdf8;
+  background: rgba(14, 30, 56, 0.96);
+}
+
+@keyframes spin360 {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.spin-icon {
+  animation: spin360 0.6s linear infinite;
+}
+
+/* Collapsible Controls & Overlays Checkbox Menu */
+.hud-menu-panel {
+  width: 335px;
+  max-height: calc(100vh - 130px);
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  background: rgba(7, 13, 28, 0.96);
+  border: 1px solid rgba(56, 189, 248, 0.3);
+  border-radius: 12px;
+  padding: 14px 16px;
+}
+
+.menu-section {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+.menu-section-title {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: #38bdf8;
+  margin-bottom: 2px;
+}
+
+.menu-checkbox-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 12px;
+  color: #cbd5e1;
+  cursor: pointer;
+  padding: 3px 4px;
+  border-radius: 6px;
+}
+
+.menu-checkbox-row:hover {
+  background: rgba(148, 163, 184, 0.1);
+  color: #f8fafc;
+}
+
+.menu-checkbox-row input[type='checkbox'] {
+  accent-color: #38bdf8;
+  width: 15px;
+  height: 15px;
+  cursor: pointer;
+}
+
+.menu-divider {
+  height: 1px;
+  background: rgba(148, 163, 184, 0.18);
+  margin: 2px 0;
+}
+
+.menu-actions-row {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.menu-action-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 8px 12px;
+  background: #0f172a;
+  border: 1px solid rgba(56, 189, 248, 0.28);
+  border-radius: 8px;
+  color: #e2e8f0;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.menu-action-btn:hover {
+  border-color: #38bdf8;
+  color: #38bdf8;
+}
+
+/* Scientific Legend Card (Bottom-Left above hint bar) */
+.hud-legend-card {
+  position: absolute;
+  left: 20px;
+  bottom: 66px;
+  width: 340px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  background: rgba(7, 13, 28, 0.94);
+  border: 1px solid rgba(56, 189, 248, 0.25);
+  border-radius: 12px;
+  padding: 12px 14px;
+  z-index: 10;
+}
+
+.legend-header {
+  font-size: 11px;
+  font-weight: 700;
+  color: #38bdf8;
+  letter-spacing: 0.04em;
+  border-bottom: 1px solid rgba(148, 163, 184, 0.18);
+  padding-bottom: 6px;
+}
+
+.legend-items {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.legend-item-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 11px;
+  color: #94a3b8;
+}
+
+.legend-swatch {
+  width: 12px;
+  height: 12px;
+  border-radius: 3px;
+  flex-shrink: 0;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+}
+
+.legend-label {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 11px;
+  color: #e2e8f0;
+}
+
+.hud-basemap-bar {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(7, 13, 28, 0.94);
+  border: 1px solid rgba(148, 163, 184, 0.2);
+  border-radius: 10px;
+  padding: 6px 10px;
+}
+
+.basemap-chip {
+  background: transparent;
+  border: 1px solid transparent;
+  color: #94a3b8;
+  font-size: 11px;
+  font-weight: 600;
+  padding: 4px 9px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.basemap-chip:hover {
+  color: #f8fafc;
+  background: rgba(148, 163, 184, 0.12);
+}
+
+.basemap-chip.active {
+  color: #38bdf8;
+  background: rgba(56, 189, 248, 0.15);
+  border-color: rgba(56, 189, 248, 0.35);
+}
+
+.chip-divider {
+  width: 1px;
+  height: 14px;
+  background: rgba(148, 163, 184, 0.25);
+  margin: 0 2px;
 }
 
 .hud-badge {
@@ -98,13 +330,11 @@ body,
   display: flex;
   align-items: center;
   gap: 18px;
-  background: rgba(7, 13, 28, 0.78);
-  backdrop-filter: blur(12px);
+  background: rgba(7, 13, 28, 0.94);
   border: 1px solid rgba(148, 163, 184, 0.2);
   border-radius: 12px;
   padding: 10px 18px;
   pointer-events: auto;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.45);
 }
 
 .telemetry-item {
@@ -144,27 +374,23 @@ body,
   display: flex;
   align-items: center;
   justify-content: center;
-  background: rgba(7, 13, 28, 0.82);
-  backdrop-filter: blur(12px);
+  background: rgba(7, 13, 28, 0.94);
   border: 1px solid rgba(148, 163, 184, 0.22);
   border-radius: 10px;
   color: #cbd5e1;
   cursor: pointer;
-  transition: all 0.18s ease;
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
 }
 
 .nav-btn:hover {
   border-color: #38bdf8;
   color: #38bdf8;
-  background: rgba(15, 23, 42, 0.92);
-  transform: translateY(-1px);
+  background: #0f172a;
 }
 
 .nav-btn.active {
   border-color: #38bdf8;
   color: #38bdf8;
-  background: rgba(56, 189, 248, 0.14);
+  background: rgba(14, 30, 56, 0.96);
 }
 
 /* Bottom-Left Hint Bar */
@@ -175,8 +401,7 @@ body,
   display: flex;
   align-items: center;
   gap: 10px;
-  background: rgba(7, 13, 28, 0.72);
-  backdrop-filter: blur(10px);
+  background: rgba(7, 13, 28, 0.92);
   border: 1px solid rgba(148, 163, 184, 0.16);
   border-radius: 10px;
   padding: 8px 14px;
