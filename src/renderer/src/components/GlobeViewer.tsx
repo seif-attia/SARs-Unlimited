@@ -6,7 +6,6 @@ import {
   Globe,
   Layers,
   Menu,
-  Mountain,
   Orbit,
   RefreshCw,
   RotateCcw,
@@ -28,36 +27,128 @@ const DEFAULT_ORBIT_VIEW = {
   height: 12_500_000
 }
 
-const SRTM_TOPOGRAPHY_URL =
-  'https://gibs.earthdata.nasa.gov/wmts/epsg3857/best/SRTM_Color_Index/default/default/GoogleMapsCompatible_Level12/{z}/{y}/{x}.png'
-
-const SHADED_RELIEF_URL =
-  'https://gibs.earthdata.nasa.gov/wmts/epsg3857/best/ASTER_GDEM_Color_Shaded_Relief/default/default/GoogleMapsCompatible_Level12/{z}/{y}/{x}.jpg'
-
 function createOpticalSatelliteProvider(cacheBust?: number): Cesium.ImageryProvider {
   const query = cacheBust ? `?t=${cacheBust}` : ''
   return new Cesium.UrlTemplateImageryProvider({
     url: `https://services.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}${query}`,
-    maximumLevel: 17,
+    maximumLevel: 19,
     credit: 'Esri World Imagery'
   })
 }
 
-function createSrtmTopographyProvider(cacheBust?: number): Cesium.ImageryProvider {
+async function createPolarCapProvider(
+  pole: 'north' | 'south',
+  cacheBust?: number
+): Promise<Cesium.SingleTileImageryProvider> {
+  const z = 3
+  const tileCount = 1 << z // 8 tiles across 360°
+  const tileSize = 256
+  const width = tileCount * tileSize // 2048px
+  const height = 256
+  const yMerc = pole === 'north' ? 0 : tileCount - 1
   const query = cacheBust ? `?t=${cacheBust}` : ''
-  return new Cesium.UrlTemplateImageryProvider({
-    url: `${SRTM_TOPOGRAPHY_URL}${query}`,
-    maximumLevel: 11,
-    credit: 'NASA SRTM Radar Topography'
-  })
-}
 
-function createShadedReliefProvider(cacheBust?: number): Cesium.ImageryProvider {
-  const query = cacheBust ? `?t=${cacheBust}` : ''
-  return new Cesium.UrlTemplateImageryProvider({
-    url: `${SHADED_RELIEF_URL}${query}`,
-    maximumLevel: 11,
-    credit: 'NASA ASTER GDEM Shaded Relief'
+  const fallbackRgb = pole === 'north' ? [11, 53, 77] : [232, 238, 242]
+
+  const loadEdgeRow = (x: number): Promise<Uint8ClampedArray | null> =>
+    new Promise((resolve) => {
+      const img = new Image()
+      img.crossOrigin = 'anonymous'
+      img.onload = () => {
+        const tmp = document.createElement('canvas')
+        tmp.width = tileSize
+        tmp.height = 1
+        const tctx = tmp.getContext('2d')
+        if (!tctx) {
+          resolve(null)
+          return
+        }
+        const sy = pole === 'north' ? 0 : img.height - 1
+        tctx.drawImage(img, 0, sy, img.width, 1, 0, 0, tileSize, 1)
+        resolve(tctx.getImageData(0, 0, tileSize, 1).data)
+      }
+      img.onerror = () => resolve(null)
+      img.src = `https://services.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/${z}/${yMerc}/${x}${query}`
+    })
+
+  const rows = await Promise.all(
+    Array.from({ length: tileCount }, (_, x) => loadEdgeRow(x))
+  )
+
+  const edge = new Uint8ClampedArray(width * 4)
+  let sumR = 0
+  let sumG = 0
+  let sumB = 0
+  let validCount = 0
+
+  for (let tx = 0; tx < tileCount; tx++) {
+    const row = rows[tx]
+    for (let px = 0; px < tileSize; px++) {
+      const dst = (tx * tileSize + px) * 4
+      if (row) {
+        const src = px * 4
+        edge[dst] = row[src]
+        edge[dst + 1] = row[src + 1]
+        edge[dst + 2] = row[src + 2]
+        edge[dst + 3] = 255
+        sumR += row[src]
+        sumG += row[src + 1]
+        sumB += row[src + 2]
+        validCount++
+      } else {
+        edge[dst] = fallbackRgb[0]
+        edge[dst + 1] = fallbackRgb[1]
+        edge[dst + 2] = fallbackRgb[2]
+        edge[dst + 3] = 255
+      }
+    }
+  }
+
+  const avgR = validCount > 0 ? sumR / validCount : fallbackRgb[0]
+  const avgG = validCount > 0 ? sumG / validCount : fallbackRgb[1]
+  const avgB = validCount > 0 ? sumB / validCount : fallbackRgb[2]
+
+  const canvas = document.createElement('canvas')
+  canvas.width = width
+  canvas.height = height
+  const ctx = canvas.getContext('2d')!
+  const imgData = ctx.createImageData(width, height)
+  const out = imgData.data
+
+  // Smoothly blend from the exact ±85.0511° edge colors to the mean pole color at ±90°
+  const seamRow = pole === 'north' ? height - 3 : 2
+  for (let y = 0; y < height; y++) {
+    const u =
+      pole === 'north'
+        ? y >= seamRow
+          ? 0
+          : (seamRow - y) / seamRow
+        : y <= seamRow
+          ? 0
+          : (y - seamRow) / (height - 1 - seamRow)
+
+    // Smooth ease-out curve so variations fade gently without pie-slice rays
+    const t = 1 - Math.pow(1 - u, 2.2)
+
+    for (let x = 0; x < width; x++) {
+      const eIdx = x * 4
+      const oIdx = (y * width + x) * 4
+      out[oIdx] = Math.round(edge[eIdx] * (1 - t) + avgR * t)
+      out[oIdx + 1] = Math.round(edge[eIdx + 1] * (1 - t) + avgG * t)
+      out[oIdx + 2] = Math.round(edge[eIdx + 2] * (1 - t) + avgB * t)
+      out[oIdx + 3] = 255
+    }
+  }
+  ctx.putImageData(imgData, 0, 0)
+
+  const rectangle =
+    pole === 'north'
+      ? Cesium.Rectangle.fromDegrees(-180, 85.0, 180, 90.0)
+      : Cesium.Rectangle.fromDegrees(-180, -90.0, 180, -85.0)
+
+  return Cesium.SingleTileImageryProvider.fromUrl(canvas.toDataURL('image/png'), {
+    rectangle,
+    credit: 'Esri World Imagery'
   })
 }
 
@@ -65,7 +156,7 @@ function createBordersProvider(cacheBust?: number): Cesium.ImageryProvider {
   const query = cacheBust ? `?t=${cacheBust}` : ''
   return new Cesium.UrlTemplateImageryProvider({
     url: `https://services.arcgisonline.com/ArcGIS/rest/services/Reference/World_Boundaries_and_Places/MapServer/tile/{z}/{y}/{x}${query}`,
-    maximumLevel: 16
+    maximumLevel: 18
   })
 }
 
@@ -73,28 +164,24 @@ export function GlobeViewer(): React.JSX.Element {
   const containerRef = useRef<HTMLDivElement | null>(null)
   const viewerRef = useRef<Cesium.Viewer | null>(null)
 
-  // Lazy-loaded ImageryLayer refs (null when unchecked -> 0 network/VRAM usage)
+  // ImageryLayer refs (Optical Satellite + Polar Caps are permanent; Labels can be toggled)
+  const northPolarLayerRef = useRef<Cesium.ImageryLayer | null>(null)
+  const southPolarLayerRef = useRef<Cesium.ImageryLayer | null>(null)
   const satelliteLayerRef = useRef<Cesium.ImageryLayer | null>(null)
-  const srtmLayerRef = useRef<Cesium.ImageryLayer | null>(null)
-  const reliefLayerRef = useRef<Cesium.ImageryLayer | null>(null)
   const labelsLayerRef = useRef<Cesium.ImageryLayer | null>(null)
 
   // Menu & Refresh state
   const [menuOpen, setMenuOpen] = useState<boolean>(false)
   const [isRefreshing, setIsRefreshing] = useState<boolean>(false)
 
-  // Lean default state: Only Optical Satellite is active at startup.
-  const [showSatellite, setShowSatellite] = useState<boolean>(true)
-  const [showSrtmTopography, setShowSrtmTopography] = useState<boolean>(false)
-  const [showShadedRelief, setShowShadedRelief] = useState<boolean>(false)
-  const [showBorders, setShowBorders] = useState<boolean>(false)
+  // Labels are ON by default and can be toggled off
+  const [showBorders, setShowBorders] = useState<boolean>(true)
   const [showAtmosphere, setShowAtmosphere] = useState<boolean>(false)
   const [autoRotate, setAutoRotate] = useState<boolean>(false)
 
   // On-Screen HUD Controls visibility (Menu Checkboxes)
   const [showTelemetryHud, setShowTelemetryHud] = useState<boolean>(true)
   const [showQuickBar, setShowQuickBar] = useState<boolean>(true)
-  const [showAltitudeLegend, setShowAltitudeLegend] = useState<boolean>(true)
   const [showNavButtons, setShowNavButtons] = useState<boolean>(true)
   const [showControlsHint, setShowControlsHint] = useState<boolean>(true)
 
@@ -121,14 +208,14 @@ export function GlobeViewer(): React.JSX.Element {
   const enforceLayerOrder = (viewer: Cesium.Viewer): void => {
     if (viewer.isDestroyed()) return
     const layers = viewer.imageryLayers
+    if (northPolarLayerRef.current && layers.contains(northPolarLayerRef.current)) {
+      layers.raiseToTop(northPolarLayerRef.current)
+    }
+    if (southPolarLayerRef.current && layers.contains(southPolarLayerRef.current)) {
+      layers.raiseToTop(southPolarLayerRef.current)
+    }
     if (satelliteLayerRef.current && layers.contains(satelliteLayerRef.current)) {
       layers.raiseToTop(satelliteLayerRef.current)
-    }
-    if (reliefLayerRef.current && layers.contains(reliefLayerRef.current)) {
-      layers.raiseToTop(reliefLayerRef.current)
-    }
-    if (srtmLayerRef.current && layers.contains(srtmLayerRef.current)) {
-      layers.raiseToTop(srtmLayerRef.current)
     }
     if (labelsLayerRef.current && layers.contains(labelsLayerRef.current)) {
       layers.raiseToTop(labelsLayerRef.current)
@@ -167,27 +254,37 @@ export function GlobeViewer(): React.JSX.Element {
     })
 
     viewerRef.current = viewer
-    viewer.resolutionScale = 1.0
+    viewer.resolutionScale = Math.min(window.devicePixelRatio || 1, 2)
 
-    // 1. Offline low-res NaturalEarthII at index 0 (instant zero-network base texture)
-    Cesium.TileMapServiceImageryProvider.fromUrl(
-      Cesium.buildModuleUrl('Assets/Textures/NaturalEarthII')
-    )
-      .then((naturalEarthProvider) => {
+    // 1. Seamless polar cap layers to eliminate Web Mercator ±85.05° pole circles
+    createPolarCapProvider('north')
+      .then((provider) => {
         if (!viewer.isDestroyed()) {
-          viewer.imageryLayers.addImageryProvider(naturalEarthProvider, 0)
-          viewer.scene.requestRender()
+          northPolarLayerRef.current = viewer.imageryLayers.addImageryProvider(provider, 0)
+          enforceLayerOrder(viewer)
         }
       })
-      .catch(() => {
-        // Ignore fallback error
-      })
+      .catch(() => {})
 
-    // 2. Load ONLY the single primary Satellite layer at startup
+    createPolarCapProvider('south')
+      .then((provider) => {
+        if (!viewer.isDestroyed()) {
+          southPolarLayerRef.current = viewer.imageryLayers.addImageryProvider(provider, 0)
+          enforceLayerOrder(viewer)
+        }
+      })
+      .catch(() => {})
+
+    // 2. Permanent Optical Satellite layer
     const satLayer = viewer.imageryLayers.addImageryProvider(createOpticalSatelliteProvider())
     satelliteLayerRef.current = satLayer
 
-    // Configure lightweight GPU & Tile Quadtree settings
+    // 3. Borders & Place Labels layer (ON by default, toggleable)
+    const labelsLayer = viewer.imageryLayers.addImageryProvider(createBordersProvider())
+    labelsLayer.alpha = 0.85
+    labelsLayerRef.current = labelsLayer
+
+    // Configure high-detail GPU & Tile Quadtree settings
     const { scene, camera } = viewer
     const { globe } = scene
     scene.backgroundColor = Cesium.Color.fromCssColorString('#03060f')
@@ -202,11 +299,11 @@ export function GlobeViewer(): React.JSX.Element {
     globe.baseColor = Cesium.Color.fromCssColorString('#071226')
     globe.enableLighting = false
     globe.showGroundAtmosphere = false
-    globe.maximumScreenSpaceError = 3.0
-    globe.tileCacheSize = 150
+    globe.maximumScreenSpaceError = 1.25
+    globe.tileCacheSize = 500
     globe.preloadAncestors = false
     globe.preloadSiblings = false
-    globe.loadingDescendantLimit = 4
+    globe.loadingDescendantLimit = 20
 
     // Smooth 3D navigation
     const controller = scene.screenSpaceCameraController
@@ -289,64 +386,7 @@ export function GlobeViewer(): React.JSX.Element {
     }
   }, [])
 
-  // Lazy-toggle Optical Satellite Imagery
-  const handleToggleSatellite = (checked?: boolean): void => {
-    const viewer = viewerRef.current
-    if (!viewer || viewer.isDestroyed()) return
-    const next = typeof checked === 'boolean' ? checked : !showSatellite
-    setShowSatellite(next)
-
-    if (next && !satelliteLayerRef.current) {
-      satelliteLayerRef.current = viewer.imageryLayers.addImageryProvider(
-        createOpticalSatelliteProvider()
-      )
-      enforceLayerOrder(viewer)
-    } else if (!next && satelliteLayerRef.current) {
-      viewer.imageryLayers.remove(satelliteLayerRef.current, true)
-      satelliteLayerRef.current = null
-      viewer.scene.requestRender()
-    }
-  }
-
-  // Lazy-toggle NASA SRTM Radar Topography (only loads tiles when checked)
-  const handleToggleSrtmTopography = (checked?: boolean): void => {
-    const viewer = viewerRef.current
-    if (!viewer || viewer.isDestroyed()) return
-    const next = typeof checked === 'boolean' ? checked : !showSrtmTopography
-    setShowSrtmTopography(next)
-
-    if (next && !srtmLayerRef.current) {
-      const layer = viewer.imageryLayers.addImageryProvider(createSrtmTopographyProvider())
-      layer.alpha = 0.65
-      srtmLayerRef.current = layer
-      enforceLayerOrder(viewer)
-    } else if (!next && srtmLayerRef.current) {
-      viewer.imageryLayers.remove(srtmLayerRef.current, true)
-      srtmLayerRef.current = null
-      viewer.scene.requestRender()
-    }
-  }
-
-  // Lazy-toggle Topographic Shaded Relief (only loads tiles when checked)
-  const handleToggleShadedRelief = (checked?: boolean): void => {
-    const viewer = viewerRef.current
-    if (!viewer || viewer.isDestroyed()) return
-    const next = typeof checked === 'boolean' ? checked : !showShadedRelief
-    setShowShadedRelief(next)
-
-    if (next && !reliefLayerRef.current) {
-      const layer = viewer.imageryLayers.addImageryProvider(createShadedReliefProvider())
-      layer.alpha = 0.65
-      reliefLayerRef.current = layer
-      enforceLayerOrder(viewer)
-    } else if (!next && reliefLayerRef.current) {
-      viewer.imageryLayers.remove(reliefLayerRef.current, true)
-      reliefLayerRef.current = null
-      viewer.scene.requestRender()
-    }
-  }
-
-  // Lazy-toggle Borders & Place Labels (only loads tiles when checked)
+  // Toggle Borders & Place Labels
   const handleToggleBorders = (checked?: boolean): void => {
     const viewer = viewerRef.current
     if (!viewer || viewer.isDestroyed()) return
@@ -378,7 +418,7 @@ export function GlobeViewer(): React.JSX.Element {
     viewer.scene.requestRender()
   }
 
-  // Refresh Footage: Only refreshes whichever layers are currently enabled
+  // Refresh Footage: Refreshes permanent satellite + polar caps and labels if enabled
   const handleRefreshFootage = (): void => {
     const viewer = viewerRef.current
     if (!viewer || viewer.isDestroyed()) return
@@ -386,25 +426,38 @@ export function GlobeViewer(): React.JSX.Element {
     setIsRefreshing(true)
     const bust = Date.now()
 
+    if (northPolarLayerRef.current) {
+      viewer.imageryLayers.remove(northPolarLayerRef.current, true)
+      northPolarLayerRef.current = null
+    }
+    if (southPolarLayerRef.current) {
+      viewer.imageryLayers.remove(southPolarLayerRef.current, true)
+      southPolarLayerRef.current = null
+    }
+
+    createPolarCapProvider('north', bust)
+      .then((provider) => {
+        if (!viewer.isDestroyed()) {
+          northPolarLayerRef.current = viewer.imageryLayers.addImageryProvider(provider, 0)
+          enforceLayerOrder(viewer)
+        }
+      })
+      .catch(() => {})
+
+    createPolarCapProvider('south', bust)
+      .then((provider) => {
+        if (!viewer.isDestroyed()) {
+          southPolarLayerRef.current = viewer.imageryLayers.addImageryProvider(provider, 0)
+          enforceLayerOrder(viewer)
+        }
+      })
+      .catch(() => {})
+
     if (satelliteLayerRef.current) {
       viewer.imageryLayers.remove(satelliteLayerRef.current, true)
       satelliteLayerRef.current = viewer.imageryLayers.addImageryProvider(
         createOpticalSatelliteProvider(bust)
       )
-    }
-
-    if (reliefLayerRef.current) {
-      viewer.imageryLayers.remove(reliefLayerRef.current, true)
-      const freshRelief = viewer.imageryLayers.addImageryProvider(createShadedReliefProvider(bust))
-      freshRelief.alpha = 0.65
-      reliefLayerRef.current = freshRelief
-    }
-
-    if (srtmLayerRef.current) {
-      viewer.imageryLayers.remove(srtmLayerRef.current, true)
-      const freshSrtm = viewer.imageryLayers.addImageryProvider(createSrtmTopographyProvider(bust))
-      freshSrtm.alpha = 0.65
-      srtmLayerRef.current = freshSrtm
     }
 
     if (labelsLayerRef.current) {
@@ -517,34 +570,7 @@ export function GlobeViewer(): React.JSX.Element {
           {menuOpen && (
             <div className="hud-menu-panel">
               <div className="menu-section">
-                <div className="menu-section-title">TOPOGRAPHY (ALTITUDE) & BASE LAYERS</div>
-
-                <label className="menu-checkbox-row">
-                  <input
-                    type="checkbox"
-                    checked={showSrtmTopography}
-                    onChange={(e) => handleToggleSrtmTopography(e.target.checked)}
-                  />
-                  <span>SRTM Radar Topography (Altitude Heatmap)</span>
-                </label>
-
-                <label className="menu-checkbox-row">
-                  <input
-                    type="checkbox"
-                    checked={showShadedRelief}
-                    onChange={(e) => handleToggleShadedRelief(e.target.checked)}
-                  />
-                  <span>ASTER Topographic Shaded Relief</span>
-                </label>
-
-                <label className="menu-checkbox-row">
-                  <input
-                    type="checkbox"
-                    checked={showSatellite}
-                    onChange={(e) => handleToggleSatellite(e.target.checked)}
-                  />
-                  <span>Optical Satellite Basemap</span>
-                </label>
+                <div className="menu-section-title">MAP LAYERS &amp; VIEW</div>
 
                 <label className="menu-checkbox-row">
                   <input
@@ -552,7 +578,7 @@ export function GlobeViewer(): React.JSX.Element {
                     checked={showBorders}
                     onChange={(e) => handleToggleBorders(e.target.checked)}
                   />
-                  <span>Borders & Place Labels</span>
+                  <span>Borders &amp; Place Labels</span>
                 </label>
 
                 <label className="menu-checkbox-row">
@@ -561,7 +587,7 @@ export function GlobeViewer(): React.JSX.Element {
                     checked={showAtmosphere}
                     onChange={(e) => handleToggleAtmosphere(e.target.checked)}
                   />
-                  <span>3D Atmosphere & Horizon Glow</span>
+                  <span>3D Atmosphere &amp; Horizon Glow</span>
                 </label>
 
                 <label className="menu-checkbox-row">
@@ -595,15 +621,6 @@ export function GlobeViewer(): React.JSX.Element {
                     onChange={(e) => setShowQuickBar(e.target.checked)}
                   />
                   <span>Quick Layer Switcher Bar</span>
-                </label>
-
-                <label className="menu-checkbox-row">
-                  <input
-                    type="checkbox"
-                    checked={showAltitudeLegend}
-                    onChange={(e) => setShowAltitudeLegend(e.target.checked)}
-                  />
-                  <span>Topography Altitude Legend</span>
                 </label>
 
                 <label className="menu-checkbox-row">
@@ -643,32 +660,7 @@ export function GlobeViewer(): React.JSX.Element {
           {/* Streamlined Quick Bar */}
           {showQuickBar && (
             <div className="hud-basemap-bar">
-              <Mountain size={14} className="hud-icon-cyan" />
-              <button
-                type="button"
-                className={`basemap-chip ${showSrtmTopography ? 'active' : ''}`}
-                onClick={() => handleToggleSrtmTopography()}
-                title="Lazy-load NASA SRTM Radar Topography (Color Altitude Index)"
-              >
-                SRTM Topography
-              </button>
-              <button
-                type="button"
-                className={`basemap-chip ${showShadedRelief ? 'active' : ''}`}
-                onClick={() => handleToggleShadedRelief()}
-                title="Lazy-load ASTER Topographic Shaded Relief"
-              >
-                Shaded Relief
-              </button>
-              <span className="chip-divider" />
               <Layers size={14} className="hud-icon-cyan" />
-              <button
-                type="button"
-                className={`basemap-chip ${showSatellite ? 'active' : ''}`}
-                onClick={() => handleToggleSatellite()}
-              >
-                Satellite
-              </button>
               <button
                 type="button"
                 className={`basemap-chip ${showBorders ? 'active' : ''}`}
@@ -706,37 +698,6 @@ export function GlobeViewer(): React.JSX.Element {
           </div>
         )}
       </header>
-
-      {/* Compact Topography (Altitude) Scale Legend — only shown when a topography overlay is active */}
-      {showAltitudeLegend && (showSrtmTopography || showShadedRelief) && (
-        <aside className="hud-legend-card">
-          <div className="legend-header">
-            <span>SRTM RADAR TOPOGRAPHY · ALTITUDE SCALE (METERS ASL)</span>
-          </div>
-          <div className="legend-items">
-            <div className="legend-item-row">
-              <span className="legend-swatch" style={{ backgroundColor: '#ffffff' }} />
-              <span className="legend-label">&gt; 3,500 m · High Alpine / Mountain Peaks</span>
-            </div>
-            <div className="legend-item-row">
-              <span className="legend-swatch" style={{ backgroundColor: '#b97a57' }} />
-              <span className="legend-label">1,500 – 3,500 m · Mountain Ranges &amp; Plateaus</span>
-            </div>
-            <div className="legend-item-row">
-              <span className="legend-swatch" style={{ backgroundColor: '#f5e663' }} />
-              <span className="legend-label">500 – 1,500 m · Uplands &amp; Highlands</span>
-            </div>
-            <div className="legend-item-row">
-              <span className="legend-swatch" style={{ backgroundColor: '#22b14c' }} />
-              <span className="legend-label">50 – 500 m · Interior Plains &amp; Valleys</span>
-            </div>
-            <div className="legend-item-row">
-              <span className="legend-swatch" style={{ backgroundColor: '#00a2e8' }} />
-              <span className="legend-label">0 – 50 m · Coastal Lowlands &amp; River Deltas</span>
-            </div>
-          </div>
-        </aside>
-      )}
 
       {/* Bottom-Right Navigation Controls */}
       {showNavButtons && (

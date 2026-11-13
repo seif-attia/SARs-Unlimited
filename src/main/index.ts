@@ -3,6 +3,9 @@ import { join } from 'path'
 import { electronApp, optimizer, is } from '@electron-toolkit/utils'
 import icon from '../../resources/icon.png?asset'
 
+// Prevent Windows GPU shader disk cache lock errors (0x5 Access is denied)
+app.commandLine.appendSwitch('disable-gpu-shader-disk-cache')
+
 function createWindow(): void {
   // Create the browser window.
   const mainWindow = new BrowserWindow({
