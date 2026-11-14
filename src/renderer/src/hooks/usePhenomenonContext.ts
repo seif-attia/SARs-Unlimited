@@ -223,10 +223,10 @@ export function usePhenomenonContext(): PhenomenonContextValue {
   }, [selectedEvent, selectedPhenomenon, selectedLayerId])
 
   const [widgetVisibility, setWidgetVisibility] = useState<WidgetVisibilityState>({
-    statistics: false,
-    eventSummary: false,
+    statistics: true,
+    eventSummary: true,
     scientificExplanation: false,
-    timeline: false
+    timeline: true
   })
 
   const toggleWidget = useCallback((widget: keyof WidgetVisibilityState) => {
@@ -416,6 +416,7 @@ export function usePhenomenonContext(): PhenomenonContextValue {
   const [mediaModalEvent, setMediaModalEvent] = useState<EventRecord | null>(null)
 
   const openReportModal = useCallback((ev: EventRecord) => {
+    setMediaModalEvent(null)
     setReportModalEvent(ev)
   }, [])
 
@@ -424,6 +425,7 @@ export function usePhenomenonContext(): PhenomenonContextValue {
   }, [])
 
   const openMediaModal = useCallback((ev: EventRecord) => {
+    setReportModalEvent(null)
     setMediaModalEvent(ev)
   }, [])
 

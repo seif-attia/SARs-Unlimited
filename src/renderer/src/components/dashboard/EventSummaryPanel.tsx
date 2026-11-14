@@ -1,5 +1,5 @@
 import React from 'react'
-import { ArrowUpRight, MapPin, PanelRightClose, Play, X } from 'lucide-react'
+import { ArrowUpRight, Columns, MapPin, PanelRightClose, X } from 'lucide-react'
 import type {
   DateFilterMode,
   EventRecord,
@@ -21,6 +21,7 @@ export interface EventSummaryPanelProps {
   onResetDateFilterMode: () => void
   selectedDate: string
   onHide: () => void
+  embedded?: boolean
 }
 
 export const EventSummaryPanel: React.FC<EventSummaryPanelProps> = ({
@@ -36,7 +37,8 @@ export const EventSummaryPanel: React.FC<EventSummaryPanelProps> = ({
   dateFilterMode,
   onResetDateFilterMode,
   selectedDate,
-  onHide
+  onHide,
+  embedded = false
 }) => {
   const showHoveredBadge =
     hoveredLocation !== null &&
@@ -44,20 +46,24 @@ export const EventSummaryPanel: React.FC<EventSummaryPanelProps> = ({
       hoveredLocation.state === 'GLOBAL LOCATION')
 
   return (
-    <aside className="sars-panel sars-right-panel" aria-label="Storytelling and Event Summary Panel">
-      {/* Header matching screenshot: SUMMARY + Hide button */}
-      <div className="sars-panel__header">
-        <h2 className="sars-panel__title">SUMMARY</h2>
-        <button
-          type="button"
-          className="sars-hide-btn"
-          onClick={onHide}
-          title="Hide Event Summary Panel"
-        >
-          <PanelRightClose size={12} />
-          <span>Hide</span>
-        </button>
-      </div>
+    <aside
+      className={embedded ? 'sars-tab-pane sars-summary-pane' : 'sars-panel sars-right-panel'}
+      aria-label="Storytelling and Event Summary Panel"
+    >
+      {!embedded && (
+        <div className="sars-panel__header">
+          <h2 className="sars-panel__title">SUMMARY</h2>
+          <button
+            type="button"
+            className="sars-hide-btn"
+            onClick={onHide}
+            title="Hide Event Summary Panel"
+          >
+            <PanelRightClose size={12} />
+            <span>Hide</span>
+          </button>
+        </div>
+      )}
 
       {/* Active Geographic / Date Filter Badges */}
       {(lockedRegionId || dateFilterMode !== 'all_period' || showHoveredBadge) && (
@@ -156,10 +162,10 @@ export const EventSummaryPanel: React.FC<EventSummaryPanelProps> = ({
                       onSelectEvent(ev)
                       onOpenMedia(ev)
                     }}
-                    title="Open interactive SAR split-screen comparator, video & radar imagery"
+                    title="Open interactive before/after SAR comparator, physics & media"
                   >
-                    <Play size={11} fill="currentColor" />
-                    <span>Video</span>
+                    <Columns size={11} />
+                    <span>Compare</span>
                   </button>
                 </div>
               </article>

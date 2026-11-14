@@ -1,8 +1,7 @@
 import React from 'react'
-import { ArrowUp, Compass, Radar, Search, X } from 'lucide-react'
+import { ArrowUp, Radar, Search, X } from 'lucide-react'
 import type {
   DatasetStatus,
-  HoveredLocationInfo,
   PhenomenonDefinition,
   WidgetVisibilityState
 } from '../../types/phenomenon'
@@ -20,9 +19,7 @@ export interface DashboardHeaderProps {
   studyRegionOptions: Array<{ id: string; name: string }>
   searchQuery: string
   onChangeSearchQuery: (q: string) => void
-  hoveredLocation: HoveredLocationInfo | null
   showTelemetryHud: boolean
-  showCursorTooltip: boolean
   cameraTelemetry: {
     lat: string
     lon: string
@@ -45,21 +42,13 @@ export const DashboardHeader: React.FC<DashboardHeaderProps> = ({
   studyRegionOptions,
   searchQuery,
   onChangeSearchQuery,
-  hoveredLocation,
   showTelemetryHud,
-  showCursorTooltip,
   cameraTelemetry,
   datasetStatus,
   widgetVisibility,
   onToggleWidget,
   settingsProps
 }) => {
-  const hasValidCursorCoords =
-    hoveredLocation !== null &&
-    hoveredLocation.latitude !== null &&
-    hoveredLocation.longitude !== null &&
-    hoveredLocation.state !== 'OUTSIDE'
-
   return (
     <header className="sars-top-header" role="banner">
       {/* LEFT: Brand Identity + Phenomenon Menu + Settings + Restore Pills */}
@@ -94,7 +83,7 @@ export const DashboardHeader: React.FC<DashboardHeaderProps> = ({
         <SettingsMenu {...settingsProps} />
       </div>
 
-      {/* RIGHT: Demo Status, Cursor Inspector, Telemetry & Search Box */}
+      {/* RIGHT: Demo Status, Telemetry & Search Box */}
       <div className="sars-top-header__right">
         {datasetStatus === 'DEMO' && (
           <div
@@ -102,27 +91,6 @@ export const DashboardHeader: React.FC<DashboardHeaderProps> = ({
             title="Synthetic local demonstration overlay active — not genuine scientific SAR observations"
           >
             DEMO DATA — NOT SCIENTIFIC OBSERVATIONS
-          </div>
-        )}
-
-        {showCursorTooltip && hasValidCursorCoords && hoveredLocation && (
-          <div
-            className={`sars-cursor-badge ${
-              hoveredLocation.state === 'AMAZON LOCATION' ||
-              hoveredLocation.state === 'GLOBAL LOCATION'
-                ? 'is-matched'
-                : ''
-            }`}
-            title={hoveredLocation.statusMessage}
-          >
-            <Compass size={12} />
-            <span className="sars-cursor-badge__region">
-              {hoveredLocation.regionName ?? hoveredLocation.state}
-            </span>
-            <span className="sars-cursor-badge__coords">
-              {(hoveredLocation.latitude ?? 0).toFixed(1)}°,{' '}
-              {(hoveredLocation.longitude ?? 0).toFixed(1)}°
-            </span>
           </div>
         )}
 

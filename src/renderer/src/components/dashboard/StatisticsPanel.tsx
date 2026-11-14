@@ -22,6 +22,7 @@ export interface StatisticsPanelProps {
   sarOverlayOpacity: number
   onChangeSarOverlayOpacity: (opacity: number) => void
   onHide: () => void
+  embedded?: boolean
 }
 
 type SeasonalMetricKey = 'discharge_m3s' | 'fire_hotspots' | 'precip_mm'
@@ -67,7 +68,8 @@ export const StatisticsPanel: React.FC<StatisticsPanelProps> = ({
   onSelectEventLayer,
   sarOverlayOpacity,
   onChangeSarOverlayOpacity,
-  onHide
+  onHide,
+  embedded = false
 }) => {
   const hasHistogram = Boolean(statistics.histogramSeries?.bins?.length)
   const hasSeasonal = Boolean(statistics.seasonalSeries?.length)
@@ -108,20 +110,24 @@ export const StatisticsPanel: React.FC<StatisticsPanelProps> = ({
   })()
 
   return (
-    <aside className="sars-panel sars-left-panel" aria-label="Scientific Statistics Panel">
-      {/* Header row matching screenshot: STATISTICS + Hide button */}
-      <div className="sars-panel__header">
-        <h2 className="sars-panel__title">STATISTICS</h2>
-        <button
-          type="button"
-          className="sars-hide-btn"
-          onClick={onHide}
-          title="Hide Statistics Panel"
-        >
-          <PanelLeftClose size={12} />
-          <span>Hide</span>
-        </button>
-      </div>
+    <aside
+      className={embedded ? 'sars-tab-pane sars-stats-pane' : 'sars-panel sars-left-panel'}
+      aria-label="Scientific Statistics Panel"
+    >
+      {!embedded && (
+        <div className="sars-panel__header">
+          <h2 className="sars-panel__title">STATISTICS</h2>
+          <button
+            type="button"
+            className="sars-hide-btn"
+            onClick={onHide}
+            title="Hide Statistics Panel"
+          >
+            <PanelLeftClose size={12} />
+            <span>Hide</span>
+          </button>
+        </div>
+      )}
 
       {/* Full wrapped context subtitle so selected phenomenon/event is never clipped */}
       {statistics.contextLabel && (

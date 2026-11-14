@@ -2,6 +2,8 @@ import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import * as Cesium from 'cesium'
 import 'cesium/Build/Cesium/Widgets/widgets.css'
 import {
+  BarChart3,
+  BookOpen,
   ChevronLeft,
   ChevronRight,
   Compass,
@@ -9,6 +11,7 @@ import {
   Moon,
   Mountain,
   Orbit,
+  PanelLeftClose,
   Play,
   RefreshCw,
   RotateCcw,
@@ -26,9 +29,9 @@ import {
   PREDEFINED_STUDY_AREAS,
   renderSarsDataOverlayPng
 } from '../services/sarsDataApi'
-import type { EventRecord } from '../types/phenomenon'
+import type { EventRecord, WidgetVisibilityState } from '../types/phenomenon'
 import { DashboardHeader } from './dashboard/DashboardHeader'
-import { HistoricalTimeline, type TheaterTarget } from './dashboard/HistoricalTimeline'
+import { HistoricalTimeline } from './dashboard/HistoricalTimeline'
 import { StatisticsPanel } from './dashboard/StatisticsPanel'
 import { EventSummaryPanel } from './dashboard/EventSummaryPanel'
 import { ScientificExplanationPanel } from './dashboard/ScientificExplanationPanel'
@@ -268,6 +271,9 @@ export function GlobeViewer(): React.JSX.Element {
   const [showAltitudeLegend, setShowAltitudeLegend] = useState<boolean>(true)
   const [showNavButtons, setShowNavButtons] = useState<boolean>(true)
   const [showControlsHint] = useState<boolean>(false)
+  const [activeSidebarTab, setActiveSidebarTab] = useState<
+    'statistics' | 'eventSummary' | 'scientificExplanation'
+  >('statistics')
 
   // Custom SARs-Data API state (preserving sarsDataApi.ts integration)
   const [customApiBaseUrl, setCustomApiBaseUrl] = useState<string>('http://localhost:8000')
@@ -312,15 +318,12 @@ export function GlobeViewer(): React.JSX.Element {
     sarOverlayOpacity,
     setSarOverlayOpacity,
     liveScope,
-    setLiveScope,
     showBasinProgression,
-    setShowBasinProgression,
     toggleBasinProgression,
     activeSeasonalPhenomenonIds,
     isTouring,
     tourStopIdx,
     tourStopCount,
-    toggleTour,
     stopTour,
     jumpTourStop,
     timeline,
@@ -334,6 +337,7 @@ export function GlobeViewer(): React.JSX.Element {
     scientificExplanation,
     widgetVisibility,
     toggleWidget,
+    setWidgetVisible,
     restoreAllWidgets,
     reportModalEvent,
     openReportModal,
@@ -342,6 +346,35 @@ export function GlobeViewer(): React.JSX.Element {
     openMediaModal,
     closeMediaModal
   } = ctx
+
+  const isSidebarVisible =
+    widgetVisibility.statistics ||
+    widgetVisibility.eventSummary ||
+    widgetVisibility.scientificExplanation
+
+  const handleHideSidebar = useCallback(() => {
+    setWidgetVisible('statistics', false)
+    setWidgetVisible('eventSummary', false)
+    setWidgetVisible('scientificExplanation', false)
+  }, [setWidgetVisible])
+
+  const handleToggleWidgetTab = useCallback(
+    (widget: keyof WidgetVisibilityState) => {
+      if (widget === 'timeline') {
+        toggleWidget('timeline')
+        return
+      }
+      if (!isSidebarVisible || activeSidebarTab !== widget) {
+        setWidgetVisible('statistics', true)
+        setWidgetVisible('eventSummary', true)
+        setWidgetVisible('scientificExplanation', true)
+        setActiveSidebarTab(widget)
+        return
+      }
+      handleHideSidebar()
+    },
+    [isSidebarVisible, activeSidebarTab, toggleWidget, setWidgetVisible, handleHideSidebar]
+  )
 
   // Throttled 3D Earth cursor geographic picking
   const { hoveredLocation: pickedLocation } = useGlobeLocationPicking({
@@ -941,42 +974,6 @@ export function GlobeViewer(): React.JSX.Element {
     })
   }, [])
 
-  const handleFlyTheater = useCallback(
-    (theater: TheaterTarget) => {
-      const viewer = viewerRef.current
-      if (!viewer || viewer.isDestroyed()) return
-      setAutoRotate(false)
-      setLiveScope(theater === 'amazon' ? 'amazon' : 'planet')
-      setShowBasinProgression(true)
-
-      if (theater === 'amazon' && dataset?.amazon_basin_bbox) {
-        flyToBbox(dataset.amazon_basin_bbox)
-        return
-      }
-
-      const views: Record<
-        Exclude<TheaterTarget, 'amazon'>,
-        { lon: number; lat: number; height: number }
-      > = {
-        planet: { lon: 15, lat: 18, height: 21_500_000 },
-        arctic: { lon: -35, lat: 74, height: 6_800_000 },
-        antarctica: { lon: 0, lat: -76, height: 7_200_000 },
-        monsoon: { lon: 90, lat: 23, height: 5_200_000 }
-      }
-      const target = views[theater === 'amazon' ? 'planet' : theater]
-      viewer.camera.flyTo({
-        destination: Cesium.Cartesian3.fromDegrees(target.lon, target.lat, target.height),
-        orientation: {
-          heading: 0,
-          pitch: Cesium.Math.toRadians(-90),
-          roll: 0
-        },
-        duration: 1.2
-      })
-    },
-    [dataset, flyToBbox, setLiveScope, setShowBasinProgression]
-  )
-
   useEffect(() => {
     if (isTouring && selectedEvent) {
       flyToEvent(selectedEvent)
@@ -1452,13 +1449,11 @@ export function GlobeViewer(): React.JSX.Element {
             restoreAllWidgets()
           }
         }}
-        hoveredLocation={hoveredLocation}
         showTelemetryHud={showTelemetryHud}
-        showCursorTooltip={showCursorTooltip}
         cameraTelemetry={formattedTelemetry}
         datasetStatus={datasetStatus}
         widgetVisibility={widgetVisibility}
-        onToggleWidget={toggleWidget}
+        onToggleWidget={handleToggleWidgetTab}
         settingsProps={{
           showTerrain: showTopography,
           onToggleTerrain: () => handleToggleTopography(),
@@ -1479,7 +1474,7 @@ export function GlobeViewer(): React.JSX.Element {
           uiLightTheme,
           onToggleUiLightTheme: () => setUiLightTheme((p) => !p),
           widgetVisibility,
-          onToggleWidget: toggleWidget,
+          onToggleWidget: handleToggleWidgetTab,
           onRestoreAllWidgets: restoreAllWidgets,
           showTelemetryHud,
           onToggleTelemetryHud: () => setShowTelemetryHud((p) => !p),
@@ -1517,64 +1512,162 @@ export function GlobeViewer(): React.JSX.Element {
           phenomenonEvents={phenomenonEvents}
           allEvents={allEvents}
           selectedEvent={selectedEvent}
-          liveScope={liveScope}
-          showBasinProgression={showBasinProgression}
-          isTouring={isTouring}
+          hasLeftPanel={isSidebarVisible}
           onSelectEvent={handleUserSelectEvent}
-          onChangeLiveScope={setLiveScope}
-          onToggleBasinProgression={toggleBasinProgression}
-          onFlyTheater={handleFlyTheater}
-          onToggleTour={toggleTour}
+          onStartPlayback={() => {
+            if (!showBasinProgression) toggleBasinProgression()
+          }}
           onStopTour={stopTour}
           onHideTimeline={() => toggleWidget('timeline')}
         />
       )}
 
-      {/* AREA C: LEFT WIDGET — STATISTICS */}
-      {widgetVisibility.statistics && (
-        <StatisticsPanel
-          statistics={statistics}
-          selectedEvent={selectedEvent}
-          activeEventLayer={activeEventLayer}
-          onSelectEventLayer={selectEventLayerById}
-          sarOverlayOpacity={sarOverlayOpacity}
-          onChangeSarOverlayOpacity={setSarOverlayOpacity}
-          onHide={() => toggleWidget('statistics')}
-        />
+      {/* UNIFIED 3-TAB LEFT SIDEBAR: STATISTICS, SUMMARY / EVENTS & SCIENTIFIC EXPLANATION */}
+      {isSidebarVisible && (
+        <aside
+          className="sars-panel sars-unified-sidebar"
+          aria-label="SAR Analysis Sidebar (Statistics, Events and Explanation)"
+        >
+          <div className="sars-unified-sidebar__header">
+            <div className="sars-unified-sidebar__tabs" role="tablist" aria-label="Sidebar Tabs">
+              <button
+                type="button"
+                role="tab"
+                aria-selected={activeSidebarTab === 'statistics'}
+                className={`sars-unified-sidebar__tab ${
+                  activeSidebarTab === 'statistics' ? 'is-active' : ''
+                }`}
+                onClick={() => setActiveSidebarTab('statistics')}
+              >
+                <BarChart3 size={13} />
+                <span>Statistics</span>
+              </button>
+
+              <button
+                type="button"
+                role="tab"
+                aria-selected={activeSidebarTab === 'eventSummary'}
+                className={`sars-unified-sidebar__tab ${
+                  activeSidebarTab === 'eventSummary' ? 'is-active' : ''
+                }`}
+                onClick={() => setActiveSidebarTab('eventSummary')}
+              >
+                <Layers size={13} />
+                <span>Events</span>
+                <span className="sars-unified-sidebar__count">{filteredEvents.length}</span>
+              </button>
+
+              <button
+                type="button"
+                role="tab"
+                aria-selected={activeSidebarTab === 'scientificExplanation'}
+                className={`sars-unified-sidebar__tab ${
+                  activeSidebarTab === 'scientificExplanation' ? 'is-active' : ''
+                }`}
+                onClick={() => setActiveSidebarTab('scientificExplanation')}
+              >
+                <BookOpen size={13} />
+                <span>Science</span>
+              </button>
+            </div>
+
+            <button
+              type="button"
+              className="sars-hide-btn"
+              onClick={handleHideSidebar}
+              title="Hide Unified Left Sidebar"
+            >
+              <PanelLeftClose size={12} />
+              <span>Hide</span>
+            </button>
+          </div>
+
+          <div className="sars-unified-sidebar__body">
+            {activeSidebarTab === 'statistics' && (
+              <StatisticsPanel
+                statistics={statistics}
+                selectedEvent={selectedEvent}
+                activeEventLayer={activeEventLayer}
+                onSelectEventLayer={selectEventLayerById}
+                sarOverlayOpacity={sarOverlayOpacity}
+                onChangeSarOverlayOpacity={setSarOverlayOpacity}
+                onHide={handleHideSidebar}
+                embedded
+              />
+            )}
+
+            {activeSidebarTab === 'eventSummary' && (
+              <EventSummaryPanel
+                selectedPhenomenon={selectedPhenomenon}
+                events={filteredEvents}
+                selectedEvent={selectedEvent}
+                onSelectEvent={handleUserSelectEvent}
+                onOpenReport={openReportModal}
+                onOpenMedia={openMediaModal}
+                hoveredLocation={hoveredLocation}
+                lockedRegionId={lockedRegionId}
+                onClearLockedRegion={() => setLockedRegionId(null)}
+                dateFilterMode={timeline.dateFilterMode}
+                onResetDateFilterMode={() => timeline.setDateFilterMode('all_period')}
+                selectedDate={timeline.selectedDate}
+                onHide={handleHideSidebar}
+                embedded
+              />
+            )}
+
+            {activeSidebarTab === 'scientificExplanation' && (
+              <ScientificExplanationPanel
+                phenomenon={selectedPhenomenon}
+                selectedEvent={selectedEvent}
+                activeEventLayer={activeEventLayer}
+                explanation={scientificExplanation}
+                onHide={handleHideSidebar}
+                embedded
+              />
+            )}
+          </div>
+        </aside>
       )}
 
-      {/* AREA D: RIGHT WIDGET — STORYTELLING & EVENT SUMMARY */}
-      {widgetVisibility.eventSummary && (
-        <EventSummaryPanel
-          selectedPhenomenon={selectedPhenomenon}
-          events={filteredEvents}
-          selectedEvent={selectedEvent}
-          onSelectEvent={handleUserSelectEvent}
-          onOpenReport={openReportModal}
-          onOpenMedia={openMediaModal}
-          hoveredLocation={hoveredLocation}
-          lockedRegionId={lockedRegionId}
-          onClearLockedRegion={() => setLockedRegionId(null)}
-          dateFilterMode={timeline.dateFilterMode}
-          onResetDateFilterMode={() => timeline.setDateFilterMode('all_period')}
-          selectedDate={timeline.selectedDate}
-          onHide={() => toggleWidget('eventSummary')}
-        />
-      )}
-
-      {/* AREA E: BOTTOM WIDGET — SCIENTIFIC EXPLANATION */}
-      {widgetVisibility.scientificExplanation && (
-        <ScientificExplanationPanel
-          phenomenon={selectedPhenomenon}
-          selectedEvent={selectedEvent}
-          explanation={scientificExplanation}
-          onHide={() => toggleWidget('scientificExplanation')}
-        />
-      )}
+      {/* FLOATING PLANET HOVER TELEMETRY PILL (NON-OVERLAPPING BOTTOM HUD) */}
+      {showCursorTooltip &&
+        hoveredLocation &&
+        hoveredLocation.latitude !== null &&
+        hoveredLocation.longitude !== null &&
+        hoveredLocation.state !== 'OUTSIDE' && (
+          <div
+            className={`sars-planet-hover-hud ${isSidebarVisible ? 'has-sidebar' : ''} ${
+              hoveredLocation.state === 'AMAZON LOCATION' ||
+              hoveredLocation.state === 'GLOBAL LOCATION'
+                ? 'is-matched'
+                : ''
+            }`}
+            aria-live="polite"
+          >
+            <Compass size={13} className="sars-planet-hover-hud__icon" />
+            <span className="sars-planet-hover-hud__state">{hoveredLocation.state}</span>
+            <span className="sars-planet-hover-hud__sep">·</span>
+            <span className="sars-planet-hover-hud__coords">
+              {hoveredLocation.latitude.toFixed(2)}°, {hoveredLocation.longitude.toFixed(2)}°
+            </span>
+            {(hoveredLocation.regionName || hoveredLocation.statusMessage) && (
+              <>
+                <span className="sars-planet-hover-hud__sep">·</span>
+                <span className="sars-planet-hover-hud__region">
+                  {hoveredLocation.regionName
+                    ? `${hoveredLocation.regionName}${
+                        hoveredLocation.country ? `, ${hoveredLocation.country}` : ''
+                      }`
+                    : hoveredLocation.statusMessage}
+                </span>
+              </>
+            )}
+          </div>
+        )}
 
       {/* Optional Quick Layer Switcher Bar (toggleable in Settings) */}
       {showQuickBar && (
-        <div className="hud-basemap-bar sars-floating-quickbar">
+        <div className={`hud-basemap-bar sars-floating-quickbar ${isSidebarVisible ? 'has-sidebar' : ''}`}>
           <Layers size={14} className="hud-icon-cyan" />
           <button
             type="button"
@@ -1609,7 +1702,9 @@ export function GlobeViewer(): React.JSX.Element {
 
       {/* Compact Topography (Altitude) Scale Legend — shown when Topography is active */}
       {showAltitudeLegend && showTopography && (
-        <aside className="hud-legend-card sars-altitude-legend">
+        <aside
+          className={`hud-legend-card sars-altitude-legend ${isSidebarVisible ? 'has-sidebar' : ''}`}
+        >
           <div className="legend-header">
             <span>SRTM RADAR TOPOGRAPHY · ALTITUDE SCALE (METERS ASL)</span>
           </div>
@@ -1638,57 +1733,57 @@ export function GlobeViewer(): React.JSX.Element {
         </aside>
       )}
 
-      {/* Floating Camera Navigation Controls */}
+      {/* Fixed Bottom-Right Camera & Rotation Controls */}
       {showNavButtons && (
-        <div
-          className={`hud-nav-controls ${
-            widgetVisibility.scientificExplanation ? 'sars-nav-above-bottom' : ''
-          }`}
-        >
+        <div className="hud-nav-controls" role="group" aria-label="Camera and Rotation Controls">
           <button
             type="button"
-            className={`nav-btn ${isRefreshing ? 'active' : ''}`}
-            onClick={handleRefreshFootage}
-            title="Refresh Active Layers"
-          >
-            <RefreshCw size={16} className={isRefreshing ? 'spin-icon' : ''} />
-          </button>
-          <button
-            type="button"
-            className={`nav-btn ${autoRotate ? 'active' : ''}`}
+            className={`nav-btn nav-btn--rotate ${autoRotate ? 'active' : ''}`}
             onClick={() => setAutoRotate((prev) => !prev)}
             title="Toggle Orbital Auto-Rotation"
           >
-            <Orbit size={16} />
+            <Orbit size={15} />
+            <span>{autoRotate ? 'Auto-Rotate On' : 'Auto-Rotate'}</span>
           </button>
-          <button type="button" className="nav-btn" onClick={handleZoomIn} title="Zoom In">
-            <ZoomIn size={16} />
-          </button>
-          <button type="button" className="nav-btn" onClick={handleZoomOut} title="Zoom Out">
-            <ZoomOut size={16} />
-          </button>
-          <button
-            type="button"
-            className="nav-btn"
-            onClick={handleResetNorth}
-            title="Align Heading North"
-          >
-            <Compass size={16} />
-          </button>
-          <button
-            type="button"
-            className="nav-btn"
-            onClick={handleResetOrbit}
-            title="Reset to Orbital View"
-          >
-            <RotateCcw size={16} />
-          </button>
+
+          <div className="hud-nav-controls__row">
+            <button
+              type="button"
+              className={`nav-btn ${isRefreshing ? 'active' : ''}`}
+              onClick={handleRefreshFootage}
+              title="Refresh Active Layers"
+            >
+              <RefreshCw size={16} className={isRefreshing ? 'spin-icon' : ''} />
+            </button>
+            <button type="button" className="nav-btn" onClick={handleZoomIn} title="Zoom In">
+              <ZoomIn size={16} />
+            </button>
+            <button type="button" className="nav-btn" onClick={handleZoomOut} title="Zoom Out">
+              <ZoomOut size={16} />
+            </button>
+            <button
+              type="button"
+              className="nav-btn"
+              onClick={handleResetNorth}
+              title="Align Heading North"
+            >
+              <Compass size={16} />
+            </button>
+            <button
+              type="button"
+              className="nav-btn"
+              onClick={handleResetOrbit}
+              title="Reset to Orbital View"
+            >
+              <RotateCcw size={16} />
+            </button>
+          </div>
         </div>
       )}
 
       {/* Optional Mouse Navigation Hint */}
       {showControlsHint && (
-        <div className="hud-controls-hint">
+        <div className={`hud-controls-hint ${isSidebarVisible ? 'has-sidebar' : ''}`}>
           <span>Left-Drag: Rotate / Pan</span>
           <span>·</span>
           <span>Scroll / Right-Drag: Zoom</span>
@@ -1699,7 +1794,11 @@ export function GlobeViewer(): React.JSX.Element {
 
       {/* FLOATING GUIDED TOUR HUD BANNER */}
       {isTouring && selectedEvent && (
-        <div className="sars-tour-banner" role="region" aria-label="Guided SAR Mission Tour">
+        <div
+          className={`sars-tour-banner ${isSidebarVisible ? 'has-sidebar' : ''}`}
+          role="region"
+          aria-label="Guided SAR Mission Tour"
+        >
           <div className="sars-tour-banner__meta">
             <span className="sars-tour-banner__kicker">
               <Play size={11} />
@@ -1758,7 +1857,12 @@ export function GlobeViewer(): React.JSX.Element {
       />
 
       {/* MULTIMEDIA / SPLIT-SCREEN COMPARATOR / VIDEO MODAL */}
-      <MediaViewer event={mediaModalEvent} onClose={closeMediaModal} />
+      <MediaViewer
+        event={mediaModalEvent}
+        onClose={closeMediaModal}
+        initialTab="comparator"
+        onSelectLayerOnGlobe={(layerId) => selectEventLayerById(layerId)}
+      />
     </div>
   )
 }
