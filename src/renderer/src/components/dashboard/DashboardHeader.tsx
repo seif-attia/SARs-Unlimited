@@ -1,5 +1,7 @@
 import React from 'react'
-import { ArrowUp, Radar, Search, X } from 'lucide-react'
+import { ArrowUp, Compass, Search, X } from 'lucide-react'
+import sarsLogoImg from '../../assets/sars-logo.png'
+import sarsUnlimitedImg from '../../assets/sars-unlimited.png'
 import type {
   DatasetStatus,
   PhenomenonDefinition,
@@ -29,6 +31,8 @@ export interface DashboardHeaderProps {
   datasetStatus: DatasetStatus
   widgetVisibility: WidgetVisibilityState
   onToggleWidget: (widget: keyof WidgetVisibilityState) => void
+  isTouring: boolean
+  onToggleTour: () => void
   settingsProps: SettingsMenuProps
 }
 
@@ -47,6 +51,8 @@ export const DashboardHeader: React.FC<DashboardHeaderProps> = ({
   datasetStatus,
   widgetVisibility,
   onToggleWidget,
+  isTouring,
+  onToggleTour,
   settingsProps
 }) => {
   return (
@@ -54,10 +60,19 @@ export const DashboardHeader: React.FC<DashboardHeaderProps> = ({
       {/* LEFT: Brand Identity + Phenomenon Menu + Settings + Restore Pills */}
       <div className="sars-top-header__left">
         <div className="sars-brand">
-          <span className="sars-brand__pulse" aria-hidden="true">
-            <Radar size={14} />
-          </span>
-          <span className="sars-brand__title">SARS UNLIMITED</span>
+          <img
+            src={sarsLogoImg}
+            alt=""
+            aria-hidden="true"
+            className="sars-brand__logo"
+            draggable={false}
+          />
+          <img
+            src={sarsUnlimitedImg}
+            alt="SARs Unlimited"
+            className="sars-brand__wordmark"
+            draggable={false}
+          />
         </div>
 
         <PhenomenonMenu
@@ -81,6 +96,16 @@ export const DashboardHeader: React.FC<DashboardHeaderProps> = ({
         />
 
         <SettingsMenu {...settingsProps} />
+
+        <button
+          type="button"
+          className={`sars-nav-pill sars-tour-pill ${isTouring ? 'is-touring' : ''}`}
+          onClick={onToggleTour}
+          title="Auto-fly Guided Tour through 8 signature 2015–2026 global & Amazon SAR crises"
+        >
+          <Compass size={13} className="sars-nav-pill__icon" />
+          <span>{isTouring ? 'Stop Tour' : 'Tour'}</span>
+        </button>
       </div>
 
       {/* RIGHT: Demo Status, Telemetry & Search Box */}

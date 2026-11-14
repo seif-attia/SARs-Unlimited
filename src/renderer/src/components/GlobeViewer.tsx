@@ -7,6 +7,7 @@ import {
   ChevronLeft,
   ChevronRight,
   Compass,
+  Info,
   Layers,
   Moon,
   Mountain,
@@ -23,6 +24,7 @@ import { usePhenomenonContext } from '../hooks/usePhenomenonContext'
 import { useGlobeLocationPicking } from '../hooks/useGlobeLocationPicking'
 import { loadSarAssetDataUrl } from '../services/phenomenonDataService'
 import { attachDynamicDesertNightSky } from '../services/celestialSkyEngine'
+import { findCustomOverlaySuggestionByUrl } from '../data/customOverlaySuggestions'
 import {
   checkSarsBackendHealth,
   fetchCustomDirectEndpointLayer,
@@ -272,7 +274,7 @@ export function GlobeViewer(): React.JSX.Element {
   const [showNavButtons, setShowNavButtons] = useState<boolean>(true)
   const [showControlsHint] = useState<boolean>(false)
   const [activeSidebarTab, setActiveSidebarTab] = useState<
-    'statistics' | 'eventSummary' | 'scientificExplanation'
+    'statistics' | 'eventSummary' | 'scientificExplanation' | 'customOverlayExplanation'
   >('statistics')
 
   // Custom SARs-Data API state (preserving sarsDataApi.ts integration)
@@ -281,6 +283,7 @@ export function GlobeViewer(): React.JSX.Element {
 
   // Separate Custom API Overlay Feed state
   const [customOverlayUrl, setCustomOverlayUrl] = useState<string>('')
+  const [activeCustomOverlayUrl, setActiveCustomOverlayUrl] = useState<string>('')
   const [customOverlayActive, setCustomOverlayActive] = useState<boolean>(false)
   const [customOverlayLoading, setCustomOverlayLoading] = useState<boolean>(false)
   const [customOverlayStatus, setCustomOverlayStatus] = useState<string | null>(null)
@@ -324,6 +327,7 @@ export function GlobeViewer(): React.JSX.Element {
     isTouring,
     tourStopIdx,
     tourStopCount,
+    toggleTour,
     stopTour,
     jumpTourStop,
     timeline,
@@ -358,6 +362,12 @@ export function GlobeViewer(): React.JSX.Element {
     setWidgetVisible('scientificExplanation', false)
   }, [setWidgetVisible])
 
+  const handleOpenSidebar = useCallback(() => {
+    setWidgetVisible('statistics', true)
+    setWidgetVisible('eventSummary', true)
+    setWidgetVisible('scientificExplanation', true)
+  }, [setWidgetVisible])
+
   const handleToggleWidgetTab = useCallback(
     (widget: keyof WidgetVisibilityState) => {
       if (widget === 'timeline') {
@@ -365,15 +375,13 @@ export function GlobeViewer(): React.JSX.Element {
         return
       }
       if (!isSidebarVisible || activeSidebarTab !== widget) {
-        setWidgetVisible('statistics', true)
-        setWidgetVisible('eventSummary', true)
-        setWidgetVisible('scientificExplanation', true)
+        handleOpenSidebar()
         setActiveSidebarTab(widget)
         return
       }
       handleHideSidebar()
     },
-    [isSidebarVisible, activeSidebarTab, toggleWidget, setWidgetVisible, handleHideSidebar]
+    [isSidebarVisible, activeSidebarTab, toggleWidget, handleOpenSidebar, handleHideSidebar]
   )
 
   // Throttled 3D Earth cursor geographic picking
@@ -1332,6 +1340,11 @@ export function GlobeViewer(): React.JSX.Element {
     }
   }, [])
 
+  const activeOverlaySuggestion = useMemo(
+    () => findCustomOverlaySuggestionByUrl(activeCustomOverlayUrl),
+    [activeCustomOverlayUrl]
+  )
+
   const handleClearCustomOverlay = useCallback(() => {
     const viewer = viewerRef.current
     if (viewer && !viewer.isDestroyed()) {
@@ -1339,79 +1352,134 @@ export function GlobeViewer(): React.JSX.Element {
       viewer.scene.requestRender()
     }
     setCustomOverlayActive(false)
+    setActiveCustomOverlayUrl('')
     setCustomOverlayStatus(null)
+    setActiveSidebarTab((prev) => (prev === 'customOverlayExplanation' ? 'statistics' : prev))
   }, [removeCustomOverlayLayers])
 
-  const handleLoadCustomOverlay = useCallback(async () => {
-    const viewer = viewerRef.current
-    if (!viewer || viewer.isDestroyed()) return
-    const trimmed = customOverlayUrl.trim()
-    if (!trimmed) return
+  const handleLoadCustomOverlay = useCallback(
+    async (urlOverride?: string) => {
+      const viewer = viewerRef.current
+      if (!viewer || viewer.isDestroyed()) return
+      const targetUrl = (typeof urlOverride === 'string' ? urlOverride : customOverlayUrl).trim()
+      if (!targetUrl) return
 
-    setCustomOverlayLoading(true)
-    setCustomOverlayStatus('Connecting to custom API endpoint…')
+      const matchedSuggestion = findCustomOverlaySuggestionByUrl(targetUrl)
 
-    try {
-      const fallbackBbox = selectedEvent?.boundingBox ?? selectedPhenomenon.defaultBbox
-      const layerSpec = await fetchCustomDirectEndpointLayer(trimmed, fallbackBbox)
-      if (viewer.isDestroyed()) return
+      setCustomOverlayLoading(true)
+      setCustomOverlayStatus('Connecting to custom API endpoint…')
 
-      removeCustomOverlayLayers(viewer)
-
-      if (layerSpec.tile_url_template) {
-        const provider = new Cesium.UrlTemplateImageryProvider({
-          url: layerSpec.tile_url_template,
-          credit: layerSpec.title || 'Custom API Overlay'
-        })
-        const layer = viewer.imageryLayers.addImageryProvider(provider)
-        layer.alpha = sarOverlayOpacity
-        customApiOverlayLayerRef.current = layer
-      } else if (layerSpec.DataUrlFallback) {
-        const [west, south, east, north] = layerSpec.bbox
-        const provider = await Cesium.SingleTileImageryProvider.fromUrl(layerSpec.DataUrlFallback, {
-          rectangle: Cesium.Rectangle.fromDegrees(west, south, east, north),
-          credit: layerSpec.title || 'Custom API Overlay'
-        })
+      try {
+        const fallbackBbox = selectedEvent?.boundingBox ?? selectedPhenomenon.defaultBbox
+        const layerSpec = await fetchCustomDirectEndpointLayer(targetUrl, fallbackBbox)
         if (viewer.isDestroyed()) return
-        const layer = viewer.imageryLayers.addImageryProvider(provider)
-        layer.alpha = sarOverlayOpacity
-        customApiOverlayLayerRef.current = layer
-      }
 
-      if (layerSpec.geojson) {
-        const ds = await Cesium.GeoJsonDataSource.load(layerSpec.geojson, {
-          stroke: Cesium.Color.fromCssColorString('#38bdf8'),
-          fill: Cesium.Color.fromCssColorString('#38bdf8').withAlpha(0.35),
-          strokeWidth: 2
-        })
-        if (viewer.isDestroyed()) return
-        await viewer.dataSources.add(ds)
-        customApiGeoJsonRef.current = ds
-      }
+        removeCustomOverlayLayers(viewer)
 
-      enforceLayerOrder(viewer)
-      if (Math.abs(layerSpec.bbox[2] - layerSpec.bbox[0]) < 300) {
-        flyToBbox(layerSpec.bbox)
+        if (layerSpec.tile_url_template) {
+          const tileUrl = layerSpec.tile_url_template
+          const gibsLevelMatch = tileUrl.match(/GoogleMapsCompatible_Level(\d+)/i)
+          const parsedLevel = gibsLevelMatch ? parseInt(gibsLevelMatch[1], 10) : undefined
+          const maxLevel = matchedSuggestion?.maximumLevel ?? parsedLevel
+          const isWebMercator =
+            /epsg3857|GoogleMapsCompatible/i.test(tileUrl) || tileUrl.includes('openseamap.org')
+          const isEpsg4326 = /epsg4326/i.test(tileUrl)
+
+          const provider = new Cesium.UrlTemplateImageryProvider({
+            url: tileUrl,
+            ...(typeof maxLevel === 'number' && Number.isFinite(maxLevel)
+              ? { maximumLevel: maxLevel }
+              : {}),
+            ...(isEpsg4326
+              ? { tilingScheme: new Cesium.GeographicTilingScheme() }
+              : isWebMercator
+                ? {
+                    tilingScheme: new Cesium.WebMercatorTilingScheme(),
+                    rectangle: Cesium.Rectangle.fromDegrees(-180, -85.05112878, 180, 85.05112878)
+                  }
+                : {}),
+            credit: matchedSuggestion?.shortLabel || layerSpec.title || 'Custom API Overlay'
+          })
+          const layer = viewer.imageryLayers.addImageryProvider(provider)
+          layer.alpha = sarOverlayOpacity
+          if (/\.(jpe?g)(\?.*)?$/i.test(tileUrl)) {
+            layer.colorToAlpha = Cesium.Color.BLACK
+            layer.colorToAlphaThreshold = 0.04
+          }
+          customApiOverlayLayerRef.current = layer
+        } else if (layerSpec.DataUrlFallback) {
+          const [west, south, east, north] = layerSpec.bbox
+          const provider = await Cesium.SingleTileImageryProvider.fromUrl(
+            layerSpec.DataUrlFallback,
+            {
+              rectangle: Cesium.Rectangle.fromDegrees(west, south, east, north),
+              credit: matchedSuggestion?.shortLabel || layerSpec.title || 'Custom API Overlay'
+            }
+          )
+          if (viewer.isDestroyed()) return
+          const layer = viewer.imageryLayers.addImageryProvider(provider)
+          layer.alpha = sarOverlayOpacity
+          customApiOverlayLayerRef.current = layer
+        }
+
+        if (layerSpec.geojson) {
+          const ds = await Cesium.GeoJsonDataSource.load(layerSpec.geojson, {
+            stroke: Cesium.Color.fromCssColorString('#38bdf8'),
+            fill: Cesium.Color.fromCssColorString('#38bdf8').withAlpha(0.35),
+            markerColor: Cesium.Color.fromCssColorString('#f97316'),
+            markerSize: 22,
+            clampToGround: true,
+            strokeWidth: 2
+          })
+          if (viewer.isDestroyed()) return
+          for (const entity of ds.entities.values) {
+            if (entity.billboard) {
+              entity.billboard = undefined
+              entity.point = new Cesium.PointGraphics({
+                pixelSize: 7,
+                color: Cesium.Color.fromCssColorString('#f97316').withAlpha(0.92),
+                outlineColor: Cesium.Color.WHITE,
+                outlineWidth: 1.5,
+                disableDepthTestDistance: Number.POSITIVE_INFINITY
+              })
+            }
+          }
+          await viewer.dataSources.add(ds)
+          customApiGeoJsonRef.current = ds
+        }
+
+        enforceLayerOrder(viewer)
+        if (Math.abs(layerSpec.bbox[2] - layerSpec.bbox[0]) < 300) {
+          flyToBbox(layerSpec.bbox)
+        }
+        setActiveCustomOverlayUrl(targetUrl)
+        setCustomOverlayActive(true)
+        setCustomOverlayStatus(
+          `Loaded: ${matchedSuggestion?.shortLabel || layerSpec.title} (${layerSpec.layer_type})`
+        )
+        handleOpenSidebar()
+      } catch (err) {
+        setCustomOverlayActive(false)
+        setActiveCustomOverlayUrl('')
+        setCustomOverlayStatus(
+          `Failed to load custom API: ${err instanceof Error ? err.message : 'Unknown error'}`
+        )
+        setActiveSidebarTab((prev) => (prev === 'customOverlayExplanation' ? 'statistics' : prev))
+      } finally {
+        setCustomOverlayLoading(false)
       }
-      setCustomOverlayActive(true)
-      setCustomOverlayStatus(`Loaded: ${layerSpec.title} (${layerSpec.layer_type})`)
-    } catch (err) {
-      setCustomOverlayActive(false)
-      setCustomOverlayStatus(
-        `Failed to load custom API: ${err instanceof Error ? err.message : 'Unknown error'}`
-      )
-    } finally {
-      setCustomOverlayLoading(false)
-    }
-  }, [
-    customOverlayUrl,
-    selectedEvent,
-    selectedPhenomenon,
-    sarOverlayOpacity,
-    removeCustomOverlayLayers,
-    enforceLayerOrder,
-    flyToBbox
-  ])
+    },
+    [
+      customOverlayUrl,
+      selectedEvent,
+      selectedPhenomenon,
+      sarOverlayOpacity,
+      removeCustomOverlayLayers,
+      enforceLayerOrder,
+      flyToBbox,
+      handleOpenSidebar
+    ]
+  )
 
   const handleApplyCustomApi = (): void => {
     checkSarsBackendHealth(customApiBaseUrl)
@@ -1421,8 +1489,13 @@ export function GlobeViewer(): React.JSX.Element {
 
   return (
     <div className={`globe-stage ${uiLightTheme ? 'sars-theme-light' : 'sars-theme-dark'}`}>
-      {/* Fullscreen 3D Cesium Canvas */}
-      <div ref={containerRef} className="cesium-Viewport" />
+      {/* Fullscreen 3D Cesium Canvas (dynamically shifted to stay centered in open view) */}
+      <div
+        ref={containerRef}
+        className={`cesium-Viewport ${isSidebarVisible ? 'has-sidebar' : ''} ${
+          widgetVisibility.timeline ? 'has-timeline' : ''
+        }`}
+      />
 
       {/* AREA A: TOP NAVIGATION HEADER */}
       <DashboardHeader
@@ -1454,6 +1527,8 @@ export function GlobeViewer(): React.JSX.Element {
         datasetStatus={datasetStatus}
         widgetVisibility={widgetVisibility}
         onToggleWidget={handleToggleWidgetTab}
+        isTouring={isTouring}
+        onToggleTour={toggleTour}
         settingsProps={{
           showTerrain: showTopography,
           onToggleTerrain: () => handleToggleTopography(),
@@ -1582,6 +1657,24 @@ export function GlobeViewer(): React.JSX.Element {
             </button>
           </div>
 
+          {customOverlayActive && (
+            <div className="sars-unified-sidebar__subrow" role="tablist" aria-label="Custom Overlay Tabs">
+              <button
+                type="button"
+                role="tab"
+                aria-selected={activeSidebarTab === 'customOverlayExplanation'}
+                className={`sars-unified-sidebar__tab sars-unified-sidebar__subtab ${
+                  activeSidebarTab === 'customOverlayExplanation' ? 'is-active' : ''
+                }`}
+                onClick={() => setActiveSidebarTab('customOverlayExplanation')}
+                title="Scientific explanation for the active Custom API overlay"
+              >
+                <Info size={13} />
+                <span>Overlay Explanation</span>
+              </button>
+            </div>
+          )}
+
           <div className="sars-unified-sidebar__body">
             {activeSidebarTab === 'statistics' && (
               <StatisticsPanel
@@ -1625,9 +1718,100 @@ export function GlobeViewer(): React.JSX.Element {
                 embedded
               />
             )}
+
+            {activeSidebarTab === 'customOverlayExplanation' &&
+              customOverlayActive &&
+              (activeOverlaySuggestion ? (
+                <section
+                  className="sars-tab-pane sars-explanation-pane sars-custom-overlay-pane"
+                  aria-label="Custom Overlay Scientific Explanation"
+                >
+                  <div className="sars-bottom-panel__header">
+                    <div className="sars-bottom-panel__header-left">
+                      <span className="sars-bottom-panel__kicker">
+                        SUGGESTED OVERLAY · {activeOverlaySuggestion.category.toUpperCase()}
+                      </span>
+                    </div>
+                    <div className="sars-bottom-panel__header-right">
+                      <span className="sars-bottom-panel__sensor">
+                        {activeOverlaySuggestion.sensorBadge}
+                      </span>
+                    </div>
+                  </div>
+
+                  <h3 className="sars-custom-overlay-pane__title">
+                    {activeOverlaySuggestion.title}
+                  </h3>
+
+                  <div className="sars-bottom-panel__columns">
+                    <div className="sars-explanation-col">
+                      <h4 className="sars-explanation-col__title">What This Overlay Represents</h4>
+                      <p className="sars-explanation-col__body">
+                        {activeOverlaySuggestion.whatItRepresents}
+                      </p>
+                    </div>
+
+                    <div className="sars-explanation-col">
+                      <h4 className="sars-explanation-col__title">
+                        Scientific Phenomena Shown
+                      </h4>
+                      <p className="sars-explanation-col__body">
+                        {activeOverlaySuggestion.scientificPhenomena}
+                      </p>
+                    </div>
+
+                    <div className="sars-explanation-col">
+                      <h4 className="sars-explanation-col__title">How to Read the Overlay</h4>
+                      <p className="sars-explanation-col__body">
+                        {activeOverlaySuggestion.readingGuide}
+                      </p>
+                      {activeOverlaySuggestion.legend.length > 0 && (
+                        <div className="sars-explanation-swatches" style={{ marginTop: 8 }}>
+                          <div className="sars-swatch-pills is-compact">
+                            {activeOverlaySuggestion.legend.map((swatch, idx) => (
+                              <span key={`${swatch.color}-${idx}`} className="sars-swatch-pill">
+                                <span
+                                  className="sars-swatch-pill__dot"
+                                  style={{ background: swatch.color }}
+                                  aria-hidden="true"
+                                />
+                                <span className="sars-swatch-pill__label">{swatch.label}</span>
+                              </span>
+                            ))}
+                          </div>
+                        </div>
+                      )}
+                    </div>
+
+                    <div className="sars-explanation-col">
+                      <h4 className="sars-explanation-col__title">Mission &amp; Data Provenance</h4>
+                      <p className="sars-explanation-col__body">
+                        {activeOverlaySuggestion.dataProvenance}
+                      </p>
+                    </div>
+                  </div>
+                </section>
+              ) : (
+                <div
+                  className="sars-tab-pane sars-custom-overlay-pane is-blank"
+                  aria-label="User Custom API Overlay Explanation"
+                />
+              ))}
           </div>
         </aside>
       )}
+
+      {/* Persistent Left Edge Arrow Toggle for Opening / Collapsing the Side Menu */}
+      <button
+        type="button"
+        className={`sars-sidebar-edge-arrow ${isSidebarVisible ? 'is-open' : 'is-closed'}`}
+        onClick={isSidebarVisible ? handleHideSidebar : handleOpenSidebar}
+        title={isSidebarVisible ? 'Collapse Side Menu' : 'Open Side Menu (Statistics, Events & Science)'}
+        aria-label={isSidebarVisible ? 'Collapse Side Menu' : 'Open Side Menu'}
+        aria-expanded={isSidebarVisible}
+      >
+        {isSidebarVisible ? <ChevronLeft size={16} /> : <ChevronRight size={16} />}
+      </button>
 
       {/* FLOATING PLANET HOVER TELEMETRY PILL (NON-OVERLAPPING BOTTOM HUD) */}
       {showCursorTooltip &&

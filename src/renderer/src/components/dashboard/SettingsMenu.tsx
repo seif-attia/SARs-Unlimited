@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react'
-import { ChevronDown, RefreshCw, RotateCcw, Settings } from 'lucide-react'
+import { ChevronDown, RefreshCw, RotateCcw, Settings, Sparkles } from 'lucide-react'
+import { CUSTOM_OVERLAY_SUGGESTIONS } from '../../data/customOverlaySuggestions'
 import type { WidgetVisibilityState } from '../../types/phenomenon'
 
 export interface SettingsMenuProps {
@@ -50,7 +51,7 @@ export interface SettingsMenuProps {
   backendConnected: boolean | null
   customOverlayUrl: string
   onChangeCustomOverlayUrl: (url: string) => void
-  onLoadCustomOverlay: () => void
+  onLoadCustomOverlay: (urlOverride?: string) => void
   onClearCustomOverlay: () => void
   customOverlayActive: boolean
   customOverlayLoading: boolean
@@ -109,18 +110,35 @@ export const SettingsMenu: React.FC<SettingsMenuProps> = ({
   legacyDemoOverlayActive
 }) => {
   const [open, setOpen] = useState(false)
+  const [suggestionsOpen, setSuggestionsOpen] = useState(false)
   const ref = useRef<HTMLDivElement | null>(null)
+  const suggestionsRef = useRef<HTMLDivElement | null>(null)
 
   useEffect(() => {
-    if (!open) return
+    if (!open) {
+      setSuggestionsOpen(false)
+      return
+    }
     const handleOutside = (e: MouseEvent): void => {
       if (ref.current && !ref.current.contains(e.target as Node)) {
         setOpen(false)
+        setSuggestionsOpen(false)
       }
     }
     window.addEventListener('mousedown', handleOutside)
     return () => window.removeEventListener('mousedown', handleOutside)
   }, [open])
+
+  useEffect(() => {
+    if (!suggestionsOpen) return
+    const handleOutsideSuggestions = (e: MouseEvent): void => {
+      if (suggestionsRef.current && !suggestionsRef.current.contains(e.target as Node)) {
+        setSuggestionsOpen(false)
+      }
+    }
+    window.addEventListener('mousedown', handleOutsideSuggestions)
+    return () => window.removeEventListener('mousedown', handleOutsideSuggestions)
+  }, [suggestionsOpen])
 
   return (
     <div className="sars-settings-wrapper" ref={ref}>
@@ -335,32 +353,93 @@ export const SettingsMenu: React.FC<SettingsMenuProps> = ({
             </div>
 
             <div className="sars-settings-custom-feed">
-              <div className="sars-settings-footer__row">
+              <div className="sars-settings-footer__row sars-settings-custom-feed__header">
                 <span className="sars-settings-section__title" style={{ margin: 0 }}>
                   CUSTOM API OVERLAY FEED ({customOverlayActive ? 'OVERLAY ACTIVE' : 'IDLE'})
                 </span>
-                {customOverlayActive && (
-                  <button
-                    type="button"
-                    className="sars-btn-subtle is-active"
-                    onClick={onClearCustomOverlay}
-                    title="Remove custom API overlay from the 3D Earth"
-                  >
-                    Clear Overlay
-                  </button>
-                )}
+                <div className="sars-settings-custom-feed__actions">
+                  <div className="sars-suggestions-dropdown" ref={suggestionsRef}>
+                    <button
+                      type="button"
+                      className={`sars-btn-subtle ${suggestionsOpen ? 'is-active' : ''}`}
+                      onClick={() => setSuggestionsOpen((p) => !p)}
+                      aria-expanded={suggestionsOpen}
+                      aria-haspopup="listbox"
+                      title="Browse curated gap-free scientific API overlays calibrated to the 3D Earth model"
+                    >
+                      <Sparkles size={11} />
+                      <span>Suggestions</span>
+                      <ChevronDown
+                        size={12}
+                        className={`sars-nav-pill__caret ${suggestionsOpen ? 'is-open' : ''}`}
+                      />
+                    </button>
+
+                    {suggestionsOpen && (
+                      <div
+                        className="sars-suggestions-popover"
+                        role="listbox"
+                        aria-label="Suggested Custom API Overlays"
+                      >
+                        <div className="sars-suggestions-popover__head">
+                          GLOBAL EARTH-ALIGNED API SUGGESTIONS
+                        </div>
+                        <div className="sars-suggestions-popover__list">
+                          {CUSTOM_OVERLAY_SUGGESTIONS.map((item) => {
+                            const isSelected = customOverlayUrl.trim() === item.url
+                            return (
+                              <button
+                                key={item.id}
+                                type="button"
+                                role="option"
+                                aria-selected={isSelected}
+                                className={`sars-suggestion-item ${isSelected ? 'is-active' : ''}`}
+                                onClick={() => {
+                                  onChangeCustomOverlayUrl(item.url)
+                                  setSuggestionsOpen(false)
+                                  onLoadCustomOverlay(item.url)
+                                }}
+                              >
+                                <div className="sars-suggestion-item__top">
+                                  <span className="sars-suggestion-item__title">
+                                    {item.shortLabel}
+                                  </span>
+                                  <span className="sars-suggestion-item__cat">{item.category}</span>
+                                </div>
+                                <span className="sars-suggestion-item__meta">
+                                  {item.sensorBadge}
+                                </span>
+                              </button>
+                            )
+                          })}
+                        </div>
+                      </div>
+                    )}
+                  </div>
+
+                  {customOverlayActive && (
+                    <button
+                      type="button"
+                      className="sars-btn-subtle is-active"
+                      onClick={onClearCustomOverlay}
+                      title="Remove custom API overlay from the 3D Earth"
+                    >
+                      Clear Overlay
+                    </button>
+                  )}
+                </div>
               </div>
               <div className="sars-settings-api-input">
                 <input
                   type="text"
-                  placeholder="https://.../tiles/{z}/{x}/{y}.png, .geojson, .png, or API URL"
+                  placeholder="https://.../tiles/{z}/{y}/{x}.png, .geojson, .png, or API URL"
                   value={customOverlayUrl}
                   onChange={(e) => onChangeCustomOverlayUrl(e.target.value)}
                 />
                 <button
                   type="button"
                   className="sars-btn-subtle"
-                  onClick={onLoadCustomOverlay}
+                  onClick={() => onLoadCustomOverlay()}
                   disabled={customOverlayLoading || !customOverlayUrl.trim()}
                 >
                   {customOverlayLoading
