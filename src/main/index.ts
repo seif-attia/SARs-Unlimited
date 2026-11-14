@@ -2,6 +2,7 @@ import { app, shell, BrowserWindow, ipcMain } from 'electron'
 import { join } from 'path'
 import { electronApp, optimizer, is } from '@electron-toolkit/utils'
 import icon from '../../resources/icon.png?asset'
+import { getAssetDataUrl, getDataset } from './dataset-service'
 
 function createWindow(): void {
   // Create the browser window.
@@ -55,6 +56,9 @@ app.whenReady().then(() => {
 
   // IPC test
   ipcMain.on('ping', () => console.log('pong'))
+
+  ipcMain.handle('sar:get-dataset', () => getDataset())
+  ipcMain.handle('sar:get-asset-data-url', (_, relPath: string) => getAssetDataUrl(relPath))
 
   createWindow()
 

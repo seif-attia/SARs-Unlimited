@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react'
+import { useCallback, useEffect, useRef, useState } from 'react'
 import * as Cesium from 'cesium'
 import 'cesium/Build/Cesium/Widgets/widgets.css'
 import {
@@ -14,6 +14,9 @@ import {
   ZoomIn,
   ZoomOut
 } from 'lucide-react'
+import type { AmazonEvent, AmazonPhenomenon, AmazonSarDataset, SarOverlayLayer } from '../types/sar'
+import { SarStoryCard } from './SarStoryCard'
+import { TimelineBar } from './TimelineBar'
 
 export interface CameraTelemetry {
   lat: number
@@ -23,9 +26,9 @@ export interface CameraTelemetry {
 }
 
 const DEFAULT_ORBIT_VIEW = {
-  lon: 30.8,
-  lat: 26.5,
-  height: 12_500_000
+  lon: -61.2,
+  lat: -5.2,
+  height: 4_800_000
 }
 
 const SRTM_TOPOGRAPHY_URL =
@@ -234,6 +237,19 @@ export function GlobeViewer(): React.JSX.Element {
   const srtmLayerRef = useRef<Cesium.ImageryLayer | null>(null)
   const reliefLayerRef = useRef<Cesium.ImageryLayer | null>(null)
   const labelsLayerRef = useRef<Cesium.ImageryLayer | null>(null)
+  const sarOverlayLayerRef = useRef<Cesium.ImageryLayer | null>(null)
+  const sarRequestSeqRef = useRef<number>(0)
+
+  // Dancing with the SARs — Amazon 2020-2026 Offline Dataset & Story State
+  const [sarDataset, setSarDataset] = useState<AmazonSarDataset | null>(null)
+  const [selectedMonthIndex, setSelectedMonthIndex] = useState<number>(81) // 2026-10
+  const [selectionMode, setSelectionMode] = useState<'phenomenon' | 'event' | null>(null)
+  const [activePhenomenonId, setActivePhenomenonId] = useState<string | null>(null)
+  const [activeEventId, setActiveEventId] = useState<string | null>(null)
+  const [activeSarLayer, setActiveSarLayer] = useState<SarOverlayLayer | null>(null)
+  const [overlayOpacity, setOverlayOpacity] = useState<number>(0.85)
+  const overlayOpacityRef = useRef<number>(0.85)
+  const selectEntityCallbackRef = useRef<(entityId: string) => void>(() => {})
 
   // Menu & Refresh state
   const [menuOpen, setMenuOpen] = useState<boolean>(false)
@@ -326,11 +342,106 @@ export function GlobeViewer(): React.JSX.Element {
     if (srtmLayerRef.current && layers.contains(srtmLayerRef.current)) {
       layers.raiseToTop(srtmLayerRef.current)
     }
+    if (sarOverlayLayerRef.current && layers.contains(sarOverlayLayerRef.current)) {
+      layers.raiseToTop(sarOverlayLayerRef.current)
+    }
     if (labelsLayerRef.current && layers.contains(labelsLayerRef.current)) {
       layers.raiseToTop(labelsLayerRef.current)
     }
     viewer.scene.requestRender()
   }
+
+  // Fly smoothly to an AOI bbox on the 3D globe
+  const flyToBbox = useCallback((bbox: [number, number, number, number]): void => {
+    const viewer = viewerRef.current
+    if (!viewer || viewer.isDestroyed()) return
+    setAutoRotate(false)
+    const [west, south, east, north] = bbox
+    const padLon = Math.max(0.18, (east - west) * 0.45)
+    const padLat = Math.max(0.18, (north - south) * 0.45)
+    viewer.camera.flyTo({
+      destination: Cesium.Rectangle.fromDegrees(
+        west - padLon,
+        south - padLat,
+        east + padLon,
+        north + padLat
+      ),
+      duration: 1.2
+    })
+  }, [])
+
+  const handleSelectPhenomenon = useCallback(
+    (phen: AmazonPhenomenon): void => {
+      setSelectionMode('phenomenon')
+      setActivePhenomenonId(phen.id)
+      setActiveEventId(null)
+      const def = phen.layers.find((l) => l.id === phen.default_layer_id) ?? phen.layers[0] ?? null
+      setActiveSarLayer(def)
+      if (sarDataset) {
+        // Jump timeline to the peak month in 2025/2026 matching this seasonal phenomenon
+        const targetPeak = phen.peak_months[0] ?? phen.months[0] ?? 6
+        const targetYm =
+          targetPeak === 12 ? '2025-12' : `2025-${String(targetPeak).padStart(2, '0')}`
+        const mIdx = sarDataset.timeline.months.findIndex((m) => m.month === targetYm)
+        if (mIdx >= 0) setSelectedMonthIndex(mIdx)
+      }
+      flyToBbox(def?.bbox ?? phen.bbox)
+    },
+    [flyToBbox, sarDataset]
+  )
+
+  const handleSelectEvent = useCallback(
+    (evt: AmazonEvent): void => {
+      setSelectionMode('event')
+      setActiveEventId(evt.id)
+      setActivePhenomenonId(null)
+      const def = evt.layers.find((l) => l.id === evt.default_layer_id) ?? evt.layers[0] ?? null
+      setActiveSarLayer(def)
+      if (sarDataset) {
+        const mIdx = sarDataset.timeline.months.findIndex((m) => m.month === evt.timeline_month)
+        if (mIdx >= 0) setSelectedMonthIndex(mIdx)
+      }
+      flyToBbox(def?.bbox ?? evt.bbox)
+    },
+    [flyToBbox, sarDataset]
+  )
+
+  const handleSelectMonthIndex = useCallback(
+    (idx: number): void => {
+      setSelectedMonthIndex(idx)
+      if (!sarDataset) return
+      const pt = sarDataset.timeline.months[idx]
+      if (!pt) return
+      // In generic browsing mode, follow seasonal phenomenon transitions cleanly if user hasn't locked an event
+      if (selectionMode !== 'event') {
+        if (pt.event_id) {
+          const evt = sarDataset.events.find((e) => e.id === pt.event_id)
+          if (evt) {
+            handleSelectEvent(evt)
+            return
+          }
+        }
+        const matchPhenId = pt.active_phenomena[0]
+        if (matchPhenId && selectionMode === 'phenomenon' && activePhenomenonId !== matchPhenId) {
+          const phen = sarDataset.phenomena.find((p) => p.id === matchPhenId)
+          if (phen) {
+            setActivePhenomenonId(phen.id)
+            const def =
+              phen.layers.find((l) => l.id === phen.default_layer_id) ?? phen.layers[0] ?? null
+            setActiveSarLayer(def)
+          }
+        }
+      }
+    },
+    [activePhenomenonId, handleSelectEvent, sarDataset, selectionMode]
+  )
+
+  const handleClearInspector = useCallback((): void => {
+    setSelectionMode(null)
+    setActivePhenomenonId(null)
+    setActiveEventId(null)
+    setActiveSarLayer(null)
+  }, [])
 
   useEffect(() => {
     const container = containerRef.current
@@ -452,6 +563,13 @@ export function GlobeViewer(): React.JSX.Element {
       setAutoRotate(false)
     }, Cesium.ScreenSpaceEventType.WHEEL)
 
+    handler.setInputAction((movement: Cesium.ScreenSpaceEventHandler.PositionedEvent) => {
+      const picked = scene.pick(movement.position)
+      if (Cesium.defined(picked) && picked.id && typeof picked.id.id === 'string') {
+        selectEntityCallbackRef.current(picked.id.id)
+      }
+    }, Cesium.ScreenSpaceEventType.LEFT_CLICK)
+
     // Gentle orbital spin ONLY when autoRotate is enabled
     let lastTime = performance.now()
     const onPreUpdate = (): void => {
@@ -493,6 +611,147 @@ export function GlobeViewer(): React.JSX.Element {
       viewerRef.current = null
     }
   }, [])
+
+  // Load offline Amazon SAR 2020-2026 Atlas once via Electron IPC
+  useEffect(() => {
+    let active = true
+    window.api
+      ?.getDataset?.()
+      .then((raw) => {
+        if (!active) return
+        setSarDataset(raw as AmazonSarDataset)
+      })
+      .catch((err) => {
+        console.error('Failed to load offline SAR dataset:', err)
+      })
+    return () => {
+      active = false
+    }
+  }, [])
+
+  // Sync clickable 3D markers for the 4 Anchor Events + Madeira Porto Velho on the globe
+  useEffect(() => {
+    const viewer = viewerRef.current
+    if (!viewer || viewer.isDestroyed() || !sarDataset) return
+
+    selectEntityCallbackRef.current = (entityId: string) => {
+      if (entityId.startsWith('evt-pin:')) {
+        const eid = entityId.slice('evt-pin:'.length)
+        const evt = sarDataset.events.find((e) => e.id === eid)
+        if (evt) handleSelectEvent(evt)
+      } else if (entityId === 'phen-pin:seasonal_flood') {
+        const phen = sarDataset.phenomena.find((p) => p.id === 'seasonal_flood')
+        if (phen) handleSelectPhenomenon(phen)
+      }
+    }
+
+    viewer.entities.removeAll()
+
+    for (const evt of sarDataset.events) {
+      const col = Cesium.Color.fromCssColorString(evt.color)
+      // Offset Manaus Nov 2026 NISAR pin slightly northeast so both Manaus Jun 2021 and NISAR 2026 dots are clickable
+      const lonOffset = evt.id === 'nisar_lband_2026' ? 0.42 : 0
+      const latOffset = evt.id === 'nisar_lband_2026' ? 0.28 : 0
+      viewer.entities.add({
+        id: `evt-pin:${evt.id}`,
+        position: Cesium.Cartesian3.fromDegrees(
+          evt.center[0] + lonOffset,
+          evt.center[1] + latOffset
+        ),
+        point: {
+          pixelSize: activeEventId === evt.id ? 14 : 10,
+          color: col,
+          outlineColor: Cesium.Color.WHITE,
+          outlineWidth: 2,
+          disableDepthTestDistance: Number.POSITIVE_INFINITY
+        },
+        label: {
+          text: `${evt.timing} · ${evt.name}`,
+          font: '600 11px Inter, system-ui, sans-serif',
+          fillColor: Cesium.Color.WHITE,
+          showBackground: true,
+          backgroundColor: Cesium.Color.fromCssColorString('rgba(9, 15, 27, 0.82)'),
+          backgroundPadding: new Cesium.Cartesian2(7, 4),
+          pixelOffset: new Cesium.Cartesian2(0, -18),
+          disableDepthTestDistance: Number.POSITIVE_INFINITY
+        }
+      })
+    }
+
+    // Add Madeira River (Porto Velho) marker for Seasonal Flood / Low River Levels
+    const madeira = sarDataset.regions['porto_velho']
+    if (madeira) {
+      viewer.entities.add({
+        id: 'phen-pin:seasonal_flood',
+        position: Cesium.Cartesian3.fromDegrees(madeira.center[0], madeira.center[1]),
+        point: {
+          pixelSize: 9,
+          color: Cesium.Color.fromCssColorString('#38BDF8'),
+          outlineColor: Cesium.Color.WHITE,
+          outlineWidth: 2,
+          disableDepthTestDistance: Number.POSITIVE_INFINITY
+        },
+        label: {
+          text: 'Porto Velho · Madeira Flood (Mar–Apr)',
+          font: '600 11px Inter, system-ui, sans-serif',
+          fillColor: Cesium.Color.WHITE,
+          showBackground: true,
+          backgroundColor: Cesium.Color.fromCssColorString('rgba(9, 15, 27, 0.82)'),
+          backgroundPadding: new Cesium.Cartesian2(7, 4),
+          pixelOffset: new Cesium.Cartesian2(0, -18),
+          disableDepthTestDistance: Number.POSITIVE_INFINITY
+        }
+      })
+    }
+
+    viewer.scene.requestRender()
+  }, [activeEventId, handleSelectEvent, handleSelectPhenomenon, sarDataset])
+
+  // Drape the active georeferenced 256x256 SAR raster overlay onto the 3D globe
+  useEffect(() => {
+    const viewer = viewerRef.current
+    if (!viewer || viewer.isDestroyed()) return
+
+    if (sarOverlayLayerRef.current) {
+      viewer.imageryLayers.remove(sarOverlayLayerRef.current, true)
+      sarOverlayLayerRef.current = null
+      viewer.scene.requestRender()
+    }
+
+    if (!activeSarLayer) return
+
+    const reqId = ++sarRequestSeqRef.current
+    const [west, south, east, north] = activeSarLayer.bbox
+
+    window.api
+      ?.getAssetDataUrl(activeSarLayer.asset_path)
+      .then((dataUrl) =>
+        Cesium.SingleTileImageryProvider.fromUrl(dataUrl, {
+          rectangle: Cesium.Rectangle.fromDegrees(west, south, east, north)
+        })
+      )
+      .then((provider) => {
+        if (viewer.isDestroyed() || reqId !== sarRequestSeqRef.current) return
+        const layer = viewer.imageryLayers.addImageryProvider(provider)
+        layer.alpha = overlayOpacityRef.current
+        sarOverlayLayerRef.current = layer
+        enforceLayerOrder(viewer)
+      })
+      .catch((err) => {
+        console.error('Failed to drape SAR overlay:', err)
+      })
+  }, [activeSarLayer])
+
+  // Sync overlay alpha slider without recreating imagery provider
+  useEffect(() => {
+    overlayOpacityRef.current = overlayOpacity
+    const viewer = viewerRef.current
+    const layer = sarOverlayLayerRef.current
+    if (viewer && !viewer.isDestroyed() && layer) {
+      layer.alpha = overlayOpacity
+      viewer.scene.requestRender()
+    }
+  }, [overlayOpacity])
 
   // Lazy-toggle Optical Satellite Imagery
   const handleToggleSatellite = (checked?: boolean): void => {
@@ -949,6 +1208,45 @@ export function GlobeViewer(): React.JSX.Element {
           </div>
         )}
       </header>
+
+      {/* Dancing with the SARs — Top Timeline Dock (Generic Phenomena + Event Dots) */}
+      {sarDataset && (
+        <TimelineBar
+          months={sarDataset.timeline.months}
+          phenomena={sarDataset.phenomena}
+          events={sarDataset.events}
+          selectedMonthIndex={selectedMonthIndex}
+          activePhenomenonId={activePhenomenonId}
+          activeEventId={activeEventId}
+          onSelectMonthIndex={handleSelectMonthIndex}
+          onSelectPhenomenon={handleSelectPhenomenon}
+          onSelectEvent={handleSelectEvent}
+          onFlyAmazonOverview={() => flyToBbox([-70.0, -12.0, -52.0, 1.5])}
+        />
+      )}
+
+      {/* Right-Side Interactive SAR Physics & Story Inspector Card */}
+      {sarDataset && selectionMode && (
+        <SarStoryCard
+          mode={selectionMode}
+          phenomenon={
+            activePhenomenonId
+              ? (sarDataset.phenomena.find((p) => p.id === activePhenomenonId) ?? null)
+              : null
+          }
+          event={
+            activeEventId ? (sarDataset.events.find((e) => e.id === activeEventId) ?? null) : null
+          }
+          activeLayer={activeSarLayer}
+          overlayOpacity={overlayOpacity}
+          onSelectLayer={(layer) => {
+            setActiveSarLayer(layer)
+            flyToBbox(layer.bbox)
+          }}
+          onChangeOpacity={setOverlayOpacity}
+          onClose={handleClearInspector}
+        />
+      )}
 
       {/* Compact Topography (Altitude) Scale Legend — only shown when a topography overlay is active */}
       {showAltitudeLegend && (showSrtmTopography || showShadedRelief) && !menuOpen && (
