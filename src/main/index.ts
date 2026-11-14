@@ -2,6 +2,7 @@ import { app, shell, BrowserWindow, ipcMain } from 'electron'
 import { join } from 'path'
 import { electronApp, optimizer, is } from '@electron-toolkit/utils'
 import icon from '../../resources/icon.png?asset'
+import { getAssetDataUrl, getDataset } from './dataset-service'
 
 // Prevent Windows GPU shader disk cache lock errors (0x5 Access is denied)
 app.commandLine.appendSwitch('disable-gpu-shader-disk-cache')
@@ -58,6 +59,9 @@ app.whenReady().then(() => {
 
   // IPC test
   ipcMain.on('ping', () => console.log('pong'))
+
+  ipcMain.handle('sar:get-dataset', () => getDataset())
+  ipcMain.handle('sar:get-asset-data-url', (_, relPath: string) => getAssetDataUrl(relPath))
 
   createWindow()
 

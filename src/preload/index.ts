@@ -1,8 +1,16 @@
-import { contextBridge } from 'electron'
+import { contextBridge, ipcRenderer } from 'electron'
 import { electronAPI } from '@electron-toolkit/preload'
 
+export interface SarBridgeApi {
+  getDataset: () => Promise<unknown>
+  getAssetDataUrl: (relPath: string) => Promise<string>
+}
+
 // Custom APIs for renderer
-const api = {}
+const api: SarBridgeApi = {
+  getDataset: () => ipcRenderer.invoke('sar:get-dataset'),
+  getAssetDataUrl: (relPath: string) => ipcRenderer.invoke('sar:get-asset-data-url', relPath)
+}
 
 // Use `contextBridge` APIs to expose Electron APIs to
 // renderer only if context isolation is enabled, otherwise
