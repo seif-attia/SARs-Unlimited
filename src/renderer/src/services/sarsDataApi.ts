@@ -495,6 +495,20 @@ export async function fetchCustomDirectEndpointLayer(
   fallbackBbox: [number, number, number, number]
 ): Promise<CesiumLayerResponse> {
   const trimmed = customUrl.trim()
+  if (!trimmed) {
+    throw new Error('Enter a custom API, XYZ tile, GeoJSON, or image URL.')
+  }
+
+  const normalizeBbox = (candidate: unknown): [number, number, number, number] => {
+    if (
+      Array.isArray(candidate) &&
+      candidate.length === 4 &&
+      candidate.every((n) => typeof n === 'number' && Number.isFinite(n))
+    ) {
+      return candidate as [number, number, number, number]
+    }
+    return fallbackBbox
+  }
 
   // 1. Direct XYZ tile URL template
   if (trimmed.includes('{z}') && (trimmed.includes('{x}') || trimmed.includes('{y}'))) {
@@ -525,13 +539,13 @@ export async function fetchCustomDirectEndpointLayer(
     }
   }
 
-  // 2. Direct single image (.png / .jpg)
-  if (/\.(png|jpg|jpeg|webp)(\?.*)?$/i.test(trimmed)) {
+  // 2. Direct single image URL (.png / .jpg / .webp) or data:image/ URI
+  if (/^data:image\//i.test(trimmed) || /\.(png|jpg|jpeg|webp)(\?.*)?$/i.test(trimmed)) {
     return {
       layer_id: `custom-img-${Date.now()}`,
       dataset: 'custom',
       title: 'Custom Draped Image Overlay',
-      source: trimmed,
+      source: trimmed.startsWith('data:') ? 'Inline Data Image' : trimmed,
       layer_type: 'hybrid',
       observation_start: '',
       observation_end: '',
@@ -547,7 +561,7 @@ export async function fetchCustomDirectEndpointLayer(
             code: 'img',
             label: 'Draped Georeferenced Image',
             color_hex: '#00E676',
-            description: trimmed
+            description: trimmed.startsWith('data:') ? 'Inline Data Image' : trimmed
           }
         ]
       },
@@ -555,41 +569,94 @@ export async function fetchCustomDirectEndpointLayer(
     }
   }
 
-  // 3. Fetch JSON endpoint (either CesiumLayerResponse or GeoJSON FeatureCollection)
-  const resp = await fetch(trimmed)
-  if (!resp.ok) {
-    throw new Error(`HTTP ${resp.status} from ${trimmed}`)
-  }
-  const data = await resp.json()
-
-  // 3a. If it's a BESO47/SARs-Data CesiumLayerResponse
-  if (data && typeof data === 'object' && ('layer_id' in data || 'tile_url_template' in data)) {
-    const parsedOrigin = new URL(trimmed).origin
-    const layer = data as CesiumLayerResponse
-    if (layer.tile_url_template && layer.tile_url_template.startsWith('/')) {
-      layer.tile_url_template = `${parsedOrigin}${layer.tile_url_template}`
+  // 3. Fetch endpoint (if user entered /flood, /nisar, /forest, or /rainfall without /layer, fall back to /layer)
+  let resolvedUrl = trimmed
+  let resp = await fetch(resolvedUrl)
+  if (!resp.ok && /\/(flood|nisar|forest|rainfall)\/?(\?.*)?$/i.test(trimmed)) {
+    const withLayerPath = trimmed.replace(
+      /\/(flood|nisar|forest|rainfall)\/?(\?.*)?$/i,
+      '/$1/layer$2'
+    )
+    const retryResp = await fetch(withLayerPath)
+    if (retryResp.ok) {
+      resp = retryResp
+      resolvedUrl = withLayerPath
     }
+  }
+  if (!resp.ok) {
+    throw new Error(`HTTP ${resp.status} from ${resolvedUrl}`)
+  }
+
+  const contentType = resp.headers.get('content-type') || ''
+  if (contentType.startsWith('image/')) {
+    return {
+      layer_id: `custom-img-${Date.now()}`,
+      dataset: 'custom',
+      title: 'Custom API Image Overlay',
+      source: resolvedUrl,
+      layer_type: 'hybrid',
+      observation_start: '',
+      observation_end: '',
+      tile_url_template: null,
+      DataUrlFallback: resolvedUrl,
+      bbox: fallbackBbox,
+      default_opacity: 0.88,
+      z_index: 20,
+      legend: {
+        title: 'Custom API Image Overlay',
+        items: [
+          {
+            code: 'img',
+            label: 'Draped Georeferenced Image',
+            color_hex: '#00E676',
+            description: resolvedUrl
+          }
+        ]
+      },
+      status: 'available'
+    }
+  }
+
+  const data = await resp.json()
+  const parsedOrigin = new URL(resolvedUrl).origin
+  const absolutize = (u: string): string => (u.startsWith('/') ? `${parsedOrigin}${u}` : u)
+
+  // 3a. BESO47/SARs-Data CesiumLayerResponse
+  if (
+    data &&
+    typeof data === 'object' &&
+    ('layer_id' in data || 'tile_url_template' in data || 'DataUrlFallback' in data)
+  ) {
+    const layer = data as CesiumLayerResponse
+    if (layer.tile_url_template) {
+      layer.tile_url_template = absolutize(layer.tile_url_template)
+    }
+    if (layer.DataUrlFallback && layer.DataUrlFallback.startsWith('/')) {
+      layer.DataUrlFallback = absolutize(layer.DataUrlFallback)
+    }
+    layer.bbox = normalizeBbox(layer.bbox)
     return layer
   }
 
-  // 3b. If it's a GeoJSON FeatureCollection (e.g. /api/forest/alerts or /api/analysis/overlap)
-  const geojsonCandidate = data?.type === 'FeatureCollection' ? data : data?.geojson
-  if (geojsonCandidate && geojsonCandidate.type === 'FeatureCollection') {
-    const bbox =
-      Array.isArray(geojsonCandidate.bbox) && geojsonCandidate.bbox.length === 4
-        ? (geojsonCandidate.bbox as [number, number, number, number])
-        : fallbackBbox
+  // 3b. GeoJSON FeatureCollection or single GeoJSON Feature
+  const rawGeo =
+    data?.type === 'FeatureCollection' || data?.type === 'Feature' ? data : data?.geojson
+  if (rawGeo && (rawGeo.type === 'FeatureCollection' || rawGeo.type === 'Feature')) {
+    const featureCollection =
+      rawGeo.type === 'Feature'
+        ? { type: 'FeatureCollection', bbox: rawGeo.bbox ?? data?.bbox, features: [rawGeo] }
+        : rawGeo
     return {
       layer_id: `custom-geojson-${Date.now()}`,
       dataset: 'custom-geojson',
-      title: 'Custom GeoJSON Vector Layer',
-      source: trimmed,
+      title: data?.title || 'Custom GeoJSON Vector Layer',
+      source: resolvedUrl,
       layer_type: 'geojson',
       observation_start: '',
       observation_end: '',
       tile_url_template: null,
-      geojson: geojsonCandidate,
-      bbox,
+      geojson: featureCollection,
+      bbox: normalizeBbox(featureCollection.bbox ?? data?.bbox),
       default_opacity: 0.85,
       z_index: 20,
       legend: {
@@ -597,9 +664,53 @@ export async function fetchCustomDirectEndpointLayer(
         items: [
           {
             code: 'feature',
-            label: `GeoJSON Features (${geojsonCandidate.features?.length ?? 0})`,
+            label: `GeoJSON Features (${featureCollection.features?.length ?? 0})`,
             color_hex: '#FF1744',
-            description: trimmed
+            description: resolvedUrl
+          }
+        ]
+      },
+      status: 'available'
+    }
+  }
+
+  // 3c. Generic JSON descriptor containing tile_url / image_url / overlay_url / url
+  const tileUrl = typeof data?.tile_url === 'string' ? data.tile_url : null
+  const imageOrUrl =
+    typeof data?.image_url === 'string'
+      ? data.image_url
+      : typeof data?.overlay_url === 'string'
+        ? data.overlay_url
+        : typeof data?.url === 'string'
+          ? data.url
+          : null
+
+  if (tileUrl || imageOrUrl) {
+    const candidate = absolutize(tileUrl || imageOrUrl!)
+    const isXyz =
+      Boolean(tileUrl) ||
+      (candidate.includes('{z}') && (candidate.includes('{x}') || candidate.includes('{y}')))
+    return {
+      layer_id: `custom-api-${Date.now()}`,
+      dataset: 'custom',
+      title: typeof data?.title === 'string' ? data.title : 'Custom API Overlay',
+      source: resolvedUrl,
+      layer_type: isXyz ? 'xyz_tiles' : 'hybrid',
+      observation_start: '',
+      observation_end: '',
+      tile_url_template: isXyz ? candidate : null,
+      DataUrlFallback: isXyz ? undefined : candidate,
+      bbox: normalizeBbox(data?.bbox),
+      default_opacity: 0.88,
+      z_index: 20,
+      legend: {
+        title: typeof data?.title === 'string' ? data.title : 'Custom API Overlay',
+        items: [
+          {
+            code: isXyz ? 'xyz' : 'img',
+            label: isXyz ? 'Custom API Tile Stream' : 'Custom API Image Overlay',
+            color_hex: '#38BDF8',
+            description: candidate
           }
         ]
       },

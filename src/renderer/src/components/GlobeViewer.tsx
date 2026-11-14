@@ -21,6 +21,7 @@ import { useGlobeLocationPicking } from '../hooks/useGlobeLocationPicking'
 import { loadSarAssetDataUrl } from '../services/phenomenonDataService'
 import {
   checkSarsBackendHealth,
+  fetchCustomDirectEndpointLayer,
   PREDEFINED_STUDY_AREAS,
   renderSarsDataOverlayPng
 } from '../services/sarsDataApi'
@@ -241,6 +242,8 @@ export function GlobeViewer(): React.JSX.Element {
   const basinReqSeqRef = useRef<number>(0)
   const sarEventLayerRef = useRef<Cesium.ImageryLayer | null>(null)
   const legacyDemoLayerRef = useRef<Cesium.ImageryLayer | null>(null)
+  const customApiOverlayLayerRef = useRef<Cesium.ImageryLayer | null>(null)
+  const customApiGeoJsonRef = useRef<Cesium.DataSource | null>(null)
   const eventEntitiesRef = useRef<Cesium.Entity[]>([])
 
   // Refresh state
@@ -268,6 +271,12 @@ export function GlobeViewer(): React.JSX.Element {
   // Custom SARs-Data API state (preserving sarsDataApi.ts integration)
   const [customApiBaseUrl, setCustomApiBaseUrl] = useState<string>('http://localhost:8000')
   const [backendConnected, setBackendConnected] = useState<boolean | null>(null)
+
+  // Separate Custom API Overlay Feed state
+  const [customOverlayUrl, setCustomOverlayUrl] = useState<string>('')
+  const [customOverlayActive, setCustomOverlayActive] = useState<boolean>(false)
+  const [customOverlayLoading, setCustomOverlayLoading] = useState<boolean>(false)
+  const [customOverlayStatus, setCustomOverlayStatus] = useState<string | null>(null)
 
   const autoRotateRef = useRef<boolean>(false)
   const darkModeRef = useRef<boolean>(false)
@@ -412,6 +421,9 @@ export function GlobeViewer(): React.JSX.Element {
     }
     if (legacyDemoLayerRef.current && layers.contains(legacyDemoLayerRef.current)) {
       layers.raiseToTop(legacyDemoLayerRef.current)
+    }
+    if (customApiOverlayLayerRef.current && layers.contains(customApiOverlayLayerRef.current)) {
+      layers.raiseToTop(customApiOverlayLayerRef.current)
     }
     if (labelsLayerRef.current && layers.contains(labelsLayerRef.current)) {
       layers.raiseToTop(labelsLayerRef.current)
@@ -657,6 +669,9 @@ export function GlobeViewer(): React.JSX.Element {
     }
     if (legacyDemoLayerRef.current) {
       legacyDemoLayerRef.current.alpha = sarOverlayOpacity
+    }
+    if (customApiOverlayLayerRef.current) {
+      customApiOverlayLayerRef.current.alpha = sarOverlayOpacity
     }
     viewer.scene.requestRender()
   }, [sarOverlayOpacity])
@@ -1295,6 +1310,98 @@ export function GlobeViewer(): React.JSX.Element {
     [telemetry]
   )
 
+  const removeCustomOverlayLayers = useCallback((viewer: Cesium.Viewer) => {
+    if (customApiOverlayLayerRef.current) {
+      viewer.imageryLayers.remove(customApiOverlayLayerRef.current, true)
+      customApiOverlayLayerRef.current = null
+    }
+    if (customApiGeoJsonRef.current) {
+      viewer.dataSources.remove(customApiGeoJsonRef.current, true)
+      customApiGeoJsonRef.current = null
+    }
+  }, [])
+
+  const handleClearCustomOverlay = useCallback(() => {
+    const viewer = viewerRef.current
+    if (viewer && !viewer.isDestroyed()) {
+      removeCustomOverlayLayers(viewer)
+      viewer.scene.requestRender()
+    }
+    setCustomOverlayActive(false)
+    setCustomOverlayStatus(null)
+  }, [removeCustomOverlayLayers])
+
+  const handleLoadCustomOverlay = useCallback(async () => {
+    const viewer = viewerRef.current
+    if (!viewer || viewer.isDestroyed()) return
+    const trimmed = customOverlayUrl.trim()
+    if (!trimmed) return
+
+    setCustomOverlayLoading(true)
+    setCustomOverlayStatus('Connecting to custom API endpoint…')
+
+    try {
+      const fallbackBbox = selectedEvent?.boundingBox ?? selectedPhenomenon.defaultBbox
+      const layerSpec = await fetchCustomDirectEndpointLayer(trimmed, fallbackBbox)
+      if (viewer.isDestroyed()) return
+
+      removeCustomOverlayLayers(viewer)
+
+      if (layerSpec.tile_url_template) {
+        const provider = new Cesium.UrlTemplateImageryProvider({
+          url: layerSpec.tile_url_template,
+          credit: layerSpec.title || 'Custom API Overlay'
+        })
+        const layer = viewer.imageryLayers.addImageryProvider(provider)
+        layer.alpha = sarOverlayOpacity
+        customApiOverlayLayerRef.current = layer
+      } else if (layerSpec.DataUrlFallback) {
+        const [west, south, east, north] = layerSpec.bbox
+        const provider = await Cesium.SingleTileImageryProvider.fromUrl(layerSpec.DataUrlFallback, {
+          rectangle: Cesium.Rectangle.fromDegrees(west, south, east, north),
+          credit: layerSpec.title || 'Custom API Overlay'
+        })
+        if (viewer.isDestroyed()) return
+        const layer = viewer.imageryLayers.addImageryProvider(provider)
+        layer.alpha = sarOverlayOpacity
+        customApiOverlayLayerRef.current = layer
+      }
+
+      if (layerSpec.geojson) {
+        const ds = await Cesium.GeoJsonDataSource.load(layerSpec.geojson, {
+          stroke: Cesium.Color.fromCssColorString('#38bdf8'),
+          fill: Cesium.Color.fromCssColorString('#38bdf8').withAlpha(0.35),
+          strokeWidth: 2
+        })
+        if (viewer.isDestroyed()) return
+        await viewer.dataSources.add(ds)
+        customApiGeoJsonRef.current = ds
+      }
+
+      enforceLayerOrder(viewer)
+      if (Math.abs(layerSpec.bbox[2] - layerSpec.bbox[0]) < 300) {
+        flyToBbox(layerSpec.bbox)
+      }
+      setCustomOverlayActive(true)
+      setCustomOverlayStatus(`Loaded: ${layerSpec.title} (${layerSpec.layer_type})`)
+    } catch (err) {
+      setCustomOverlayActive(false)
+      setCustomOverlayStatus(
+        `Failed to load custom API: ${err instanceof Error ? err.message : 'Unknown error'}`
+      )
+    } finally {
+      setCustomOverlayLoading(false)
+    }
+  }, [
+    customOverlayUrl,
+    selectedEvent,
+    selectedPhenomenon,
+    sarOverlayOpacity,
+    removeCustomOverlayLayers,
+    enforceLayerOrder,
+    flyToBbox
+  ])
+
   const handleApplyCustomApi = (): void => {
     checkSarsBackendHealth(customApiBaseUrl)
       .then((res) => setBackendConnected(res.online))
@@ -1363,6 +1470,13 @@ export function GlobeViewer(): React.JSX.Element {
           onChangeCustomApiBaseUrl: setCustomApiBaseUrl,
           onApplyCustomApiBaseUrl: handleApplyCustomApi,
           backendConnected,
+          customOverlayUrl,
+          onChangeCustomOverlayUrl: setCustomOverlayUrl,
+          onLoadCustomOverlay: handleLoadCustomOverlay,
+          onClearCustomOverlay: handleClearCustomOverlay,
+          customOverlayActive,
+          customOverlayLoading,
+          customOverlayStatus,
           onToggleLegacyDemoOverlay: handleToggleLegacyDemoOverlay,
           legacyDemoOverlayActive: isDemoFallbackActive
         }}

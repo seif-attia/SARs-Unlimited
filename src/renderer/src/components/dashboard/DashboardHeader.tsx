@@ -6,7 +6,7 @@ import type {
   PhenomenonDefinition,
   WidgetVisibilityState
 } from '../../types/phenomenon'
-import { PhenomenonMenu } from './PhenomenonMenu'
+import { CategoriesMenu, PhenomenonMenu } from './PhenomenonMenu'
 import { SettingsMenu, type SettingsMenuProps } from './SettingsMenu'
 import { WidgetVisibilityControl } from './WidgetVisibilityControl'
 
@@ -81,12 +81,17 @@ export const DashboardHeader: React.FC<DashboardHeaderProps> = ({
           studyRegionOptions={studyRegionOptions}
         />
 
-        <SettingsMenu {...settingsProps} />
+        <CategoriesMenu
+          selectedPhenomenon={selectedPhenomenon}
+          onSelectPhenomenon={onSelectPhenomenon}
+        />
 
         <WidgetVisibilityControl
           widgetVisibility={widgetVisibility}
           onToggleWidget={onToggleWidget}
         />
+
+        <SettingsMenu {...settingsProps} />
       </div>
 
       {/* RIGHT: Demo Status, Cursor Inspector, Telemetry & Search Box */}

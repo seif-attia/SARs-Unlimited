@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react'
-import { ChevronDown, Globe2, Layers, Trees } from 'lucide-react'
+import { ChevronDown, Globe2, Layers, LayoutGrid, Trees } from 'lucide-react'
 import type { PhenomenonDefinition } from '../../types/phenomenon'
 
 export interface PhenomenonMenuProps {
@@ -10,6 +10,83 @@ export interface PhenomenonMenuProps {
   onSelectAmazonRegion?: (regionId: string | null) => void
   lockedRegionId?: string | null
   studyRegionOptions?: Array<{ id: string; name: string }>
+}
+
+export interface CategoriesMenuProps {
+  selectedPhenomenon: PhenomenonDefinition
+  onSelectPhenomenon: (id: string) => void
+}
+
+const CATEGORY_SLOTS: Array<{ id: string; label: string }> = [
+  { id: 'global-pheno-1', label: 'Deformation' },
+  { id: 'global-pheno-2', label: 'Flooding' },
+  { id: 'global-pheno-4', label: 'Wildfires' },
+  { id: 'global-pheno-5', label: 'Marine' },
+  { id: 'global-pheno-3', label: 'Ice' },
+  { id: 'amazon-pheno-2', label: 'Amazon' }
+]
+
+export const CategoriesMenu: React.FC<CategoriesMenuProps> = ({
+  selectedPhenomenon,
+  onSelectPhenomenon
+}) => {
+  const [open, setOpen] = useState(false)
+  const ref = useRef<HTMLDivElement | null>(null)
+
+  useEffect(() => {
+    if (!open) return
+    const handleOutside = (e: MouseEvent): void => {
+      if (ref.current && !ref.current.contains(e.target as Node)) {
+        setOpen(false)
+      }
+    }
+    window.addEventListener('mousedown', handleOutside)
+    return () => window.removeEventListener('mousedown', handleOutside)
+  }, [open])
+
+  return (
+    <div className="sars-settings-wrapper" ref={ref}>
+      <button
+        type="button"
+        className={`sars-nav-pill ${open ? 'is-open' : ''}`}
+        onClick={() => setOpen((p) => !p)}
+        title="Phenomenon Categories (Deformation, Flooding, Wildfires, Marine, Ice, Amazon)"
+      >
+        <LayoutGrid size={13} className="sars-nav-pill__icon" />
+        <span>Categories</span>
+        <ChevronDown size={13} className={`sars-nav-pill__caret ${open ? 'is-open' : ''}`} />
+      </button>
+
+      {open && (
+        <div
+          className="sars-dropdown-popover sars-categories-popover"
+          role="menu"
+          aria-label="Categories"
+        >
+          {CATEGORY_SLOTS.map((slot) => {
+            const isActive =
+              selectedPhenomenon.id === slot.id ||
+              (slot.id === 'amazon-pheno-2' && selectedPhenomenon.geographicScope === 'amazon')
+            return (
+              <button
+                key={slot.id}
+                type="button"
+                role="menuitemradio"
+                aria-checked={isActive}
+                className={`sars-category-menu-item ${isActive ? 'is-active' : ''}`}
+                onClick={() => {
+                  onSelectPhenomenon(slot.id)
+                  setOpen(false)
+                }}
+              >
+                <span>{slot.label}</span>
+              </button>
+            )
+          })}
+        </div>
+      )}
+    </div>
+  )
 }
 
 export const PhenomenonMenu: React.FC<PhenomenonMenuProps> = ({
@@ -35,15 +112,6 @@ export const PhenomenonMenu: React.FC<PhenomenonMenuProps> = ({
     return () => window.removeEventListener('mousedown', handleOutside)
   }, [open])
 
-  const quickSlots: Array<{ id: string; label: string }> = [
-    { id: 'global-pheno-1', label: 'Deformation' },
-    { id: 'global-pheno-2', label: 'Flooding' },
-    { id: 'global-pheno-4', label: 'Wildfires' },
-    { id: 'global-pheno-5', label: 'Marine' },
-    { id: 'global-pheno-3', label: 'Ice' },
-    { id: 'amazon-pheno-2', label: 'Amazon' }
-  ]
-
   return (
     <div className="sars-pheno-nav-group" ref={containerRef}>
       {/* Main Phenomenon Dropdown Button */}
@@ -60,28 +128,6 @@ export const PhenomenonMenu: React.FC<PhenomenonMenuProps> = ({
         </span>
         <ChevronDown size={13} className={`sars-nav-pill__caret ${open ? 'is-open' : ''}`} />
       </button>
-
-      {/* Quick Category Pills matching screenshot */}
-      <div className="sars-quick-pheno-pills" role="tablist" aria-label="Quick phenomenon categories">
-        {quickSlots.map((slot) => {
-          const isActive =
-            selectedPhenomenon.id === slot.id ||
-            (slot.id === 'amazon-pheno-2' && selectedPhenomenon.geographicScope === 'amazon')
-          return (
-            <button
-              key={slot.id}
-              type="button"
-              role="tab"
-              aria-selected={isActive}
-              className={`sars-quick-pill ${isActive ? 'is-active' : ''}`}
-              onClick={() => onSelectPhenomenon(slot.id)}
-            >
-              <span>{slot.label}</span>
-              <span className="sars-quick-pill__caret">▾</span>
-            </button>
-          )
-        })}
-      </div>
 
       {/* Full Phenomenon Catalog Popover */}
       {open && (

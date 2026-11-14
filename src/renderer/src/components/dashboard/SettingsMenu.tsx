@@ -48,6 +48,13 @@ export interface SettingsMenuProps {
   onChangeCustomApiBaseUrl: (url: string) => void
   onApplyCustomApiBaseUrl: () => void
   backendConnected: boolean | null
+  customOverlayUrl: string
+  onChangeCustomOverlayUrl: (url: string) => void
+  onLoadCustomOverlay: () => void
+  onClearCustomOverlay: () => void
+  customOverlayActive: boolean
+  customOverlayLoading: boolean
+  customOverlayStatus: string | null
   onToggleLegacyDemoOverlay: () => void
   legacyDemoOverlayActive: boolean
 }
@@ -91,6 +98,13 @@ export const SettingsMenu: React.FC<SettingsMenuProps> = ({
   onChangeCustomApiBaseUrl,
   onApplyCustomApiBaseUrl,
   backendConnected,
+  customOverlayUrl,
+  onChangeCustomOverlayUrl,
+  onLoadCustomOverlay,
+  onClearCustomOverlay,
+  customOverlayActive,
+  customOverlayLoading,
+  customOverlayStatus,
   onToggleLegacyDemoOverlay,
   legacyDemoOverlayActive
 }) => {
@@ -318,6 +332,47 @@ export const SettingsMenu: React.FC<SettingsMenuProps> = ({
               <button type="button" className="sars-btn-subtle" onClick={onApplyCustomApiBaseUrl}>
                 Connect API
               </button>
+            </div>
+
+            <div className="sars-settings-custom-feed">
+              <div className="sars-settings-footer__row">
+                <span className="sars-settings-section__title" style={{ margin: 0 }}>
+                  CUSTOM API OVERLAY FEED ({customOverlayActive ? 'OVERLAY ACTIVE' : 'IDLE'})
+                </span>
+                {customOverlayActive && (
+                  <button
+                    type="button"
+                    className="sars-btn-subtle is-active"
+                    onClick={onClearCustomOverlay}
+                    title="Remove custom API overlay from the 3D Earth"
+                  >
+                    Clear Overlay
+                  </button>
+                )}
+              </div>
+              <div className="sars-settings-api-input">
+                <input
+                  type="text"
+                  placeholder="https://.../tiles/{z}/{x}/{y}.png, .geojson, .png, or API URL"
+                  value={customOverlayUrl}
+                  onChange={(e) => onChangeCustomOverlayUrl(e.target.value)}
+                />
+                <button
+                  type="button"
+                  className="sars-btn-subtle"
+                  onClick={onLoadCustomOverlay}
+                  disabled={customOverlayLoading || !customOverlayUrl.trim()}
+                >
+                  {customOverlayLoading
+                    ? 'Loading…'
+                    : customOverlayActive
+                      ? 'Reload Overlay'
+                      : 'Load Overlay'}
+                </button>
+              </div>
+              {customOverlayStatus && (
+                <div className="sars-settings-custom-feed__status">{customOverlayStatus}</div>
+              )}
             </div>
           </div>
         </div>
