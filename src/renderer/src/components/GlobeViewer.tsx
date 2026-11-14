@@ -352,6 +352,7 @@ export function GlobeViewer(): React.JSX.Element {
   const [isPlaying, setIsPlaying] = useState<boolean>(false)
   const [playbackSpeed, setPlaybackSpeed] = useState<1 | 2 | 4>(1)
   const [showBasinProgression, setShowBasinProgression] = useState<boolean>(true)
+  const [liveScope, setLiveScope] = useState<'planet' | 'amazon'>('planet')
   const [selectionMode, setSelectionMode] = useState<'phenomenon' | 'event' | null>(null)
   const [activePhenomenonId, setActivePhenomenonId] = useState<string | null>(null)
   const [activeEventId, setActiveEventId] = useState<string | null>(null)
@@ -540,9 +541,45 @@ export function GlobeViewer(): React.JSX.Element {
     })
   }, [])
 
+  const handleFlyTheater = useCallback(
+    (theater: 'planet' | 'amazon' | 'arctic' | 'antarctica' | 'monsoon'): void => {
+      const viewer = viewerRef.current
+      setAutoRotate(false)
+      setShowBasinProgression(true)
+      if (theater === 'amazon') {
+        setLiveScope('amazon')
+        flyToBbox(sarDataset?.amazon_basin_bbox ?? [-79.5, -18.0, -44.5, 8.5])
+        return
+      }
+      setLiveScope('planet')
+      if (theater === 'monsoon') {
+        flyToBbox([65.0, 8.0, 108.0, 34.0])
+        return
+      }
+      if (!viewer || viewer.isDestroyed()) return
+      const dest =
+        theater === 'arctic'
+          ? Cesium.Cartesian3.fromDegrees(15.0, 80.0, 7_400_000)
+          : theater === 'antarctica'
+            ? Cesium.Cartesian3.fromDegrees(-48.0, -76.0, 8_200_000)
+            : Cesium.Cartesian3.fromDegrees(-28.0, 12.0, 21_500_000)
+      viewer.camera.flyTo({ destination: dest, duration: 1.25 })
+    },
+    [flyToBbox, sarDataset]
+  )
+
+  const handleChangeLiveScope = useCallback(
+    (scope: 'planet' | 'amazon'): void => {
+      handleFlyTheater(scope)
+    },
+    [handleFlyTheater]
+  )
+
   const handleSelectPhenomenon = useCallback(
     (phen: AmazonPhenomenon): void => {
       setIsPlaying(false)
+      setLiveScope('amazon')
+      setShowBasinProgression(true)
       setSelectionMode('phenomenon')
       setActivePhenomenonId(phen.id)
       setActiveEventId(null)
@@ -564,6 +601,7 @@ export function GlobeViewer(): React.JSX.Element {
   const handleSelectEvent = useCallback(
     (evt: AmazonEvent): void => {
       setIsPlaying(false)
+      setLiveScope(evt.scope === 'global' ? 'planet' : 'amazon')
       setSelectionMode('event')
       setActiveEventId(evt.id)
       setActivePhenomenonId(null)
@@ -885,13 +923,14 @@ export function GlobeViewer(): React.JSX.Element {
           disableDepthTestDistance: Number.POSITIVE_INFINITY
         },
         label: {
-          text: `${evt.timing} · ${evt.name}`,
+          text: `${evt.scope === 'global' ? '★ ' : ''}${evt.timing} · ${evt.name}`,
           font: '600 11px Inter, system-ui, sans-serif',
           fillColor: Cesium.Color.WHITE,
           showBackground: true,
           backgroundColor: Cesium.Color.fromCssColorString('rgba(9, 15, 27, 0.82)'),
           backgroundPadding: new Cesium.Cartesian2(7, 4),
           pixelOffset: new Cesium.Cartesian2(0, -18),
+          scaleByDistance: new Cesium.NearFarScalar(2_500_000, 1.0, 22_000_000, 0.72),
           disableDepthTestDistance: Number.POSITIVE_INFINITY
         }
       })
@@ -978,10 +1017,14 @@ export function GlobeViewer(): React.JSX.Element {
 
     const months = sarDataset.timeline.months
     const monthObj = months[selectedMonthIndex]
-    const relPath = monthObj?.basin_overlay_path
+    const relPath =
+      liveScope === 'planet' ? monthObj?.planet_overlay_path : monthObj?.basin_overlay_path
     if (!relPath) return
 
-    const [west, south, east, north] = sarDataset.amazon_basin_bbox ?? [-79.5, -18.0, -44.5, 8.5]
+    const [west, south, east, north] =
+      liveScope === 'planet'
+        ? (sarDataset.planet_bbox ?? [-180, -90, 180, 90])
+        : (sarDataset.amazon_basin_bbox ?? [-79.5, -18.0, -44.5, 8.5])
     const rect = Cesium.Rectangle.fromDegrees(west, south, east, north)
 
     const applyProvider = (provider: Cesium.SingleTileImageryProvider): void => {
@@ -1023,7 +1066,8 @@ export function GlobeViewer(): React.JSX.Element {
     // Prefetch next 3 months silently for silky smooth 1x/2x/4x playback
     for (let step = 1; step <= 3; step++) {
       const nextM = months[(selectedMonthIndex + step) % months.length]
-      const nextRel = nextM?.basin_overlay_path
+      const nextRel =
+        liveScope === 'planet' ? nextM?.planet_overlay_path : nextM?.basin_overlay_path
       if (nextRel && !basinProviderCacheRef.current.has(nextRel)) {
         window.api
           ?.getAssetDataUrl(nextRel)
@@ -1040,7 +1084,7 @@ export function GlobeViewer(): React.JSX.Element {
           })
       }
     }
-  }, [enforceLayerOrder, sarDataset, selectedMonthIndex, showBasinProgression])
+  }, [enforceLayerOrder, liveScope, sarDataset, selectedMonthIndex, showBasinProgression])
 
   // Sync overlay alpha slider without recreating imagery provider
   useEffect(() => {
@@ -1533,15 +1577,16 @@ export function GlobeViewer(): React.JSX.Element {
           isPlaying={isPlaying}
           playbackSpeed={playbackSpeed}
           showBasinProgression={showBasinProgression}
+          liveScope={liveScope}
           onSelectMonthIndex={handleSelectMonthIndex}
           onSelectPhenomenon={handleSelectPhenomenon}
           onSelectEvent={handleSelectEvent}
-          onFlyAmazonOverview={() =>
-            flyToBbox(sarDataset.amazon_basin_bbox ?? [-79.5, -18.0, -44.5, 8.5])
-          }
+          onFlyAmazonOverview={() => handleFlyTheater('amazon')}
           onTogglePlay={handleTogglePlay}
           onCycleSpeed={handleCycleSpeed}
           onToggleBasinProgression={handleToggleBasinProgression}
+          onChangeLiveScope={handleChangeLiveScope}
+          onFlyTheater={handleFlyTheater}
         />
       )}
 

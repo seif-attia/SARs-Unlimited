@@ -28,6 +28,9 @@ export interface TimelineMonthPoint {
   soil_moisture_idx: number
   flood_pulse_idx: number
   drought_fire_idx: number
+  planet_overlay_path: string
+  global_frozen_pct: number
+  global_sea_ice_idx: number
 }
 
 export interface SarPhysicsSpec {
@@ -106,6 +109,7 @@ export interface ComparisonPair {
 
 export interface AmazonEvent {
   id: string
+  scope?: 'amazon' | 'global'
   name: string
   timing: string
   timeline_month: string
@@ -140,6 +144,7 @@ export interface AmazonSarDataset {
     end: string
     observed_end: string
   }
+  planet_bbox?: [number, number, number, number]
   amazon_basin_bbox: [number, number, number, number]
   amazon_basin_outline: [number, number][]
   regions: Record<string, StudyRegion>

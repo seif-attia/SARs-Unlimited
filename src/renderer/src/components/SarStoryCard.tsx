@@ -43,7 +43,7 @@ export function SarStoryCard({
           <span className="story-kicker">
             <Radio size={12} />
             {mode === 'event'
-              ? `ANCHOR EVENT · ${event?.timing}`
+              ? `${event?.scope === 'global' ? 'GLOBAL SAR CRISIS' : 'AMAZON ANCHOR EVENT'} · ${event?.timing}`
               : `SEASONAL PHENOMENON · ${phenomenon?.typical_timing}`}
           </span>
           <button

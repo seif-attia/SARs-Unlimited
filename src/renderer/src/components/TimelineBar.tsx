@@ -1,5 +1,17 @@
-import { Calendar, ChevronLeft, ChevronRight, Pause, Play, Radio, Sparkles } from 'lucide-react'
+import {
+  Calendar,
+  ChevronLeft,
+  ChevronRight,
+  Compass,
+  Globe,
+  Pause,
+  Play,
+  Radio,
+  Sparkles
+} from 'lucide-react'
 import type { AmazonEvent, AmazonPhenomenon, TimelineMonthPoint } from '../types/sar'
+
+type TheaterTarget = 'planet' | 'amazon' | 'arctic' | 'antarctica' | 'monsoon'
 
 interface TimelineBarProps {
   months: TimelineMonthPoint[]
@@ -11,6 +23,7 @@ interface TimelineBarProps {
   isPlaying: boolean
   playbackSpeed: 1 | 2 | 4
   showBasinProgression: boolean
+  liveScope: 'planet' | 'amazon'
   onSelectMonthIndex: (index: number) => void
   onSelectPhenomenon: (phenomenon: AmazonPhenomenon) => void
   onSelectEvent: (event: AmazonEvent) => void
@@ -18,6 +31,8 @@ interface TimelineBarProps {
   onTogglePlay: () => void
   onCycleSpeed: () => void
   onToggleBasinProgression: () => void
+  onChangeLiveScope: (scope: 'planet' | 'amazon') => void
+  onFlyTheater: (theater: TheaterTarget) => void
 }
 
 const YEAR_TICKS = [2020, 2021, 2022, 2023, 2024, 2025, 2026]
@@ -32,13 +47,16 @@ export function TimelineBar({
   isPlaying,
   playbackSpeed,
   showBasinProgression,
+  liveScope,
   onSelectMonthIndex,
   onSelectPhenomenon,
   onSelectEvent,
   onFlyAmazonOverview,
   onTogglePlay,
   onCycleSpeed,
-  onToggleBasinProgression
+  onToggleBasinProgression,
+  onChangeLiveScope,
+  onFlyTheater
 }: TimelineBarProps): React.JSX.Element {
   const current = months[selectedMonthIndex] ?? months[0]
   const totalMax = Math.max(months.length - 1, 1)
@@ -48,16 +66,61 @@ export function TimelineBar({
 
   return (
     <section className="sar-timeline-dock" aria-label="Dancing with the SARs Timeline & Phenomena">
-      {/* Row 1: Generic Seasonal Rhythms (Table 1 — 6 Phenomena) */}
+      {/* Row 1: Planet / Amazon Theater Switcher + 6 Seasonal Rhythms */}
       <div className="sar-phenomena-row">
+        <div className="sar-scope-switcher" role="group" aria-label="Live progression scope">
+          <button
+            type="button"
+            className={`sar-scope-btn ${liveScope === 'planet' ? 'active' : ''}`}
+            onClick={() => onChangeLiveScope('planet')}
+            title="Show Whole-Planet 84-month SMAP moisture, freeze/thaw, floodplains, fires & polar sea ice"
+          >
+            <Globe size={12} />
+            <span>Planet Live</span>
+          </button>
+          <button
+            type="button"
+            className={`sar-scope-btn ${liveScope === 'amazon' ? 'active' : ''}`}
+            onClick={() => onChangeLiveScope('amazon')}
+            title="Focus Whole-Amazon 84-month SMAP + GloFAS + FIRMS hydrological cycle"
+          >
+            <Sparkles size={12} />
+            <span>Amazon Live</span>
+          </button>
+          <button
+            type="button"
+            className="sar-theater-btn"
+            onClick={() => onFlyTheater('arctic')}
+            title="Fly camera to Arctic Ocean sea-ice & boreal freeze/thaw belt"
+          >
+            <Compass size={11} />
+            <span>Arctic</span>
+          </button>
+          <button
+            type="button"
+            className="sar-theater-btn"
+            onClick={() => onFlyTheater('antarctica')}
+            title="Fly camera to Antarctica & Weddell Sea sea-ice belt"
+          >
+            <span>Antarctica</span>
+          </button>
+          <button
+            type="button"
+            className="sar-theater-btn"
+            onClick={() => onFlyTheater('monsoon')}
+            title="Fly camera to South & Southeast Asia monsoon floodplains"
+          >
+            <span>Monsoon</span>
+          </button>
+        </div>
+
         <button
           type="button"
           className="sar-overview-pill"
           onClick={onFlyAmazonOverview}
           title="Center camera on Amazon Rainforest study basin"
         >
-          <Sparkles size={12} className="hud-icon-cyan" />
-          <span>AMAZON 2020–2026</span>
+          <span>Amazon Focus</span>
         </button>
 
         <div className="sar-phenomena-pills" role="tablist" aria-label="Amazon Seasonal Phenomena">
@@ -89,10 +152,10 @@ export function TimelineBar({
           type="button"
           className={`sar-live-basin-toggle ${showBasinProgression ? 'active' : ''}`}
           onClick={onToggleBasinProgression}
-          title="Toggle Whole-Amazon monthly progression (SMAP moisture + GloFAS rivers + FIRMS fires)"
+          title="Toggle live 2020–2026 monthly surface-change progression overlay"
         >
           <Radio size={12} />
-          <span>Whole Amazon Live</span>
+          <span>{showBasinProgression ? 'Live ON' : 'Live OFF'}</span>
         </button>
       </div>
 
@@ -162,18 +225,21 @@ export function TimelineBar({
             })}
           </div>
 
-          {/* Clickable 4 Specific Event Dots pinned on exact month positions */}
+          {/* Clickable 9 Specific Event Dots pinned on exact month positions (4 Amazon + 5 Global) */}
           <div className="sar-event-dots-layer">
             {events.map((evt) => {
               const idx = monthIndexMap.get(evt.timeline_month)
               if (idx === undefined) return null
               const leftPct = (idx / totalMax) * 100
               const isSelected = activeEventId === evt.id
+              const isGlobal = evt.scope === 'global'
               return (
                 <button
                   key={evt.id}
                   type="button"
-                  className={`sar-event-dot-btn ${isSelected ? 'active' : ''}`}
+                  className={`sar-event-dot-btn ${isGlobal ? 'is-global' : ''} ${
+                    isSelected ? 'active' : ''
+                  }`}
                   style={
                     {
                       left: `${leftPct}%`,
@@ -181,10 +247,11 @@ export function TimelineBar({
                     } as React.CSSProperties
                   }
                   onClick={() => onSelectEvent(evt)}
-                  title={`${evt.name} (${evt.timing})`}
+                  title={`${isGlobal ? '[GLOBAL] ' : '[AMAZON] '}${evt.name} (${evt.timing})`}
                 >
                   <span className="sar-event-dot-core" />
                   <span className="sar-event-dot-tag">
+                    {isGlobal && <span className="evt-scope-tag">GLOBAL</span>}
                     <strong>{evt.timing}</strong> · {evt.name.replace(' (Manaus)', '')}
                   </span>
                 </button>
@@ -195,8 +262,21 @@ export function TimelineBar({
 
         {/* Live Month Environmental Readout */}
         {current && (
-          <div className="sar-month-metrics" title="Selected month hydrological & SAR counts">
-            {showBasinProgression && (
+          <div
+            className="sar-month-metrics"
+            title="Selected month hydrological, cryosphere & SAR metrics"
+          >
+            {showBasinProgression && liveScope === 'planet' && (
+              <span className="sar-live-legend" title="Whole-Planet progression color key">
+                <i className="leg-dot" style={{ backgroundColor: '#22D3EE' }} /> Flood
+                <i className="leg-dot" style={{ backgroundColor: '#10B981' }} /> Canopy
+                <i className="leg-dot" style={{ backgroundColor: '#F59E0B' }} /> Dry
+                <i className="leg-dot" style={{ backgroundColor: '#FB7185' }} /> Fire
+                <i className="leg-dot" style={{ backgroundColor: '#6366F1' }} /> Freeze
+                <i className="leg-dot" style={{ backgroundColor: '#E0F2FE' }} /> Ice
+              </span>
+            )}
+            {showBasinProgression && liveScope === 'amazon' && (
               <span className="sar-live-legend" title="Whole-Amazon progression color key">
                 <i className="leg-dot" style={{ backgroundColor: '#22D3EE' }} /> Flood
                 <i className="leg-dot" style={{ backgroundColor: '#10B981' }} /> Wet
@@ -204,11 +284,23 @@ export function TimelineBar({
                 <i className="leg-dot" style={{ backgroundColor: '#EF4444' }} /> Fire
               </span>
             )}
-            <span>Q: {(current.discharge_manaus_m3s / 1000).toFixed(0)}k m³/s</span>
-            <span>·</span>
-            <span>SMAP: {Math.round(current.soil_moisture_idx)}%</span>
-            <span>·</span>
-            <span>Fires: {current.fire_hotspots_amazon.toLocaleString()}</span>
+            {liveScope === 'planet' ? (
+              <>
+                <span>Frozen: {Math.round(current.global_frozen_pct ?? 0)}%</span>
+                <span>·</span>
+                <span>Ice: {Math.round(current.global_sea_ice_idx ?? 0)}%</span>
+                <span>·</span>
+                <span>Amazon Q: {(current.discharge_manaus_m3s / 1000).toFixed(0)}k</span>
+              </>
+            ) : (
+              <>
+                <span>Q: {(current.discharge_manaus_m3s / 1000).toFixed(0)}k m³/s</span>
+                <span>·</span>
+                <span>SMAP: {Math.round(current.soil_moisture_idx)}%</span>
+                <span>·</span>
+                <span>Fires: {current.fire_hotspots_amazon.toLocaleString()}</span>
+              </>
+            )}
             {current.nisar_scenes > 0 && (
               <>
                 <span>·</span>

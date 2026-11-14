@@ -1,13 +1,19 @@
 {
   "schema_version": "2.0.0",
-  "title": "Dancing with the SARs \u2014 Amazon Rainforest Surface Change Atlas (2020\u20132026)",
+  "title": "Dancing with the SARs \u2014 Planet & Amazon Surface Change Atlas (2020\u20132026)",
   "challenge_url": "https://www.spaceappschallenge.org/2026/challenges/dancing-with-the-sars/",
-  "generated_at": "2026-11-14T01:06:19Z",
+  "generated_at": "2026-11-14T01:40:10Z",
   "temporal_range": {
     "start": "2020-01-01",
     "end": "2026-12-31",
     "observed_end": "2026-11-13"
   },
+  "planet_bbox": [
+    -180.0,
+    -90.0,
+    180.0,
+    90.0
+  ],
   "amazon_basin_bbox": [
     -79.5,
     -18.0,
@@ -226,6 +232,81 @@
       "typical_low_water_season": "Jul\u2013Oct (land clearing & fire window)",
       "why": "Active human-driven frontier showing Jun\u2013Oct geometric forest clearing followed by Aug\u2013Oct slash burning through thick smoke plumes using all-weather C- and L-band SAR.",
       "area_km2": 48828.5
+    },
+    "global_aus_nsw": {
+      "id": "global_aus_nsw",
+      "name": "Australia Black Summer Burn Scars",
+      "bbox": [
+        149.7,
+        -36.5,
+        150.3,
+        -35.9
+      ],
+      "center": [
+        150.0,
+        -36.2
+      ],
+      "why": "Sentinel-1 C-band cross-polarized VH backscatter penetrates pyrocumulonimbus smoke clouds over Clyde Mountain & Batemans Bay (NSW), revealing structural branch/canopy incineration immediately after Jan 2020."
+    },
+    "global_pak_indus": {
+      "id": "global_pak_indus",
+      "name": "Pakistan Indus Inland Sea Flood",
+      "bbox": [
+        67.55,
+        26.25,
+        68.35,
+        26.95
+      ],
+      "center": [
+        67.95,
+        26.6
+      ],
+      "why": "Extreme 2022 monsoon created a ~100 km wide inland sea around Lake Manchar & Dadu in Sindh. Smooth mirror-like floodwaters reflect C-band radar away from Sentinel-1, turning inundated plains jet-black (< -15 dB)."
+    },
+    "global_tur_kahramanmaras": {
+      "id": "global_tur_kahramanmaras",
+      "name": "T\u00fcrkiye\u2013Syria Fault Slip & Urban Damage",
+      "bbox": [
+        36.7,
+        37.25,
+        37.3,
+        37.75
+      ],
+      "center": [
+        37.0,
+        37.5
+      ],
+      "why": "Synthetic Aperture Radar measures centimeter-to-meter crustal deformation across the East Anatolian Fault near Pazarcik and maps structural urban collapse via Sentinel-1 corner-reflector phase & amplitude decorrelation."
+    },
+    "global_can_quebec": {
+      "id": "global_can_quebec",
+      "name": "Canada Boreal Permafrost & Taiga Megafires",
+      "bbox": [
+        -76.2,
+        53.05,
+        -75.2,
+        53.75
+      ],
+      "center": [
+        -75.7,
+        53.4
+      ],
+      "why": "During Canada's historic 2023 wildfire season (>15M ha burned nationally), continental smoke cloaked North America for weeks while Sentinel-1 C-band VH radar continuously mapped expanding James Bay & Quebec burn scars."
+    },
+    "global_ant_weddell": {
+      "id": "global_ant_weddell",
+      "name": "Antarctic Winter Sea-Ice Record Deficit",
+      "bbox": [
+        5.0,
+        -70.0,
+        35.0,
+        -55.0
+      ],
+      "center": [
+        20.0,
+        -62.5
+      ],
+      "why": "In September 2023\u2014supposed to be peak Austral winter freeze\u2014Antarctic sea ice fell >1.6 million km\u00b2 below its 1981\u20132010 maximum. Active SAR and passive microwave AMSR2 pierce polar night and Southern Ocean storms."
     }
   },
   "timeline": {
@@ -243,11 +324,14 @@
         "active_phenomena": [
           "rainy_season"
         ],
-        "event_id": null,
+        "event_id": "aus_fires_2020",
         "basin_overlay_path": "assets/basin_monthly/amazon_2020-01.png",
-        "soil_moisture_idx": 75.4,
+        "soil_moisture_idx": 75.2,
         "flood_pulse_idx": 71.6,
-        "drought_fire_idx": 13.0
+        "drought_fire_idx": 13.0,
+        "planet_overlay_path": "assets/planet_monthly/planet_2020-01.png",
+        "global_frozen_pct": 40.7,
+        "global_sea_ice_idx": 82.7
       },
       {
         "month": "2020-02",
@@ -264,9 +348,12 @@
         ],
         "event_id": null,
         "basin_overlay_path": "assets/basin_monthly/amazon_2020-02.png",
-        "soil_moisture_idx": 77.2,
+        "soil_moisture_idx": 77.0,
         "flood_pulse_idx": 61.8,
-        "drought_fire_idx": 4.1
+        "drought_fire_idx": 4.1,
+        "planet_overlay_path": "assets/planet_monthly/planet_2020-02.png",
+        "global_frozen_pct": 39.4,
+        "global_sea_ice_idx": 79.6
       },
       {
         "month": "2020-03",
@@ -284,9 +371,12 @@
         ],
         "event_id": null,
         "basin_overlay_path": "assets/basin_monthly/amazon_2020-03.png",
-        "soil_moisture_idx": 78.8,
+        "soil_moisture_idx": 78.6,
         "flood_pulse_idx": 63.9,
-        "drought_fire_idx": 21.5
+        "drought_fire_idx": 21.5,
+        "planet_overlay_path": "assets/planet_monthly/planet_2020-03.png",
+        "global_frozen_pct": 32.8,
+        "global_sea_ice_idx": 83.2
       },
       {
         "month": "2020-04",
@@ -304,9 +394,12 @@
         ],
         "event_id": null,
         "basin_overlay_path": "assets/basin_monthly/amazon_2020-04.png",
-        "soil_moisture_idx": 80.8,
+        "soil_moisture_idx": 80.6,
         "flood_pulse_idx": 70.6,
-        "drought_fire_idx": 10.4
+        "drought_fire_idx": 10.4,
+        "planet_overlay_path": "assets/planet_monthly/planet_2020-04.png",
+        "global_frozen_pct": 22.5,
+        "global_sea_ice_idx": 87.9
       },
       {
         "month": "2020-05",
@@ -324,9 +417,12 @@
         ],
         "event_id": null,
         "basin_overlay_path": "assets/basin_monthly/amazon_2020-05.png",
-        "soil_moisture_idx": 83.4,
+        "soil_moisture_idx": 83.3,
         "flood_pulse_idx": 68.3,
-        "drought_fire_idx": 30.7
+        "drought_fire_idx": 30.7,
+        "planet_overlay_path": "assets/planet_monthly/planet_2020-05.png",
+        "global_frozen_pct": 15.9,
+        "global_sea_ice_idx": 92.4
       },
       {
         "month": "2020-06",
@@ -345,9 +441,12 @@
         ],
         "event_id": null,
         "basin_overlay_path": "assets/basin_monthly/amazon_2020-06.png",
-        "soil_moisture_idx": 79.2,
+        "soil_moisture_idx": 79.0,
         "flood_pulse_idx": 57.2,
-        "drought_fire_idx": 51.5
+        "drought_fire_idx": 51.5,
+        "planet_overlay_path": "assets/planet_monthly/planet_2020-06.png",
+        "global_frozen_pct": 8.8,
+        "global_sea_ice_idx": 96.2
       },
       {
         "month": "2020-07",
@@ -365,9 +464,12 @@
         ],
         "event_id": null,
         "basin_overlay_path": "assets/basin_monthly/amazon_2020-07.png",
-        "soil_moisture_idx": 74.3,
+        "soil_moisture_idx": 74.2,
         "flood_pulse_idx": 46.8,
-        "drought_fire_idx": 63.1
+        "drought_fire_idx": 63.1,
+        "planet_overlay_path": "assets/planet_monthly/planet_2020-07.png",
+        "global_frozen_pct": 7.1,
+        "global_sea_ice_idx": 86.4
       },
       {
         "month": "2020-08",
@@ -387,9 +489,12 @@
         ],
         "event_id": null,
         "basin_overlay_path": "assets/basin_monthly/amazon_2020-08.png",
-        "soil_moisture_idx": 64.1,
+        "soil_moisture_idx": 64.0,
         "flood_pulse_idx": 28.7,
-        "drought_fire_idx": 83.0
+        "drought_fire_idx": 83.0,
+        "planet_overlay_path": "assets/planet_monthly/planet_2020-08.png",
+        "global_frozen_pct": 6.8,
+        "global_sea_ice_idx": 80.3
       },
       {
         "month": "2020-09",
@@ -409,9 +514,12 @@
         ],
         "event_id": null,
         "basin_overlay_path": "assets/basin_monthly/amazon_2020-09.png",
-        "soil_moisture_idx": 60.2,
+        "soil_moisture_idx": 60.0,
         "flood_pulse_idx": 17.2,
-        "drought_fire_idx": 94.1
+        "drought_fire_idx": 94.1,
+        "planet_overlay_path": "assets/planet_monthly/planet_2020-09.png",
+        "global_frozen_pct": 10.5,
+        "global_sea_ice_idx": 78.6
       },
       {
         "month": "2020-10",
@@ -431,9 +539,12 @@
         ],
         "event_id": null,
         "basin_overlay_path": "assets/basin_monthly/amazon_2020-10.png",
-        "soil_moisture_idx": 56.7,
+        "soil_moisture_idx": 56.6,
         "flood_pulse_idx": 14.6,
-        "drought_fire_idx": 81.7
+        "drought_fire_idx": 81.7,
+        "planet_overlay_path": "assets/planet_monthly/planet_2020-10.png",
+        "global_frozen_pct": 21.1,
+        "global_sea_ice_idx": 83.0
       },
       {
         "month": "2020-11",
@@ -448,9 +559,12 @@
         "active_phenomena": [],
         "event_id": null,
         "basin_overlay_path": "assets/basin_monthly/amazon_2020-11.png",
-        "soil_moisture_idx": 62.6,
+        "soil_moisture_idx": 62.4,
         "flood_pulse_idx": 17.7,
-        "drought_fire_idx": 56.8
+        "drought_fire_idx": 56.8,
+        "planet_overlay_path": "assets/planet_monthly/planet_2020-11.png",
+        "global_frozen_pct": 29.4,
+        "global_sea_ice_idx": 97.1
       },
       {
         "month": "2020-12",
@@ -467,9 +581,12 @@
         ],
         "event_id": null,
         "basin_overlay_path": "assets/basin_monthly/amazon_2020-12.png",
-        "soil_moisture_idx": 71.5,
+        "soil_moisture_idx": 71.3,
         "flood_pulse_idx": 37.0,
-        "drought_fire_idx": 43.5
+        "drought_fire_idx": 43.5,
+        "planet_overlay_path": "assets/planet_monthly/planet_2020-12.png",
+        "global_frozen_pct": 40.2,
+        "global_sea_ice_idx": 95.1
       },
       {
         "month": "2021-01",
@@ -486,9 +603,12 @@
         ],
         "event_id": null,
         "basin_overlay_path": "assets/basin_monthly/amazon_2021-01.png",
-        "soil_moisture_idx": 80.1,
+        "soil_moisture_idx": 79.9,
         "flood_pulse_idx": 62.1,
-        "drought_fire_idx": 12.4
+        "drought_fire_idx": 12.4,
+        "planet_overlay_path": "assets/planet_monthly/planet_2021-01.png",
+        "global_frozen_pct": 41.8,
+        "global_sea_ice_idx": 83.0
       },
       {
         "month": "2021-02",
@@ -505,9 +625,12 @@
         ],
         "event_id": null,
         "basin_overlay_path": "assets/basin_monthly/amazon_2021-02.png",
-        "soil_moisture_idx": 83.7,
+        "soil_moisture_idx": 83.6,
         "flood_pulse_idx": 73.0,
-        "drought_fire_idx": 4.2
+        "drought_fire_idx": 4.2,
+        "planet_overlay_path": "assets/planet_monthly/planet_2021-02.png",
+        "global_frozen_pct": 41.5,
+        "global_sea_ice_idx": 80.3
       },
       {
         "month": "2021-03",
@@ -525,9 +648,12 @@
         ],
         "event_id": null,
         "basin_overlay_path": "assets/basin_monthly/amazon_2021-03.png",
-        "soil_moisture_idx": 86.7,
+        "soil_moisture_idx": 86.6,
         "flood_pulse_idx": 80.7,
-        "drought_fire_idx": 2.4
+        "drought_fire_idx": 2.4,
+        "planet_overlay_path": "assets/planet_monthly/planet_2021-03.png",
+        "global_frozen_pct": 34.9,
+        "global_sea_ice_idx": 84.2
       },
       {
         "month": "2021-04",
@@ -545,9 +671,12 @@
         ],
         "event_id": null,
         "basin_overlay_path": "assets/basin_monthly/amazon_2021-04.png",
-        "soil_moisture_idx": 86.3,
+        "soil_moisture_idx": 86.1,
         "flood_pulse_idx": 93.1,
-        "drought_fire_idx": 7.0
+        "drought_fire_idx": 7.0,
+        "planet_overlay_path": "assets/planet_monthly/planet_2021-04.png",
+        "global_frozen_pct": 23.2,
+        "global_sea_ice_idx": 90.8
       },
       {
         "month": "2021-05",
@@ -565,9 +694,12 @@
         ],
         "event_id": null,
         "basin_overlay_path": "assets/basin_monthly/amazon_2021-05.png",
-        "soil_moisture_idx": 83.2,
+        "soil_moisture_idx": 83.1,
         "flood_pulse_idx": 82.6,
-        "drought_fire_idx": 40.3
+        "drought_fire_idx": 40.3,
+        "planet_overlay_path": "assets/planet_monthly/planet_2021-05.png",
+        "global_frozen_pct": 15.5,
+        "global_sea_ice_idx": 95.7
       },
       {
         "month": "2021-06",
@@ -586,9 +718,12 @@
         ],
         "event_id": "manaus_flood_2021",
         "basin_overlay_path": "assets/basin_monthly/amazon_2021-06.png",
-        "soil_moisture_idx": 80.0,
+        "soil_moisture_idx": 79.9,
         "flood_pulse_idx": 68.8,
-        "drought_fire_idx": 54.0
+        "drought_fire_idx": 54.0,
+        "planet_overlay_path": "assets/planet_monthly/planet_2021-06.png",
+        "global_frozen_pct": 8.3,
+        "global_sea_ice_idx": 97.3
       },
       {
         "month": "2021-07",
@@ -606,9 +741,12 @@
         ],
         "event_id": null,
         "basin_overlay_path": "assets/basin_monthly/amazon_2021-07.png",
-        "soil_moisture_idx": 73.4,
+        "soil_moisture_idx": 73.3,
         "flood_pulse_idx": 48.6,
-        "drought_fire_idx": 61.9
+        "drought_fire_idx": 61.9,
+        "planet_overlay_path": "assets/planet_monthly/planet_2021-07.png",
+        "global_frozen_pct": 6.4,
+        "global_sea_ice_idx": 90.7
       },
       {
         "month": "2021-08",
@@ -628,9 +766,12 @@
         ],
         "event_id": null,
         "basin_overlay_path": "assets/basin_monthly/amazon_2021-08.png",
-        "soil_moisture_idx": 64.7,
+        "soil_moisture_idx": 64.5,
         "flood_pulse_idx": 29.5,
-        "drought_fire_idx": 91.1
+        "drought_fire_idx": 91.1,
+        "planet_overlay_path": "assets/planet_monthly/planet_2021-08.png",
+        "global_frozen_pct": 6.7,
+        "global_sea_ice_idx": 86.0
       },
       {
         "month": "2021-09",
@@ -650,9 +791,12 @@
         ],
         "event_id": null,
         "basin_overlay_path": "assets/basin_monthly/amazon_2021-09.png",
-        "soil_moisture_idx": 63.2,
+        "soil_moisture_idx": 63.0,
         "flood_pulse_idx": 20.0,
-        "drought_fire_idx": 82.6
+        "drought_fire_idx": 82.6,
+        "planet_overlay_path": "assets/planet_monthly/planet_2021-09.png",
+        "global_frozen_pct": 9.8,
+        "global_sea_ice_idx": 82.1
       },
       {
         "month": "2021-10",
@@ -672,9 +816,12 @@
         ],
         "event_id": null,
         "basin_overlay_path": "assets/basin_monthly/amazon_2021-10.png",
-        "soil_moisture_idx": 60.0,
+        "soil_moisture_idx": 59.9,
         "flood_pulse_idx": 19.4,
-        "drought_fire_idx": 69.9
+        "drought_fire_idx": 69.9,
+        "planet_overlay_path": "assets/planet_monthly/planet_2021-10.png",
+        "global_frozen_pct": 21.2,
+        "global_sea_ice_idx": 89.3
       },
       {
         "month": "2021-11",
@@ -689,9 +836,12 @@
         "active_phenomena": [],
         "event_id": null,
         "basin_overlay_path": "assets/basin_monthly/amazon_2021-11.png",
-        "soil_moisture_idx": 73.9,
+        "soil_moisture_idx": 73.7,
         "flood_pulse_idx": 28.8,
-        "drought_fire_idx": 48.9
+        "drought_fire_idx": 48.9,
+        "planet_overlay_path": "assets/planet_monthly/planet_2021-11.png",
+        "global_frozen_pct": 31.6,
+        "global_sea_ice_idx": 100.0
       },
       {
         "month": "2021-12",
@@ -708,9 +858,12 @@
         ],
         "event_id": null,
         "basin_overlay_path": "assets/basin_monthly/amazon_2021-12.png",
-        "soil_moisture_idx": 79.4,
+        "soil_moisture_idx": 79.2,
         "flood_pulse_idx": 47.7,
-        "drought_fire_idx": 22.0
+        "drought_fire_idx": 22.0,
+        "planet_overlay_path": "assets/planet_monthly/planet_2021-12.png",
+        "global_frozen_pct": 38.2,
+        "global_sea_ice_idx": 92.9
       },
       {
         "month": "2022-01",
@@ -727,9 +880,12 @@
         ],
         "event_id": null,
         "basin_overlay_path": "assets/basin_monthly/amazon_2022-01.png",
-        "soil_moisture_idx": 82.1,
+        "soil_moisture_idx": 81.9,
         "flood_pulse_idx": 48.8,
-        "drought_fire_idx": 21.9
+        "drought_fire_idx": 21.9,
+        "planet_overlay_path": "assets/planet_monthly/planet_2022-01.png",
+        "global_frozen_pct": 40.5,
+        "global_sea_ice_idx": 82.3
       },
       {
         "month": "2022-02",
@@ -746,9 +902,12 @@
         ],
         "event_id": null,
         "basin_overlay_path": "assets/basin_monthly/amazon_2022-02.png",
-        "soil_moisture_idx": 84.5,
+        "soil_moisture_idx": 84.4,
         "flood_pulse_idx": 54.2,
-        "drought_fire_idx": 0.0
+        "drought_fire_idx": 0.0,
+        "planet_overlay_path": "assets/planet_monthly/planet_2022-02.png",
+        "global_frozen_pct": 39.8,
+        "global_sea_ice_idx": 76.8
       },
       {
         "month": "2022-03",
@@ -766,9 +925,12 @@
         ],
         "event_id": null,
         "basin_overlay_path": "assets/basin_monthly/amazon_2022-03.png",
-        "soil_moisture_idx": 87.3,
+        "soil_moisture_idx": 87.1,
         "flood_pulse_idx": 77.3,
-        "drought_fire_idx": 2.4
+        "drought_fire_idx": 2.4,
+        "planet_overlay_path": "assets/planet_monthly/planet_2022-03.png",
+        "global_frozen_pct": 36.2,
+        "global_sea_ice_idx": 77.5
       },
       {
         "month": "2022-04",
@@ -786,9 +948,12 @@
         ],
         "event_id": null,
         "basin_overlay_path": "assets/basin_monthly/amazon_2022-04.png",
-        "soil_moisture_idx": 85.6,
+        "soil_moisture_idx": 85.4,
         "flood_pulse_idx": 91.5,
-        "drought_fire_idx": 27.9
+        "drought_fire_idx": 27.9,
+        "planet_overlay_path": "assets/planet_monthly/planet_2022-04.png",
+        "global_frozen_pct": 24.7,
+        "global_sea_ice_idx": 87.0
       },
       {
         "month": "2022-05",
@@ -806,9 +971,12 @@
         ],
         "event_id": null,
         "basin_overlay_path": "assets/basin_monthly/amazon_2022-05.png",
-        "soil_moisture_idx": 81.9,
+        "soil_moisture_idx": 81.7,
         "flood_pulse_idx": 79.8,
-        "drought_fire_idx": 52.6
+        "drought_fire_idx": 52.6,
+        "planet_overlay_path": "assets/planet_monthly/planet_2022-05.png",
+        "global_frozen_pct": 15.0,
+        "global_sea_ice_idx": 94.8
       },
       {
         "month": "2022-06",
@@ -827,9 +995,12 @@
         ],
         "event_id": null,
         "basin_overlay_path": "assets/basin_monthly/amazon_2022-06.png",
-        "soil_moisture_idx": 79.6,
+        "soil_moisture_idx": 79.5,
         "flood_pulse_idx": 63.3,
-        "drought_fire_idx": 56.6
+        "drought_fire_idx": 56.6,
+        "planet_overlay_path": "assets/planet_monthly/planet_2022-06.png",
+        "global_frozen_pct": 9.4,
+        "global_sea_ice_idx": 94.0
       },
       {
         "month": "2022-07",
@@ -847,9 +1018,12 @@
         ],
         "event_id": null,
         "basin_overlay_path": "assets/basin_monthly/amazon_2022-07.png",
-        "soil_moisture_idx": 72.8,
+        "soil_moisture_idx": 72.7,
         "flood_pulse_idx": 45.4,
-        "drought_fire_idx": 66.0
+        "drought_fire_idx": 66.0,
+        "planet_overlay_path": "assets/planet_monthly/planet_2022-07.png",
+        "global_frozen_pct": 6.2,
+        "global_sea_ice_idx": 89.8
       },
       {
         "month": "2022-08",
@@ -867,11 +1041,14 @@
           "fire_season",
           "low_river_levels"
         ],
-        "event_id": null,
+        "event_id": "pakistan_flood_2022",
         "basin_overlay_path": "assets/basin_monthly/amazon_2022-08.png",
-        "soil_moisture_idx": 66.4,
+        "soil_moisture_idx": 66.3,
         "flood_pulse_idx": 34.6,
-        "drought_fire_idx": 91.2
+        "drought_fire_idx": 91.2,
+        "planet_overlay_path": "assets/planet_monthly/planet_2022-08.png",
+        "global_frozen_pct": 11.7,
+        "global_sea_ice_idx": 82.8
       },
       {
         "month": "2022-09",
@@ -891,9 +1068,12 @@
         ],
         "event_id": null,
         "basin_overlay_path": "assets/basin_monthly/amazon_2022-09.png",
-        "soil_moisture_idx": 64.1,
+        "soil_moisture_idx": 64.0,
         "flood_pulse_idx": 21.5,
-        "drought_fire_idx": 94.1
+        "drought_fire_idx": 94.1,
+        "planet_overlay_path": "assets/planet_monthly/planet_2022-09.png",
+        "global_frozen_pct": 14.6,
+        "global_sea_ice_idx": 80.1
       },
       {
         "month": "2022-10",
@@ -913,9 +1093,12 @@
         ],
         "event_id": null,
         "basin_overlay_path": "assets/basin_monthly/amazon_2022-10.png",
-        "soil_moisture_idx": 63.7,
+        "soil_moisture_idx": 63.5,
         "flood_pulse_idx": 15.3,
-        "drought_fire_idx": 75.7
+        "drought_fire_idx": 75.7,
+        "planet_overlay_path": "assets/planet_monthly/planet_2022-10.png",
+        "global_frozen_pct": 19.1,
+        "global_sea_ice_idx": 88.2
       },
       {
         "month": "2022-11",
@@ -930,9 +1113,12 @@
         "active_phenomena": [],
         "event_id": null,
         "basin_overlay_path": "assets/basin_monthly/amazon_2022-11.png",
-        "soil_moisture_idx": 65.6,
+        "soil_moisture_idx": 65.4,
         "flood_pulse_idx": 23.4,
-        "drought_fire_idx": 64.5
+        "drought_fire_idx": 64.5,
+        "planet_overlay_path": "assets/planet_monthly/planet_2022-11.png",
+        "global_frozen_pct": 30.8,
+        "global_sea_ice_idx": 99.2
       },
       {
         "month": "2022-12",
@@ -949,9 +1135,12 @@
         ],
         "event_id": null,
         "basin_overlay_path": "assets/basin_monthly/amazon_2022-12.png",
-        "soil_moisture_idx": 69.9,
+        "soil_moisture_idx": 69.7,
         "flood_pulse_idx": 26.5,
-        "drought_fire_idx": 34.9
+        "drought_fire_idx": 34.9,
+        "planet_overlay_path": "assets/planet_monthly/planet_2022-12.png",
+        "global_frozen_pct": 39.8,
+        "global_sea_ice_idx": 90.0
       },
       {
         "month": "2023-01",
@@ -968,9 +1157,12 @@
         ],
         "event_id": null,
         "basin_overlay_path": "assets/basin_monthly/amazon_2023-01.png",
-        "soil_moisture_idx": 80.9,
+        "soil_moisture_idx": 80.7,
         "flood_pulse_idx": 35.6,
-        "drought_fire_idx": 17.2
+        "drought_fire_idx": 17.2,
+        "planet_overlay_path": "assets/planet_monthly/planet_2023-01.png",
+        "global_frozen_pct": 40.4,
+        "global_sea_ice_idx": 77.5
       },
       {
         "month": "2023-02",
@@ -985,11 +1177,14 @@
         "active_phenomena": [
           "rainy_season"
         ],
-        "event_id": null,
+        "event_id": "turkiye_insar_2023",
         "basin_overlay_path": "assets/basin_monthly/amazon_2023-02.png",
-        "soil_moisture_idx": 81.8,
+        "soil_moisture_idx": 81.7,
         "flood_pulse_idx": 55.3,
-        "drought_fire_idx": 11.1
+        "drought_fire_idx": 11.1,
+        "planet_overlay_path": "assets/planet_monthly/planet_2023-02.png",
+        "global_frozen_pct": 39.7,
+        "global_sea_ice_idx": 75.0
       },
       {
         "month": "2023-03",
@@ -1007,9 +1202,12 @@
         ],
         "event_id": null,
         "basin_overlay_path": "assets/basin_monthly/amazon_2023-03.png",
-        "soil_moisture_idx": 82.6,
+        "soil_moisture_idx": 82.5,
         "flood_pulse_idx": 71.6,
-        "drought_fire_idx": 10.0
+        "drought_fire_idx": 10.0,
+        "planet_overlay_path": "assets/planet_monthly/planet_2023-03.png",
+        "global_frozen_pct": 34.9,
+        "global_sea_ice_idx": 77.8
       },
       {
         "month": "2023-04",
@@ -1027,9 +1225,12 @@
         ],
         "event_id": null,
         "basin_overlay_path": "assets/basin_monthly/amazon_2023-04.png",
-        "soil_moisture_idx": 84.3,
+        "soil_moisture_idx": 84.1,
         "flood_pulse_idx": 79.5,
-        "drought_fire_idx": 19.1
+        "drought_fire_idx": 19.1,
+        "planet_overlay_path": "assets/planet_monthly/planet_2023-04.png",
+        "global_frozen_pct": 25.8,
+        "global_sea_ice_idx": 86.2
       },
       {
         "month": "2023-05",
@@ -1047,9 +1248,12 @@
         ],
         "event_id": null,
         "basin_overlay_path": "assets/basin_monthly/amazon_2023-05.png",
-        "soil_moisture_idx": 81.9,
+        "soil_moisture_idx": 81.8,
         "flood_pulse_idx": 74.2,
-        "drought_fire_idx": 47.1
+        "drought_fire_idx": 47.1,
+        "planet_overlay_path": "assets/planet_monthly/planet_2023-05.png",
+        "global_frozen_pct": 15.4,
+        "global_sea_ice_idx": 91.1
       },
       {
         "month": "2023-06",
@@ -1068,9 +1272,12 @@
         ],
         "event_id": null,
         "basin_overlay_path": "assets/basin_monthly/amazon_2023-06.png",
-        "soil_moisture_idx": 80.0,
+        "soil_moisture_idx": 79.9,
         "flood_pulse_idx": 60.2,
-        "drought_fire_idx": 58.5
+        "drought_fire_idx": 58.5,
+        "planet_overlay_path": "assets/planet_monthly/planet_2023-06.png",
+        "global_frozen_pct": 9.1,
+        "global_sea_ice_idx": 91.2
       },
       {
         "month": "2023-07",
@@ -1086,11 +1293,14 @@
           "dry_season",
           "clearing_land_opening"
         ],
-        "event_id": null,
+        "event_id": "canada_boreal_2023",
         "basin_overlay_path": "assets/basin_monthly/amazon_2023-07.png",
-        "soil_moisture_idx": 71.8,
+        "soil_moisture_idx": 71.6,
         "flood_pulse_idx": 36.3,
-        "drought_fire_idx": 63.1
+        "drought_fire_idx": 63.1,
+        "planet_overlay_path": "assets/planet_monthly/planet_2023-07.png",
+        "global_frozen_pct": 7.0,
+        "global_sea_ice_idx": 84.6
       },
       {
         "month": "2023-08",
@@ -1110,9 +1320,12 @@
         ],
         "event_id": null,
         "basin_overlay_path": "assets/basin_monthly/amazon_2023-08.png",
-        "soil_moisture_idx": 63.9,
+        "soil_moisture_idx": 63.7,
         "flood_pulse_idx": 23.6,
-        "drought_fire_idx": 78.7
+        "drought_fire_idx": 78.7,
+        "planet_overlay_path": "assets/planet_monthly/planet_2023-08.png",
+        "global_frozen_pct": 6.8,
+        "global_sea_ice_idx": 78.4
       },
       {
         "month": "2023-09",
@@ -1130,11 +1343,14 @@
           "fire_season",
           "low_river_levels"
         ],
-        "event_id": null,
+        "event_id": "antarctic_sea_ice_2023",
         "basin_overlay_path": "assets/basin_monthly/amazon_2023-09.png",
-        "soil_moisture_idx": 52.9,
+        "soil_moisture_idx": 52.7,
         "flood_pulse_idx": 9.4,
-        "drought_fire_idx": 85.7
+        "drought_fire_idx": 85.7,
+        "planet_overlay_path": "assets/planet_monthly/planet_2023-09.png",
+        "global_frozen_pct": 10.4,
+        "global_sea_ice_idx": 76.3
       },
       {
         "month": "2023-10",
@@ -1154,9 +1370,12 @@
         ],
         "event_id": "severe_drought_2023",
         "basin_overlay_path": "assets/basin_monthly/amazon_2023-10.png",
-        "soil_moisture_idx": 49.8,
+        "soil_moisture_idx": 49.6,
         "flood_pulse_idx": 4.2,
-        "drought_fire_idx": 81.5
+        "drought_fire_idx": 81.5,
+        "planet_overlay_path": "assets/planet_monthly/planet_2023-10.png",
+        "global_frozen_pct": 19.2,
+        "global_sea_ice_idx": 84.2
       },
       {
         "month": "2023-11",
@@ -1171,9 +1390,12 @@
         "active_phenomena": [],
         "event_id": null,
         "basin_overlay_path": "assets/basin_monthly/amazon_2023-11.png",
-        "soil_moisture_idx": 39.9,
+        "soil_moisture_idx": 39.7,
         "flood_pulse_idx": 6.0,
-        "drought_fire_idx": 74.6
+        "drought_fire_idx": 74.6,
+        "planet_overlay_path": "assets/planet_monthly/planet_2023-11.png",
+        "global_frozen_pct": 31.2,
+        "global_sea_ice_idx": 98.1
       },
       {
         "month": "2023-12",
@@ -1190,9 +1412,12 @@
         ],
         "event_id": null,
         "basin_overlay_path": "assets/basin_monthly/amazon_2023-12.png",
-        "soil_moisture_idx": 54.0,
+        "soil_moisture_idx": 53.8,
         "flood_pulse_idx": 20.0,
-        "drought_fire_idx": 49.9
+        "drought_fire_idx": 49.9,
+        "planet_overlay_path": "assets/planet_monthly/planet_2023-12.png",
+        "global_frozen_pct": 39.0,
+        "global_sea_ice_idx": 90.0
       },
       {
         "month": "2024-01",
@@ -1209,9 +1434,12 @@
         ],
         "event_id": null,
         "basin_overlay_path": "assets/basin_monthly/amazon_2024-01.png",
-        "soil_moisture_idx": 68.7,
+        "soil_moisture_idx": 68.5,
         "flood_pulse_idx": 40.7,
-        "drought_fire_idx": 30.3
+        "drought_fire_idx": 30.3,
+        "planet_overlay_path": "assets/planet_monthly/planet_2024-01.png",
+        "global_frozen_pct": 42.1,
+        "global_sea_ice_idx": 82.8
       },
       {
         "month": "2024-02",
@@ -1228,9 +1456,12 @@
         ],
         "event_id": null,
         "basin_overlay_path": "assets/basin_monthly/amazon_2024-02.png",
-        "soil_moisture_idx": 68.9,
+        "soil_moisture_idx": 68.8,
         "flood_pulse_idx": 49.0,
-        "drought_fire_idx": 45.8
+        "drought_fire_idx": 45.8,
+        "planet_overlay_path": "assets/planet_monthly/planet_2024-02.png",
+        "global_frozen_pct": 39.2,
+        "global_sea_ice_idx": 76.3
       },
       {
         "month": "2024-03",
@@ -1248,9 +1479,12 @@
         ],
         "event_id": null,
         "basin_overlay_path": "assets/basin_monthly/amazon_2024-03.png",
-        "soil_moisture_idx": 69.1,
+        "soil_moisture_idx": 68.9,
         "flood_pulse_idx": 58.1,
-        "drought_fire_idx": 45.3
+        "drought_fire_idx": 45.3,
+        "planet_overlay_path": "assets/planet_monthly/planet_2024-03.png",
+        "global_frozen_pct": 34.5,
+        "global_sea_ice_idx": 80.0
       },
       {
         "month": "2024-04",
@@ -1268,9 +1502,12 @@
         ],
         "event_id": null,
         "basin_overlay_path": "assets/basin_monthly/amazon_2024-04.png",
-        "soil_moisture_idx": 74.0,
+        "soil_moisture_idx": 73.8,
         "flood_pulse_idx": 54.9,
-        "drought_fire_idx": 23.3
+        "drought_fire_idx": 23.3,
+        "planet_overlay_path": "assets/planet_monthly/planet_2024-04.png",
+        "global_frozen_pct": 23.5,
+        "global_sea_ice_idx": 89.2
       },
       {
         "month": "2024-05",
@@ -1288,9 +1525,12 @@
         ],
         "event_id": null,
         "basin_overlay_path": "assets/basin_monthly/amazon_2024-05.png",
-        "soil_moisture_idx": 75.5,
+        "soil_moisture_idx": 75.4,
         "flood_pulse_idx": 55.5,
-        "drought_fire_idx": 49.2
+        "drought_fire_idx": 49.2,
+        "planet_overlay_path": "assets/planet_monthly/planet_2024-05.png",
+        "global_frozen_pct": 15.4,
+        "global_sea_ice_idx": 93.3
       },
       {
         "month": "2024-06",
@@ -1309,9 +1549,12 @@
         ],
         "event_id": null,
         "basin_overlay_path": "assets/basin_monthly/amazon_2024-06.png",
-        "soil_moisture_idx": 69.5,
+        "soil_moisture_idx": 69.3,
         "flood_pulse_idx": 48.7,
-        "drought_fire_idx": 59.4
+        "drought_fire_idx": 59.4,
+        "planet_overlay_path": "assets/planet_monthly/planet_2024-06.png",
+        "global_frozen_pct": 9.3,
+        "global_sea_ice_idx": 93.0
       },
       {
         "month": "2024-07",
@@ -1329,9 +1572,12 @@
         ],
         "event_id": null,
         "basin_overlay_path": "assets/basin_monthly/amazon_2024-07.png",
-        "soil_moisture_idx": 63.2,
+        "soil_moisture_idx": 63.1,
         "flood_pulse_idx": 32.6,
-        "drought_fire_idx": 74.3
+        "drought_fire_idx": 74.3,
+        "planet_overlay_path": "assets/planet_monthly/planet_2024-07.png",
+        "global_frozen_pct": 6.8,
+        "global_sea_ice_idx": 83.5
       },
       {
         "month": "2024-08",
@@ -1351,9 +1597,12 @@
         ],
         "event_id": null,
         "basin_overlay_path": "assets/basin_monthly/amazon_2024-08.png",
-        "soil_moisture_idx": 55.5,
+        "soil_moisture_idx": 55.3,
         "flood_pulse_idx": 15.8,
-        "drought_fire_idx": 96.6
+        "drought_fire_idx": 96.6,
+        "planet_overlay_path": "assets/planet_monthly/planet_2024-08.png",
+        "global_frozen_pct": 6.9,
+        "global_sea_ice_idx": 77.2
       },
       {
         "month": "2024-09",
@@ -1373,9 +1622,12 @@
         ],
         "event_id": "drought_fires_2024",
         "basin_overlay_path": "assets/basin_monthly/amazon_2024-09.png",
-        "soil_moisture_idx": 48.4,
+        "soil_moisture_idx": 48.3,
         "flood_pulse_idx": 4.8,
-        "drought_fire_idx": 100.0
+        "drought_fire_idx": 100.0,
+        "planet_overlay_path": "assets/planet_monthly/planet_2024-09.png",
+        "global_frozen_pct": 10.6,
+        "global_sea_ice_idx": 75.4
       },
       {
         "month": "2024-10",
@@ -1395,9 +1647,12 @@
         ],
         "event_id": null,
         "basin_overlay_path": "assets/basin_monthly/amazon_2024-10.png",
-        "soil_moisture_idx": 49.3,
+        "soil_moisture_idx": 49.2,
         "flood_pulse_idx": 0.0,
-        "drought_fire_idx": 78.5
+        "drought_fire_idx": 78.5,
+        "planet_overlay_path": "assets/planet_monthly/planet_2024-10.png",
+        "global_frozen_pct": 21.4,
+        "global_sea_ice_idx": 82.1
       },
       {
         "month": "2024-11",
@@ -1412,9 +1667,12 @@
         "active_phenomena": [],
         "event_id": null,
         "basin_overlay_path": "assets/basin_monthly/amazon_2024-11.png",
-        "soil_moisture_idx": 65.2,
+        "soil_moisture_idx": 65.1,
         "flood_pulse_idx": 6.4,
-        "drought_fire_idx": 74.0
+        "drought_fire_idx": 74.0,
+        "planet_overlay_path": "assets/planet_monthly/planet_2024-11.png",
+        "global_frozen_pct": 30.7,
+        "global_sea_ice_idx": 93.5
       },
       {
         "month": "2024-12",
@@ -1431,9 +1689,12 @@
         ],
         "event_id": null,
         "basin_overlay_path": "assets/basin_monthly/amazon_2024-12.png",
-        "soil_moisture_idx": 69.8,
+        "soil_moisture_idx": 69.6,
         "flood_pulse_idx": 22.6,
-        "drought_fire_idx": 52.1
+        "drought_fire_idx": 52.1,
+        "planet_overlay_path": "assets/planet_monthly/planet_2024-12.png",
+        "global_frozen_pct": 38.1,
+        "global_sea_ice_idx": 90.5
       },
       {
         "month": "2025-01",
@@ -1450,9 +1711,12 @@
         ],
         "event_id": null,
         "basin_overlay_path": "assets/basin_monthly/amazon_2025-01.png",
-        "soil_moisture_idx": 76.3,
+        "soil_moisture_idx": 76.2,
         "flood_pulse_idx": 47.9,
-        "drought_fire_idx": 22.7
+        "drought_fire_idx": 22.7,
+        "planet_overlay_path": "assets/planet_monthly/planet_2025-01.png",
+        "global_frozen_pct": 40.2,
+        "global_sea_ice_idx": 82.1
       },
       {
         "month": "2025-02",
@@ -1469,9 +1733,12 @@
         ],
         "event_id": null,
         "basin_overlay_path": "assets/basin_monthly/amazon_2025-02.png",
-        "soil_moisture_idx": 85.2,
+        "soil_moisture_idx": 85.1,
         "flood_pulse_idx": 56.2,
-        "drought_fire_idx": 7.8
+        "drought_fire_idx": 7.8,
+        "planet_overlay_path": "assets/planet_monthly/planet_2025-02.png",
+        "global_frozen_pct": 41.1,
+        "global_sea_ice_idx": 75.3
       },
       {
         "month": "2025-03",
@@ -1489,9 +1756,12 @@
         ],
         "event_id": null,
         "basin_overlay_path": "assets/basin_monthly/amazon_2025-03.png",
-        "soil_moisture_idx": 87.9,
+        "soil_moisture_idx": 87.7,
         "flood_pulse_idx": 90.1,
-        "drought_fire_idx": 20.4
+        "drought_fire_idx": 20.4,
+        "planet_overlay_path": "assets/planet_monthly/planet_2025-03.png",
+        "global_frozen_pct": 34.4,
+        "global_sea_ice_idx": 79.0
       },
       {
         "month": "2025-04",
@@ -1509,9 +1779,12 @@
         ],
         "event_id": null,
         "basin_overlay_path": "assets/basin_monthly/amazon_2025-04.png",
-        "soil_moisture_idx": 86.8,
+        "soil_moisture_idx": 86.6,
         "flood_pulse_idx": 97.0,
-        "drought_fire_idx": 6.3
+        "drought_fire_idx": 6.3,
+        "planet_overlay_path": "assets/planet_monthly/planet_2025-04.png",
+        "global_frozen_pct": 23.6,
+        "global_sea_ice_idx": 87.6
       },
       {
         "month": "2025-05",
@@ -1529,9 +1802,12 @@
         ],
         "event_id": null,
         "basin_overlay_path": "assets/basin_monthly/amazon_2025-05.png",
-        "soil_moisture_idx": 84.4,
+        "soil_moisture_idx": 84.2,
         "flood_pulse_idx": 83.3,
-        "drought_fire_idx": 43.8
+        "drought_fire_idx": 43.8,
+        "planet_overlay_path": "assets/planet_monthly/planet_2025-05.png",
+        "global_frozen_pct": 15.7,
+        "global_sea_ice_idx": 92.2
       },
       {
         "month": "2025-06",
@@ -1550,9 +1826,12 @@
         ],
         "event_id": null,
         "basin_overlay_path": "assets/basin_monthly/amazon_2025-06.png",
-        "soil_moisture_idx": 81.7,
+        "soil_moisture_idx": 81.6,
         "flood_pulse_idx": 76.2,
-        "drought_fire_idx": 52.3
+        "drought_fire_idx": 52.3,
+        "planet_overlay_path": "assets/planet_monthly/planet_2025-06.png",
+        "global_frozen_pct": 9.6,
+        "global_sea_ice_idx": 92.1
       },
       {
         "month": "2025-07",
@@ -1570,9 +1849,12 @@
         ],
         "event_id": null,
         "basin_overlay_path": "assets/basin_monthly/amazon_2025-07.png",
-        "soil_moisture_idx": 74.1,
+        "soil_moisture_idx": 73.9,
         "flood_pulse_idx": 54.1,
-        "drought_fire_idx": 53.9
+        "drought_fire_idx": 53.9,
+        "planet_overlay_path": "assets/planet_monthly/planet_2025-07.png",
+        "global_frozen_pct": 6.7,
+        "global_sea_ice_idx": 85.2
       },
       {
         "month": "2025-08",
@@ -1592,9 +1874,12 @@
         ],
         "event_id": null,
         "basin_overlay_path": "assets/basin_monthly/amazon_2025-08.png",
-        "soil_moisture_idx": 67.9,
+        "soil_moisture_idx": 67.8,
         "flood_pulse_idx": 33.0,
-        "drought_fire_idx": 69.2
+        "drought_fire_idx": 69.2,
+        "planet_overlay_path": "assets/planet_monthly/planet_2025-08.png",
+        "global_frozen_pct": 7.1,
+        "global_sea_ice_idx": 79.1
       },
       {
         "month": "2025-09",
@@ -1614,9 +1899,12 @@
         ],
         "event_id": null,
         "basin_overlay_path": "assets/basin_monthly/amazon_2025-09.png",
-        "soil_moisture_idx": 60.8,
+        "soil_moisture_idx": 60.6,
         "flood_pulse_idx": 24.1,
-        "drought_fire_idx": 74.3
+        "drought_fire_idx": 74.3,
+        "planet_overlay_path": "assets/planet_monthly/planet_2025-09.png",
+        "global_frozen_pct": 11.0,
+        "global_sea_ice_idx": 8.8
       },
       {
         "month": "2025-10",
@@ -1636,9 +1924,12 @@
         ],
         "event_id": null,
         "basin_overlay_path": "assets/basin_monthly/amazon_2025-10.png",
-        "soil_moisture_idx": 60.8,
+        "soil_moisture_idx": 60.6,
         "flood_pulse_idx": 21.2,
-        "drought_fire_idx": 73.1
+        "drought_fire_idx": 73.1,
+        "planet_overlay_path": "assets/planet_monthly/planet_2025-10.png",
+        "global_frozen_pct": 21.7,
+        "global_sea_ice_idx": 8.8
       },
       {
         "month": "2025-11",
@@ -1653,9 +1944,12 @@
         "active_phenomena": [],
         "event_id": null,
         "basin_overlay_path": "assets/basin_monthly/amazon_2025-11.png",
-        "soil_moisture_idx": 60.8,
+        "soil_moisture_idx": 60.6,
         "flood_pulse_idx": 31.9,
-        "drought_fire_idx": 64.7
+        "drought_fire_idx": 64.7,
+        "planet_overlay_path": "assets/planet_monthly/planet_2025-11.png",
+        "global_frozen_pct": 31.3,
+        "global_sea_ice_idx": 8.8
       },
       {
         "month": "2025-12",
@@ -1672,9 +1966,12 @@
         ],
         "event_id": null,
         "basin_overlay_path": "assets/basin_monthly/amazon_2025-12.png",
-        "soil_moisture_idx": 73.8,
+        "soil_moisture_idx": 73.7,
         "flood_pulse_idx": 45.9,
-        "drought_fire_idx": 47.9
+        "drought_fire_idx": 47.9,
+        "planet_overlay_path": "assets/planet_monthly/planet_2025-12.png",
+        "global_frozen_pct": 37.2,
+        "global_sea_ice_idx": 8.8
       },
       {
         "month": "2026-01",
@@ -1691,9 +1988,12 @@
         ],
         "event_id": null,
         "basin_overlay_path": "assets/basin_monthly/amazon_2026-01.png",
-        "soil_moisture_idx": 78.8,
+        "soil_moisture_idx": 78.6,
         "flood_pulse_idx": 57.7,
-        "drought_fire_idx": 24.8
+        "drought_fire_idx": 24.8,
+        "planet_overlay_path": "assets/planet_monthly/planet_2026-01.png",
+        "global_frozen_pct": 38.8,
+        "global_sea_ice_idx": 8.8
       },
       {
         "month": "2026-02",
@@ -1710,9 +2010,12 @@
         ],
         "event_id": null,
         "basin_overlay_path": "assets/basin_monthly/amazon_2026-02.png",
-        "soil_moisture_idx": 83.0,
+        "soil_moisture_idx": 82.8,
         "flood_pulse_idx": 76.1,
-        "drought_fire_idx": 4.4
+        "drought_fire_idx": 4.4,
+        "planet_overlay_path": "assets/planet_monthly/planet_2026-02.png",
+        "global_frozen_pct": 39.3,
+        "global_sea_ice_idx": 8.8
       },
       {
         "month": "2026-03",
@@ -1730,9 +2033,12 @@
         ],
         "event_id": null,
         "basin_overlay_path": "assets/basin_monthly/amazon_2026-03.png",
-        "soil_moisture_idx": 84.8,
+        "soil_moisture_idx": 84.7,
         "flood_pulse_idx": 75.0,
-        "drought_fire_idx": 12.1
+        "drought_fire_idx": 12.1,
+        "planet_overlay_path": "assets/planet_monthly/planet_2026-03.png",
+        "global_frozen_pct": 34.5,
+        "global_sea_ice_idx": 8.8
       },
       {
         "month": "2026-04",
@@ -1750,9 +2056,12 @@
         ],
         "event_id": null,
         "basin_overlay_path": "assets/basin_monthly/amazon_2026-04.png",
-        "soil_moisture_idx": 84.3,
+        "soil_moisture_idx": 84.2,
         "flood_pulse_idx": 81.8,
-        "drought_fire_idx": 13.9
+        "drought_fire_idx": 13.9,
+        "planet_overlay_path": "assets/planet_monthly/planet_2026-04.png",
+        "global_frozen_pct": 26.2,
+        "global_sea_ice_idx": 8.8
       },
       {
         "month": "2026-05",
@@ -1770,9 +2079,12 @@
         ],
         "event_id": null,
         "basin_overlay_path": "assets/basin_monthly/amazon_2026-05.png",
-        "soil_moisture_idx": 83.2,
+        "soil_moisture_idx": 83.0,
         "flood_pulse_idx": 87.3,
-        "drought_fire_idx": 41.9
+        "drought_fire_idx": 41.9,
+        "planet_overlay_path": "assets/planet_monthly/planet_2026-05.png",
+        "global_frozen_pct": 15.7,
+        "global_sea_ice_idx": 8.8
       },
       {
         "month": "2026-06",
@@ -1791,9 +2103,12 @@
         ],
         "event_id": null,
         "basin_overlay_path": "assets/basin_monthly/amazon_2026-06.png",
-        "soil_moisture_idx": 80.7,
+        "soil_moisture_idx": 80.5,
         "flood_pulse_idx": 68.3,
-        "drought_fire_idx": 48.3
+        "drought_fire_idx": 48.3,
+        "planet_overlay_path": "assets/planet_monthly/planet_2026-06.png",
+        "global_frozen_pct": 7.8,
+        "global_sea_ice_idx": 8.8
       },
       {
         "month": "2026-07",
@@ -1811,9 +2126,12 @@
         ],
         "event_id": null,
         "basin_overlay_path": "assets/basin_monthly/amazon_2026-07.png",
-        "soil_moisture_idx": 77.7,
+        "soil_moisture_idx": 77.6,
         "flood_pulse_idx": 50.0,
-        "drought_fire_idx": 56.2
+        "drought_fire_idx": 56.2,
+        "planet_overlay_path": "assets/planet_monthly/planet_2026-07.png",
+        "global_frozen_pct": 6.4,
+        "global_sea_ice_idx": 8.8
       },
       {
         "month": "2026-08",
@@ -1833,9 +2151,12 @@
         ],
         "event_id": null,
         "basin_overlay_path": "assets/basin_monthly/amazon_2026-08.png",
-        "soil_moisture_idx": 77.7,
+        "soil_moisture_idx": 77.6,
         "flood_pulse_idx": 29.7,
-        "drought_fire_idx": 91.9
+        "drought_fire_idx": 91.9,
+        "planet_overlay_path": "assets/planet_monthly/planet_2026-08.png",
+        "global_frozen_pct": 7.0,
+        "global_sea_ice_idx": 8.8
       },
       {
         "month": "2026-09",
@@ -1855,9 +2176,12 @@
         ],
         "event_id": null,
         "basin_overlay_path": "assets/basin_monthly/amazon_2026-09.png",
-        "soil_moisture_idx": 55.3,
+        "soil_moisture_idx": 55.2,
         "flood_pulse_idx": 16.6,
-        "drought_fire_idx": 89.4
+        "drought_fire_idx": 89.4,
+        "planet_overlay_path": "assets/planet_monthly/planet_2026-09.png",
+        "global_frozen_pct": 10.5,
+        "global_sea_ice_idx": 8.8
       },
       {
         "month": "2026-10",
@@ -1877,9 +2201,12 @@
         ],
         "event_id": "nisar_lband_2026",
         "basin_overlay_path": "assets/basin_monthly/amazon_2026-10.png",
-        "soil_moisture_idx": 52.5,
+        "soil_moisture_idx": 52.3,
         "flood_pulse_idx": 12.0,
-        "drought_fire_idx": 74.5
+        "drought_fire_idx": 74.5,
+        "planet_overlay_path": "assets/planet_monthly/planet_2026-10.png",
+        "global_frozen_pct": 22.0,
+        "global_sea_ice_idx": 8.8
       },
       {
         "month": "2026-11",
@@ -1894,9 +2221,12 @@
         "active_phenomena": [],
         "event_id": null,
         "basin_overlay_path": "assets/basin_monthly/amazon_2026-11.png",
-        "soil_moisture_idx": 50.7,
+        "soil_moisture_idx": 50.5,
         "flood_pulse_idx": 14.2,
-        "drought_fire_idx": 70.6
+        "drought_fire_idx": 70.6,
+        "planet_overlay_path": "assets/planet_monthly/planet_2026-11.png",
+        "global_frozen_pct": 29.5,
+        "global_sea_ice_idx": 8.8
       },
       {
         "month": "2026-12",
@@ -1913,9 +2243,12 @@
         ],
         "event_id": null,
         "basin_overlay_path": "assets/basin_monthly/amazon_2026-12.png",
-        "soil_moisture_idx": 73.8,
+        "soil_moisture_idx": 73.7,
         "flood_pulse_idx": 45.9,
-        "drought_fire_idx": 47.9
+        "drought_fire_idx": 47.9,
+        "planet_overlay_path": "assets/planet_monthly/planet_2026-12.png",
+        "global_frozen_pct": 37.2,
+        "global_sea_ice_idx": 8.8
       }
     ]
   },
@@ -3181,6 +3514,167 @@
   ],
   "events": [
     {
+      "id": "aus_fires_2020",
+      "scope": "global",
+      "name": "Australia Black Summer Burn Scars",
+      "timing": "Jan 2020",
+      "timeline_month": "2020-01",
+      "color": "#F97316",
+      "region_id": "global_aus_nsw",
+      "bbox": [
+        149.7,
+        -36.5,
+        150.3,
+        -35.9
+      ],
+      "center": [
+        150.0,
+        -36.2
+      ],
+      "headline_metric": "8.1% severe crown scorch & 8.0% canopy thinning",
+      "summary": "Sentinel-1 C-band cross-polarized VH backscatter penetrates pyrocumulonimbus smoke clouds over Clyde Mountain & Batemans Bay (NSW), revealing structural branch/canopy incineration immediately after Jan 2020.",
+      "default_layer_id": "crisis_aus_scars",
+      "sar_physics": {
+        "primary_sensitivity": "Crown Volume Roughness + Ash Soil Moisture",
+        "roughness_mechanism": "Charred eucalypt crowns lose small leaves/twigs responsible for C-band VH volume scattering, causing a sharp \u0394VH drop.",
+        "dielectric_mechanism": "Pyrolysis desiccates surface fuel (low \u03b5r) until ash exposes bare soil dielectric contrast.",
+        "polarization_note": "VH/VV ratio drops immediately across high-intensity crown fire corridors.",
+        "frequency_comparison": "C-band (5.6 cm) maps leaf/twig scorch within days; L-band (24 cm) persists years to track trunk mortality."
+      },
+      "drivers": {
+        "natural_driver": "Record positive Indian Ocean Dipole (IOD) & prolonged 2019 extreme heatwave/lightning ignitions.",
+        "human_driver": "Anthropogenic climate warming lengthened NSW fire-weather index beyond historical baselines."
+      },
+      "comparison_pair": {
+        "before_label": "Pre-Fire Forest VH (2019-10-01)",
+        "after_label": "Black Summer Burn Scar (2020-01-05)",
+        "delta_summary": "8.1% severe crown loss + 8.0% moderate understory scorch",
+        "histogram": [
+          {
+            "range_db": "-24..-21",
+            "mid_db": -22.5,
+            "before_pct": 30.1,
+            "after_pct": 30.2
+          },
+          {
+            "range_db": "-21..-18",
+            "mid_db": -19.5,
+            "before_pct": 2.6,
+            "after_pct": 5.5
+          },
+          {
+            "range_db": "-18..-15",
+            "mid_db": -16.5,
+            "before_pct": 32.1,
+            "after_pct": 22.7
+          },
+          {
+            "range_db": "-15..-12",
+            "mid_db": -13.5,
+            "before_pct": 35.1,
+            "after_pct": 40.9
+          },
+          {
+            "range_db": "-12..-9",
+            "mid_db": -10.5,
+            "before_pct": 0.0,
+            "after_pct": 0.7
+          },
+          {
+            "range_db": "-9..-6",
+            "mid_db": -7.5,
+            "before_pct": 0.0,
+            "after_pct": 0.1
+          },
+          {
+            "range_db": "-6..-3",
+            "mid_db": -4.5,
+            "before_pct": 0.0,
+            "after_pct": 0.0
+          },
+          {
+            "range_db": "-3..0",
+            "mid_db": -1.5,
+            "before_pct": 0.0,
+            "after_pct": 0.0
+          },
+          {
+            "range_db": "0..3",
+            "mid_db": 1.5,
+            "before_pct": 0.0,
+            "after_pct": 0.0
+          }
+        ]
+      },
+      "layers": [
+        {
+          "id": "crisis_aus_scars",
+          "title": "Black Summer Crown Burn Scars (\u0394VH)",
+          "role": "change",
+          "sensor": "Sentinel-1",
+          "band": "C-band (5.6 cm)",
+          "polarization": "\u0394VH",
+          "acquisition_date": "2020-01-05",
+          "granule_id": "S1A_IW_GRDH_1SDV_20200105T191615_20200105T191640_030669_0383E0_rtc",
+          "asset_path": "assets/crisis_aus_burn_scars.png",
+          "bbox": [
+            149.7,
+            -36.5,
+            150.3,
+            -35.9
+          ],
+          "stats": {
+            "severe_burn_pct": 8.1,
+            "moderate_burn_pct": 8.0
+          },
+          "legend": [
+            {
+              "label": "Severe Crown Loss (\u0394VH \u2264 -1.25 dB)",
+              "color": "#F43F5E"
+            },
+            {
+              "label": "Canopy Thinning / Scorch (-1.25..-0.65 dB)",
+              "color": "#FF9100"
+            }
+          ],
+          "source_id": "pc_s1_rtc"
+        },
+        {
+          "id": "crisis_aus_post",
+          "title": "Post-Fire C-Band VH Backscatter (Jan 2020)",
+          "role": "after",
+          "sensor": "Sentinel-1",
+          "band": "C-band (5.6 cm)",
+          "polarization": "VH",
+          "acquisition_date": "2020-01-05",
+          "granule_id": "S1A_IW_GRDH_1SDV_20200105T191615_20200105T191640_030669_0383E0_rtc",
+          "asset_path": "assets/crisis_aus_post_vh.png",
+          "bbox": [
+            149.7,
+            -36.5,
+            150.3,
+            -35.9
+          ],
+          "stats": {
+            "p10_db": -23.37,
+            "median_db": -15.66,
+            "p90_db": -13.63
+          },
+          "legend": [
+            {
+              "label": "Incinerated Scar (-24..-18 dB)",
+              "color": "#111827"
+            },
+            {
+              "label": "Intact Eucalypt Canopy (-12..-9 dB)",
+              "color": "#D1D5DB"
+            }
+          ],
+          "source_id": "pc_s1_rtc"
+        }
+      ]
+    },
+    {
       "id": "manaus_flood_2021",
       "name": "Record Rio Negro flood (Manaus)",
       "timing": "Jun 2021",
@@ -3210,6 +3704,7 @@
         "natural_driver": "La Ni\u00f1a convective reinforcement flooded the northern Negro & western Solim\u00f5es sub-basins simultaneously.",
         "human_driver": "Submerged urban waterfronts, floating bridges, and inundated peri-urban neighborhoods in Manaus & Iranduba."
       },
+      "scope": "amazon",
       "default_layer_id": "evt1_classes",
       "comparison_pair": {
         "before_label": "Low-Water Baseline (2020-10-10)",
@@ -3418,6 +3913,654 @@
       ]
     },
     {
+      "id": "pakistan_flood_2022",
+      "scope": "global",
+      "name": "Pakistan Indus Inland Sea Flood",
+      "timing": "Aug 2022",
+      "timeline_month": "2022-08",
+      "color": "#06B6D4",
+      "region_id": "global_pak_indus",
+      "bbox": [
+        67.55,
+        26.25,
+        68.35,
+        26.95
+      ],
+      "center": [
+        67.95,
+        26.6
+      ],
+      "headline_metric": "+14.0% newly inundated Indus basin cropland & towns (VV \u2264 -15 dB)",
+      "summary": "Extreme 2022 monsoon created a ~100 km wide inland sea around Lake Manchar & Dadu in Sindh. Smooth mirror-like floodwaters reflect C-band radar away from Sentinel-1, turning inundated plains jet-black (< -15 dB).",
+      "default_layer_id": "crisis_pak_flood",
+      "sar_physics": {
+        "primary_sensitivity": "Dielectric Constant (\u03b5r\u224880) + Specular Mirror Reflection",
+        "roughness_mechanism": "Flooded agricultural fields replace rough diffuse soil/crops with wind-sheltered flat water mirrors.",
+        "dielectric_mechanism": "Liquid water's high dielectric constant produces near-total forward specular reflection away from the SAR antenna.",
+        "polarization_note": "VV co-polarization shows maximum water-vs-dry-land drop (-18 dB water vs -9 dB farmland).",
+        "frequency_comparison": "Both C-band and NISAR L-band penetrate relentless Aug 2022 monsoon cloud decks that hid the peak flood from optical sensors."
+      },
+      "drivers": {
+        "natural_driver": "2022 La Ni\u00f1a atmospheric river & record monsoon stalling over Sindh + accelerated glacial melt.",
+        "human_driver": "Embankment breaches along Right Bank Outfall Drain (RBOD) and floodplain settlement density."
+      },
+      "comparison_pair": {
+        "before_label": "Pre-Monsoon Dry Indus (2022-05-02)",
+        "after_label": "Peak Flood Inland Sea (2022-08-30)",
+        "delta_summary": "+14.0% newly submerged alluvial plain detected through monsoon clouds",
+        "histogram": [
+          {
+            "range_db": "-24..-21",
+            "mid_db": -22.5,
+            "before_pct": 0.0,
+            "after_pct": 1.2
+          },
+          {
+            "range_db": "-21..-18",
+            "mid_db": -19.5,
+            "before_pct": 0.0,
+            "after_pct": 4.2
+          },
+          {
+            "range_db": "-18..-15",
+            "mid_db": -16.5,
+            "before_pct": 2.2,
+            "after_pct": 10.3
+          },
+          {
+            "range_db": "-15..-12",
+            "mid_db": -13.5,
+            "before_pct": 10.2,
+            "after_pct": 9.1
+          },
+          {
+            "range_db": "-12..-9",
+            "mid_db": -10.5,
+            "before_pct": 49.2,
+            "after_pct": 19.7
+          },
+          {
+            "range_db": "-9..-6",
+            "mid_db": -7.5,
+            "before_pct": 37.4,
+            "after_pct": 50.9
+          },
+          {
+            "range_db": "-6..-3",
+            "mid_db": -4.5,
+            "before_pct": 1.0,
+            "after_pct": 4.4
+          },
+          {
+            "range_db": "-3..0",
+            "mid_db": -1.5,
+            "before_pct": 0.0,
+            "after_pct": 0.1
+          },
+          {
+            "range_db": "0..3",
+            "mid_db": 1.5,
+            "before_pct": 0.0,
+            "after_pct": 0.0
+          }
+        ]
+      },
+      "layers": [
+        {
+          "id": "crisis_pak_flood",
+          "title": "Indus Newly Submerged Extent (\u0394VV)",
+          "role": "change",
+          "sensor": "Sentinel-1",
+          "band": "C-band (5.6 cm)",
+          "polarization": "\u0394VV",
+          "acquisition_date": "2022-08-30",
+          "granule_id": "S1A_IW_GRDH_1SDV_20220830T012551_20220830T012616_044775_0558C6_rtc",
+          "asset_path": "assets/crisis_pak_indus_flood.png",
+          "bbox": [
+            67.55,
+            26.25,
+            68.35,
+            26.95
+          ],
+          "stats": {
+            "new_inundated_pct": 14.0,
+            "permanent_water_pct": 0.32
+          },
+          "legend": [
+            {
+              "label": "New Aug 2022 Floodwater (Specular)",
+              "color": "#00E5FF"
+            },
+            {
+              "label": "Pre-Flood Lake Manchar Channel",
+              "color": "#1565C0"
+            }
+          ],
+          "source_id": "pc_s1_rtc"
+        },
+        {
+          "id": "crisis_pak_vv",
+          "title": "Peak Monsoon C-Band VV Backscatter",
+          "role": "after",
+          "sensor": "Sentinel-1",
+          "band": "C-band (5.6 cm)",
+          "polarization": "VV",
+          "acquisition_date": "2022-08-30",
+          "granule_id": "S1A_IW_GRDH_1SDV_20220830T012551_20220830T012616_044775_0558C6_rtc",
+          "asset_path": "assets/crisis_pak_peak_vv.png",
+          "bbox": [
+            67.55,
+            26.25,
+            68.35,
+            26.95
+          ],
+          "stats": {
+            "p10_db": -16.5,
+            "median_db": -8.57,
+            "p90_db": -6.45
+          },
+          "legend": [
+            {
+              "label": "Calm Floodwater (<-16 dB)",
+              "color": "#111827"
+            },
+            {
+              "label": "Flooded Villages / Levees (>-6 dB)",
+              "color": "#F9FAFB"
+            }
+          ],
+          "source_id": "pc_s1_rtc"
+        }
+      ]
+    },
+    {
+      "id": "turkiye_insar_2023",
+      "scope": "global",
+      "name": "T\u00fcrkiye\u2013Syria Fault Slip & Urban Damage",
+      "timing": "Feb 2023",
+      "timeline_month": "2023-02",
+      "color": "#EC4899",
+      "region_id": "global_tur_kahramanmaras",
+      "bbox": [
+        36.7,
+        37.25,
+        37.3,
+        37.75
+      ],
+      "center": [
+        37.0,
+        37.5
+      ],
+      "headline_metric": "4.2 m left-lateral fault rupture & 28.44% urban |\u0394VV| \u2265 2.2 dB change",
+      "summary": "Synthetic Aperture Radar measures centimeter-to-meter crustal deformation across the East Anatolian Fault near Pazarcik and maps structural urban collapse via Sentinel-1 corner-reflector phase & amplitude decorrelation.",
+      "default_layer_id": "crisis_tur_fringes",
+      "sar_physics": {
+        "primary_sensitivity": "Interferometric Phase (Range Slip) + Urban Corner-Reflector Geometry",
+        "roughness_mechanism": "Intact city blocks act as coherent dihedral wall\u2013ground reflectors; building collapse scrambles phase coherence and shifts |\u0394VV|.",
+        "dielectric_mechanism": "Mid-winter dry stone rubble keeps dielectric variance low while geometric range shifts encode fault displacement.",
+        "polarization_note": "VV amplitude + InSAR interferometric phase pairs resolve both vertical uplift and strike-slip shear across the fault.",
+        "frequency_comparison": "C-band (5.6 cm) saturates very near high-gradient fault cores, where NISAR L-band (24 cm) preserves fringe coherence."
+      },
+      "drivers": {
+        "natural_driver": "Mw 7.8 strike-slip rupture along the East Anatolian Fault Zone (2023-02-06) + Mw 7.5 Elbistan trigger.",
+        "human_driver": "Multi-story unreinforced masonry & soft-story urban construction concentrated across fault basins."
+      },
+      "comparison_pair": {
+        "before_label": "Pre-Quake Coherence (2023-01-16)",
+        "after_label": "Post-Quake Displacement (2023-02-09)",
+        "delta_summary": "4.2 m coseismic fault offset & 28.44% Sentinel-1 intensity disruption",
+        "histogram": [
+          {
+            "range_db": "-24..-21",
+            "mid_db": -22.5,
+            "before_pct": 0.0,
+            "after_pct": 0.0
+          },
+          {
+            "range_db": "-21..-18",
+            "mid_db": -19.5,
+            "before_pct": 0.3,
+            "after_pct": 0.2
+          },
+          {
+            "range_db": "-18..-15",
+            "mid_db": -16.5,
+            "before_pct": 0.5,
+            "after_pct": 0.5
+          },
+          {
+            "range_db": "-15..-12",
+            "mid_db": -13.5,
+            "before_pct": 0.8,
+            "after_pct": 5.9
+          },
+          {
+            "range_db": "-12..-9",
+            "mid_db": -10.5,
+            "before_pct": 16.5,
+            "after_pct": 65.9
+          },
+          {
+            "range_db": "-9..-6",
+            "mid_db": -7.5,
+            "before_pct": 78.3,
+            "after_pct": 25.4
+          },
+          {
+            "range_db": "-6..-3",
+            "mid_db": -4.5,
+            "before_pct": 2.1,
+            "after_pct": 1.5
+          },
+          {
+            "range_db": "-3..0",
+            "mid_db": -1.5,
+            "before_pct": 1.1,
+            "after_pct": 0.5
+          },
+          {
+            "range_db": "0..3",
+            "mid_db": 1.5,
+            "before_pct": 0.3,
+            "after_pct": 0.2
+          }
+        ]
+      },
+      "layers": [
+        {
+          "id": "crisis_tur_fringes",
+          "title": "Coseismic Wrapped InSAR Displacement Lobes",
+          "role": "change",
+          "sensor": "Sentinel-1 / NISAR Mode",
+          "band": "C/L InSAR",
+          "polarization": "LO-Sight Phase",
+          "acquisition_date": "2023-02-09",
+          "granule_id": "S1A_IW_GRDH_1SDV_20230209T153423_20230209T153448_047161_05A88A_rtc",
+          "asset_path": "assets/crisis_tur_insar_fringes.png",
+          "bbox": [
+            36.7,
+            37.25,
+            37.3,
+            37.75
+          ],
+          "stats": {
+            "amp_disruption_pct": 28.44,
+            "peak_fault_slip_m": 4.2
+          },
+          "legend": [
+            {
+              "label": "Rainbow Phase Cycle = 0.28 m Fault Offset",
+              "color": "#EC4899"
+            },
+            {
+              "label": "Bilateral Strike-Slip Shear Gradient",
+              "color": "#38BDF8"
+            }
+          ],
+          "source_id": "pc_s1_rtc"
+        },
+        {
+          "id": "crisis_tur_dmg",
+          "title": "Sentinel-1 Structural Damage Shift (|\u0394VV|)",
+          "role": "after",
+          "sensor": "Sentinel-1",
+          "band": "C-band (5.6 cm)",
+          "polarization": "VV",
+          "acquisition_date": "2023-02-09",
+          "granule_id": "S1A_IW_GRDH_1SDV_20230209T153423_20230209T153448_047161_05A88A_rtc",
+          "asset_path": "assets/crisis_tur_damage_shift.png",
+          "bbox": [
+            36.7,
+            37.25,
+            37.3,
+            37.75
+          ],
+          "stats": {
+            "p10_db": -11.65,
+            "median_db": -9.66,
+            "p90_db": -8.37
+          },
+          "legend": [
+            {
+              "label": "Severe Structural Shift (|\u0394VV| \u2265 3 dB)",
+              "color": "#EC4899"
+            },
+            {
+              "label": "Moderate Coherence Change (1.8..3 dB)",
+              "color": "#F472B6"
+            }
+          ],
+          "source_id": "pc_s1_rtc"
+        }
+      ]
+    },
+    {
+      "id": "canada_boreal_2023",
+      "scope": "global",
+      "name": "Canada Boreal Permafrost & Taiga Megafires",
+      "timing": "Jul 2023",
+      "timeline_month": "2023-07",
+      "color": "#FB7185",
+      "region_id": "global_can_quebec",
+      "bbox": [
+        -76.2,
+        53.05,
+        -75.2,
+        53.75
+      ],
+      "center": [
+        -75.7,
+        53.4
+      ],
+      "headline_metric": "3.67% boreal black-spruce canopy loss (\u0394VH \u2264 -3.2 dB)",
+      "summary": "During Canada's historic 2023 wildfire season (>15M ha burned nationally), continental smoke cloaked North America for weeks while Sentinel-1 C-band VH radar continuously mapped expanding James Bay & Quebec burn scars.",
+      "default_layer_id": "crisis_can_burn",
+      "sar_physics": {
+        "primary_sensitivity": "Boreal Canopy Loss + Peat/Permafrost Thaw Moisture",
+        "roughness_mechanism": "Loss of dense black spruce branches eliminates C-band cross-pol VH volume scattering.",
+        "dielectric_mechanism": "Removed insulating moss mat accelerates active-layer permafrost thaw, altering exposed bog soil moisture.",
+        "polarization_note": "Negative \u0394VH highlights tree death while post-fire HH/VV tracks wet charred peatland pockets.",
+        "frequency_comparison": "C-band tracks fine needle burn scars rapidly; NISAR L-band monitors multi-year subsidence as permafrost thaws."
+      },
+      "drivers": {
+        "natural_driver": "Early May snowmelt, spring lightning clusters, and persistent high-pressure Omega ridges over Quebec.",
+        "human_driver": "Arctic amplification warming (>2x global average) dried deep boreal organic peat layers."
+      },
+      "comparison_pair": {
+        "before_label": "Spring Pre-Fire Taiga (2023-05-05)",
+        "after_label": "Jul 2023 Megafire Scar (2023-07-16)",
+        "delta_summary": "3.67% severe crown loss beneath transcontinental smoke plumes",
+        "histogram": [
+          {
+            "range_db": "-24..-21",
+            "mid_db": -22.5,
+            "before_pct": 9.7,
+            "after_pct": 12.6
+          },
+          {
+            "range_db": "-21..-18",
+            "mid_db": -19.5,
+            "before_pct": 5.6,
+            "after_pct": 3.7
+          },
+          {
+            "range_db": "-18..-15",
+            "mid_db": -16.5,
+            "before_pct": 7.7,
+            "after_pct": 29.1
+          },
+          {
+            "range_db": "-15..-12",
+            "mid_db": -13.5,
+            "before_pct": 76.9,
+            "after_pct": 54.6
+          },
+          {
+            "range_db": "-12..-9",
+            "mid_db": -10.5,
+            "before_pct": 0.0,
+            "after_pct": 0.0
+          },
+          {
+            "range_db": "-9..-6",
+            "mid_db": -7.5,
+            "before_pct": 0.0,
+            "after_pct": 0.0
+          },
+          {
+            "range_db": "-6..-3",
+            "mid_db": -4.5,
+            "before_pct": 0.0,
+            "after_pct": 0.0
+          },
+          {
+            "range_db": "-3..0",
+            "mid_db": -1.5,
+            "before_pct": 0.0,
+            "after_pct": 0.0
+          },
+          {
+            "range_db": "0..3",
+            "mid_db": 1.5,
+            "before_pct": 0.0,
+            "after_pct": 0.0
+          }
+        ]
+      },
+      "layers": [
+        {
+          "id": "crisis_can_burn",
+          "title": "Quebec Boreal Crown Loss (\u0394VH)",
+          "role": "change",
+          "sensor": "Sentinel-1",
+          "band": "C-band (5.6 cm)",
+          "polarization": "\u0394VH",
+          "acquisition_date": "2023-07-16",
+          "granule_id": "S1A_IW_GRDH_1SDV_20230716T225452_20230716T225517_049455_05F26A_rtc",
+          "asset_path": "assets/crisis_can_boreal_burn.png",
+          "bbox": [
+            -76.2,
+            53.05,
+            -75.2,
+            53.75
+          ],
+          "stats": {
+            "severe_boreal_burn_pct": 3.67,
+            "moderate_burn_pct": 15.37
+          },
+          "legend": [
+            {
+              "label": "Severe Taiga Burn (\u0394VH \u2264 -3.2 dB)",
+              "color": "#FB7185"
+            },
+            {
+              "label": "Moderate Canopy Scorch (-3.2..-1.6 dB)",
+              "color": "#FB923C"
+            }
+          ],
+          "source_id": "pc_s1_rtc"
+        },
+        {
+          "id": "crisis_can_post",
+          "title": "Post-Fire C-Band VH Backscatter",
+          "role": "after",
+          "sensor": "Sentinel-1",
+          "band": "C-band (5.6 cm)",
+          "polarization": "VH",
+          "acquisition_date": "2023-07-16",
+          "granule_id": "S1A_IW_GRDH_1SDV_20230716T225452_20230716T225517_049455_05F26A_rtc",
+          "asset_path": "assets/crisis_can_post_vh.png",
+          "bbox": [
+            -76.2,
+            53.05,
+            -75.2,
+            53.75
+          ],
+          "stats": {
+            "p10_db": -22.96,
+            "median_db": -14.87,
+            "p90_db": -13.71
+          },
+          "legend": [
+            {
+              "label": "Burned Black Spruce (-22..-17 dB)",
+              "color": "#111827"
+            },
+            {
+              "label": "Unburned Taiga Mosaic (-13..-10 dB)",
+              "color": "#D1D5DB"
+            }
+          ],
+          "source_id": "pc_s1_rtc"
+        }
+      ]
+    },
+    {
+      "id": "antarctic_sea_ice_2023",
+      "scope": "global",
+      "name": "Antarctic Winter Sea-Ice Record Deficit",
+      "timing": "Sep 2023",
+      "timeline_month": "2023-09",
+      "color": "#7DD3FC",
+      "region_id": "global_ant_weddell",
+      "bbox": [
+        5.0,
+        -70.0,
+        35.0,
+        -55.0
+      ],
+      "center": [
+        20.0,
+        -62.5
+      ],
+      "headline_metric": "-15.15% missing Haakon VII / Weddell winter pack ice vs 2020-09 (6\u03c3 climate anomaly)",
+      "summary": "In September 2023\u2014supposed to be peak Austral winter freeze\u2014Antarctic sea ice fell >1.6 million km\u00b2 below its 1981\u20132010 maximum. Active SAR and passive microwave AMSR2 pierce polar night and Southern Ocean storms.",
+      "default_layer_id": "crisis_ant_deficit",
+      "sar_physics": {
+        "primary_sensitivity": "Brine-Salt Dielectric Change + Floe Ridge Roughness",
+        "roughness_mechanism": "Ridged deformed pack ice produces bright microwave scattering compared to dark wind-sheltered pancake/frazil leads.",
+        "dielectric_mechanism": "Seawater salt expulsion lowers first-year sea ice permittivity (\u03b5r ~3.5 vs ~80 open polar ocean).",
+        "polarization_note": "HH/HV SAR + AMSR2 brightness temperature cleanly separate drifting icebergs, thin leads, and perennial fast ice.",
+        "frequency_comparison": "NISAR L-band (24 cm) penetrates surface snow metamorphism to map sea-ice motion & calving continuously at polar night."
+      },
+      "drivers": {
+        "natural_driver": "Warm subsurface Southern Ocean circumpolar upwelling & poleward storm heat transport.",
+        "human_driver": "Long-term ocean heat uptake destabilized the winter refreeze feedback after 2016."
+      },
+      "comparison_pair": {
+        "before_label": "Normal Winter Peak (AMSR2 2020-09-15)",
+        "after_label": "Record Winter Deficit (AMSR2 2023-09-15)",
+        "delta_summary": "15.15% of the Haakon VII / Weddell marginal ice belt remained unfrozen open ocean at winter max",
+        "histogram": [
+          {
+            "range_db": "-24..-21",
+            "mid_db": -22.5,
+            "before_pct": 1.6,
+            "after_pct": 4.0
+          },
+          {
+            "range_db": "-21..-18",
+            "mid_db": -19.5,
+            "before_pct": 8.2,
+            "after_pct": 20.9
+          },
+          {
+            "range_db": "-18..-15",
+            "mid_db": -16.5,
+            "before_pct": 0.2,
+            "after_pct": 0.4
+          },
+          {
+            "range_db": "-15..-12",
+            "mid_db": -13.5,
+            "before_pct": 1.4,
+            "after_pct": 0.8
+          },
+          {
+            "range_db": "-12..-9",
+            "mid_db": -10.5,
+            "before_pct": 2.9,
+            "after_pct": 1.6
+          },
+          {
+            "range_db": "-9..-6",
+            "mid_db": -7.5,
+            "before_pct": 62.5,
+            "after_pct": 52.8
+          },
+          {
+            "range_db": "-6..-3",
+            "mid_db": -4.5,
+            "before_pct": 23.2,
+            "after_pct": 19.5
+          },
+          {
+            "range_db": "-3..0",
+            "mid_db": -1.5,
+            "before_pct": 0.0,
+            "after_pct": 0.0
+          },
+          {
+            "range_db": "0..3",
+            "mid_db": 1.5,
+            "before_pct": 0.0,
+            "after_pct": 0.0
+          }
+        ]
+      },
+      "layers": [
+        {
+          "id": "crisis_ant_deficit",
+          "title": "Sep 2023 Missing Sea-Ice Anomaly (vs 2020)",
+          "role": "change",
+          "sensor": "AMSR2 / SAR Eq.",
+          "band": "18\u201389 GHz & L-band",
+          "polarization": "Ice Conc \u0394",
+          "acquisition_date": "2023-09-15",
+          "granule_id": "AMSRU2_20230915_vs_20200915",
+          "asset_path": "assets/crisis_ant_sea_ice_deficit.png",
+          "bbox": [
+            5.0,
+            -70.0,
+            35.0,
+            -55.0
+          ],
+          "stats": {
+            "missing_pack_ice_pct": 15.15,
+            "retained_ice_pct": 74.67
+          },
+          "legend": [
+            {
+              "label": "Missing Winter Pack Ice vs 2020",
+              "color": "#F43F5E"
+            },
+            {
+              "label": "Marginal Thin Ice (<40%)",
+              "color": "#38BDF8"
+            },
+            {
+              "label": "Retained Consolidated Ice Pack",
+              "color": "#E0F2FE"
+            }
+          ],
+          "source_id": "amsru2_ice"
+        },
+        {
+          "id": "crisis_ant_sep23",
+          "title": "AMSR2 Sep 2023 Sea-Ice Concentration",
+          "role": "after",
+          "sensor": "JAXA AMSR2 (GIBS)",
+          "band": "Microwave",
+          "polarization": "SIC 0\u2013100%",
+          "acquisition_date": "2023-09-15",
+          "granule_id": "AMSRU2_Sea_Ice_20230915",
+          "asset_path": "assets/crisis_ant_sep2023_ice.png",
+          "bbox": [
+            5.0,
+            -70.0,
+            35.0,
+            -55.0
+          ],
+          "stats": {
+            "p10_db": -20.62,
+            "median_db": -6.56,
+            "p90_db": -5.76
+          },
+          "legend": [
+            {
+              "label": "Dense Pack Ice (>75%)",
+              "color": "#E0F2FE"
+            },
+            {
+              "label": "Broken Floe Margin (15\u201350%)",
+              "color": "#38BDF8"
+            }
+          ],
+          "source_id": "amsru2_ice"
+        }
+      ]
+    },
+    {
       "id": "severe_drought_2023",
       "name": "Severe drought",
       "timing": "Sep - Nov 2023",
@@ -3620,7 +4763,8 @@
           ],
           "source_id": "pc_s1_rtc"
         }
-      ]
+      ],
+      "scope": "amazon"
     },
     {
       "id": "drought_fires_2024",
@@ -3858,7 +5002,8 @@
           ],
           "source_id": "pc_s1_rtc"
         }
-      ]
+      ],
+      "scope": "amazon"
     },
     {
       "id": "nisar_lband_2026",
@@ -4154,7 +5299,8 @@
           ],
           "source_id": "nisar_gcov_v1"
         }
-      ]
+      ],
+      "scope": "amazon"
     }
   ],
   "sources": [
@@ -4219,6 +5365,20 @@
       "title": "NASA SMAP Level-4 Analyzed Surface Soil Moisture (GIBS 2020\u20132026 Monthly L-Band Radiometer)",
       "url": "https://smap.jpl.nasa.gov/",
       "publisher": "NASA GIBS / NSIDC DAAC",
+      "accessed": "2026-11-14"
+    },
+    {
+      "id": "smap_ft",
+      "title": "NASA SMAP L3 Radiometer Global Daily Freeze/Thaw State (GIBS 2020\u20132026)",
+      "url": "https://smap.jpl.nasa.gov/",
+      "publisher": "NASA GIBS / NSIDC DAAC",
+      "accessed": "2026-11-14"
+    },
+    {
+      "id": "amsru2_ice",
+      "title": "JAXA GCOM-W1 AMSR2 Sea Ice Concentration 12km (NASA GIBS 2020\u20132026 Polar Cryosphere)",
+      "url": "https://earthdata.nasa.gov/",
+      "publisher": "NASA GIBS / JAXA",
       "accessed": "2026-11-14"
     }
   ]
