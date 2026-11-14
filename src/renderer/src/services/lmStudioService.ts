@@ -4,6 +4,13 @@ import type { SarOverlayLayer, TimelineMonthPoint } from '../types/sar'
 export const LM_STUDIO_DEFAULT_URL = 'http://127.0.0.1:1234'
 export const LM_STUDIO_DEFAULT_MODEL = 'qwen2.5-3b-instruct'
 
+export function normalizeLmStudioBaseUrl(rawUrl?: string): string {
+  const trimmed = (rawUrl || LM_STUDIO_DEFAULT_URL).trim().replace(/\/+$/, '')
+  if (!trimmed) return LM_STUDIO_DEFAULT_URL
+  if (/^https?:\/\//i.test(trimmed)) return trimmed
+  return `http://${trimmed}`
+}
+
 export type LmStudioStatus = 'idle' | 'checking' | 'ready' | 'fallback' | 'error'
 
 export interface SarChatContext {

@@ -29,6 +29,11 @@ import {
   PREDEFINED_STUDY_AREAS,
   renderSarsDataOverlayPng
 } from '../services/sarsDataApi'
+import {
+  checkLmStudioConnection,
+  LM_STUDIO_DEFAULT_URL,
+  normalizeLmStudioBaseUrl
+} from '../services/lmStudioService'
 import type { EventRecord, WidgetVisibilityState } from '../types/phenomenon'
 import { DashboardHeader } from './dashboard/DashboardHeader'
 import { HistoricalTimeline } from './dashboard/HistoricalTimeline'
@@ -280,6 +285,12 @@ export function GlobeViewer(): React.JSX.Element {
   // Custom SARs-Data API state (preserving sarsDataApi.ts integration)
   const [customApiBaseUrl, setCustomApiBaseUrl] = useState<string>('http://localhost:8000')
   const [backendConnected, setBackendConnected] = useState<boolean | null>(null)
+
+  // Local AI Model (LM Studio) endpoint state
+  const [localModelBaseUrl, setLocalModelBaseUrl] = useState<string>(LM_STUDIO_DEFAULT_URL)
+  const [activeLocalModelBaseUrl, setActiveLocalModelBaseUrl] =
+    useState<string>(LM_STUDIO_DEFAULT_URL)
+  const [localModelConnected, setLocalModelConnected] = useState<boolean | null>(null)
 
   // Separate Custom API Overlay Feed state
   const [customOverlayUrl, setCustomOverlayUrl] = useState<string>('')
@@ -1419,6 +1430,15 @@ export function GlobeViewer(): React.JSX.Element {
       .catch(() => setBackendConnected(false))
   }
 
+  const handleApplyLocalModelUrl = (): void => {
+    const normalized = normalizeLmStudioBaseUrl(localModelBaseUrl)
+    setLocalModelBaseUrl(normalized)
+    setActiveLocalModelBaseUrl(normalized)
+    checkLmStudioConnection(normalized)
+      .then((res) => setLocalModelConnected(res.ok))
+      .catch(() => setLocalModelConnected(false))
+  }
+
   return (
     <div className={`globe-stage ${uiLightTheme ? 'sars-theme-light' : 'sars-theme-dark'}`}>
       {/* Fullscreen 3D Cesium Canvas */}
@@ -1496,7 +1516,11 @@ export function GlobeViewer(): React.JSX.Element {
           customOverlayLoading,
           customOverlayStatus,
           onToggleLegacyDemoOverlay: handleToggleLegacyDemoOverlay,
-          legacyDemoOverlayActive: isDemoFallbackActive
+          legacyDemoOverlayActive: isDemoFallbackActive,
+          localModelBaseUrl,
+          onChangeLocalModelBaseUrl: setLocalModelBaseUrl,
+          onApplyLocalModelBaseUrl: handleApplyLocalModelUrl,
+          localModelConnected
         }}
       />
 
@@ -1858,6 +1882,8 @@ export function GlobeViewer(): React.JSX.Element {
         activeEventLayer={activeEventLayer}
         timeline={timeline}
         allEvents={allEvents}
+        lmStudioBaseUrl={activeLocalModelBaseUrl}
+        onConnectionStatusChange={setLocalModelConnected}
       />
 
       {/* SCIENTIFIC REPORT MODAL */}

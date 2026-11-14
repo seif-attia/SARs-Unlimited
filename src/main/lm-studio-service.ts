@@ -28,7 +28,9 @@ const activeStreams = new Map<string, AbortController>()
 
 function normalizeBaseUrl(rawUrl?: string): string {
   const trimmed = (rawUrl || DEFAULT_LM_STUDIO_URL).trim().replace(/\/+$/, '')
-  return trimmed || DEFAULT_LM_STUDIO_URL
+  if (!trimmed) return DEFAULT_LM_STUDIO_URL
+  if (/^https?:\/\//i.test(trimmed)) return trimmed
+  return `http://${trimmed}`
 }
 
 function pickPreferredModel(models: string[], requestedModel?: string): string {

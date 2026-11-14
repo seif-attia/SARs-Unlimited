@@ -18,6 +18,7 @@ import {
   checkLmStudioConnection,
   generateAiChatResponse,
   LM_STUDIO_DEFAULT_MODEL,
+  LM_STUDIO_DEFAULT_URL,
   type ChatTurnInput,
   type LmStudioStatus,
   type SarChatContext
@@ -31,6 +32,8 @@ export interface AiHelpSidebarProps {
   activeEventLayer: SarOverlayLayer | null
   timeline: TimelineSelectionState
   allEvents: EventRecord[]
+  lmStudioBaseUrl?: string
+  onConnectionStatusChange?: (connected: boolean) => void
 }
 
 interface ChatMessage {
@@ -139,7 +142,9 @@ export const AiHelpSidebar: React.FC<AiHelpSidebarProps> = ({
   selectedEvent,
   activeEventLayer,
   timeline,
-  allEvents
+  allEvents,
+  lmStudioBaseUrl = LM_STUDIO_DEFAULT_URL,
+  onConnectionStatusChange
 }) => {
   const [messages, setMessages] = useState<ChatMessage[]>([INITIAL_WELCOME_MESSAGE])
   const [inputValue, setInputValue] = useState<string>('')
@@ -174,19 +179,25 @@ export const AiHelpSidebar: React.FC<AiHelpSidebarProps> = ({
 
   const checkLmStudioServer = useCallback(async () => {
     setEngineStatus('checking')
-    const health = await checkLmStudioConnection()
+    const health = await checkLmStudioConnection(lmStudioBaseUrl)
     if (health.ok) {
       setEngineStatus('ready')
       setActiveModel(health.activeModel || LM_STUDIO_DEFAULT_MODEL)
       setEngineError(null)
+      onConnectionStatusChange?.(true)
     } else {
       setEngineStatus('fallback')
       setEngineError(
         health.error ||
-          'Model is not connected. Make sure LM Studio Local Server is running on port 1234.'
+          `Model is not connected. Make sure LM Studio Local Server is running at ${lmStudioBaseUrl}.`
       )
+      onConnectionStatusChange?.(false)
     }
-  }, [])
+  }, [lmStudioBaseUrl, onConnectionStatusChange])
+
+  useEffect(() => {
+    hasAutoCheckedRef.current = false
+  }, [lmStudioBaseUrl])
 
   // Check LM Studio connection when the sidebar is opened
   useEffect(() => {
@@ -253,6 +264,7 @@ export const AiHelpSidebar: React.FC<AiHelpSidebarProps> = ({
           history: historyForModel,
           userMessage: text,
           context: sarContext,
+          baseUrl: lmStudioBaseUrl,
           model: activeModel,
           signal: controller.signal,
           onToken: (partial) => {
@@ -292,7 +304,7 @@ export const AiHelpSidebar: React.FC<AiHelpSidebarProps> = ({
         setIsGenerating(false)
       }
     },
-    [activeModel, inputValue, isGenerating, isModelConnected, messages, sarContext]
+    [activeModel, inputValue, isGenerating, isModelConnected, lmStudioBaseUrl, messages, sarContext]
   )
 
   const handleClearChat = useCallback(() => {
