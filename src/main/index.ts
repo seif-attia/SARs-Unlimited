@@ -2,15 +2,29 @@ import { app, shell, BrowserWindow, ipcMain } from 'electron'
 import { join } from 'path'
 import { electronApp, optimizer, is } from '@electron-toolkit/utils'
 import icon from '../../resources/icon.png?asset'
+import { getAssetDataUrl, getDataset } from './dataset-service'
+import {
+  abortLmStudioChat,
+  checkLmStudioHealth,
+  streamLmStudioChat,
+  type LmStudioChatPayload
+} from './lm-studio-service'
+
+// Prevent Windows GPU shader disk cache lock errors (0x5 Access is denied)
+app.commandLine.appendSwitch('disable-gpu-shader-disk-cache')
 
 function createWindow(): void {
   // Create the browser window.
   const mainWindow = new BrowserWindow({
-    width: 900,
-    height: 670,
+    width: 1440,
+    height: 900,
+    minWidth: 1080,
+    minHeight: 700,
+    backgroundColor: '#040711',
+    title: 'SARs Unlimited — NASA Space Apps 2026',
     show: false,
     autoHideMenuBar: true,
-    ...(process.platform === 'linux' ? { icon } : {}),
+    ...(process.platform !== 'darwin' ? { icon } : {}),
     webPreferences: {
       preload: join(__dirname, '../preload/index.js'),
       sandbox: false
@@ -51,6 +65,15 @@ app.whenReady().then(() => {
 
   // IPC test
   ipcMain.on('ping', () => console.log('pong'))
+
+  ipcMain.handle('sar:get-dataset', () => getDataset())
+  ipcMain.handle('sar:get-asset-data-url', (_, relPath: string) => getAssetDataUrl(relPath))
+
+  ipcMain.handle('ai:check-health', (_, baseUrl?: string) => checkLmStudioHealth(baseUrl))
+  ipcMain.handle('ai:start-chat', (event, requestId: string, payload: LmStudioChatPayload) =>
+    streamLmStudioChat(event.sender, requestId, payload)
+  )
+  ipcMain.handle('ai:abort-chat', (_, requestId: string) => abortLmStudioChat(requestId))
 
   createWindow()
 
