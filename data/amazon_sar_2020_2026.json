@@ -1,0 +1,3770 @@
+{
+  "schema_version": "2.0.0",
+  "title": "Dancing with the SARs \u2014 Amazon Rainforest Surface Change Atlas (2020\u20132026)",
+  "challenge_url": "https://www.spaceappschallenge.org/2026/challenges/dancing-with-the-sars/",
+  "generated_at": "2026-11-14T00:36:48Z",
+  "temporal_range": {
+    "start": "2020-01-01",
+    "end": "2026-12-31",
+    "observed_end": "2026-11-13"
+  },
+  "regions": {
+    "manaus": {
+      "id": "manaus",
+      "name": "Manaus \u2014 Rio Negro / Solim\u00f5es Confluence",
+      "country": "Brazil",
+      "state": "Amazonas",
+      "bbox": [
+        -60.35,
+        -3.35,
+        -59.7,
+        -2.95
+      ],
+      "center": [
+        -60.025,
+        -3.15
+      ],
+      "glofas_coord": [
+        -59.9,
+        -3.13
+      ],
+      "river": "Rio Negro / Rio Solim\u00f5es / Amazonas",
+      "typical_flood_season": "May\u2013Jun (peak ~Jun)",
+      "typical_low_water_season": "Sep\u2013Nov (lowest ~Oct)",
+      "why": "Anchor gauge for the record June 2021 flood (30.02 m), 2023 drought (12.70 m), 2024 historic low (12.11 m), and real 2026 NISAR L-band Track 140 acquisitions capturing seasonal flood vs. dry transition over flooded igap\u00f3 forest.",
+      "area_km2": 3195.7
+    },
+    "porto_velho": {
+      "id": "porto_velho",
+      "name": "Porto Velho \u2014 Middle Madeira River Floodplain",
+      "country": "Brazil",
+      "state": "Rond\u00f4nia / Amazonas",
+      "bbox": [
+        -64.05,
+        -8.9,
+        -63.7,
+        -8.55
+      ],
+      "center": [
+        -63.875,
+        -8.725
+      ],
+      "glofas_coord": [
+        -63.875,
+        -8.625
+      ],
+      "river": "Rio Madeira",
+      "typical_flood_season": "Mar\u2013Apr (southern tributary flood wave)",
+      "typical_low_water_season": "Aug\u2013Oct (lowest ~Sep/Oct)",
+      "why": "Southern Amazon tributary where the seasonal flood wave peaks in Mar\u2013Apr\u2014two months before Manaus\u2014and where Oct dry-season lows expose extensive rocky/sandy shoals.",
+      "area_km2": 1490.9
+    },
+    "tefe": {
+      "id": "tefe",
+      "name": "Lake Tef\u00e9 & Mamirau\u00e1 V\u00e1rzea (Middle Solim\u00f5es)",
+      "country": "Brazil",
+      "state": "Amazonas",
+      "bbox": [
+        -64.85,
+        -3.45,
+        -64.55,
+        -3.2
+      ],
+      "center": [
+        -64.7,
+        -3.325
+      ],
+      "glofas_coord": [
+        -64.7,
+        -3.3
+      ],
+      "river": "Rio Solim\u00f5es / Lake Tef\u00e9",
+      "typical_flood_season": "Apr\u2013Jun",
+      "typical_low_water_season": "Sep\u2013Nov",
+      "why": "Epicentre of the Sep\u2013Nov 2023 severe drought crisis (lake contraction and 39.1 \u00b0C water) next to Mamirau\u00e1 v\u00e1rzea flooded forest.",
+      "area_km2": 921.7
+    },
+    "apui_labrea": {
+      "id": "apui_labrea",
+      "name": "Apu\u00ed\u2013L\u00e1brea Deforestation & Fire Frontier (BR-230)",
+      "country": "Brazil",
+      "state": "Amazonas",
+      "bbox": [
+        -60.5,
+        -8.5,
+        -58.5,
+        -6.5
+      ],
+      "sar_clearing_bbox": [
+        -60.0,
+        -7.5,
+        -59.5,
+        -7.0
+      ],
+      "center": [
+        -59.75,
+        -7.25
+      ],
+      "glofas_coord": [
+        -59.5,
+        -7.5
+      ],
+      "river": "Aripuan\u00e3 / Madeira Tributaries & BR-230 Highway",
+      "typical_flood_season": "Jan\u2013Apr",
+      "typical_low_water_season": "Jul\u2013Oct (land clearing & fire window)",
+      "why": "Active human-driven frontier showing Jun\u2013Oct geometric forest clearing followed by Aug\u2013Oct slash burning through thick smoke plumes using all-weather C- and L-band SAR.",
+      "area_km2": 48828.5
+    }
+  },
+  "timeline": {
+    "months": [
+      {
+        "month": "2020-01",
+        "year": 2020,
+        "month_num": 1,
+        "discharge_manaus_m3s": 165639.9,
+        "discharge_porto_velho_m3s": 36054.0,
+        "precip_mm": 167.2,
+        "fire_hotspots_amazon": 223,
+        "s1_scenes": 844,
+        "nisar_scenes": 0,
+        "active_phenomena": [
+          "rainy_season"
+        ],
+        "event_id": null
+      },
+      {
+        "month": "2020-02",
+        "year": 2020,
+        "month_num": 2,
+        "discharge_manaus_m3s": 136510.8,
+        "discharge_porto_velho_m3s": 38929.0,
+        "precip_mm": 120.8,
+        "fire_hotspots_amazon": 129,
+        "s1_scenes": 781,
+        "nisar_scenes": 0,
+        "active_phenomena": [
+          "rainy_season"
+        ],
+        "event_id": null
+      },
+      {
+        "month": "2020-03",
+        "year": 2020,
+        "month_num": 3,
+        "discharge_manaus_m3s": 144433.1,
+        "discharge_porto_velho_m3s": 35828.4,
+        "precip_mm": 270.7,
+        "fire_hotspots_amazon": 378,
+        "s1_scenes": 861,
+        "nisar_scenes": 0,
+        "active_phenomena": [
+          "rainy_season",
+          "seasonal_flood"
+        ],
+        "event_id": null
+      },
+      {
+        "month": "2020-04",
+        "year": 2020,
+        "month_num": 4,
+        "discharge_manaus_m3s": 173095.0,
+        "discharge_porto_velho_m3s": 29469.0,
+        "precip_mm": 276.9,
+        "fire_hotspots_amazon": 190,
+        "s1_scenes": 862,
+        "nisar_scenes": 0,
+        "active_phenomena": [
+          "rainy_season",
+          "seasonal_flood"
+        ],
+        "event_id": null
+      },
+      {
+        "month": "2020-05",
+        "year": 2020,
+        "month_num": 5,
+        "discharge_manaus_m3s": 188991.6,
+        "discharge_porto_velho_m3s": 19026.2,
+        "precip_mm": 277.1,
+        "fire_hotspots_amazon": 666,
+        "s1_scenes": 833,
+        "nisar_scenes": 0,
+        "active_phenomena": [
+          "rainy_season",
+          "seasonal_flood"
+        ],
+        "event_id": null
+      },
+      {
+        "month": "2020-06",
+        "year": 2020,
+        "month_num": 6,
+        "discharge_manaus_m3s": 174500.6,
+        "discharge_porto_velho_m3s": 11555.8,
+        "precip_mm": 105.8,
+        "fire_hotspots_amazon": 2412,
+        "s1_scenes": 839,
+        "nisar_scenes": 0,
+        "active_phenomena": [
+          "seasonal_flood",
+          "dry_season",
+          "clearing_land_opening"
+        ],
+        "event_id": null
+      },
+      {
+        "month": "2020-07",
+        "year": 2020,
+        "month_num": 7,
+        "discharge_manaus_m3s": 151511.9,
+        "discharge_porto_velho_m3s": 8367.8,
+        "precip_mm": 41.6,
+        "fire_hotspots_amazon": 4948,
+        "s1_scenes": 834,
+        "nisar_scenes": 0,
+        "active_phenomena": [
+          "dry_season",
+          "clearing_land_opening"
+        ],
+        "event_id": null
+      },
+      {
+        "month": "2020-08",
+        "year": 2020,
+        "month_num": 8,
+        "discharge_manaus_m3s": 103692.8,
+        "discharge_porto_velho_m3s": 7229.5,
+        "precip_mm": 19.4,
+        "fire_hotspots_amazon": 16877,
+        "s1_scenes": 864,
+        "nisar_scenes": 0,
+        "active_phenomena": [
+          "dry_season",
+          "clearing_land_opening",
+          "fire_season",
+          "low_river_levels"
+        ],
+        "event_id": null
+      },
+      {
+        "month": "2020-09",
+        "year": 2020,
+        "month_num": 9,
+        "discharge_manaus_m3s": 73577.6,
+        "discharge_porto_velho_m3s": 5677.0,
+        "precip_mm": 71.2,
+        "fire_hotspots_amazon": 33586,
+        "s1_scenes": 837,
+        "nisar_scenes": 0,
+        "active_phenomena": [
+          "dry_season",
+          "clearing_land_opening",
+          "fire_season",
+          "low_river_levels"
+        ],
+        "event_id": null
+      },
+      {
+        "month": "2020-10",
+        "year": 2020,
+        "month_num": 10,
+        "discharge_manaus_m3s": 65395.7,
+        "discharge_porto_velho_m3s": 4559.2,
+        "precip_mm": 59.8,
+        "fire_hotspots_amazon": 15620,
+        "s1_scenes": 863,
+        "nisar_scenes": 0,
+        "active_phenomena": [
+          "dry_season",
+          "clearing_land_opening",
+          "fire_season",
+          "low_river_levels"
+        ],
+        "event_id": null
+      },
+      {
+        "month": "2020-11",
+        "year": 2020,
+        "month_num": 11,
+        "discharge_manaus_m3s": 68528.3,
+        "discharge_porto_velho_m3s": 7223.7,
+        "precip_mm": 173.0,
+        "fire_hotspots_amazon": 3353,
+        "s1_scenes": 811,
+        "nisar_scenes": 0,
+        "active_phenomena": [],
+        "event_id": null
+      },
+      {
+        "month": "2020-12",
+        "year": 2020,
+        "month_num": 12,
+        "discharge_manaus_m3s": 107744.2,
+        "discharge_porto_velho_m3s": 12407.1,
+        "precip_mm": 226.7,
+        "fire_hotspots_amazon": 1471,
+        "s1_scenes": 814,
+        "nisar_scenes": 0,
+        "active_phenomena": [
+          "rainy_season"
+        ],
+        "event_id": null
+      },
+      {
+        "month": "2021-01",
+        "year": 2021,
+        "month_num": 1,
+        "discharge_manaus_m3s": 150268.1,
+        "discharge_porto_velho_m3s": 29248.7,
+        "precip_mm": 213.0,
+        "fire_hotspots_amazon": 215,
+        "s1_scenes": 863,
+        "nisar_scenes": 0,
+        "active_phenomena": [
+          "rainy_season"
+        ],
+        "event_id": null
+      },
+      {
+        "month": "2021-02",
+        "year": 2021,
+        "month_num": 2,
+        "discharge_manaus_m3s": 165805.3,
+        "discharge_porto_velho_m3s": 39950.6,
+        "precip_mm": 232.3,
+        "fire_hotspots_amazon": 130,
+        "s1_scenes": 778,
+        "nisar_scenes": 0,
+        "active_phenomena": [
+          "rainy_season"
+        ],
+        "event_id": null
+      },
+      {
+        "month": "2021-03",
+        "year": 2021,
+        "month_num": 3,
+        "discharge_manaus_m3s": 185713.3,
+        "discharge_porto_velho_m3s": 38351.9,
+        "precip_mm": 340.2,
+        "fire_hotspots_amazon": 116,
+        "s1_scenes": 839,
+        "nisar_scenes": 0,
+        "active_phenomena": [
+          "rainy_season",
+          "seasonal_flood"
+        ],
+        "event_id": null
+      },
+      {
+        "month": "2021-04",
+        "year": 2021,
+        "month_num": 4,
+        "discharge_manaus_m3s": 220844.7,
+        "discharge_porto_velho_m3s": 36173.8,
+        "precip_mm": 277.8,
+        "fire_hotspots_amazon": 154,
+        "s1_scenes": 834,
+        "nisar_scenes": 0,
+        "active_phenomena": [
+          "rainy_season",
+          "seasonal_flood"
+        ],
+        "event_id": null
+      },
+      {
+        "month": "2021-05",
+        "year": 2021,
+        "month_num": 5,
+        "discharge_manaus_m3s": 218331.2,
+        "discharge_porto_velho_m3s": 21551.0,
+        "precip_mm": 159.9,
+        "fire_hotspots_amazon": 1209,
+        "s1_scenes": 866,
+        "nisar_scenes": 0,
+        "active_phenomena": [
+          "rainy_season",
+          "seasonal_flood"
+        ],
+        "event_id": null
+      },
+      {
+        "month": "2021-06",
+        "year": 2021,
+        "month_num": 6,
+        "discharge_manaus_m3s": 198457.0,
+        "discharge_porto_velho_m3s": 12230.2,
+        "precip_mm": 106.4,
+        "fire_hotspots_amazon": 2807,
+        "s1_scenes": 803,
+        "nisar_scenes": 0,
+        "active_phenomena": [
+          "seasonal_flood",
+          "dry_season",
+          "clearing_land_opening"
+        ],
+        "event_id": "manaus_flood_2021"
+      },
+      {
+        "month": "2021-07",
+        "year": 2021,
+        "month_num": 7,
+        "discharge_manaus_m3s": 152564.3,
+        "discharge_porto_velho_m3s": 8031.3,
+        "precip_mm": 78.4,
+        "fire_hotspots_amazon": 4579,
+        "s1_scenes": 810,
+        "nisar_scenes": 0,
+        "active_phenomena": [
+          "dry_season",
+          "clearing_land_opening"
+        ],
+        "event_id": null
+      },
+      {
+        "month": "2021-08",
+        "year": 2021,
+        "month_num": 8,
+        "discharge_manaus_m3s": 109670.3,
+        "discharge_porto_velho_m3s": 4966.0,
+        "precip_mm": 81.3,
+        "fire_hotspots_amazon": 27857,
+        "s1_scenes": 888,
+        "nisar_scenes": 0,
+        "active_phenomena": [
+          "dry_season",
+          "clearing_land_opening",
+          "fire_season",
+          "low_river_levels"
+        ],
+        "event_id": null
+      },
+      {
+        "month": "2021-09",
+        "year": 2021,
+        "month_num": 9,
+        "discharge_manaus_m3s": 83380.9,
+        "discharge_porto_velho_m3s": 4711.8,
+        "precip_mm": 59.4,
+        "fire_hotspots_amazon": 16531,
+        "s1_scenes": 879,
+        "nisar_scenes": 0,
+        "active_phenomena": [
+          "dry_season",
+          "clearing_land_opening",
+          "fire_season",
+          "low_river_levels"
+        ],
+        "event_id": null
+      },
+      {
+        "month": "2021-10",
+        "year": 2021,
+        "month_num": 10,
+        "discharge_manaus_m3s": 77640.6,
+        "discharge_porto_velho_m3s": 4853.7,
+        "precip_mm": 89.0,
+        "fire_hotspots_amazon": 7498,
+        "s1_scenes": 842,
+        "nisar_scenes": 0,
+        "active_phenomena": [
+          "dry_season",
+          "clearing_land_opening",
+          "fire_season",
+          "low_river_levels"
+        ],
+        "event_id": null
+      },
+      {
+        "month": "2021-11",
+        "year": 2021,
+        "month_num": 11,
+        "discharge_manaus_m3s": 92466.4,
+        "discharge_porto_velho_m3s": 9221.0,
+        "precip_mm": 189.8,
+        "fire_hotspots_amazon": 2048,
+        "s1_scenes": 796,
+        "nisar_scenes": 0,
+        "active_phenomena": [],
+        "event_id": null
+      },
+      {
+        "month": "2021-12",
+        "year": 2021,
+        "month_num": 12,
+        "discharge_manaus_m3s": 122156.5,
+        "discharge_porto_velho_m3s": 23352.2,
+        "precip_mm": 264.5,
+        "fire_hotspots_amazon": 390,
+        "s1_scenes": 708,
+        "nisar_scenes": 0,
+        "active_phenomena": [
+          "rainy_season"
+        ],
+        "event_id": null
+      },
+      {
+        "month": "2022-01",
+        "year": 2022,
+        "month_num": 1,
+        "discharge_manaus_m3s": 123464.2,
+        "discharge_porto_velho_m3s": 26755.7,
+        "precip_mm": 219.6,
+        "fire_hotspots_amazon": 388,
+        "s1_scenes": 405,
+        "nisar_scenes": 0,
+        "active_phenomena": [
+          "rainy_season"
+        ],
+        "event_id": null
+      },
+      {
+        "month": "2022-02",
+        "year": 2022,
+        "month_num": 2,
+        "discharge_manaus_m3s": 129278.9,
+        "discharge_porto_velho_m3s": 31760.8,
+        "precip_mm": 281.3,
+        "fire_hotspots_amazon": 79,
+        "s1_scenes": 376,
+        "nisar_scenes": 0,
+        "active_phenomena": [
+          "rainy_season"
+        ],
+        "event_id": null
+      },
+      {
+        "month": "2022-03",
+        "year": 2022,
+        "month_num": 3,
+        "discharge_manaus_m3s": 184874.3,
+        "discharge_porto_velho_m3s": 33713.6,
+        "precip_mm": 321.6,
+        "fire_hotspots_amazon": 116,
+        "s1_scenes": 462,
+        "nisar_scenes": 0,
+        "active_phenomena": [
+          "rainy_season",
+          "seasonal_flood"
+        ],
+        "event_id": null
+      },
+      {
+        "month": "2022-04",
+        "year": 2022,
+        "month_num": 4,
+        "discharge_manaus_m3s": 229001.0,
+        "discharge_porto_velho_m3s": 29021.4,
+        "precip_mm": 205.6,
+        "fire_hotspots_amazon": 560,
+        "s1_scenes": 469,
+        "nisar_scenes": 0,
+        "active_phenomena": [
+          "rainy_season",
+          "seasonal_flood"
+        ],
+        "event_id": null
+      },
+      {
+        "month": "2022-05",
+        "year": 2022,
+        "month_num": 5,
+        "discharge_manaus_m3s": 221884.9,
+        "discharge_porto_velho_m3s": 15166.6,
+        "precip_mm": 160.4,
+        "fire_hotspots_amazon": 2578,
+        "s1_scenes": 476,
+        "nisar_scenes": 0,
+        "active_phenomena": [
+          "rainy_season",
+          "seasonal_flood"
+        ],
+        "event_id": null
+      },
+      {
+        "month": "2022-06",
+        "year": 2022,
+        "month_num": 6,
+        "discharge_manaus_m3s": 190203.3,
+        "discharge_porto_velho_m3s": 10121.5,
+        "precip_mm": 133.5,
+        "fire_hotspots_amazon": 3299,
+        "s1_scenes": 453,
+        "nisar_scenes": 0,
+        "active_phenomena": [
+          "seasonal_flood",
+          "dry_season",
+          "clearing_land_opening"
+        ],
+        "event_id": null
+      },
+      {
+        "month": "2022-07",
+        "year": 2022,
+        "month_num": 7,
+        "discharge_manaus_m3s": 148639.3,
+        "discharge_porto_velho_m3s": 5829.1,
+        "precip_mm": 38.7,
+        "fire_hotspots_amazon": 5922,
+        "s1_scenes": 471,
+        "nisar_scenes": 0,
+        "active_phenomena": [
+          "dry_season",
+          "clearing_land_opening"
+        ],
+        "event_id": null
+      },
+      {
+        "month": "2022-08",
+        "year": 2022,
+        "month_num": 8,
+        "discharge_manaus_m3s": 118483.6,
+        "discharge_porto_velho_m3s": 5750.0,
+        "precip_mm": 34.0,
+        "fire_hotspots_amazon": 28078,
+        "s1_scenes": 471,
+        "nisar_scenes": 0,
+        "active_phenomena": [
+          "dry_season",
+          "clearing_land_opening",
+          "fire_season",
+          "low_river_levels"
+        ],
+        "event_id": null
+      },
+      {
+        "month": "2022-09",
+        "year": 2022,
+        "month_num": 9,
+        "discharge_manaus_m3s": 84701.3,
+        "discharge_porto_velho_m3s": 5172.8,
+        "precip_mm": 30.7,
+        "fire_hotspots_amazon": 33590,
+        "s1_scenes": 489,
+        "nisar_scenes": 0,
+        "active_phenomena": [
+          "dry_season",
+          "clearing_land_opening",
+          "fire_season",
+          "low_river_levels"
+        ],
+        "event_id": null
+      },
+      {
+        "month": "2022-10",
+        "year": 2022,
+        "month_num": 10,
+        "discharge_manaus_m3s": 63259.4,
+        "discharge_porto_velho_m3s": 6390.1,
+        "precip_mm": 79.5,
+        "fire_hotspots_amazon": 10795,
+        "s1_scenes": 503,
+        "nisar_scenes": 0,
+        "active_phenomena": [
+          "dry_season",
+          "clearing_land_opening",
+          "fire_season",
+          "low_river_levels"
+        ],
+        "event_id": null
+      },
+      {
+        "month": "2022-11",
+        "year": 2022,
+        "month_num": 11,
+        "discharge_manaus_m3s": 81890.0,
+        "discharge_porto_velho_m3s": 6722.2,
+        "precip_mm": 82.1,
+        "fire_hotspots_amazon": 5381,
+        "s1_scenes": 501,
+        "nisar_scenes": 0,
+        "active_phenomena": [],
+        "event_id": null
+      },
+      {
+        "month": "2022-12",
+        "year": 2022,
+        "month_num": 12,
+        "discharge_manaus_m3s": 88428.8,
+        "discharge_porto_velho_m3s": 10154.9,
+        "precip_mm": 228.1,
+        "fire_hotspots_amazon": 863,
+        "s1_scenes": 517,
+        "nisar_scenes": 0,
+        "active_phenomena": [
+          "rainy_season"
+        ],
+        "event_id": null
+      },
+      {
+        "month": "2023-01",
+        "year": 2023,
+        "month_num": 1,
+        "discharge_manaus_m3s": 99483.9,
+        "discharge_porto_velho_m3s": 18828.8,
+        "precip_mm": 236.6,
+        "fire_hotspots_amazon": 289,
+        "s1_scenes": 520,
+        "nisar_scenes": 0,
+        "active_phenomena": [
+          "rainy_season"
+        ],
+        "event_id": null
+      },
+      {
+        "month": "2023-02",
+        "year": 2023,
+        "month_num": 2,
+        "discharge_manaus_m3s": 136643.9,
+        "discharge_porto_velho_m3s": 27974.0,
+        "precip_mm": 269.0,
+        "fire_hotspots_amazon": 198,
+        "s1_scenes": 460,
+        "nisar_scenes": 0,
+        "active_phenomena": [
+          "rainy_season"
+        ],
+        "event_id": null
+      },
+      {
+        "month": "2023-03",
+        "year": 2023,
+        "month_num": 3,
+        "discharge_manaus_m3s": 172625.7,
+        "discharge_porto_velho_m3s": 31228.8,
+        "precip_mm": 218.8,
+        "fire_hotspots_amazon": 185,
+        "s1_scenes": 511,
+        "nisar_scenes": 0,
+        "active_phenomena": [
+          "rainy_season",
+          "seasonal_flood"
+        ],
+        "event_id": null
+      },
+      {
+        "month": "2023-04",
+        "year": 2023,
+        "month_num": 4,
+        "discharge_manaus_m3s": 187583.3,
+        "discharge_porto_velho_m3s": 33741.6,
+        "precip_mm": 163.0,
+        "fire_hotspots_amazon": 325,
+        "s1_scenes": 477,
+        "nisar_scenes": 0,
+        "active_phenomena": [
+          "rainy_season",
+          "seasonal_flood"
+        ],
+        "event_id": null
+      },
+      {
+        "month": "2023-05",
+        "year": 2023,
+        "month_num": 5,
+        "discharge_manaus_m3s": 194847.0,
+        "discharge_porto_velho_m3s": 20612.0,
+        "precip_mm": 197.6,
+        "fire_hotspots_amazon": 1834,
+        "s1_scenes": 514,
+        "nisar_scenes": 0,
+        "active_phenomena": [
+          "rainy_season",
+          "seasonal_flood"
+        ],
+        "event_id": null
+      },
+      {
+        "month": "2023-06",
+        "year": 2023,
+        "month_num": 6,
+        "discharge_manaus_m3s": 170494.7,
+        "discharge_porto_velho_m3s": 12882.6,
+        "precip_mm": 71.6,
+        "fire_hotspots_amazon": 3716,
+        "s1_scenes": 461,
+        "nisar_scenes": 0,
+        "active_phenomena": [
+          "seasonal_flood",
+          "dry_season",
+          "clearing_land_opening"
+        ],
+        "event_id": null
+      },
+      {
+        "month": "2023-07",
+        "year": 2023,
+        "month_num": 7,
+        "discharge_manaus_m3s": 119957.5,
+        "discharge_porto_velho_m3s": 6997.1,
+        "precip_mm": 29.9,
+        "fire_hotspots_amazon": 4954,
+        "s1_scenes": 464,
+        "nisar_scenes": 0,
+        "active_phenomena": [
+          "dry_season",
+          "clearing_land_opening"
+        ],
+        "event_id": null
+      },
+      {
+        "month": "2023-08",
+        "year": 2023,
+        "month_num": 8,
+        "discharge_manaus_m3s": 88477.9,
+        "discharge_porto_velho_m3s": 6354.8,
+        "precip_mm": 15.3,
+        "fire_hotspots_amazon": 12976,
+        "s1_scenes": 519,
+        "nisar_scenes": 0,
+        "active_phenomena": [
+          "dry_season",
+          "clearing_land_opening",
+          "fire_season",
+          "low_river_levels"
+        ],
+        "event_id": null
+      },
+      {
+        "month": "2023-09",
+        "year": 2023,
+        "month_num": 9,
+        "discharge_manaus_m3s": 51871.6,
+        "discharge_porto_velho_m3s": 4459.6,
+        "precip_mm": 26.4,
+        "fire_hotspots_amazon": 19988,
+        "s1_scenes": 450,
+        "nisar_scenes": 0,
+        "active_phenomena": [
+          "dry_season",
+          "clearing_land_opening",
+          "fire_season",
+          "low_river_levels"
+        ],
+        "event_id": null
+      },
+      {
+        "month": "2023-10",
+        "year": 2023,
+        "month_num": 10,
+        "discharge_manaus_m3s": 37526.0,
+        "discharge_porto_velho_m3s": 4425.3,
+        "precip_mm": 38.9,
+        "fire_hotspots_amazon": 15426,
+        "s1_scenes": 497,
+        "nisar_scenes": 0,
+        "active_phenomena": [
+          "dry_season",
+          "clearing_land_opening",
+          "fire_season",
+          "low_river_levels"
+        ],
+        "event_id": "severe_drought_2023"
+      },
+      {
+        "month": "2023-11",
+        "year": 2023,
+        "month_num": 11,
+        "discharge_manaus_m3s": 38472.4,
+        "discharge_porto_velho_m3s": 5333.7,
+        "precip_mm": 52.2,
+        "fire_hotspots_amazon": 10056,
+        "s1_scenes": 492,
+        "nisar_scenes": 0,
+        "active_phenomena": [],
+        "event_id": null
+      },
+      {
+        "month": "2023-12",
+        "year": 2023,
+        "month_num": 12,
+        "discharge_manaus_m3s": 59340.2,
+        "discharge_porto_velho_m3s": 13793.9,
+        "precip_mm": 157.2,
+        "fire_hotspots_amazon": 2182,
+        "s1_scenes": 493,
+        "nisar_scenes": 0,
+        "active_phenomena": [
+          "rainy_season"
+        ],
+        "event_id": null
+      },
+      {
+        "month": "2024-01",
+        "year": 2024,
+        "month_num": 1,
+        "discharge_manaus_m3s": 105271.5,
+        "discharge_porto_velho_m3s": 16079.1,
+        "precip_mm": 121.7,
+        "fire_hotspots_amazon": 651,
+        "s1_scenes": 495,
+        "nisar_scenes": 0,
+        "active_phenomena": [
+          "rainy_season"
+        ],
+        "event_id": null
+      },
+      {
+        "month": "2024-02",
+        "year": 2024,
+        "month_num": 2,
+        "discharge_manaus_m3s": 116341.1,
+        "discharge_porto_velho_m3s": 24940.8,
+        "precip_mm": 239.0,
+        "fire_hotspots_amazon": 1696,
+        "s1_scenes": 453,
+        "nisar_scenes": 0,
+        "active_phenomena": [
+          "rainy_season"
+        ],
+        "event_id": null
+      },
+      {
+        "month": "2024-03",
+        "year": 2024,
+        "month_num": 3,
+        "discharge_manaus_m3s": 130272.8,
+        "discharge_porto_velho_m3s": 32428.4,
+        "precip_mm": 182.0,
+        "fire_hotspots_amazon": 1643,
+        "s1_scenes": 503,
+        "nisar_scenes": 0,
+        "active_phenomena": [
+          "rainy_season",
+          "seasonal_flood"
+        ],
+        "event_id": null
+      },
+      {
+        "month": "2024-04",
+        "year": 2024,
+        "month_num": 4,
+        "discharge_manaus_m3s": 136688.2,
+        "discharge_porto_velho_m3s": 24589.8,
+        "precip_mm": 159.8,
+        "fire_hotspots_amazon": 421,
+        "s1_scenes": 497,
+        "nisar_scenes": 0,
+        "active_phenomena": [
+          "rainy_season",
+          "seasonal_flood"
+        ],
+        "event_id": null
+      },
+      {
+        "month": "2024-05",
+        "year": 2024,
+        "month_num": 5,
+        "discharge_manaus_m3s": 152913.4,
+        "discharge_porto_velho_m3s": 15168.7,
+        "precip_mm": 149.7,
+        "fire_hotspots_amazon": 2095,
+        "s1_scenes": 438,
+        "nisar_scenes": 0,
+        "active_phenomena": [
+          "rainy_season",
+          "seasonal_flood"
+        ],
+        "event_id": null
+      },
+      {
+        "month": "2024-06",
+        "year": 2024,
+        "month_num": 6,
+        "discharge_manaus_m3s": 151658.4,
+        "discharge_porto_velho_m3s": 8056.9,
+        "precip_mm": 66.7,
+        "fire_hotspots_amazon": 3940,
+        "s1_scenes": 403,
+        "nisar_scenes": 0,
+        "active_phenomena": [
+          "seasonal_flood",
+          "dry_season",
+          "clearing_land_opening"
+        ],
+        "event_id": null
+      },
+      {
+        "month": "2024-07",
+        "year": 2024,
+        "month_num": 7,
+        "discharge_manaus_m3s": 113854.9,
+        "discharge_porto_velho_m3s": 6543.6,
+        "precip_mm": 38.2,
+        "fire_hotspots_amazon": 9849,
+        "s1_scenes": 465,
+        "nisar_scenes": 0,
+        "active_phenomena": [
+          "dry_season",
+          "clearing_land_opening"
+        ],
+        "event_id": null
+      },
+      {
+        "month": "2024-08",
+        "year": 2024,
+        "month_num": 8,
+        "discharge_manaus_m3s": 73031.2,
+        "discharge_porto_velho_m3s": 4917.6,
+        "precip_mm": 18.4,
+        "fire_hotspots_amazon": 39116,
+        "s1_scenes": 517,
+        "nisar_scenes": 0,
+        "active_phenomena": [
+          "dry_season",
+          "clearing_land_opening",
+          "fire_season",
+          "low_river_levels"
+        ],
+        "event_id": null
+      },
+      {
+        "month": "2024-09",
+        "year": 2024,
+        "month_num": 9,
+        "discharge_manaus_m3s": 43287.0,
+        "discharge_porto_velho_m3s": 3599.5,
+        "precip_mm": 14.5,
+        "fire_hotspots_amazon": 48322,
+        "s1_scenes": 523,
+        "nisar_scenes": 0,
+        "active_phenomena": [
+          "dry_season",
+          "clearing_land_opening",
+          "fire_season",
+          "low_river_levels"
+        ],
+        "event_id": "drought_fires_2024"
+      },
+      {
+        "month": "2024-10",
+        "year": 2024,
+        "month_num": 10,
+        "discharge_manaus_m3s": 30069.2,
+        "discharge_porto_velho_m3s": 3011.2,
+        "precip_mm": 71.3,
+        "fire_hotspots_amazon": 12827,
+        "s1_scenes": 516,
+        "nisar_scenes": 0,
+        "active_phenomena": [
+          "dry_season",
+          "clearing_land_opening",
+          "fire_season",
+          "low_river_levels"
+        ],
+        "event_id": null
+      },
+      {
+        "month": "2024-11",
+        "year": 2024,
+        "month_num": 11,
+        "discharge_manaus_m3s": 37528.1,
+        "discharge_porto_velho_m3s": 7325.4,
+        "precip_mm": 59.8,
+        "fire_hotspots_amazon": 9696,
+        "s1_scenes": 509,
+        "nisar_scenes": 0,
+        "active_phenomena": [],
+        "event_id": null
+      },
+      {
+        "month": "2024-12",
+        "year": 2024,
+        "month_num": 12,
+        "discharge_manaus_m3s": 64096.5,
+        "discharge_porto_velho_m3s": 15088.1,
+        "precip_mm": 225.8,
+        "fire_hotspots_amazon": 2498,
+        "s1_scenes": 519,
+        "nisar_scenes": 0,
+        "active_phenomena": [
+          "rainy_season"
+        ],
+        "event_id": null
+      },
+      {
+        "month": "2025-01",
+        "year": 2025,
+        "month_num": 1,
+        "discharge_manaus_m3s": 118557.3,
+        "discharge_porto_velho_m3s": 23345.6,
+        "precip_mm": 146.0,
+        "fire_hotspots_amazon": 406,
+        "s1_scenes": 540,
+        "nisar_scenes": 0,
+        "active_phenomena": [
+          "rainy_season"
+        ],
+        "event_id": null
+      },
+      {
+        "month": "2025-02",
+        "year": 2025,
+        "month_num": 2,
+        "discharge_manaus_m3s": 134914.0,
+        "discharge_porto_velho_m3s": 28414.9,
+        "precip_mm": 296.9,
+        "fire_hotspots_amazon": 162,
+        "s1_scenes": 453,
+        "nisar_scenes": 0,
+        "active_phenomena": [
+          "rainy_season"
+        ],
+        "event_id": null
+      },
+      {
+        "month": "2025-03",
+        "year": 2025,
+        "month_num": 3,
+        "discharge_manaus_m3s": 201769.4,
+        "discharge_porto_velho_m3s": 40608.1,
+        "precip_mm": 203.8,
+        "fire_hotspots_amazon": 353,
+        "s1_scenes": 499,
+        "nisar_scenes": 0,
+        "active_phenomena": [
+          "rainy_season",
+          "seasonal_flood"
+        ],
+        "event_id": null
+      },
+      {
+        "month": "2025-04",
+        "year": 2025,
+        "month_num": 4,
+        "discharge_manaus_m3s": 225835.4,
+        "discharge_porto_velho_m3s": 36549.2,
+        "precip_mm": 206.8,
+        "fire_hotspots_amazon": 148,
+        "s1_scenes": 619,
+        "nisar_scenes": 0,
+        "active_phenomena": [
+          "rainy_season",
+          "seasonal_flood"
+        ],
+        "event_id": null
+      },
+      {
+        "month": "2025-05",
+        "year": 2025,
+        "month_num": 5,
+        "discharge_manaus_m3s": 209759.0,
+        "discharge_porto_velho_m3s": 25538.7,
+        "precip_mm": 165.1,
+        "fire_hotspots_amazon": 1500,
+        "s1_scenes": 846,
+        "nisar_scenes": 0,
+        "active_phenomena": [
+          "rainy_season",
+          "seasonal_flood"
+        ],
+        "event_id": null
+      },
+      {
+        "month": "2025-06",
+        "year": 2025,
+        "month_num": 6,
+        "discharge_manaus_m3s": 211576.6,
+        "discharge_porto_velho_m3s": 13065.8,
+        "precip_mm": 186.1,
+        "fire_hotspots_amazon": 2527,
+        "s1_scenes": 850,
+        "nisar_scenes": 0,
+        "active_phenomena": [
+          "seasonal_flood",
+          "dry_season",
+          "clearing_land_opening"
+        ],
+        "event_id": null
+      },
+      {
+        "month": "2025-07",
+        "year": 2025,
+        "month_num": 7,
+        "discharge_manaus_m3s": 166244.0,
+        "discharge_porto_velho_m3s": 7579.6,
+        "precip_mm": 45.6,
+        "fire_hotspots_amazon": 2794,
+        "s1_scenes": 817,
+        "nisar_scenes": 0,
+        "active_phenomena": [
+          "dry_season",
+          "clearing_land_opening"
+        ],
+        "event_id": null
+      },
+      {
+        "month": "2025-08",
+        "year": 2025,
+        "month_num": 8,
+        "discharge_manaus_m3s": 114254.4,
+        "discharge_porto_velho_m3s": 5078.7,
+        "precip_mm": 82.2,
+        "fire_hotspots_amazon": 7185,
+        "s1_scenes": 886,
+        "nisar_scenes": 0,
+        "active_phenomena": [
+          "dry_season",
+          "clearing_land_opening",
+          "fire_season",
+          "low_river_levels"
+        ],
+        "event_id": null
+      },
+      {
+        "month": "2025-09",
+        "year": 2025,
+        "month_num": 9,
+        "discharge_manaus_m3s": 90036.1,
+        "discharge_porto_velho_m3s": 4703.2,
+        "precip_mm": 124.1,
+        "fire_hotspots_amazon": 9883,
+        "s1_scenes": 829,
+        "nisar_scenes": 0,
+        "active_phenomena": [
+          "dry_season",
+          "clearing_land_opening",
+          "fire_season",
+          "low_river_levels"
+        ],
+        "event_id": null
+      },
+      {
+        "month": "2025-10",
+        "year": 2025,
+        "month_num": 10,
+        "discharge_manaus_m3s": 77565.2,
+        "discharge_porto_velho_m3s": 5214.1,
+        "precip_mm": 189.7,
+        "fire_hotspots_amazon": 9169,
+        "s1_scenes": 878,
+        "nisar_scenes": 21,
+        "active_phenomena": [
+          "dry_season",
+          "clearing_land_opening",
+          "fire_season",
+          "low_river_levels"
+        ],
+        "event_id": null
+      },
+      {
+        "month": "2025-11",
+        "year": 2025,
+        "month_num": 11,
+        "discharge_manaus_m3s": 95395.7,
+        "discharge_porto_velho_m3s": 9133.8,
+        "precip_mm": 312.1,
+        "fire_hotspots_amazon": 5441,
+        "s1_scenes": 838,
+        "nisar_scenes": 202,
+        "active_phenomena": [],
+        "event_id": null
+      },
+      {
+        "month": "2025-12",
+        "year": 2025,
+        "month_num": 12,
+        "discharge_manaus_m3s": 125966.3,
+        "discharge_porto_velho_m3s": 13995.8,
+        "precip_mm": 359.5,
+        "fire_hotspots_amazon": 1927,
+        "s1_scenes": 866,
+        "nisar_scenes": 171,
+        "active_phenomena": [
+          "rainy_season"
+        ],
+        "event_id": null
+      },
+      {
+        "month": "2026-01",
+        "year": 2026,
+        "month_num": 1,
+        "discharge_manaus_m3s": 137642.7,
+        "discharge_porto_velho_m3s": 28365.0,
+        "precip_mm": 377.1,
+        "fire_hotspots_amazon": 462,
+        "s1_scenes": 801,
+        "nisar_scenes": 160,
+        "active_phenomena": [
+          "rainy_season"
+        ],
+        "event_id": null
+      },
+      {
+        "month": "2026-02",
+        "year": 2026,
+        "month_num": 2,
+        "discharge_manaus_m3s": 180152.7,
+        "discharge_porto_velho_m3s": 31753.7,
+        "precip_mm": 343.7,
+        "fire_hotspots_amazon": 131,
+        "s1_scenes": 749,
+        "nisar_scenes": 31,
+        "active_phenomena": [
+          "rainy_season"
+        ],
+        "event_id": null
+      },
+      {
+        "month": "2026-03",
+        "year": 2026,
+        "month_num": 3,
+        "discharge_manaus_m3s": 173862.2,
+        "discharge_porto_velho_m3s": 34772.7,
+        "precip_mm": 284.1,
+        "fire_hotspots_amazon": 211,
+        "s1_scenes": 889,
+        "nisar_scenes": 35,
+        "active_phenomena": [
+          "rainy_season",
+          "seasonal_flood"
+        ],
+        "event_id": null
+      },
+      {
+        "month": "2026-04",
+        "year": 2026,
+        "month_num": 4,
+        "discharge_manaus_m3s": 189485.0,
+        "discharge_porto_velho_m3s": 36792.9,
+        "precip_mm": 271.2,
+        "fire_hotspots_amazon": 236,
+        "s1_scenes": 931,
+        "nisar_scenes": 36,
+        "active_phenomena": [
+          "rainy_season",
+          "seasonal_flood"
+        ],
+        "event_id": null
+      },
+      {
+        "month": "2026-05",
+        "year": 2026,
+        "month_num": 5,
+        "discharge_manaus_m3s": 217403.3,
+        "discharge_porto_velho_m3s": 28796.6,
+        "precip_mm": 534.4,
+        "fire_hotspots_amazon": 1332,
+        "s1_scenes": 956,
+        "nisar_scenes": 39,
+        "active_phenomena": [
+          "rainy_season",
+          "seasonal_flood"
+        ],
+        "event_id": null
+      },
+      {
+        "month": "2026-06",
+        "year": 2026,
+        "month_num": 6,
+        "discharge_manaus_m3s": 197550.1,
+        "discharge_porto_velho_m3s": 14598.6,
+        "precip_mm": 229.8,
+        "fire_hotspots_amazon": 1984,
+        "s1_scenes": 1009,
+        "nisar_scenes": 423,
+        "active_phenomena": [
+          "seasonal_flood",
+          "dry_season",
+          "clearing_land_opening"
+        ],
+        "event_id": null
+      },
+      {
+        "month": "2026-07",
+        "year": 2026,
+        "month_num": 7,
+        "discharge_manaus_m3s": 154781.4,
+        "discharge_porto_velho_m3s": 8252.9,
+        "precip_mm": 53.1,
+        "fire_hotspots_amazon": 3218,
+        "s1_scenes": 794,
+        "nisar_scenes": 737,
+        "active_phenomena": [
+          "dry_season",
+          "clearing_land_opening"
+        ],
+        "event_id": null
+      },
+      {
+        "month": "2026-08",
+        "year": 2026,
+        "month_num": 8,
+        "discharge_manaus_m3s": 100259.9,
+        "discharge_porto_velho_m3s": 7318.6,
+        "precip_mm": 30.5,
+        "fire_hotspots_amazon": 29357,
+        "s1_scenes": 766,
+        "nisar_scenes": 579,
+        "active_phenomena": [
+          "dry_season",
+          "clearing_land_opening",
+          "fire_season",
+          "low_river_levels"
+        ],
+        "event_id": null
+      },
+      {
+        "month": "2026-09",
+        "year": 2026,
+        "month_num": 9,
+        "discharge_manaus_m3s": 66459.0,
+        "discharge_porto_velho_m3s": 6652.6,
+        "precip_mm": 55.7,
+        "fire_hotspots_amazon": 25106,
+        "s1_scenes": 722,
+        "nisar_scenes": 849,
+        "active_phenomena": [
+          "dry_season",
+          "clearing_land_opening",
+          "fire_season",
+          "low_river_levels"
+        ],
+        "event_id": null
+      },
+      {
+        "month": "2026-10",
+        "year": 2026,
+        "month_num": 10,
+        "discharge_manaus_m3s": 54017.8,
+        "discharge_porto_velho_m3s": 5699.6,
+        "precip_mm": 152.3,
+        "fire_hotspots_amazon": 9996,
+        "s1_scenes": 733,
+        "nisar_scenes": 752,
+        "active_phenomena": [
+          "dry_season",
+          "clearing_land_opening",
+          "fire_season",
+          "low_river_levels"
+        ],
+        "event_id": "nisar_lband_2026"
+      },
+      {
+        "month": "2026-11",
+        "year": 2026,
+        "month_num": 11,
+        "discharge_manaus_m3s": 54064.8,
+        "discharge_porto_velho_m3s": 8211.1,
+        "precip_mm": 21.0,
+        "fire_hotspots_amazon": 7846,
+        "s1_scenes": 316,
+        "nisar_scenes": 63,
+        "active_phenomena": [],
+        "event_id": null
+      },
+      {
+        "month": "2026-12",
+        "year": 2026,
+        "month_num": 12,
+        "discharge_manaus_m3s": 0.0,
+        "discharge_porto_velho_m3s": 0.0,
+        "precip_mm": 0.0,
+        "fire_hotspots_amazon": 0,
+        "s1_scenes": 0,
+        "nisar_scenes": 0,
+        "active_phenomena": [
+          "rainy_season"
+        ],
+        "event_id": null
+      }
+    ]
+  },
+  "phenomena": [
+    {
+      "id": "rainy_season",
+      "name": "Rainy season",
+      "typical_timing": "Dec - May",
+      "months": [
+        12,
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "peak_months": [
+        2,
+        3,
+        4
+      ],
+      "color": "#38BDF8",
+      "region_id": "manaus",
+      "bbox": [
+        -60.35,
+        -3.35,
+        -59.7,
+        -2.95
+      ],
+      "center": [
+        -60.025,
+        -3.15
+      ],
+      "summary": "Peak convective rainfall across the Amazon Basin (Dec\u2013May, wettest Feb\u2013Apr). Cloud-penetrating microwave radar monitors soil/canopy wetting and the multi-month floodplain recharge even when dense ITCZ clouds blind optical satellites.",
+      "sar_physics": {
+        "primary_sensitivity": "Dielectric Constant (Wet Foliage & Soil)",
+        "roughness_mechanism": "Dense Amazon terra firme crowns produce diffuse volume scattering across C- and L-band all year round, while smooth rising water surfaces begin turning dark via specular reflection.",
+        "dielectric_mechanism": "Liquid water has a very high dielectric constant (~80 vs ~3\u20135 for dry vegetation/soil). Heavy wet-season rain raises leaf and soil moisture, boosting upper-canopy reflectivity (+0.6 to +1.2 dB in Sentinel-1 C-band VV) and triggering early inundated-forest returns.",
+        "polarization_note": "VV tracks top-crown dielectric moisture + vertical stem scattering; VH preserves cross-polarized volume structure to separate rain-wet forest from open water.",
+        "frequency_comparison": "C-band (5.6 cm) reacts strongly to leaf/twig surface wetness in the upper crown, whereas L-band (24 cm) passes cleanly through rain cells and upper leaves to inspect trunks."
+      },
+      "drivers": {
+        "natural_driver": "Southward migration of the Intertropical Convergence Zone (ITCZ) and Amazon moisture convergence.",
+        "human_driver": "Road washouts and wetland recharge pause heavy mechanized forest clearing during Dec\u2013May."
+      },
+      "default_layer_id": "phen_rainy_dswx",
+      "layers": [
+        {
+          "id": "phen_rainy_dswx",
+          "title": "OPERA DSWx-S1 Rainy Season Rise",
+          "role": "classification",
+          "sensor": "Sentinel-1 (OPERA)",
+          "band": "C-band (5.6 cm)",
+          "polarization": "VV+VH -> WTR",
+          "acquisition_date": "2025-03-06",
+          "granule_id": "OPERA_L3_DSWx-S1_T20MQB_20250306T093932Z_20250308T161257Z_S1A_30_v1.0",
+          "asset_path": "assets/phen_rainy_dswx.png",
+          "bbox": [
+            -60.35,
+            -3.35,
+            -59.7,
+            -2.95
+          ],
+          "stats": {
+            "open_water_pct": 23.46,
+            "partial_water_pct": 0.0,
+            "inundated_vegetation_pct": 2.98
+          },
+          "legend": [
+            {
+              "label": "Open Water (Class 1)",
+              "color": "#00E5FF"
+            },
+            {
+              "label": "Partial Surface Water (Class 2)",
+              "color": "#40C4FF"
+            },
+            {
+              "label": "Inundated Vegetation (Class 3)",
+              "color": "#00E676"
+            }
+          ],
+          "source_id": "opera_dswx_s1"
+        },
+        {
+          "id": "phen_rainy_vv",
+          "title": "Wet-Canopy Dielectric Backscatter (Feb 2025)",
+          "role": "backscatter",
+          "sensor": "Sentinel-1",
+          "band": "C-band (5.6 cm)",
+          "polarization": "VV",
+          "acquisition_date": "2025-02-10",
+          "granule_id": "S1A_IW_GRDH_1SDV_20250210T093928_20250210T093953_057832_0721F3_rtc",
+          "asset_path": "assets/phen_rainy_vv.png",
+          "bbox": [
+            -60.35,
+            -3.35,
+            -59.7,
+            -2.95
+          ],
+          "stats": {
+            "p10_db": -17.74,
+            "median_db": -6.36,
+            "p90_db": -4.54
+          },
+          "legend": [
+            {
+              "label": "Smooth Water (<-15 dB)",
+              "color": "#111827"
+            },
+            {
+              "label": "Rainforest Canopy (-9 to -6 dB)",
+              "color": "#9CA3AF"
+            },
+            {
+              "label": "Flooded Forest Double-Bounce (>-5 dB)",
+              "color": "#F9FAFB"
+            }
+          ],
+          "source_id": "pc_s1_rtc"
+        }
+      ],
+      "seasonal_rhythm": [
+        {
+          "month_num": 1,
+          "label": "Jan",
+          "discharge_m3s": 128618.2,
+          "precip_mm": 211.6,
+          "fire_hotspots": 376
+        },
+        {
+          "month_num": 2,
+          "label": "Feb",
+          "discharge_m3s": 142806.7,
+          "precip_mm": 254.7,
+          "fire_hotspots": 361
+        },
+        {
+          "month_num": 3,
+          "label": "Mar",
+          "discharge_m3s": 170507.3,
+          "precip_mm": 260.2,
+          "fire_hotspots": 429
+        },
+        {
+          "month_num": 4,
+          "label": "Apr",
+          "discharge_m3s": 194647.5,
+          "precip_mm": 223.0,
+          "fire_hotspots": 291
+        },
+        {
+          "month_num": 5,
+          "label": "May",
+          "discharge_m3s": 200590.1,
+          "precip_mm": 234.9,
+          "fire_hotspots": 1602
+        },
+        {
+          "month_num": 6,
+          "label": "Jun",
+          "discharge_m3s": 184920.1,
+          "precip_mm": 128.6,
+          "fire_hotspots": 2955
+        },
+        {
+          "month_num": 7,
+          "label": "Jul",
+          "discharge_m3s": 143936.2,
+          "precip_mm": 46.5,
+          "fire_hotspots": 5181
+        },
+        {
+          "month_num": 8,
+          "label": "Aug",
+          "discharge_m3s": 101124.3,
+          "precip_mm": 40.2,
+          "fire_hotspots": 23064
+        },
+        {
+          "month_num": 9,
+          "label": "Sep",
+          "discharge_m3s": 70473.4,
+          "precip_mm": 54.6,
+          "fire_hotspots": 26715
+        },
+        {
+          "month_num": 10,
+          "label": "Oct",
+          "discharge_m3s": 57924.8,
+          "precip_mm": 97.2,
+          "fire_hotspots": 11619
+        },
+        {
+          "month_num": 11,
+          "label": "Nov",
+          "discharge_m3s": 66906.5,
+          "precip_mm": 127.1,
+          "fire_hotspots": 6260
+        },
+        {
+          "month_num": 12,
+          "label": "Dec",
+          "discharge_m3s": 94622.1,
+          "precip_mm": 243.6,
+          "fire_hotspots": 1555
+        }
+      ]
+    },
+    {
+      "id": "seasonal_flood",
+      "name": "Seasonal flood",
+      "typical_timing": "Peak ~Mar - Jun (Madeira at Porto Velho: ~Mar - Apr)",
+      "months": [
+        3,
+        4,
+        5,
+        6
+      ],
+      "peak_months": [
+        3,
+        4,
+        5,
+        6
+      ],
+      "color": "#00E5FF",
+      "region_id": "porto_velho",
+      "bbox": [
+        -64.05,
+        -8.9,
+        -63.7,
+        -8.55
+      ],
+      "center": [
+        -63.875,
+        -8.725
+      ],
+      "summary": "Annual 10\u201312 meter Amazon flood-pulse wave. Southern tributaries like the Madeira River at Porto Velho crest early (~Mar\u2013Apr), whereas the Rio Negro/Solim\u00f5es mainstem at Manaus peaks later (~May\u2013Jun).",
+      "sar_physics": {
+        "primary_sensitivity": "Dielectric Constant + Corner Roughness (Double-Bounce)",
+        "roughness_mechanism": "Two opposite roughness signatures appear side-by-side: calm open rivers become radar mirrors (specular reflection away from satellite, very dark), while flooded forest trunks standing in water form 90\u00b0 corner reflectors.",
+        "dielectric_mechanism": "High dielectric floodwater beneath v\u00e1rzea/igap\u00f3 trees reflects incident microwaves forward onto vertical trunks and back to the sensor\u2014producing intense trunk\u2013water double-bounce (+3.5 to +5.5 dB enhancement).",
+        "polarization_note": "HH (horizontal co-pol) maximizes double-bounce off horizontal water + vertical trunks; OPERA DSWx-S1 fuses C-band backscatter to classify Open Water vs. Inundated Vegetation.",
+        "frequency_comparison": "Sentinel-1 C-band (5.6 cm) maps open channels and sparse inundated shrubs; NISAR L-band (24 cm) penetrates closed 30 m forest canopies to reveal hidden flooded forests beneath."
+      },
+      "drivers": {
+        "natural_driver": "Asynchronous timing of southern Andes/Madeira rains (peaking Mar\u2013Apr) vs. northern Rio Negro crest (May\u2013Jun).",
+        "human_driver": "Riverine v\u00e1rzea agriculture, floating stilt communities, and hydropower dams (Santo Ant\u00f4nio / Jirau near Porto Velho)."
+      },
+      "default_layer_id": "phen_flood_madeira_dswx",
+      "layers": [
+        {
+          "id": "phen_flood_madeira_dswx",
+          "title": "Madeira River Flood at Porto Velho (Mar\u2013Apr)",
+          "role": "classification",
+          "sensor": "Sentinel-1 (OPERA)",
+          "band": "C-band (5.6 cm)",
+          "polarization": "VV+VH -> WTR",
+          "acquisition_date": "2025-04-09",
+          "granule_id": "OPERA_L3_DSWx-S1_T20LLR_20250409T095727Z_20260406T193636Z_S1A_30_v1.0",
+          "asset_path": "assets/phen_flood_madeira_dswx.png",
+          "bbox": [
+            -64.05,
+            -8.9,
+            -63.7,
+            -8.55
+          ],
+          "stats": {
+            "open_water_pct": 10.47,
+            "partial_water_pct": 0.0,
+            "inundated_vegetation_pct": 0.28
+          },
+          "legend": [
+            {
+              "label": "Open Water (Class 1)",
+              "color": "#00E5FF"
+            },
+            {
+              "label": "Partial Surface Water (Class 2)",
+              "color": "#40C4FF"
+            },
+            {
+              "label": "Inundated Vegetation (Class 3)",
+              "color": "#00E676"
+            }
+          ],
+          "source_id": "opera_dswx_s1"
+        },
+        {
+          "id": "phen_flood_madeira_vv",
+          "title": "Madeira Flood Sentinel-1 VV Backscatter",
+          "role": "backscatter",
+          "sensor": "Sentinel-1",
+          "band": "C-band (5.6 cm)",
+          "polarization": "VV",
+          "acquisition_date": "2025-03-16",
+          "granule_id": "S1A_IW_GRDH_1SDV_20250316T095735_20250316T095800_058328_0735FE_rtc",
+          "asset_path": "assets/phen_flood_madeira_vv.png",
+          "bbox": [
+            -64.05,
+            -8.9,
+            -63.7,
+            -8.55
+          ],
+          "stats": {
+            "p10_db": -8.05,
+            "median_db": -6.52,
+            "p90_db": -5.84
+          },
+          "legend": [
+            {
+              "label": "Smooth Water (<-15 dB)",
+              "color": "#111827"
+            },
+            {
+              "label": "Rainforest Canopy (-9 to -6 dB)",
+              "color": "#9CA3AF"
+            },
+            {
+              "label": "Flooded Forest Double-Bounce (>-5 dB)",
+              "color": "#F9FAFB"
+            }
+          ],
+          "source_id": "pc_s1_rtc"
+        },
+        {
+          "id": "phen_flood_nisar_jun",
+          "title": "Manaus Flood Peak NISAR L-Band HHHH (Jun 2026)",
+          "role": "lband_flood",
+          "sensor": "NISAR",
+          "band": "L-band (24 cm)",
+          "polarization": "HHHH",
+          "acquisition_date": "2026-06-23",
+          "granule_id": "NISAR_L2_PR_GCOV_023_140_D_090_4005_DHDH_A_20260623T221633_20260623T221711_P05023_N_F_J_001",
+          "asset_path": "assets/phen_flood_nisar_jun2026_hhhh.png",
+          "bbox": [
+            -60.11777,
+            -3.24274,
+            -59.93323,
+            -3.05739
+          ],
+          "stats": {
+            "p10_db": -15.01,
+            "median_db": -6.59,
+            "p90_db": -0.58
+          },
+          "legend": [
+            {
+              "label": "Red/Gold: L-band HHHH Trunk & Double-Bounce",
+              "color": "#F472B6"
+            },
+            {
+              "label": "Green: L-band HVHV Woody Canopy Biomass",
+              "color": "#34D399"
+            },
+            {
+              "label": "Dark: Specular Open River Channels",
+              "color": "#1E293B"
+            }
+          ],
+          "source_id": "nisar_gcov_v1"
+        }
+      ],
+      "seasonal_rhythm": [
+        {
+          "month_num": 1,
+          "label": "Jan",
+          "discharge_m3s": 25525.3,
+          "precip_mm": 314.1,
+          "fire_hotspots": 376
+        },
+        {
+          "month_num": 2,
+          "label": "Feb",
+          "discharge_m3s": 31960.5,
+          "precip_mm": 300.4,
+          "fire_hotspots": 361
+        },
+        {
+          "month_num": 3,
+          "label": "Mar",
+          "discharge_m3s": 35276.0,
+          "precip_mm": 294.5,
+          "fire_hotspots": 429
+        },
+        {
+          "month_num": 4,
+          "label": "Apr",
+          "discharge_m3s": 32334.0,
+          "precip_mm": 251.3,
+          "fire_hotspots": 291
+        },
+        {
+          "month_num": 5,
+          "label": "May",
+          "discharge_m3s": 20837.1,
+          "precip_mm": 105.2,
+          "fire_hotspots": 1602
+        },
+        {
+          "month_num": 6,
+          "label": "Jun",
+          "discharge_m3s": 11787.3,
+          "precip_mm": 40.4,
+          "fire_hotspots": 2955
+        },
+        {
+          "month_num": 7,
+          "label": "Jul",
+          "discharge_m3s": 7371.6,
+          "precip_mm": 10.4,
+          "fire_hotspots": 5181
+        },
+        {
+          "month_num": 8,
+          "label": "Aug",
+          "discharge_m3s": 5945.0,
+          "precip_mm": 48.4,
+          "fire_hotspots": 23064
+        },
+        {
+          "month_num": 9,
+          "label": "Sep",
+          "discharge_m3s": 4996.6,
+          "precip_mm": 74.7,
+          "fire_hotspots": 26715
+        },
+        {
+          "month_num": 10,
+          "label": "Oct",
+          "discharge_m3s": 4879.0,
+          "precip_mm": 130.3,
+          "fire_hotspots": 11619
+        },
+        {
+          "month_num": 11,
+          "label": "Nov",
+          "discharge_m3s": 7595.8,
+          "precip_mm": 205.2,
+          "fire_hotspots": 6260
+        },
+        {
+          "month_num": 12,
+          "label": "Dec",
+          "discharge_m3s": 14798.7,
+          "precip_mm": 258.8,
+          "fire_hotspots": 1555
+        }
+      ]
+    },
+    {
+      "id": "dry_season",
+      "name": "Dry season",
+      "typical_timing": "Jun/Jul - Oct",
+      "months": [
+        6,
+        7,
+        8,
+        9,
+        10
+      ],
+      "peak_months": [
+        8,
+        9
+      ],
+      "color": "#FBBF24",
+      "region_id": "manaus",
+      "bbox": [
+        -60.35,
+        -3.35,
+        -59.7,
+        -2.95
+      ],
+      "center": [
+        -60.025,
+        -3.15
+      ],
+      "summary": "Dry austral winter\u2013spring period (Jun/Jul\u2013Oct) across the central and southern Amazon. Falling rainfall dries surface soils and stresses canopy moisture, prepping both natural floodplains and human agricultural frontiers for late-dry extremes.",
+      "sar_physics": {
+        "primary_sensitivity": "Dielectric Constant Drop (Desiccation & Leaf Flushing)",
+        "roughness_mechanism": "Standing terra firme tree geometry remains physically rough, so spatial texture persists even as radar brightness shifts with moisture; dried pasture grasses look smoother.",
+        "dielectric_mechanism": "Reduced leaf water potential and lower topsoil moisture decrease the surface dielectric constant across sunlit uplands, lowering C-band VH cross-polarization by -0.8 to -1.8 dB.",
+        "polarization_note": "VH / VV ratio isolates canopy water content changes separately from soil roughness variations.",
+        "frequency_comparison": "C-band (5.6 cm) senses rapid top-leaf water stress during dry spells, while L-band (24 cm) remains stable over deep woody trunks unless drought causes branch dieback."
+      },
+      "drivers": {
+        "natural_driver": "Seasonal northward ITCZ shift (Jun\u2013Oct), amplified strongly during El Ni\u00f1o & warm Tropical North Atlantic phases.",
+        "human_driver": "Dry-season soil firming enables heavy machinery access along frontier roads (BR-230, BR-319)."
+      },
+      "default_layer_id": "phen_dry_vh",
+      "layers": [
+        {
+          "id": "phen_dry_vh",
+          "title": "Dry-Season Cross-Pol Canopy Moisture (Aug 2022)",
+          "role": "backscatter",
+          "sensor": "Sentinel-1",
+          "band": "C-band (5.6 cm)",
+          "polarization": "VH",
+          "acquisition_date": "2022-08-13",
+          "granule_id": "S1A_IW_GRDH_1SDV_20220813T093934_20220813T093959_044532_05508B_rtc",
+          "asset_path": "assets/phen_dry_vh.png",
+          "bbox": [
+            -60.35,
+            -3.35,
+            -59.7,
+            -2.95
+          ],
+          "stats": {
+            "p10_db": -23.97,
+            "median_db": -13.13,
+            "p90_db": -12.07
+          },
+          "legend": [
+            {
+              "label": "Smooth Water (<-15 dB)",
+              "color": "#111827"
+            },
+            {
+              "label": "Rainforest Canopy (-9 to -6 dB)",
+              "color": "#9CA3AF"
+            },
+            {
+              "label": "Flooded Forest Double-Bounce (>-5 dB)",
+              "color": "#F9FAFB"
+            }
+          ],
+          "source_id": "pc_s1_rtc"
+        },
+        {
+          "id": "phen_dry_delta",
+          "title": "Dry vs Wet Desiccation Shift (\u0394VH)",
+          "role": "change",
+          "sensor": "Sentinel-1",
+          "band": "C-band (5.6 cm)",
+          "polarization": "\u0394VH",
+          "acquisition_date": "2022-08-13",
+          "granule_id": "S1A_IW_GRDH_1SDV_20220813T093934_20220813T093959_044532_05508B_rtc",
+          "asset_path": "assets/phen_dry_delta_vh.png",
+          "bbox": [
+            -60.35,
+            -3.35,
+            -59.7,
+            -2.95
+          ],
+          "stats": {
+            "canopy_loss_gt2db_pct": 10.08,
+            "severe_clearing_gt4db_pct": 2.4
+          },
+          "legend": [
+            {
+              "label": "Severe Clearing / Burn Scar (\u0394VH \u2264 -4 dB)",
+              "color": "#F43F5E"
+            },
+            {
+              "label": "Canopy Thinning (-4 < \u0394VH \u2264 -2 dB)",
+              "color": "#FF9100"
+            }
+          ],
+          "source_id": "pc_s1_rtc"
+        }
+      ],
+      "seasonal_rhythm": [
+        {
+          "month_num": 1,
+          "label": "Jan",
+          "discharge_m3s": 128618.2,
+          "precip_mm": 211.6,
+          "fire_hotspots": 376
+        },
+        {
+          "month_num": 2,
+          "label": "Feb",
+          "discharge_m3s": 142806.7,
+          "precip_mm": 254.7,
+          "fire_hotspots": 361
+        },
+        {
+          "month_num": 3,
+          "label": "Mar",
+          "discharge_m3s": 170507.3,
+          "precip_mm": 260.2,
+          "fire_hotspots": 429
+        },
+        {
+          "month_num": 4,
+          "label": "Apr",
+          "discharge_m3s": 194647.5,
+          "precip_mm": 223.0,
+          "fire_hotspots": 291
+        },
+        {
+          "month_num": 5,
+          "label": "May",
+          "discharge_m3s": 200590.1,
+          "precip_mm": 234.9,
+          "fire_hotspots": 1602
+        },
+        {
+          "month_num": 6,
+          "label": "Jun",
+          "discharge_m3s": 184920.1,
+          "precip_mm": 128.6,
+          "fire_hotspots": 2955
+        },
+        {
+          "month_num": 7,
+          "label": "Jul",
+          "discharge_m3s": 143936.2,
+          "precip_mm": 46.5,
+          "fire_hotspots": 5181
+        },
+        {
+          "month_num": 8,
+          "label": "Aug",
+          "discharge_m3s": 101124.3,
+          "precip_mm": 40.2,
+          "fire_hotspots": 23064
+        },
+        {
+          "month_num": 9,
+          "label": "Sep",
+          "discharge_m3s": 70473.4,
+          "precip_mm": 54.6,
+          "fire_hotspots": 26715
+        },
+        {
+          "month_num": 10,
+          "label": "Oct",
+          "discharge_m3s": 57924.8,
+          "precip_mm": 97.2,
+          "fire_hotspots": 11619
+        },
+        {
+          "month_num": 11,
+          "label": "Nov",
+          "discharge_m3s": 66906.5,
+          "precip_mm": 127.1,
+          "fire_hotspots": 6260
+        },
+        {
+          "month_num": 12,
+          "label": "Dec",
+          "discharge_m3s": 94622.1,
+          "precip_mm": 243.6,
+          "fire_hotspots": 1555
+        }
+      ]
+    },
+    {
+      "id": "clearing_land_opening",
+      "name": "Clearing / land opening",
+      "typical_timing": "Mostly Jun - Oct",
+      "months": [
+        6,
+        7,
+        8,
+        9,
+        10
+      ],
+      "peak_months": [
+        7,
+        8,
+        9
+      ],
+      "color": "#FB923C",
+      "region_id": "apui_labrea",
+      "bbox": [
+        -60.0,
+        -7.5,
+        -59.5,
+        -7.0
+      ],
+      "center": [
+        -59.75,
+        -7.25
+      ],
+      "summary": "Human-driven forest felling and fishbone pasture expansion concentrated during the dry Jun\u2013Oct ground-access window along Southern Amazonas corridors (Apu\u00ed\u2013L\u00e1brea / BR-230).",
+      "sar_physics": {
+        "primary_sensitivity": "Volume Roughness Loss (3D Forest -> Smooth Bare Soil)",
+        "roughness_mechanism": "Intact rainforest is a deep 3D volume of randomly oriented branches and leaves (strong depolarizing volume scatter). Felling replaces this with flat cleared soil/pasture, collapsing volume scattering in sharp rectangular geometric plots.",
+        "dielectric_mechanism": "Freshly felled logs briefly retain sap water, then dry rapidly under sun\u2014making clearings persistently darker in cross-polarization regardless of afternoon cloud cover.",
+        "polarization_note": "Cross-polarization (Sentinel-1 VH and NISAR HV) is the premier deforestation detector: VH drops -2 to -6 dB immediately after felling.",
+        "frequency_comparison": "C-band (5.6 cm) detects early understory/crown thinning; L-band (24 cm) directly measures loss of heavy woody trunks and aboveground carbon biomass (~150+ Mg/ha drop)."
+      },
+      "drivers": {
+        "natural_driver": "Drier Jun\u2013Oct terrain permits bulldozers and chainsaws to enter upland terra firme.",
+        "human_driver": "Cattle pasture conversion, speculative land grabbing along BR-230 Trans-Amazonian & BR-319 roads."
+      },
+      "default_layer_id": "phen_clearing_delta_vh",
+      "layers": [
+        {
+          "id": "phen_clearing_delta_vh",
+          "title": "BR-230 Forest Clearing Scars (2020 -> 2024 \u0394VH)",
+          "role": "change",
+          "sensor": "Sentinel-1",
+          "band": "C-band (5.6 cm)",
+          "polarization": "\u0394VH",
+          "acquisition_date": "2024-10-13",
+          "granule_id": "S1A_IW_GRDH_1SDV_20241013T094050_20241013T094115_056082_06DC84_rtc",
+          "asset_path": "assets/phen_clearing_delta_vh.png",
+          "bbox": [
+            -60.0,
+            -7.5,
+            -59.5,
+            -7.0
+          ],
+          "stats": {
+            "canopy_loss_gt2db_pct": 1.75,
+            "severe_clearing_gt4db_pct": 0.06
+          },
+          "legend": [
+            {
+              "label": "Severe Clearing / Burn Scar (\u0394VH \u2264 -4 dB)",
+              "color": "#F43F5E"
+            },
+            {
+              "label": "Canopy Thinning (-4 < \u0394VH \u2264 -2 dB)",
+              "color": "#FF9100"
+            }
+          ],
+          "source_id": "pc_s1_rtc"
+        },
+        {
+          "id": "phen_clearing_dist",
+          "title": "NASA OPERA DIST-ALERT-S1 Disturbance (2026)",
+          "role": "alerts",
+          "sensor": "Sentinel-1 (OPERA)",
+          "band": "C-band (5.6 cm)",
+          "polarization": "GEN-DIST-CONF",
+          "acquisition_date": "2026-02-24",
+          "granule_id": "OPERA_L3_DIST-ALERT-S1_T20MRS_20260224T093234Z_20260715T101215Z_S1A_30_v1.0",
+          "asset_path": "assets/phen_clearing_opera_dist.png",
+          "bbox": [
+            -60.0,
+            -7.5,
+            -59.5,
+            -7.0
+          ],
+          "stats": {
+            "disturbed_pixels_pct": 11.71,
+            "high_conf_pct": 5.17
+          },
+          "legend": [
+            {
+              "label": "Severe Clearing / Burn Scar (\u0394VH \u2264 -4 dB)",
+              "color": "#F43F5E"
+            },
+            {
+              "label": "Canopy Thinning (-4 < \u0394VH \u2264 -2 dB)",
+              "color": "#FF9100"
+            }
+          ],
+          "source_id": "opera_dist_alert_s1"
+        },
+        {
+          "id": "phen_clearing_nisar",
+          "title": "NISAR L-Band over Apu\u00ed Frontier (Oct 2026)",
+          "role": "rgb",
+          "sensor": "NISAR",
+          "band": "L-band (24 cm)",
+          "polarization": "SHSH",
+          "acquisition_date": "2026-10-21",
+          "granule_id": "NISAR_L2_PR_GCOV_033_140_D_092_2005_SHSH_A_20261021T221736_20261021T221811_P05036_N_F_J_001",
+          "asset_path": "assets/phen_clearing_nisar_rgb.png",
+          "bbox": [
+            -60.0,
+            -7.5,
+            -59.5,
+            -7.0
+          ],
+          "stats": {
+            "qa_status": "WARN"
+          },
+          "legend": [
+            {
+              "label": "Red/Gold: L-band HHHH Trunk & Double-Bounce",
+              "color": "#F472B6"
+            },
+            {
+              "label": "Green: L-band HVHV Woody Canopy Biomass",
+              "color": "#34D399"
+            },
+            {
+              "label": "Dark: Specular Open River Channels",
+              "color": "#1E293B"
+            }
+          ],
+          "source_id": "nisar_gcov_v1"
+        }
+      ],
+      "seasonal_rhythm": [
+        {
+          "month_num": 1,
+          "label": "Jan",
+          "discharge_m3s": 5.4,
+          "precip_mm": 283.7,
+          "fire_hotspots": 376
+        },
+        {
+          "month_num": 2,
+          "label": "Feb",
+          "discharge_m3s": 7.9,
+          "precip_mm": 341.5,
+          "fire_hotspots": 361
+        },
+        {
+          "month_num": 3,
+          "label": "Mar",
+          "discharge_m3s": 9.1,
+          "precip_mm": 320.4,
+          "fire_hotspots": 429
+        },
+        {
+          "month_num": 4,
+          "label": "Apr",
+          "discharge_m3s": 9.3,
+          "precip_mm": 222.5,
+          "fire_hotspots": 291
+        },
+        {
+          "month_num": 5,
+          "label": "May",
+          "discharge_m3s": 6.7,
+          "precip_mm": 91.9,
+          "fire_hotspots": 1602
+        },
+        {
+          "month_num": 6,
+          "label": "Jun",
+          "discharge_m3s": 3.7,
+          "precip_mm": 37.7,
+          "fire_hotspots": 2955
+        },
+        {
+          "month_num": 7,
+          "label": "Jul",
+          "discharge_m3s": 1.9,
+          "precip_mm": 10.6,
+          "fire_hotspots": 5181
+        },
+        {
+          "month_num": 8,
+          "label": "Aug",
+          "discharge_m3s": 1.0,
+          "precip_mm": 31.8,
+          "fire_hotspots": 23064
+        },
+        {
+          "month_num": 9,
+          "label": "Sep",
+          "discharge_m3s": 0.7,
+          "precip_mm": 58.8,
+          "fire_hotspots": 26715
+        },
+        {
+          "month_num": 10,
+          "label": "Oct",
+          "discharge_m3s": 0.8,
+          "precip_mm": 135.3,
+          "fire_hotspots": 11619
+        },
+        {
+          "month_num": 11,
+          "label": "Nov",
+          "discharge_m3s": 1.5,
+          "precip_mm": 145.7,
+          "fire_hotspots": 6260
+        },
+        {
+          "month_num": 12,
+          "label": "Dec",
+          "discharge_m3s": 2.8,
+          "precip_mm": 221.0,
+          "fire_hotspots": 1555
+        }
+      ]
+    },
+    {
+      "id": "fire_season",
+      "name": "Fire season",
+      "typical_timing": "Aug - Oct (peak ~Sep)",
+      "months": [
+        8,
+        9,
+        10
+      ],
+      "peak_months": [
+        9
+      ],
+      "color": "#F43F5E",
+      "region_id": "apui_labrea",
+      "bbox": [
+        -60.5,
+        -8.5,
+        -58.5,
+        -6.5
+      ],
+      "center": [
+        -59.5,
+        -7.5
+      ],
+      "summary": "Peak Amazon burning season (Aug\u2013Oct, climaxing in Sep). Thick smoke chokes optical imaging for weeks\u2014precisely where active SAR microwave pulses see through smoke plumes to map burned scars alongside NASA FIRMS thermal detections.",
+      "sar_physics": {
+        "primary_sensitivity": "Roughness Shift + Smoke-Penetrating Burn Scar Mapping",
+        "roughness_mechanism": "Fire consumes fine leaves and twigs (reducing cross-pol volume scatter) while leaving charred bare soil and skeletal standing snags exposed to radar pulses.",
+        "dielectric_mechanism": "Intense heat vaporizes surface soil and litter moisture, dropping the surface dielectric constant sharply until the first Nov\u2013Dec rains trigger post-fire ash runoff.",
+        "polarization_note": "Pre-fire vs. post-fire \u0394VH (-2.0 to -4.5 dB drop) combined with NASA FIRMS thermal hotspots separates active burn scars from unburned smoke-covered forest.",
+        "frequency_comparison": "Both C-band (5.6 cm) and L-band (24 cm) penetrate dense biomass smoke without attenuation; L-band distinguishes understory ground fires (snags left) from stand-replacing clear-cuts."
+      },
+      "drivers": {
+        "natural_driver": "Late-dry VPD spike and drought-desiccated litter turn escaped agricultural fires into megafires.",
+        "human_driver": "Broadcast ignition of Jun\u2013Aug felled slash to clear pastures and enrich soil ash nutrients."
+      },
+      "default_layer_id": "phen_fire_firms",
+      "layers": [
+        {
+          "id": "phen_fire_firms",
+          "title": "NASA FIRMS Active Fire Density (Sep Peak)",
+          "role": "thermal",
+          "sensor": "MODIS C6.1",
+          "band": "Thermal IR",
+          "polarization": "Hotspots",
+          "acquisition_date": "2024-08-01..2024-10-31",
+          "granule_id": "MODIS_C61_Brazil_2024",
+          "asset_path": "assets/fire_apui_2024.png",
+          "bbox": [
+            -60.5,
+            -8.5,
+            -58.5,
+            -6.5
+          ],
+          "stats": {
+            "high_conf_detections": 5144
+          },
+          "legend": [
+            {
+              "label": "Extreme Fire Cluster (MODIS C6.1)",
+              "color": "#FFEE58"
+            },
+            {
+              "label": "Active Clearing/Slash Fire Front",
+              "color": "#FF6D00"
+            }
+          ],
+          "source_id": "firms_modis"
+        },
+        {
+          "id": "phen_fire_burn_vh",
+          "title": "Sentinel-1 Smoke-Penetrating Burn Scars (\u0394VH)",
+          "role": "change",
+          "sensor": "Sentinel-1",
+          "band": "C-band (5.6 cm)",
+          "polarization": "\u0394VH",
+          "acquisition_date": "2024-10-13",
+          "granule_id": "S1A_IW_GRDH_1SDV_20241013T094050_20241013T094115_056082_06DC84_rtc",
+          "asset_path": "assets/evt3_apui2024_scars.png",
+          "bbox": [
+            -60.0,
+            -7.5,
+            -59.5,
+            -7.0
+          ],
+          "stats": {
+            "canopy_loss_gt2db_pct": 4.22,
+            "severe_clearing_gt4db_pct": 0.13
+          },
+          "legend": [
+            {
+              "label": "Severe Clearing / Burn Scar (\u0394VH \u2264 -4 dB)",
+              "color": "#F43F5E"
+            },
+            {
+              "label": "Canopy Thinning (-4 < \u0394VH \u2264 -2 dB)",
+              "color": "#FF9100"
+            }
+          ],
+          "source_id": "pc_s1_rtc"
+        }
+      ],
+      "seasonal_rhythm": [
+        {
+          "month_num": 1,
+          "label": "Jan",
+          "discharge_m3s": 5.4,
+          "precip_mm": 283.7,
+          "fire_hotspots": 376
+        },
+        {
+          "month_num": 2,
+          "label": "Feb",
+          "discharge_m3s": 7.9,
+          "precip_mm": 341.5,
+          "fire_hotspots": 361
+        },
+        {
+          "month_num": 3,
+          "label": "Mar",
+          "discharge_m3s": 9.1,
+          "precip_mm": 320.4,
+          "fire_hotspots": 429
+        },
+        {
+          "month_num": 4,
+          "label": "Apr",
+          "discharge_m3s": 9.3,
+          "precip_mm": 222.5,
+          "fire_hotspots": 291
+        },
+        {
+          "month_num": 5,
+          "label": "May",
+          "discharge_m3s": 6.7,
+          "precip_mm": 91.9,
+          "fire_hotspots": 1602
+        },
+        {
+          "month_num": 6,
+          "label": "Jun",
+          "discharge_m3s": 3.7,
+          "precip_mm": 37.7,
+          "fire_hotspots": 2955
+        },
+        {
+          "month_num": 7,
+          "label": "Jul",
+          "discharge_m3s": 1.9,
+          "precip_mm": 10.6,
+          "fire_hotspots": 5181
+        },
+        {
+          "month_num": 8,
+          "label": "Aug",
+          "discharge_m3s": 1.0,
+          "precip_mm": 31.8,
+          "fire_hotspots": 23064
+        },
+        {
+          "month_num": 9,
+          "label": "Sep",
+          "discharge_m3s": 0.7,
+          "precip_mm": 58.8,
+          "fire_hotspots": 26715
+        },
+        {
+          "month_num": 10,
+          "label": "Oct",
+          "discharge_m3s": 0.8,
+          "precip_mm": 135.3,
+          "fire_hotspots": 11619
+        },
+        {
+          "month_num": 11,
+          "label": "Nov",
+          "discharge_m3s": 1.5,
+          "precip_mm": 145.7,
+          "fire_hotspots": 6260
+        },
+        {
+          "month_num": 12,
+          "label": "Dec",
+          "discharge_m3s": 2.8,
+          "precip_mm": 221.0,
+          "fire_hotspots": 1555
+        }
+      ]
+    },
+    {
+      "id": "low_river_levels",
+      "name": "Low river levels",
+      "typical_timing": "Aug - Oct (lowest ~Sep/Oct)",
+      "months": [
+        8,
+        9,
+        10
+      ],
+      "peak_months": [
+        9,
+        10
+      ],
+      "color": "#A855F7",
+      "region_id": "porto_velho",
+      "bbox": [
+        -64.05,
+        -8.9,
+        -63.7,
+        -8.55
+      ],
+      "center": [
+        -63.875,
+        -8.725
+      ],
+      "summary": "Annual Amazon hydrologic trough (Aug\u2013Oct, lowest stage ~Sep/Oct). Shrinking channels expose kilometer-wide sandbars, mudflats, and bedrock rapids\u2014severing river transport for rural communities across the Madeira, Solim\u00f5es, and Rio Negro.",
+      "sar_physics": {
+        "primary_sensitivity": "Roughness Inversion (Smooth Mirror Water -> Bright Rough Sandbars)",
+        "roughness_mechanism": "When flooded, smooth river water reflects microwaves away like a mirror (<-16 dB). As water drops in Sep\u2013Oct, rippled sandbars, mudflats, and rocks replace water\u2014jumping +4 to +8 dB brighter in C- and L-band!",
+        "dielectric_mechanism": "Drying exposed riverbeds rapidly lose water dielectric response while gaining rough geometric micro-relief that backscatters strongly to SAR.",
+        "polarization_note": "OPERA DSWx-S1 shrinks water masks cleanly to thin low-flow threads while \u0394VV highlights every newly exposed sandbar shoal blocking river barges.",
+        "frequency_comparison": "C-band (5.6 cm) is acutely sensitive to small centimeter-scale sand ripples on newly exposed bars; L-band (24 cm) differentiates smoother wet mudflats from coarser cobbles."
+      },
+      "drivers": {
+        "natural_driver": "Seasonal baseflow recession peaking Sep\u2013Oct, pushed to extremes by 2023/2024 warm-Atlantic/El Ni\u00f1o droughts.",
+        "human_driver": "Marooned river supply barges, drinking-water shortages, and hydropower generation cuts on Rio Madeira."
+      },
+      "default_layer_id": "phen_low_sandbars_dvv",
+      "layers": [
+        {
+          "id": "phen_low_sandbars_dvv",
+          "title": "Exposed Sandbars Roughness Rise (Sep \u0394VV)",
+          "role": "change",
+          "sensor": "Sentinel-1",
+          "band": "C-band (5.6 cm)",
+          "polarization": "\u0394VV",
+          "acquisition_date": "2024-09-05",
+          "granule_id": "S1A_IW_GRDH_1SDV_20240905T095741_20240905T095806_055528_06C69B_rtc",
+          "asset_path": "assets/phen_low_sandbars_dvv.png",
+          "bbox": [
+            -64.05,
+            -8.9,
+            -63.7,
+            -8.55
+          ],
+          "stats": {
+            "exposed_sandbar_pct": 0.47,
+            "receded_shoal_pct": 0.25
+          },
+          "legend": [
+            {
+              "label": "Exposed Rough Sandbars (\u0394VV \u2265 +3 dB)",
+              "color": "#FACC15"
+            },
+            {
+              "label": "Shallow Drying Shoals (+1.5..+3 dB)",
+              "color": "#A855F7"
+            }
+          ],
+          "source_id": "pc_s1_rtc"
+        },
+        {
+          "id": "phen_low_opera_dswx",
+          "title": "OPERA DSWx-S1 Contracted Madeira Channel (Sep)",
+          "role": "classification",
+          "sensor": "Sentinel-1 (OPERA)",
+          "band": "C-band (5.6 cm)",
+          "polarization": "VV+VH -> WTR",
+          "acquisition_date": "2024-10-11",
+          "granule_id": "OPERA_L3_DSWx-S1_T20LLR_20241011T095735Z_20241011T170138Z_S1A_30_v1.0",
+          "asset_path": "assets/phen_low_madeira_dswx.png",
+          "bbox": [
+            -64.05,
+            -8.9,
+            -63.7,
+            -8.55
+          ],
+          "stats": {
+            "open_water_pct": 5.79,
+            "partial_water_pct": 0.0,
+            "inundated_vegetation_pct": 2.13
+          },
+          "legend": [
+            {
+              "label": "Open Water (Class 1)",
+              "color": "#00E5FF"
+            },
+            {
+              "label": "Partial Surface Water (Class 2)",
+              "color": "#40C4FF"
+            },
+            {
+              "label": "Inundated Vegetation (Class 3)",
+              "color": "#00E676"
+            }
+          ],
+          "source_id": "opera_dswx_s1"
+        }
+      ],
+      "seasonal_rhythm": [
+        {
+          "month_num": 1,
+          "label": "Jan",
+          "discharge_m3s": 25525.3,
+          "precip_mm": 314.1,
+          "fire_hotspots": 376
+        },
+        {
+          "month_num": 2,
+          "label": "Feb",
+          "discharge_m3s": 31960.5,
+          "precip_mm": 300.4,
+          "fire_hotspots": 361
+        },
+        {
+          "month_num": 3,
+          "label": "Mar",
+          "discharge_m3s": 35276.0,
+          "precip_mm": 294.5,
+          "fire_hotspots": 429
+        },
+        {
+          "month_num": 4,
+          "label": "Apr",
+          "discharge_m3s": 32334.0,
+          "precip_mm": 251.3,
+          "fire_hotspots": 291
+        },
+        {
+          "month_num": 5,
+          "label": "May",
+          "discharge_m3s": 20837.1,
+          "precip_mm": 105.2,
+          "fire_hotspots": 1602
+        },
+        {
+          "month_num": 6,
+          "label": "Jun",
+          "discharge_m3s": 11787.3,
+          "precip_mm": 40.4,
+          "fire_hotspots": 2955
+        },
+        {
+          "month_num": 7,
+          "label": "Jul",
+          "discharge_m3s": 7371.6,
+          "precip_mm": 10.4,
+          "fire_hotspots": 5181
+        },
+        {
+          "month_num": 8,
+          "label": "Aug",
+          "discharge_m3s": 5945.0,
+          "precip_mm": 48.4,
+          "fire_hotspots": 23064
+        },
+        {
+          "month_num": 9,
+          "label": "Sep",
+          "discharge_m3s": 4996.6,
+          "precip_mm": 74.7,
+          "fire_hotspots": 26715
+        },
+        {
+          "month_num": 10,
+          "label": "Oct",
+          "discharge_m3s": 4879.0,
+          "precip_mm": 130.3,
+          "fire_hotspots": 11619
+        },
+        {
+          "month_num": 11,
+          "label": "Nov",
+          "discharge_m3s": 7595.8,
+          "precip_mm": 205.2,
+          "fire_hotspots": 6260
+        },
+        {
+          "month_num": 12,
+          "label": "Dec",
+          "discharge_m3s": 14798.7,
+          "precip_mm": 258.8,
+          "fire_hotspots": 1555
+        }
+      ]
+    }
+  ],
+  "events": [
+    {
+      "id": "manaus_flood_2021",
+      "name": "Record Rio Negro flood (Manaus)",
+      "timing": "Jun 2021",
+      "timeline_month": "2021-06",
+      "color": "#00E5FF",
+      "region_id": "manaus",
+      "bbox": [
+        -60.35,
+        -3.35,
+        -59.7,
+        -2.95
+      ],
+      "center": [
+        -60.025,
+        -3.15
+      ],
+      "headline_metric": "30.02 m crest at Porto de Manaus (119-yr record, Jun 2021)",
+      "summary": "In June 2021, the Rio Negro crested at an all-time record 30.02 m in Manaus after intense La Ni\u00f1a rainfall. Sentinel-1 C-band and ALOS-2 L-band SAR expose both expanded open channels and miles of submerged igap\u00f3/v\u00e1rzea forest hidden beneath intact tree crowns.",
+      "sar_physics": {
+        "primary_sensitivity": "Dielectric Flood Inundation & Sub-Canopy Double-Bounce",
+        "roughness_mechanism": "Calm flood lakes act as smooth specular mirrors (VV < -15 dB, dark cyan), while flooded tree trunks create intense vertical-horizontal corner reflectors (emerald/violet).",
+        "dielectric_mechanism": "Rising water fills the floodplain floor with \u03b5r \u2248 80 liquid water, jumping trunk\u2013water dihedral backscatter +3.8 to +5.5 dB higher than the Oct 2020 low-water baseline.",
+        "polarization_note": "Compare Event Peak (Jun 2021) vs. Low-Water Baseline (Oct 2020): VV double-bounce + HH L-band penetration reveal where water stood inside closed forest.",
+        "frequency_comparison": "C-band (5.6 cm) captures open flooded avenues and low v\u00e1rzea scrub; 24 cm L-band penetrates tall dense igap\u00f3 crowns along Rio Negro islands."
+      },
+      "drivers": {
+        "natural_driver": "La Ni\u00f1a convective reinforcement flooded the northern Negro & western Solim\u00f5es sub-basins simultaneously.",
+        "human_driver": "Submerged urban waterfronts, floating bridges, and inundated peri-urban neighborhoods in Manaus & Iranduba."
+      },
+      "default_layer_id": "evt1_classes",
+      "comparison_pair": {
+        "before_label": "Low-Water Baseline (2020-10-10)",
+        "after_label": "Record Flood Crest (2021-06-19)",
+        "delta_summary": "+4.34% new open water & 0.99% flooded igap\u00f3",
+        "histogram": [
+          {
+            "range_db": "-24..-21",
+            "mid_db": -22.5,
+            "before_pct": 4.9,
+            "after_pct": 1.9
+          },
+          {
+            "range_db": "-21..-18",
+            "mid_db": -19.5,
+            "before_pct": 10.3,
+            "after_pct": 11.6
+          },
+          {
+            "range_db": "-18..-15",
+            "mid_db": -16.5,
+            "before_pct": 3.2,
+            "after_pct": 9.1
+          },
+          {
+            "range_db": "-15..-12",
+            "mid_db": -13.5,
+            "before_pct": 1.7,
+            "after_pct": 3.4
+          },
+          {
+            "range_db": "-12..-9",
+            "mid_db": -10.5,
+            "before_pct": 3.1,
+            "after_pct": 5.8
+          },
+          {
+            "range_db": "-9..-6",
+            "mid_db": -7.5,
+            "before_pct": 59.6,
+            "after_pct": 39.6
+          },
+          {
+            "range_db": "-6..-3",
+            "mid_db": -4.5,
+            "before_pct": 14.5,
+            "after_pct": 25.9
+          },
+          {
+            "range_db": "-3..0",
+            "mid_db": -1.5,
+            "before_pct": 2.3,
+            "after_pct": 2.2
+          },
+          {
+            "range_db": "0..3",
+            "mid_db": 1.5,
+            "before_pct": 0.5,
+            "after_pct": 0.5
+          }
+        ]
+      },
+      "layers": [
+        {
+          "id": "evt1_classes",
+          "title": "Flood Classification & Flooded Forest",
+          "role": "classification",
+          "sensor": "Sentinel-1",
+          "band": "C-band (5.6 cm)",
+          "polarization": "VV + VH",
+          "acquisition_date": "2021-06-19",
+          "granule_id": "S1A_IW_GRDH_1SDV_20210619T093925_20210619T093950_038407_04883E_rtc",
+          "asset_path": "assets/evt1_manaus2021_classes.png",
+          "bbox": [
+            -60.35,
+            -3.35,
+            -59.7,
+            -2.95
+          ],
+          "stats": {
+            "open_water_pct": 22.44,
+            "flooded_forest_pct": 0.99
+          },
+          "legend": [
+            {
+              "label": "Open Flood Water (VV<-15, VH<-19 dB)",
+              "color": "#00E5FF"
+            },
+            {
+              "label": "Flooded Igap\u00f3/V\u00e1rzea Canopy (+\u0394VV)",
+              "color": "#00E676"
+            }
+          ],
+          "source_id": "pc_s1_rtc"
+        },
+        {
+          "id": "evt1_peak",
+          "title": "Flood Crest VV Backscatter (Jun 2021)",
+          "role": "after",
+          "sensor": "Sentinel-1",
+          "band": "C-band (5.6 cm)",
+          "polarization": "VV",
+          "acquisition_date": "2021-06-19",
+          "granule_id": "S1A_IW_GRDH_1SDV_20210619T093925_20210619T093950_038407_04883E_rtc",
+          "asset_path": "assets/evt1_manaus2021_peak_vv.png",
+          "bbox": [
+            -60.35,
+            -3.35,
+            -59.7,
+            -2.95
+          ],
+          "stats": {
+            "p10_db": -18.65,
+            "median_db": -6.63,
+            "p90_db": -5.51
+          },
+          "legend": [
+            {
+              "label": "Smooth Water (<-15 dB)",
+              "color": "#111827"
+            },
+            {
+              "label": "Rainforest Canopy (-9 to -6 dB)",
+              "color": "#9CA3AF"
+            },
+            {
+              "label": "Flooded Forest Double-Bounce (>-5 dB)",
+              "color": "#F9FAFB"
+            }
+          ],
+          "source_id": "pc_s1_rtc"
+        },
+        {
+          "id": "evt1_base",
+          "title": "Low-Water Baseline VV (Oct 2020)",
+          "role": "before",
+          "sensor": "Sentinel-1",
+          "band": "C-band (5.6 cm)",
+          "polarization": "VV",
+          "acquisition_date": "2020-10-10",
+          "granule_id": "S1A_IW_GRDH_1SDV_20201010T093924_20201010T093949_034732_040BDF_rtc",
+          "asset_path": "assets/evt1_manaus2020_base_vv.png",
+          "bbox": [
+            -60.35,
+            -3.35,
+            -59.7,
+            -2.95
+          ],
+          "stats": {
+            "p10_db": -19.93,
+            "median_db": -6.62,
+            "p90_db": -5.7
+          },
+          "legend": [
+            {
+              "label": "Smooth Water (<-15 dB)",
+              "color": "#111827"
+            },
+            {
+              "label": "Rainforest Canopy (-9 to -6 dB)",
+              "color": "#9CA3AF"
+            },
+            {
+              "label": "Flooded Forest Double-Bounce (>-5 dB)",
+              "color": "#F9FAFB"
+            }
+          ],
+          "source_id": "pc_s1_rtc"
+        },
+        {
+          "id": "evt1_change",
+          "title": "Flood Expansion (+New Water)",
+          "role": "change",
+          "sensor": "Sentinel-1",
+          "band": "C-band (5.6 cm)",
+          "polarization": "\u0394VV/\u0394VH",
+          "acquisition_date": "2021-06-19",
+          "granule_id": "S1A_IW_GRDH_1SDV_20210619T093925_20210619T093950_038407_04883E_rtc",
+          "asset_path": "assets/evt1_manaus2021_change.png",
+          "bbox": [
+            -60.35,
+            -3.35,
+            -59.7,
+            -2.95
+          ],
+          "stats": {
+            "new_water_pct": 4.34,
+            "lost_water_pct": 0.11
+          },
+          "legend": [
+            {
+              "label": "New Flood Water / Gain",
+              "color": "#00E5FF"
+            },
+            {
+              "label": "Lost Water / Exposed Sandbars",
+              "color": "#F59E0B"
+            },
+            {
+              "label": "Permanent River Channel",
+              "color": "#1565C0"
+            }
+          ],
+          "source_id": "pc_s1_rtc"
+        }
+      ]
+    },
+    {
+      "id": "severe_drought_2023",
+      "name": "Severe drought",
+      "timing": "Sep - Nov 2023",
+      "timeline_month": "2023-10",
+      "color": "#F59E0B",
+      "region_id": "tefe",
+      "bbox": [
+        -64.85,
+        -3.45,
+        -64.55,
+        -3.2
+      ],
+      "center": [
+        -64.7,
+        -3.325
+      ],
+      "headline_metric": "Manaus 12.70 m \u00b7 Lake Tef\u00e9 39.1 \u00b0C & dramatic shoreline contraction",
+      "summary": "From September to November 2023, an extraordinary El Ni\u00f1o + warm Tropical North Atlantic drought shrank central Amazon lakes and rivers. Over Lake Tef\u00e9 & Rio Solim\u00f5es, Sentinel-1 SAR maps wide dark open water turning into bright radar-rough exposed mudflats and sandbars.",
+      "sar_physics": {
+        "primary_sensitivity": "Roughness Inversion as Specular Lake Becomes Exposed Mudflats",
+        "roughness_mechanism": "Receding Lake Tef\u00e9 shoreline replaces mirror-smooth open water (-17 dB) with rough cracked silt beds and sandbars (-9 to -5 dB), producing a dramatic +6 dB brightening.",
+        "dielectric_mechanism": "Loss of open surface water and drying v\u00e1rzea soil drops dielectric wetness across hundreds of square kilometers of formerly submerged Mamirau\u00e1 wetlands.",
+        "polarization_note": "Sentinel-1 VV cleanly delineates the shrinking water polygon (-Water contraction mask) between May 2023 High Water and Oct 2023 Extreme Drought.",
+        "frequency_comparison": "C-band (5.6 cm) VV sharply resolves every newly stranded sandbank along Solim\u00f5es meanders and Lake Tef\u00e9 thermal refuges."
+      },
+      "drivers": {
+        "natural_driver": "Compound 2023 El Ni\u00f1o + record North Atlantic sea-surface heat suppressed wet-season inflow and triggered Oct extremes.",
+        "human_driver": "Isolated river towns requiring emergency barges; mass dolphin mortality in shallowed 39.1 \u00b0C Lake Tef\u00e9."
+      },
+      "default_layer_id": "evt2_change",
+      "comparison_pair": {
+        "before_label": "High-Water Baseline (2023-05-19)",
+        "after_label": "Severe Drought Peak (2023-10-22)",
+        "delta_summary": "-13.45% water area contracted into rough sandbars/mudflats",
+        "histogram": [
+          {
+            "range_db": "-24..-21",
+            "mid_db": -22.5,
+            "before_pct": 0.0,
+            "after_pct": 0.0
+          },
+          {
+            "range_db": "-21..-18",
+            "mid_db": -19.5,
+            "before_pct": 16.1,
+            "after_pct": 1.5
+          },
+          {
+            "range_db": "-18..-15",
+            "mid_db": -16.5,
+            "before_pct": 11.0,
+            "after_pct": 7.8
+          },
+          {
+            "range_db": "-15..-12",
+            "mid_db": -13.5,
+            "before_pct": 2.1,
+            "after_pct": 7.3
+          },
+          {
+            "range_db": "-12..-9",
+            "mid_db": -10.5,
+            "before_pct": 1.9,
+            "after_pct": 7.5
+          },
+          {
+            "range_db": "-9..-6",
+            "mid_db": -7.5,
+            "before_pct": 23.1,
+            "after_pct": 66.2
+          },
+          {
+            "range_db": "-6..-3",
+            "mid_db": -4.5,
+            "before_pct": 45.6,
+            "after_pct": 9.3
+          },
+          {
+            "range_db": "-3..0",
+            "mid_db": -1.5,
+            "before_pct": 0.2,
+            "after_pct": 0.2
+          },
+          {
+            "range_db": "0..3",
+            "mid_db": 1.5,
+            "before_pct": 0.1,
+            "after_pct": 0.0
+          }
+        ]
+      },
+      "layers": [
+        {
+          "id": "evt2_change",
+          "title": "Lake Tef\u00e9 Drought Contraction",
+          "role": "change",
+          "sensor": "Sentinel-1",
+          "band": "C-band (5.6 cm)",
+          "polarization": "\u0394VV/\u0394VH",
+          "acquisition_date": "2023-10-22",
+          "granule_id": "S1A_IW_GRDH_1SDV_20231022T100428_20231022T100453_050876_0621D8_rtc",
+          "asset_path": "assets/evt2_tefe2023_change.png",
+          "bbox": [
+            -64.85,
+            -3.45,
+            -64.55,
+            -3.2
+          ],
+          "stats": {
+            "new_water_pct": 0.2,
+            "lost_water_pct": 13.45
+          },
+          "legend": [
+            {
+              "label": "New Flood Water / Gain",
+              "color": "#00E5FF"
+            },
+            {
+              "label": "Lost Water / Exposed Sandbars",
+              "color": "#F59E0B"
+            },
+            {
+              "label": "Permanent River Channel",
+              "color": "#1565C0"
+            }
+          ],
+          "source_id": "pc_s1_rtc"
+        },
+        {
+          "id": "evt2_peak",
+          "title": "Extreme Drought VV (Oct 2023)",
+          "role": "after",
+          "sensor": "Sentinel-1",
+          "band": "C-band (5.6 cm)",
+          "polarization": "VV",
+          "acquisition_date": "2023-10-22",
+          "granule_id": "S1A_IW_GRDH_1SDV_20231022T100428_20231022T100453_050876_0621D8_rtc",
+          "asset_path": "assets/evt2_tefe2023_drought_vv.png",
+          "bbox": [
+            -64.85,
+            -3.45,
+            -64.55,
+            -3.2
+          ],
+          "stats": {
+            "p10_db": -14.87,
+            "median_db": -6.59,
+            "p90_db": -6.01
+          },
+          "legend": [
+            {
+              "label": "Smooth Water (<-15 dB)",
+              "color": "#111827"
+            },
+            {
+              "label": "Rainforest Canopy (-9 to -6 dB)",
+              "color": "#9CA3AF"
+            },
+            {
+              "label": "Flooded Forest Double-Bounce (>-5 dB)",
+              "color": "#F9FAFB"
+            }
+          ],
+          "source_id": "pc_s1_rtc"
+        },
+        {
+          "id": "evt2_base",
+          "title": "High-Water Baseline VV (May 2023)",
+          "role": "before",
+          "sensor": "Sentinel-1",
+          "band": "C-band (5.6 cm)",
+          "polarization": "VV",
+          "acquisition_date": "2023-05-19",
+          "granule_id": "S1A_IW_GRDH_1SDV_20230519T100421_20230519T100446_048601_05D86E_rtc",
+          "asset_path": "assets/evt2_tefe2023_wet_vv.png",
+          "bbox": [
+            -64.85,
+            -3.45,
+            -64.55,
+            -3.2
+          ],
+          "stats": {
+            "p10_db": -19.19,
+            "median_db": -6.1,
+            "p90_db": -5.41
+          },
+          "legend": [
+            {
+              "label": "Smooth Water (<-15 dB)",
+              "color": "#111827"
+            },
+            {
+              "label": "Rainforest Canopy (-9 to -6 dB)",
+              "color": "#9CA3AF"
+            },
+            {
+              "label": "Flooded Forest Double-Bounce (>-5 dB)",
+              "color": "#F9FAFB"
+            }
+          ],
+          "source_id": "pc_s1_rtc"
+        }
+      ]
+    },
+    {
+      "id": "drought_fires_2024",
+      "name": "Record drought and fires",
+      "timing": "Aug - Oct 2024",
+      "timeline_month": "2024-09",
+      "color": "#EF4444",
+      "region_id": "apui_labrea",
+      "bbox": [
+        -60.5,
+        -8.5,
+        -58.5,
+        -6.5
+      ],
+      "sar_clearing_bbox": [
+        -60.0,
+        -7.5,
+        -59.5,
+        -7.0
+      ],
+      "center": [
+        -59.75,
+        -7.25
+      ],
+      "headline_metric": "Manaus record 12.11 m \u00b7 140,328 INPE biome fire hotspots (Aug\u2013Oct 2024)",
+      "summary": "Worse than 2023: Aug\u2013Oct 2024 broke all-time low water records (Manaus 12.11 m, Madeira 1.24 m) while fueling massive fires across southern Amazonas (Apu\u00ed\u2013L\u00e1brea). Cloud- & smoke-penetrating Sentinel-1 \u0394VH exposes deforestation clearings and fire scars hidden beneath choking smoke.",
+      "sar_physics": {
+        "primary_sensitivity": "Volume Scattering Loss & Smoke-Penetrating Burn Scars",
+        "roughness_mechanism": "Freshly burned and cleared plots lose dense foliage volume scatterers, causing C-band VH backscatter to plummet -2.0 to -4.8 dB along BR-230 expansion fishbones.",
+        "dielectric_mechanism": "Extreme dry-season VPD dries dead slash and standing peat/litter soils, allowing fires to spread into untouched upland forest edges.",
+        "polarization_note": "Pre-fire (Jul 2024) vs. Post-fire (Oct 2024) Sentinel-1 VH difference directly maps structural canopy loss beneath thick optical smoke haze.",
+        "frequency_comparison": "Fusing NASA FIRMS thermal detections (8\u201310 \u03bcm infrared) with 5.6 cm SAR VH change locates both active flame fronts and lasting structural canopy scars."
+      },
+      "drivers": {
+        "natural_driver": "Multi-year 2023\u20132024 precipitation deficit left Amazon soils parched ahead of Aug\u2013Oct 2024 heat.",
+        "human_driver": "Intentional Jun\u2013Aug clearing along BR-230 escaped into drought-stressed rainforest during Sep ignition."
+      },
+      "default_layer_id": "evt3_scars",
+      "comparison_pair": {
+        "before_label": "Pre-Fire Dry Forest (2024-07-09)",
+        "after_label": "Post-Fire & Clearing (2024-10-13)",
+        "delta_summary": "4.22% canopy \u0394VH \u2264 -2 dB (0.13% severe) \u00b7 5,144 high-conf fires",
+        "histogram": [
+          {
+            "range_db": "-24..-21",
+            "mid_db": -22.5,
+            "before_pct": 0.0,
+            "after_pct": 0.0
+          },
+          {
+            "range_db": "-21..-18",
+            "mid_db": -19.5,
+            "before_pct": 0.0,
+            "after_pct": 0.0
+          },
+          {
+            "range_db": "-18..-15",
+            "mid_db": -16.5,
+            "before_pct": 2.5,
+            "after_pct": 8.3
+          },
+          {
+            "range_db": "-15..-12",
+            "mid_db": -13.5,
+            "before_pct": 97.4,
+            "after_pct": 91.0
+          },
+          {
+            "range_db": "-12..-9",
+            "mid_db": -10.5,
+            "before_pct": 0.0,
+            "after_pct": 0.6
+          },
+          {
+            "range_db": "-9..-6",
+            "mid_db": -7.5,
+            "before_pct": 0.0,
+            "after_pct": 0.0
+          },
+          {
+            "range_db": "-6..-3",
+            "mid_db": -4.5,
+            "before_pct": 0.0,
+            "after_pct": 0.0
+          },
+          {
+            "range_db": "-3..0",
+            "mid_db": -1.5,
+            "before_pct": 0.0,
+            "after_pct": 0.0
+          },
+          {
+            "range_db": "0..3",
+            "mid_db": 1.5,
+            "before_pct": 0.0,
+            "after_pct": 0.0
+          }
+        ]
+      },
+      "layers": [
+        {
+          "id": "evt3_scars",
+          "title": "Smoke-Penetrating Burn & Clearing Scars (\u0394VH)",
+          "role": "change",
+          "sensor": "Sentinel-1",
+          "band": "C-band (5.6 cm)",
+          "polarization": "\u0394VH",
+          "acquisition_date": "2024-10-13",
+          "granule_id": "S1A_IW_GRDH_1SDV_20241013T094050_20241013T094115_056082_06DC84_rtc",
+          "asset_path": "assets/evt3_apui2024_scars.png",
+          "bbox": [
+            -60.0,
+            -7.5,
+            -59.5,
+            -7.0
+          ],
+          "stats": {
+            "canopy_loss_gt2db_pct": 4.22,
+            "severe_clearing_gt4db_pct": 0.13
+          },
+          "legend": [
+            {
+              "label": "Severe Clearing / Burn Scar (\u0394VH \u2264 -4 dB)",
+              "color": "#F43F5E"
+            },
+            {
+              "label": "Canopy Thinning (-4 < \u0394VH \u2264 -2 dB)",
+              "color": "#FF9100"
+            }
+          ],
+          "source_id": "pc_s1_rtc"
+        },
+        {
+          "id": "evt3_fires",
+          "title": "NASA FIRMS Active Fire Hotspots (2024)",
+          "role": "thermal",
+          "sensor": "MODIS C6.1",
+          "band": "Thermal IR",
+          "polarization": "Hotspot Density",
+          "acquisition_date": "2024-08-01..2024-10-31",
+          "granule_id": "MODIS_C61_Brazil_2024",
+          "asset_path": "assets/fire_apui_2024.png",
+          "bbox": [
+            -60.5,
+            -8.5,
+            -58.5,
+            -6.5
+          ],
+          "stats": {
+            "high_conf_detections": 5144
+          },
+          "legend": [
+            {
+              "label": "Extreme Fire Cluster (MODIS C6.1)",
+              "color": "#FFEE58"
+            },
+            {
+              "label": "Active Clearing/Slash Fire Front",
+              "color": "#FF6D00"
+            }
+          ],
+          "source_id": "firms_modis"
+        },
+        {
+          "id": "evt3_peak",
+          "title": "Post-Fire VH Backscatter (Oct 2024)",
+          "role": "after",
+          "sensor": "Sentinel-1",
+          "band": "C-band (5.6 cm)",
+          "polarization": "VH",
+          "acquisition_date": "2024-10-13",
+          "granule_id": "S1A_IW_GRDH_1SDV_20241013T094050_20241013T094115_056082_06DC84_rtc",
+          "asset_path": "assets/evt3_apui2024_post_vh.png",
+          "bbox": [
+            -60.0,
+            -7.5,
+            -59.5,
+            -7.0
+          ],
+          "stats": {
+            "p10_db": -14.83,
+            "median_db": -12.97,
+            "p90_db": -12.44
+          },
+          "legend": [
+            {
+              "label": "Smooth Water (<-15 dB)",
+              "color": "#111827"
+            },
+            {
+              "label": "Rainforest Canopy (-9 to -6 dB)",
+              "color": "#9CA3AF"
+            },
+            {
+              "label": "Flooded Forest Double-Bounce (>-5 dB)",
+              "color": "#F9FAFB"
+            }
+          ],
+          "source_id": "pc_s1_rtc"
+        },
+        {
+          "id": "evt3_base",
+          "title": "Pre-Fire Baseline VH (Jul 2024)",
+          "role": "before",
+          "sensor": "Sentinel-1",
+          "band": "C-band (5.6 cm)",
+          "polarization": "VH",
+          "acquisition_date": "2024-07-09",
+          "granule_id": "S1A_IW_GRDH_1SDV_20240709T094049_20240709T094114_054682_06A842_rtc",
+          "asset_path": "assets/evt3_apui2024_pre_vh.png",
+          "bbox": [
+            -60.0,
+            -7.5,
+            -59.5,
+            -7.0
+          ],
+          "stats": {
+            "p10_db": -14.29,
+            "median_db": -12.99,
+            "p90_db": -12.46
+          },
+          "legend": [
+            {
+              "label": "Smooth Water (<-15 dB)",
+              "color": "#111827"
+            },
+            {
+              "label": "Rainforest Canopy (-9 to -6 dB)",
+              "color": "#9CA3AF"
+            },
+            {
+              "label": "Flooded Forest Double-Bounce (>-5 dB)",
+              "color": "#F9FAFB"
+            }
+          ],
+          "source_id": "pc_s1_rtc"
+        }
+      ]
+    },
+    {
+      "id": "nisar_lband_2026",
+      "name": "NISAR L-band acquisitions",
+      "timing": "Oct - Nov 2026",
+      "timeline_month": "2026-10",
+      "color": "#A78BFA",
+      "region_id": "manaus",
+      "bbox": [
+        -60.35,
+        -3.35,
+        -59.7,
+        -2.95
+      ],
+      "center": [
+        -60.025,
+        -3.15
+      ],
+      "headline_metric": "NASA-ISRO NISAR L-band (24 cm) GCOV Validated Passes (Oct\u2013Nov 2026 vs Jun 2026)",
+      "summary": "Real validated NASA-ISRO NISAR Level-2 GCOV dual-polarization (HHHH + HVHV) acquisitions over Manaus & the Amazon Basin (Oct 21 & Nov 2, 2026, Track 140), compared directly with June 2026 flood-peak NISAR data and simultaneous NASA OPERA Sentinel-1 C-band masks.",
+      "sar_physics": {
+        "primary_sensitivity": "24 cm L-Band Sub-Canopy Penetration & Co/Cross-Pol Separation",
+        "roughness_mechanism": "NISAR's 24 cm L-band wavelength passes through small twigs/leaves to scatter off major trunks, soil surface roughness, and smooth blackwater Rio Negro channels.",
+        "dielectric_mechanism": "Comparing Jun 2026 flood peak vs. Oct\u2013Nov 2026 dry transition on identical Track 140 shows flooded-forest HHHH double-bounce turning back to dry forest floor scattering.",
+        "polarization_note": "HHHH (co-pol) highlights specular water darkness and trunk-water double-bounce brightness; HVHV (cross-pol) quantitatively measures 3D woody forest biomass density.",
+        "frequency_comparison": "Overlay NISAR L-band (24 cm) beside simultaneous NASA OPERA DSWx-S1 Sentinel-1 C-band (5.6 cm) from Oct 2026 to see deep sub-canopy structure vs. upper-crown sensitivity."
+      },
+      "drivers": {
+        "natural_driver": "2026 Rio Negro flood-to-dry seasonal pulse captured across identical 12-day repeat NISAR orbits.",
+        "human_driver": "First operational L-band radar baseline over Manaus wetlands & Amazon deforestation arcs (Apu\u00ed & Madeira)."
+      },
+      "default_layer_id": "evt4_nisar_hhhh",
+      "comparison_pair": {
+        "before_label": "NISAR Flood Peak Track 140 (2026-06-23)",
+        "after_label": "NISAR Dry Transition Track 140 (2026-10-21)",
+        "delta_summary": "L-band HHHH median -6.6 dB vs HVHV -11.61 dB (+5.01 dB co/cross pol gap)",
+        "histogram": [
+          {
+            "range_db": "-26..-22",
+            "mid_db": -24.0,
+            "before_pct": 7.0,
+            "after_pct": 0.0
+          },
+          {
+            "range_db": "-22..-18",
+            "mid_db": -20.0,
+            "before_pct": 21.4,
+            "after_pct": 0.5
+          },
+          {
+            "range_db": "-18..-14",
+            "mid_db": -16.0,
+            "before_pct": 7.7,
+            "after_pct": 13.0
+          },
+          {
+            "range_db": "-14..-10",
+            "mid_db": -12.0,
+            "before_pct": 35.5,
+            "after_pct": 16.2
+          },
+          {
+            "range_db": "-10..-6",
+            "mid_db": -8.0,
+            "before_pct": 26.3,
+            "after_pct": 28.1
+          },
+          {
+            "range_db": "-6..-2",
+            "mid_db": -4.0,
+            "before_pct": 1.8,
+            "after_pct": 27.0
+          },
+          {
+            "range_db": "-2..2",
+            "mid_db": 0.0,
+            "before_pct": 0.3,
+            "after_pct": 15.2
+          }
+        ]
+      },
+      "layers": [
+        {
+          "id": "evt4_nisar_hhhh",
+          "title": "NISAR L-Band HHHH Co-Pol (dB, Trunk/Water)",
+          "role": "after",
+          "sensor": "NISAR",
+          "band": "L-band (24 cm)",
+          "polarization": "HHHH",
+          "acquisition_date": "2026-10-21",
+          "granule_id": "NISAR_L2_PR_GCOV_033_140_D_090_4005_DHDH_A_20261021T221629_20261021T221704_P05036_N_F_J_001",
+          "asset_path": "assets/evt4_nisar_oct2026_hhhh.png",
+          "bbox": [
+            -60.11777,
+            -3.24274,
+            -59.93323,
+            -3.05739
+          ],
+          "stats": {
+            "p10_db": -14.6,
+            "median_db": -6.6,
+            "p90_db": 0.22
+          },
+          "legend": [
+            {
+              "label": "Red/Gold: L-band HHHH Trunk & Double-Bounce",
+              "color": "#F472B6"
+            },
+            {
+              "label": "Green: L-band HVHV Woody Canopy Biomass",
+              "color": "#34D399"
+            },
+            {
+              "label": "Dark: Specular Open River Channels",
+              "color": "#1E293B"
+            }
+          ],
+          "source_id": "nisar_gcov_v1"
+        },
+        {
+          "id": "evt4_nisar_hvhv",
+          "title": "NISAR L-Band HVHV Cross-Pol (dB, Canopy Volume)",
+          "role": "polarization",
+          "sensor": "NISAR",
+          "band": "L-band (24 cm)",
+          "polarization": "HVHV",
+          "acquisition_date": "2026-10-21",
+          "granule_id": "NISAR_L2_PR_GCOV_033_140_D_090_4005_DHDH_A_20261021T221629_20261021T221704_P05036_N_F_J_001",
+          "asset_path": "assets/evt4_nisar_oct2026_hvhv.png",
+          "bbox": [
+            -60.11777,
+            -3.24274,
+            -59.93323,
+            -3.05739
+          ],
+          "stats": {
+            "p10_db": -21.69,
+            "median_db": -11.61,
+            "p90_db": -8.4
+          },
+          "legend": [
+            {
+              "label": "Red/Gold: L-band HHHH Trunk & Double-Bounce",
+              "color": "#F472B6"
+            },
+            {
+              "label": "Green: L-band HVHV Woody Canopy Biomass",
+              "color": "#34D399"
+            },
+            {
+              "label": "Dark: Specular Open River Channels",
+              "color": "#1E293B"
+            }
+          ],
+          "source_id": "nisar_gcov_v1"
+        },
+        {
+          "id": "evt4_nisar_diff",
+          "title": "NISAR Jun Flood vs Oct Transition (\u0394HHHH)",
+          "role": "change",
+          "sensor": "NISAR",
+          "band": "L-band (24 cm)",
+          "polarization": "\u0394HHHH",
+          "acquisition_date": "2026-06-23 -> 2026-10-21",
+          "granule_id": "NISAR_L2_PR_GCOV_033_140_D_090_4005_DHDH_A_20261021T221629_20261021T221704_P05036_N_F_J_001",
+          "asset_path": "assets/evt4_nisar_jun_vs_oct_diff.png",
+          "bbox": [
+            -60.11777,
+            -3.24274,
+            -59.93323,
+            -3.05739
+          ],
+          "stats": {
+            "flooded_double_bounce_drop_pct": 13.06,
+            "exposed_roughness_rise_pct": 13.66
+          },
+          "legend": [
+            {
+              "label": "Jun Flood Sub-Canopy Double-Bounce (+\u0394HHHH)",
+              "color": "#A78BFA"
+            },
+            {
+              "label": "Oct Emergent Bar / Dry Return (-\u0394HHHH)",
+              "color": "#00E5FF"
+            }
+          ],
+          "source_id": "nisar_gcov_v1"
+        },
+        {
+          "id": "evt4_nisar_rgb",
+          "title": "NISAR Dual-Pol RGB Composite (Manaus)",
+          "role": "rgb",
+          "sensor": "NISAR",
+          "band": "L-band (24 cm)",
+          "polarization": "HHHH/HVHV",
+          "acquisition_date": "2026-10-21",
+          "granule_id": "NISAR_L2_PR_GCOV_033_140_D_090_4005_DHDH_A_20261021T221629_20261021T221704_P05036_N_F_J_001",
+          "asset_path": "assets/evt4_nisar_oct2026_rgb.png",
+          "bbox": [
+            -60.35,
+            -3.35,
+            -59.7,
+            -2.95
+          ],
+          "stats": {
+            "qa_status": "WARN"
+          },
+          "legend": [
+            {
+              "label": "Red/Gold: L-band HHHH Trunk & Double-Bounce",
+              "color": "#F472B6"
+            },
+            {
+              "label": "Green: L-band HVHV Woody Canopy Biomass",
+              "color": "#34D399"
+            },
+            {
+              "label": "Dark: Specular Open River Channels",
+              "color": "#1E293B"
+            }
+          ],
+          "source_id": "nisar_gcov_v1"
+        },
+        {
+          "id": "evt4_opera_dswx",
+          "title": "OPERA DSWx-S1 C-Band Water Mask (Oct 2026)",
+          "role": "cband_compare",
+          "sensor": "Sentinel-1 (OPERA)",
+          "band": "C-band (5.6 cm)",
+          "polarization": "VV+VH -> WTR",
+          "acquisition_date": "2026-11-03",
+          "granule_id": "OPERA_L3_DSWx-S1_T20MQB_20261103T093832Z_20261104T040557Z_S1D_30_v1.0",
+          "asset_path": "assets/evt4_opera_dswx_oct2026.png",
+          "bbox": [
+            -60.35,
+            -3.35,
+            -59.7,
+            -2.95
+          ],
+          "stats": {
+            "open_water_pct": 20.11,
+            "partial_water_pct": 0.0,
+            "inundated_vegetation_pct": 3.79
+          },
+          "legend": [
+            {
+              "label": "Open Water (Class 1)",
+              "color": "#00E5FF"
+            },
+            {
+              "label": "Partial Surface Water (Class 2)",
+              "color": "#40C4FF"
+            },
+            {
+              "label": "Inundated Vegetation (Class 3)",
+              "color": "#00E676"
+            }
+          ],
+          "source_id": "opera_dswx_s1"
+        },
+        {
+          "id": "evt4_nisar_swath",
+          "title": "NISAR Nov 2026 Full Swath (Track 140)",
+          "role": "swath",
+          "sensor": "NISAR",
+          "band": "L-band (24 cm)",
+          "polarization": "HHHH/HVHV",
+          "acquisition_date": "2026-11-02",
+          "granule_id": "NISAR_L2_PR_GCOV_034_140_D_090_4005_DHDH_A_20261102T221630_20261102T221704_P05036_N_F_J_001",
+          "asset_path": "assets/evt4_nisar_nov2026_swath.png",
+          "bbox": [
+            -60.60941,
+            -4.56331,
+            -57.59903,
+            -1.60505
+          ],
+          "stats": {
+            "qa_status": "WARN"
+          },
+          "legend": [
+            {
+              "label": "Red/Gold: L-band HHHH Trunk & Double-Bounce",
+              "color": "#F472B6"
+            },
+            {
+              "label": "Green: L-band HVHV Woody Canopy Biomass",
+              "color": "#34D399"
+            },
+            {
+              "label": "Dark: Specular Open River Channels",
+              "color": "#1E293B"
+            }
+          ],
+          "source_id": "nisar_gcov_v1"
+        }
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "id": "nisar_gcov_v1",
+      "title": "NASA-ISRO NISAR Level-2 Geocoded Polarimetric Covariance (NISAR_L2_GCOV_V1 & PROVISIONAL)",
+      "url": "https://asf.alaska.edu/nisar/",
+      "publisher": "NASA Earthdata Cloud / ASF DAAC",
+      "accessed": "2026-11-13"
+    },
+    {
+      "id": "opera_dswx_s1",
+      "title": "NASA JPL OPERA L3 Dynamic Surface Water Extent from Sentinel-1 (OPERA_L3_DSWx-S1_V1)",
+      "url": "https://www.jpl.nasa.gov/go/opera",
+      "publisher": "NASA Earthdata Cloud / PO.DAAC & ASF",
+      "accessed": "2026-11-13"
+    },
+    {
+      "id": "opera_dist_alert_s1",
+      "title": "NASA JPL OPERA L3 Surface Disturbance Alert from Sentinel-1 (OPERA_L3_DIST-ALERT-S1_V1)",
+      "url": "https://www.jpl.nasa.gov/go/opera",
+      "publisher": "NASA Earthdata Cloud / LP DAAC",
+      "accessed": "2026-11-13"
+    },
+    {
+      "id": "pc_s1_rtc",
+      "title": "Copernicus Sentinel-1 Radiometrically Terrain-Corrected (RTC) Gamma0 C-Band SAR",
+      "url": "https://planetarycomputer.microsoft.com/dataset/sentinel-1-rtc",
+      "publisher": "ESA Copernicus / Microsoft Planetary Computer",
+      "accessed": "2026-11-13"
+    },
+    {
+      "id": "pc_alos_palsar",
+      "title": "JAXA ALOS-2 PALSAR-2 Global L-Band SAR Mosaic (HH/HV)",
+      "url": "https://planetarycomputer.microsoft.com/dataset/alos-palsar-mosaic",
+      "publisher": "JAXA EORC / Microsoft Planetary Computer",
+      "accessed": "2026-11-13"
+    },
+    {
+      "id": "firms_modis",
+      "title": "NASA FIRMS MODIS C6.1 Active Fire & Thermal Anomalies",
+      "url": "https://firms.modaps.eosdis.nasa.gov/download/",
+      "publisher": "NASA LANCE / FIRMS",
+      "accessed": "2026-11-13"
+    },
+    {
+      "id": "glofas_era5",
+      "title": "Copernicus CEMS GloFAS v4 River Discharge & ECMWF ERA5 Precipitation",
+      "url": "https://open-meteo.com/",
+      "publisher": "ECMWF / Copernicus / Open-Meteo",
+      "accessed": "2026-11-13"
+    },
+    {
+      "id": "space_apps_2026",
+      "title": "2026 NASA Space Apps Challenge \u2014 Dancing with the SARs",
+      "url": "https://www.spaceappschallenge.org/2026/challenges/dancing-with-the-sars/",
+      "publisher": "NASA Science Mission Directorate",
+      "accessed": "2026-11-13"
+    }
+  ]
+}
