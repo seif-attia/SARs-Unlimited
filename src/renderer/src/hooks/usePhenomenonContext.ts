@@ -222,8 +222,42 @@ export function usePhenomenonContext(): PhenomenonContextValue {
     return null
   }, [selectedEvent, selectedPhenomenon, selectedLayerId])
 
+  const [widgetVisibility, setWidgetVisibility] = useState<WidgetVisibilityState>({
+    statistics: false,
+    eventSummary: false,
+    scientificExplanation: false,
+    timeline: false
+  })
+
+  const toggleWidget = useCallback((widget: keyof WidgetVisibilityState) => {
+    setWidgetVisibility((prev) => ({
+      ...prev,
+      [widget]: !prev[widget]
+    }))
+  }, [])
+
+  const setWidgetVisible = useCallback(
+    (widget: keyof WidgetVisibilityState, visible: boolean) => {
+      setWidgetVisibility((prev) => ({
+        ...prev,
+        [widget]: visible
+      }))
+    },
+    []
+  )
+
+  const restoreAllWidgets = useCallback(() => {
+    setWidgetVisibility({
+      statistics: true,
+      eventSummary: true,
+      scientificExplanation: true,
+      timeline: true
+    })
+  }, [])
+
   const applyEventSelectionInternal = useCallback(
     (event: EventRecord) => {
+      restoreAllWidgets()
       timeline.setIsPlaying(false)
       setLiveScope(event.scope === 'global' ? 'planet' : 'amazon')
       if (event.phenomenonId) {
@@ -233,15 +267,18 @@ export function usePhenomenonContext(): PhenomenonContextValue {
       setSelectedLayerId(event.defaultLayerId)
       timeline.setSelectedDate(event.eventDate)
     },
-    [timeline]
+    [restoreAllWidgets, timeline]
   )
 
   const selectPhenomenonById = useCallback(
     (id: string) => {
+      restoreAllWidgets()
       setIsTouring(false)
       timeline.setIsPlaying(false)
-      setSelectedPhenomenonId(id)
-      const targetPheno = phenomena.find((p) => p.id === id)
+      const targetPheno = phenomena.find(
+        (p) => p.id === id || p.sourcePhenomenonIds.includes(id)
+      )
+      setSelectedPhenomenonId(targetPheno ? targetPheno.id : id)
       if (!targetPheno) return
 
       setLiveScope(targetPheno.geographicScope === 'global' ? 'planet' : 'amazon')
@@ -270,7 +307,7 @@ export function usePhenomenonContext(): PhenomenonContextValue {
         }
       }
     },
-    [phenomena, allEvents, timeline]
+    [restoreAllWidgets, phenomena, allEvents, timeline]
   )
 
   const selectEvent = useCallback(
@@ -374,39 +411,6 @@ export function usePhenomenonContext(): PhenomenonContextValue {
     () => selectedEvent?.scientificExplanation ?? selectedPhenomenon.scientificExplanation,
     [selectedEvent, selectedPhenomenon]
   )
-
-  const [widgetVisibility, setWidgetVisibility] = useState<WidgetVisibilityState>({
-    statistics: true,
-    eventSummary: true,
-    scientificExplanation: true,
-    timeline: true
-  })
-
-  const toggleWidget = useCallback((widget: keyof WidgetVisibilityState) => {
-    setWidgetVisibility((prev) => ({
-      ...prev,
-      [widget]: !prev[widget]
-    }))
-  }, [])
-
-  const setWidgetVisible = useCallback(
-    (widget: keyof WidgetVisibilityState, visible: boolean) => {
-      setWidgetVisibility((prev) => ({
-        ...prev,
-        [widget]: visible
-      }))
-    },
-    []
-  )
-
-  const restoreAllWidgets = useCallback(() => {
-    setWidgetVisibility({
-      statistics: true,
-      eventSummary: true,
-      scientificExplanation: true,
-      timeline: true
-    })
-  }, [])
 
   const [reportModalEvent, setReportModalEvent] = useState<EventRecord | null>(null)
   const [mediaModalEvent, setMediaModalEvent] = useState<EventRecord | null>(null)

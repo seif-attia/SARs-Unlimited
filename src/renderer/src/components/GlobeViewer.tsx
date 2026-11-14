@@ -19,6 +19,7 @@ import {
 import { usePhenomenonContext } from '../hooks/usePhenomenonContext'
 import { useGlobeLocationPicking } from '../hooks/useGlobeLocationPicking'
 import { loadSarAssetDataUrl } from '../services/phenomenonDataService'
+import { attachDynamicDesertNightSky } from '../services/celestialSkyEngine'
 import {
   checkSarsBackendHealth,
   fetchCustomDirectEndpointLayer,
@@ -506,6 +507,7 @@ export function GlobeViewer(): React.JSX.Element {
     }
     if (scene.sun) scene.sun.show = false
     if (scene.moon) scene.moon.show = false
+    const detachCelestialSky = attachDynamicDesertNightSky(viewer)
 
     globe.baseColor = Cesium.Color.fromCssColorString('#071226')
     globe.enableLighting = false
@@ -587,6 +589,7 @@ export function GlobeViewer(): React.JSX.Element {
     camera.percentageChanged = 0.08
 
     return () => {
+      detachCelestialSky()
       scene.preUpdate.removeEventListener(onPreUpdate)
       camera.changed.removeEventListener(updateTelemetry)
       handler.destroy()
@@ -982,16 +985,20 @@ export function GlobeViewer(): React.JSX.Element {
 
   const handleUserSelectEvent = useCallback(
     (ev: EventRecord) => {
+      restoreAllWidgets()
       selectEvent(ev)
       flyToEvent(ev)
     },
-    [selectEvent, flyToEvent]
+    [restoreAllWidgets, selectEvent, flyToEvent]
   )
 
   const handleUserSelectPhenomenon = useCallback(
     (id: string) => {
+      restoreAllWidgets()
       selectPhenomenonById(id)
-      const targetPheno = [...globalPhenomena, ...amazonPhenomena].find((p) => p.id === id)
+      const targetPheno = [...globalPhenomena, ...amazonPhenomena].find(
+        (p) => p.id === id || p.sourcePhenomenonIds.includes(id)
+      )
       if (!targetPheno) return
       const firstEv = allEvents.find(
         (ev) =>
@@ -1021,7 +1028,14 @@ export function GlobeViewer(): React.JSX.Element {
         }
       }
     },
-    [selectPhenomenonById, globalPhenomena, amazonPhenomena, allEvents, flyToEvent]
+    [
+      restoreAllWidgets,
+      selectPhenomenonById,
+      globalPhenomena,
+      amazonPhenomena,
+      allEvents,
+      flyToEvent
+    ]
   )
 
   // Click on a globe event pin or seasonal pulse pin to select and focus it
@@ -1041,7 +1055,7 @@ export function GlobeViewer(): React.JSX.Element {
             handleUserSelectEvent(found)
           }
         } else if (entityId === 'phen-pin:seasonal_flood') {
-          handleUserSelectPhenomenon('amazon_flood_pulse')
+          handleUserSelectPhenomenon('amazon-pheno-2')
         }
       }
     }, Cesium.ScreenSpaceEventType.LEFT_CLICK)
@@ -1420,10 +1434,24 @@ export function GlobeViewer(): React.JSX.Element {
         selectedPhenomenon={selectedPhenomenon}
         onSelectPhenomenon={handleUserSelectPhenomenon}
         lockedRegionId={lockedRegionId}
-        onSelectAmazonRegion={(regionId) => setLockedRegionId(regionId)}
+        onSelectAmazonRegion={(regionId) => {
+          setLockedRegionId(regionId)
+          if (regionId) {
+            restoreAllWidgets()
+            const region = dataset?.regions?.[regionId]
+            if (region?.bbox) {
+              flyToBbox(region.bbox)
+            }
+          }
+        }}
         studyRegionOptions={studyRegionOptions}
         searchQuery={searchQuery}
-        onChangeSearchQuery={setSearchQuery}
+        onChangeSearchQuery={(q) => {
+          setSearchQuery(q)
+          if (q.trim().length > 0) {
+            restoreAllWidgets()
+          }
+        }}
         hoveredLocation={hoveredLocation}
         showTelemetryHud={showTelemetryHud}
         showCursorTooltip={showCursorTooltip}
