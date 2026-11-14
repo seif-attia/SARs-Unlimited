@@ -3,6 +3,12 @@ import { join } from 'path'
 import { electronApp, optimizer, is } from '@electron-toolkit/utils'
 import icon from '../../resources/icon.png?asset'
 import { getAssetDataUrl, getDataset } from './dataset-service'
+import {
+  abortLmStudioChat,
+  checkLmStudioHealth,
+  streamLmStudioChat,
+  type LmStudioChatPayload
+} from './lm-studio-service'
 
 // Prevent Windows GPU shader disk cache lock errors (0x5 Access is denied)
 app.commandLine.appendSwitch('disable-gpu-shader-disk-cache')
@@ -62,6 +68,12 @@ app.whenReady().then(() => {
 
   ipcMain.handle('sar:get-dataset', () => getDataset())
   ipcMain.handle('sar:get-asset-data-url', (_, relPath: string) => getAssetDataUrl(relPath))
+
+  ipcMain.handle('ai:check-health', (_, baseUrl?: string) => checkLmStudioHealth(baseUrl))
+  ipcMain.handle('ai:start-chat', (event, requestId: string, payload: LmStudioChatPayload) =>
+    streamLmStudioChat(event.sender, requestId, payload)
+  )
+  ipcMain.handle('ai:abort-chat', (_, requestId: string) => abortLmStudioChat(requestId))
 
   createWindow()
 

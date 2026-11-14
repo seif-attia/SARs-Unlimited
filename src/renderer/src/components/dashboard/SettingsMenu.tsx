@@ -58,6 +58,12 @@ export interface SettingsMenuProps {
   customOverlayStatus: string | null
   onToggleLegacyDemoOverlay: () => void
   legacyDemoOverlayActive: boolean
+
+  // Local AI Model (LM Studio)
+  localModelBaseUrl: string
+  onChangeLocalModelBaseUrl: (url: string) => void
+  onApplyLocalModelBaseUrl: () => void
+  localModelConnected: boolean | null
 }
 
 export const SettingsMenu: React.FC<SettingsMenuProps> = ({
@@ -107,7 +113,11 @@ export const SettingsMenu: React.FC<SettingsMenuProps> = ({
   customOverlayLoading,
   customOverlayStatus,
   onToggleLegacyDemoOverlay,
-  legacyDemoOverlayActive
+  legacyDemoOverlayActive,
+  localModelBaseUrl,
+  onChangeLocalModelBaseUrl,
+  onApplyLocalModelBaseUrl,
+  localModelConnected
 }) => {
   const [open, setOpen] = useState(false)
   const [suggestionsOpen, setSuggestionsOpen] = useState(false)
@@ -452,6 +462,41 @@ export const SettingsMenu: React.FC<SettingsMenuProps> = ({
               {customOverlayStatus && (
                 <div className="sars-settings-custom-feed__status">{customOverlayStatus}</div>
               )}
+            </div>
+
+            <div className="sars-settings-custom-feed">
+              <div className="sars-settings-footer__row">
+                <span className="sars-settings-section__title" style={{ margin: 0 }}>
+                  LOCAL AI MODEL IP / URL (
+                  {localModelConnected === true
+                    ? 'ONLINE'
+                    : localModelConnected === false
+                      ? 'OFFLINE'
+                      : 'NOT CHECKED'}
+                  )
+                </span>
+              </div>
+              <div className="sars-settings-api-input">
+                <input
+                  type="text"
+                  placeholder="http://127.0.0.1:1234"
+                  value={localModelBaseUrl}
+                  onChange={(e) => onChangeLocalModelBaseUrl(e.target.value)}
+                  onKeyDown={(e) => {
+                    if (e.key === 'Enter') {
+                      e.preventDefault()
+                      onApplyLocalModelBaseUrl()
+                    }
+                  }}
+                />
+                <button
+                  type="button"
+                  className="sars-btn-subtle"
+                  onClick={onApplyLocalModelBaseUrl}
+                >
+                  Connect Model
+                </button>
+              </div>
             </div>
           </div>
         </div>

@@ -31,6 +31,11 @@ import {
   PREDEFINED_STUDY_AREAS,
   renderSarsDataOverlayPng
 } from '../services/sarsDataApi'
+import {
+  checkLmStudioConnection,
+  LM_STUDIO_DEFAULT_URL,
+  normalizeLmStudioBaseUrl
+} from '../services/lmStudioService'
 import type { EventRecord, WidgetVisibilityState } from '../types/phenomenon'
 import { DashboardHeader } from './dashboard/DashboardHeader'
 import { HistoricalTimeline } from './dashboard/HistoricalTimeline'
@@ -39,6 +44,7 @@ import { EventSummaryPanel } from './dashboard/EventSummaryPanel'
 import { ScientificExplanationPanel } from './dashboard/ScientificExplanationPanel'
 import { ReportViewer } from './dashboard/ReportViewer'
 import { MediaViewer } from './dashboard/MediaViewer'
+import { AiHelpSidebar } from './dashboard/AiHelpSidebar'
 
 export interface CameraTelemetry {
   lat: number
@@ -276,10 +282,17 @@ export function GlobeViewer(): React.JSX.Element {
   const [activeSidebarTab, setActiveSidebarTab] = useState<
     'statistics' | 'eventSummary' | 'scientificExplanation' | 'customOverlayExplanation'
   >('statistics')
+  const [isAiSidebarOpen, setIsAiSidebarOpen] = useState<boolean>(false)
 
   // Custom SARs-Data API state (preserving sarsDataApi.ts integration)
   const [customApiBaseUrl, setCustomApiBaseUrl] = useState<string>('http://localhost:8000')
   const [backendConnected, setBackendConnected] = useState<boolean | null>(null)
+
+  // Local AI Model (LM Studio) endpoint state
+  const [localModelBaseUrl, setLocalModelBaseUrl] = useState<string>(LM_STUDIO_DEFAULT_URL)
+  const [activeLocalModelBaseUrl, setActiveLocalModelBaseUrl] =
+    useState<string>(LM_STUDIO_DEFAULT_URL)
+  const [localModelConnected, setLocalModelConnected] = useState<boolean | null>(null)
 
   // Separate Custom API Overlay Feed state
   const [customOverlayUrl, setCustomOverlayUrl] = useState<string>('')
@@ -335,8 +348,6 @@ export function GlobeViewer(): React.JSX.Element {
     setHoveredLocation,
     lockedRegionId,
     setLockedRegionId,
-    searchQuery,
-    setSearchQuery,
     statistics,
     scientificExplanation,
     widgetVisibility,
@@ -1487,6 +1498,15 @@ export function GlobeViewer(): React.JSX.Element {
       .catch(() => setBackendConnected(false))
   }
 
+  const handleApplyLocalModelUrl = (): void => {
+    const normalized = normalizeLmStudioBaseUrl(localModelBaseUrl)
+    setLocalModelBaseUrl(normalized)
+    setActiveLocalModelBaseUrl(normalized)
+    checkLmStudioConnection(normalized)
+      .then((res) => setLocalModelConnected(res.ok))
+      .catch(() => setLocalModelConnected(false))
+  }
+
   return (
     <div className={`globe-stage ${uiLightTheme ? 'sars-theme-light' : 'sars-theme-dark'}`}>
       {/* Fullscreen 3D Cesium Canvas (dynamically shifted to stay centered in open view) */}
@@ -1515,13 +1535,8 @@ export function GlobeViewer(): React.JSX.Element {
           }
         }}
         studyRegionOptions={studyRegionOptions}
-        searchQuery={searchQuery}
-        onChangeSearchQuery={(q) => {
-          setSearchQuery(q)
-          if (q.trim().length > 0) {
-            restoreAllWidgets()
-          }
-        }}
+        isAiSidebarOpen={isAiSidebarOpen}
+        onToggleAiSidebar={() => setIsAiSidebarOpen((p) => !p)}
         showTelemetryHud={showTelemetryHud}
         cameraTelemetry={formattedTelemetry}
         datasetStatus={datasetStatus}
@@ -1576,7 +1591,11 @@ export function GlobeViewer(): React.JSX.Element {
           customOverlayLoading,
           customOverlayStatus,
           onToggleLegacyDemoOverlay: handleToggleLegacyDemoOverlay,
-          legacyDemoOverlayActive: isDemoFallbackActive
+          legacyDemoOverlayActive: isDemoFallbackActive,
+          localModelBaseUrl,
+          onChangeLocalModelBaseUrl: setLocalModelBaseUrl,
+          onApplyLocalModelBaseUrl: handleApplyLocalModelUrl,
+          localModelConnected
         }}
       />
 
@@ -1588,6 +1607,7 @@ export function GlobeViewer(): React.JSX.Element {
           allEvents={allEvents}
           selectedEvent={selectedEvent}
           hasLeftPanel={isSidebarVisible}
+          hasRightPanel={isAiSidebarOpen}
           onSelectEvent={handleUserSelectEvent}
           onStartPlayback={() => {
             if (!showBasinProgression) toggleBasinProgression()
@@ -1919,7 +1939,11 @@ export function GlobeViewer(): React.JSX.Element {
 
       {/* Fixed Bottom-Right Camera & Rotation Controls */}
       {showNavButtons && (
-        <div className="hud-nav-controls" role="group" aria-label="Camera and Rotation Controls">
+        <div
+          className={`hud-nav-controls ${isAiSidebarOpen ? 'has-right-panel' : ''}`}
+          role="group"
+          aria-label="Camera and Rotation Controls"
+        >
           <button
             type="button"
             className={`nav-btn nav-btn--rotate ${autoRotate ? 'active' : ''}`}
@@ -2032,6 +2056,19 @@ export function GlobeViewer(): React.JSX.Element {
           </div>
         </div>
       )}
+
+      {/* RIGHT SIDEBAR: LOCAL AI ASSISTANT (LM STUDIO / QWEN2.5-3B-INSTRUCT) */}
+      <AiHelpSidebar
+        isOpen={isAiSidebarOpen}
+        onClose={() => setIsAiSidebarOpen(false)}
+        selectedPhenomenon={selectedPhenomenon}
+        selectedEvent={selectedEvent}
+        activeEventLayer={activeEventLayer}
+        timeline={timeline}
+        allEvents={allEvents}
+        lmStudioBaseUrl={activeLocalModelBaseUrl}
+        onConnectionStatusChange={setLocalModelConnected}
+      />
 
       {/* SCIENTIFIC REPORT MODAL */}
       <ReportViewer
