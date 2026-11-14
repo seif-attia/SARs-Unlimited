@@ -12,9 +12,6 @@ const api: SarBridgeApi = {
   getAssetDataUrl: (relPath: string) => ipcRenderer.invoke('sar:get-asset-data-url', relPath)
 }
 
-// Use `contextBridge` APIs to expose Electron APIs to
-// renderer only if context isolation is enabled, otherwise
-// just add to the DOM global.
 if (process.contextIsolated) {
   try {
     contextBridge.exposeInMainWorld('electron', electronAPI)
