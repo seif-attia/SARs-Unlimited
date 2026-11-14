@@ -33,6 +33,7 @@ export interface AiHelpSidebarProps {
   timeline: TimelineSelectionState
   allEvents: EventRecord[]
   lmStudioBaseUrl?: string
+  connectionRefreshToken?: number
   onConnectionStatusChange?: (connected: boolean) => void
 }
 
@@ -144,6 +145,7 @@ export const AiHelpSidebar: React.FC<AiHelpSidebarProps> = ({
   timeline,
   allEvents,
   lmStudioBaseUrl = LM_STUDIO_DEFAULT_URL,
+  connectionRefreshToken = 0,
   onConnectionStatusChange
 }) => {
   const [messages, setMessages] = useState<ChatMessage[]>([INITIAL_WELCOME_MESSAGE])
@@ -197,7 +199,11 @@ export const AiHelpSidebar: React.FC<AiHelpSidebarProps> = ({
 
   useEffect(() => {
     hasAutoCheckedRef.current = false
-  }, [lmStudioBaseUrl])
+    if (isOpen) {
+      hasAutoCheckedRef.current = true
+      void checkLmStudioServer()
+    }
+  }, [lmStudioBaseUrl, connectionRefreshToken, isOpen, checkLmStudioServer])
 
   // Check LM Studio connection when the sidebar is opened
   useEffect(() => {

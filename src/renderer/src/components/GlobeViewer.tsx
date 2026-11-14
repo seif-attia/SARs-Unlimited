@@ -293,6 +293,9 @@ export function GlobeViewer(): React.JSX.Element {
   const [activeLocalModelBaseUrl, setActiveLocalModelBaseUrl] =
     useState<string>(LM_STUDIO_DEFAULT_URL)
   const [localModelConnected, setLocalModelConnected] = useState<boolean | null>(null)
+  const [localModelChecking, setLocalModelChecking] = useState<boolean>(false)
+  const [localModelStatus, setLocalModelStatus] = useState<string | null>(null)
+  const [localModelRefreshToken, setLocalModelRefreshToken] = useState<number>(0)
 
   // Separate Custom API Overlay Feed state
   const [customOverlayUrl, setCustomOverlayUrl] = useState<string>('')
@@ -1502,9 +1505,27 @@ export function GlobeViewer(): React.JSX.Element {
     const normalized = normalizeLmStudioBaseUrl(localModelBaseUrl)
     setLocalModelBaseUrl(normalized)
     setActiveLocalModelBaseUrl(normalized)
+    setLocalModelRefreshToken((n) => n + 1)
+    setLocalModelChecking(true)
+    setLocalModelStatus(`Connecting to ${normalized}…`)
     checkLmStudioConnection(normalized)
-      .then((res) => setLocalModelConnected(res.ok))
-      .catch(() => setLocalModelConnected(false))
+      .then((res) => {
+        setLocalModelConnected(res.ok)
+        if (res.ok) {
+          setLocalModelStatus(
+            `Connected to ${normalized}${res.activeModel ? ` (${res.activeModel})` : ''}`
+          )
+        } else {
+          setLocalModelStatus(res.error || `Cannot reach LM Studio at ${normalized}`)
+        }
+      })
+      .catch((err) => {
+        setLocalModelConnected(false)
+        setLocalModelStatus(err instanceof Error ? err.message : `Cannot reach ${normalized}`)
+      })
+      .finally(() => {
+        setLocalModelChecking(false)
+      })
   }
 
   return (
@@ -1595,7 +1616,9 @@ export function GlobeViewer(): React.JSX.Element {
           localModelBaseUrl,
           onChangeLocalModelBaseUrl: setLocalModelBaseUrl,
           onApplyLocalModelBaseUrl: handleApplyLocalModelUrl,
-          localModelConnected
+          localModelConnected,
+          localModelChecking,
+          localModelStatus
         }}
       />
 
@@ -2067,6 +2090,7 @@ export function GlobeViewer(): React.JSX.Element {
         timeline={timeline}
         allEvents={allEvents}
         lmStudioBaseUrl={activeLocalModelBaseUrl}
+        connectionRefreshToken={localModelRefreshToken}
         onConnectionStatusChange={setLocalModelConnected}
       />
 

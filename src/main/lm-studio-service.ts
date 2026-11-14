@@ -29,8 +29,19 @@ const activeStreams = new Map<string, AbortController>()
 function normalizeBaseUrl(rawUrl?: string): string {
   const trimmed = (rawUrl || DEFAULT_LM_STUDIO_URL).trim().replace(/\/+$/, '')
   if (!trimmed) return DEFAULT_LM_STUDIO_URL
-  if (/^https?:\/\//i.test(trimmed)) return trimmed
-  return `http://${trimmed}`
+  const hasScheme = /^https?:\/\//i.test(trimmed)
+  const withScheme = hasScheme ? trimmed : `http://${trimmed}`
+  try {
+    const parsed = new URL(withScheme)
+    const isIpv4OrLocal =
+      parsed.hostname === 'localhost' || /^\d{1,3}(\.\d{1,3}){3}$/.test(parsed.hostname)
+    if (!parsed.port && parsed.protocol === 'http:' && (isIpv4OrLocal || !hasScheme)) {
+      parsed.port = '1234'
+    }
+    return parsed.toString().replace(/\/+$/, '')
+  } catch {
+    return withScheme
+  }
 }
 
 function pickPreferredModel(models: string[], requestedModel?: string): string {

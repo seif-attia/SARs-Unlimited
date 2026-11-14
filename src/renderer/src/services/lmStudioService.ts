@@ -7,8 +7,19 @@ export const LM_STUDIO_DEFAULT_MODEL = 'qwen2.5-3b-instruct'
 export function normalizeLmStudioBaseUrl(rawUrl?: string): string {
   const trimmed = (rawUrl || LM_STUDIO_DEFAULT_URL).trim().replace(/\/+$/, '')
   if (!trimmed) return LM_STUDIO_DEFAULT_URL
-  if (/^https?:\/\//i.test(trimmed)) return trimmed
-  return `http://${trimmed}`
+  const hasScheme = /^https?:\/\//i.test(trimmed)
+  const withScheme = hasScheme ? trimmed : `http://${trimmed}`
+  try {
+    const parsed = new URL(withScheme)
+    const isIpv4OrLocal =
+      parsed.hostname === 'localhost' || /^\d{1,3}(\.\d{1,3}){3}$/.test(parsed.hostname)
+    if (!parsed.port && parsed.protocol === 'http:' && (isIpv4OrLocal || !hasScheme)) {
+      parsed.port = '1234'
+    }
+    return parsed.toString().replace(/\/+$/, '')
+  } catch {
+    return withScheme
+  }
 }
 
 export type LmStudioStatus = 'idle' | 'checking' | 'ready' | 'fallback' | 'error'

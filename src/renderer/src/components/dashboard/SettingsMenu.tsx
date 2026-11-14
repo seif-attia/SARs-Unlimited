@@ -64,6 +64,8 @@ export interface SettingsMenuProps {
   onChangeLocalModelBaseUrl: (url: string) => void
   onApplyLocalModelBaseUrl: () => void
   localModelConnected: boolean | null
+  localModelChecking: boolean
+  localModelStatus: string | null
 }
 
 export const SettingsMenu: React.FC<SettingsMenuProps> = ({
@@ -117,12 +119,15 @@ export const SettingsMenu: React.FC<SettingsMenuProps> = ({
   localModelBaseUrl,
   onChangeLocalModelBaseUrl,
   onApplyLocalModelBaseUrl,
-  localModelConnected
+  localModelConnected,
+  localModelChecking,
+  localModelStatus
 }) => {
   const [open, setOpen] = useState(false)
   const [suggestionsOpen, setSuggestionsOpen] = useState(false)
   const ref = useRef<HTMLDivElement | null>(null)
   const suggestionsRef = useRef<HTMLDivElement | null>(null)
+  const connectModelBtnRef = useRef<HTMLButtonElement | null>(null)
 
   useEffect(() => {
     if (!open) {
@@ -468,11 +473,13 @@ export const SettingsMenu: React.FC<SettingsMenuProps> = ({
               <div className="sars-settings-footer__row">
                 <span className="sars-settings-section__title" style={{ margin: 0 }}>
                   LOCAL AI MODEL IP / URL (
-                  {localModelConnected === true
-                    ? 'ONLINE'
-                    : localModelConnected === false
-                      ? 'OFFLINE'
-                      : 'NOT CHECKED'}
+                  {localModelChecking
+                    ? 'CONNECTING…'
+                    : localModelConnected === true
+                      ? 'ONLINE'
+                      : localModelConnected === false
+                        ? 'OFFLINE'
+                        : 'NOT CHECKED'}
                   )
                 </span>
               </div>
@@ -482,6 +489,11 @@ export const SettingsMenu: React.FC<SettingsMenuProps> = ({
                   placeholder="http://127.0.0.1:1234"
                   value={localModelBaseUrl}
                   onChange={(e) => onChangeLocalModelBaseUrl(e.target.value)}
+                  onBlur={(e) => {
+                    if (e.relatedTarget !== connectModelBtnRef.current) {
+                      onApplyLocalModelBaseUrl()
+                    }
+                  }}
                   onKeyDown={(e) => {
                     if (e.key === 'Enter') {
                       e.preventDefault()
@@ -490,13 +502,18 @@ export const SettingsMenu: React.FC<SettingsMenuProps> = ({
                   }}
                 />
                 <button
+                  ref={connectModelBtnRef}
                   type="button"
                   className="sars-btn-subtle"
                   onClick={onApplyLocalModelBaseUrl}
+                  disabled={localModelChecking}
                 >
-                  Connect Model
+                  {localModelChecking ? 'Connecting…' : 'Connect Model'}
                 </button>
               </div>
+              {localModelStatus && (
+                <div className="sars-settings-custom-feed__status">{localModelStatus}</div>
+              )}
             </div>
           </div>
         </div>
