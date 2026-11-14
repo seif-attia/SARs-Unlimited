@@ -1,4 +1,4 @@
-import { Calendar, ChevronLeft, ChevronRight, Sparkles } from 'lucide-react'
+import { Calendar, ChevronLeft, ChevronRight, Pause, Play, Radio, Sparkles } from 'lucide-react'
 import type { AmazonEvent, AmazonPhenomenon, TimelineMonthPoint } from '../types/sar'
 
 interface TimelineBarProps {
@@ -8,10 +8,16 @@ interface TimelineBarProps {
   selectedMonthIndex: number
   activePhenomenonId: string | null
   activeEventId: string | null
+  isPlaying: boolean
+  playbackSpeed: 1 | 2 | 4
+  showBasinProgression: boolean
   onSelectMonthIndex: (index: number) => void
   onSelectPhenomenon: (phenomenon: AmazonPhenomenon) => void
   onSelectEvent: (event: AmazonEvent) => void
   onFlyAmazonOverview: () => void
+  onTogglePlay: () => void
+  onCycleSpeed: () => void
+  onToggleBasinProgression: () => void
 }
 
 const YEAR_TICKS = [2020, 2021, 2022, 2023, 2024, 2025, 2026]
@@ -23,10 +29,16 @@ export function TimelineBar({
   selectedMonthIndex,
   activePhenomenonId,
   activeEventId,
+  isPlaying,
+  playbackSpeed,
+  showBasinProgression,
   onSelectMonthIndex,
   onSelectPhenomenon,
   onSelectEvent,
-  onFlyAmazonOverview
+  onFlyAmazonOverview,
+  onTogglePlay,
+  onCycleSpeed,
+  onToggleBasinProgression
 }: TimelineBarProps): React.JSX.Element {
   const current = months[selectedMonthIndex] ?? months[0]
   const totalMax = Math.max(months.length - 1, 1)
@@ -72,11 +84,38 @@ export function TimelineBar({
             )
           })}
         </div>
+
+        <button
+          type="button"
+          className={`sar-live-basin-toggle ${showBasinProgression ? 'active' : ''}`}
+          onClick={onToggleBasinProgression}
+          title="Toggle Whole-Amazon monthly progression (SMAP moisture + GloFAS rivers + FIRMS fires)"
+        >
+          <Radio size={12} />
+          <span>Whole Amazon Live</span>
+        </button>
       </div>
 
       {/* Row 2: 2020–2026 Temporal Scrubber & Clickable Specific Event Dots (Table 2) */}
       <div className="sar-scrubber-row">
         <div className="sar-month-readout">
+          <button
+            type="button"
+            className={`sar-play-btn ${isPlaying ? 'playing' : ''}`}
+            onClick={onTogglePlay}
+            aria-label={isPlaying ? 'Pause monthly progression' : 'Play 2020–2026 progression'}
+            title={isPlaying ? 'Pause playback' : 'Play monthly Amazon progression'}
+          >
+            {isPlaying ? <Pause size={12} /> : <Play size={12} />}
+          </button>
+          <button
+            type="button"
+            className="sar-speed-btn"
+            onClick={onCycleSpeed}
+            title="Cycle playback speed (1x / 2x / 4x)"
+          >
+            {playbackSpeed}x
+          </button>
           <Calendar size={12} className="hud-icon-cyan" />
           <span className="sar-month-code">{current?.month ?? '2026-10'}</span>
           <button
@@ -157,9 +196,17 @@ export function TimelineBar({
         {/* Live Month Environmental Readout */}
         {current && (
           <div className="sar-month-metrics" title="Selected month hydrological & SAR counts">
+            {showBasinProgression && (
+              <span className="sar-live-legend" title="Whole-Amazon progression color key">
+                <i className="leg-dot" style={{ backgroundColor: '#22D3EE' }} /> Flood
+                <i className="leg-dot" style={{ backgroundColor: '#10B981' }} /> Wet
+                <i className="leg-dot" style={{ backgroundColor: '#F59E0B' }} /> Dry
+                <i className="leg-dot" style={{ backgroundColor: '#EF4444' }} /> Fire
+              </span>
+            )}
             <span>Q: {(current.discharge_manaus_m3s / 1000).toFixed(0)}k m³/s</span>
             <span>·</span>
-            <span>Rain: {Math.round(current.precip_mm)} mm</span>
+            <span>SMAP: {Math.round(current.soil_moisture_idx)}%</span>
             <span>·</span>
             <span>Fires: {current.fire_hotspots_amazon.toLocaleString()}</span>
             {current.nisar_scenes > 0 && (

@@ -24,6 +24,10 @@ export interface TimelineMonthPoint {
   nisar_scenes: number
   active_phenomena: string[]
   event_id: string | null
+  basin_overlay_path: string
+  soil_moisture_idx: number
+  flood_pulse_idx: number
+  drought_fire_idx: number
 }
 
 export interface SarPhysicsSpec {
@@ -136,6 +140,8 @@ export interface AmazonSarDataset {
     end: string
     observed_end: string
   }
+  amazon_basin_bbox: [number, number, number, number]
+  amazon_basin_outline: [number, number][]
   regions: Record<string, StudyRegion>
   timeline: {
     months: TimelineMonthPoint[]

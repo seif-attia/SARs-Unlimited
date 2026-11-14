@@ -2,12 +2,124 @@
   "schema_version": "2.0.0",
   "title": "Dancing with the SARs \u2014 Amazon Rainforest Surface Change Atlas (2020\u20132026)",
   "challenge_url": "https://www.spaceappschallenge.org/2026/challenges/dancing-with-the-sars/",
-  "generated_at": "2026-11-14T00:36:48Z",
+  "generated_at": "2026-11-14T01:06:19Z",
   "temporal_range": {
     "start": "2020-01-01",
     "end": "2026-12-31",
     "observed_end": "2026-11-13"
   },
+  "amazon_basin_bbox": [
+    -79.5,
+    -18.0,
+    -44.5,
+    8.5
+  ],
+  "amazon_basin_outline": [
+    [
+      -60.5,
+      6.2
+    ],
+    [
+      -55.2,
+      5.8
+    ],
+    [
+      -51.8,
+      4.4
+    ],
+    [
+      -49.5,
+      1.8
+    ],
+    [
+      -48.0,
+      -0.5
+    ],
+    [
+      -45.8,
+      -1.8
+    ],
+    [
+      -45.4,
+      -4.2
+    ],
+    [
+      -47.5,
+      -7.8
+    ],
+    [
+      -49.8,
+      -11.4
+    ],
+    [
+      -52.2,
+      -14.2
+    ],
+    [
+      -55.8,
+      -15.6
+    ],
+    [
+      -59.6,
+      -16.4
+    ],
+    [
+      -63.5,
+      -17.3
+    ],
+    [
+      -67.2,
+      -16.2
+    ],
+    [
+      -70.4,
+      -14.0
+    ],
+    [
+      -73.8,
+      -11.6
+    ],
+    [
+      -76.2,
+      -8.5
+    ],
+    [
+      -78.0,
+      -5.0
+    ],
+    [
+      -78.2,
+      -1.5
+    ],
+    [
+      -76.5,
+      1.4
+    ],
+    [
+      -73.8,
+      3.2
+    ],
+    [
+      -70.6,
+      4.4
+    ],
+    [
+      -67.8,
+      5.2
+    ],
+    [
+      -65.0,
+      6.0
+    ],
+    [
+      -62.6,
+      6.5
+    ],
+    [
+      -60.5,
+      6.2
+    ]
+  ],
   "regions": {
     "manaus": {
       "id": "manaus",
@@ -131,7 +243,11 @@
         "active_phenomena": [
           "rainy_season"
         ],
-        "event_id": null
+        "event_id": null,
+        "basin_overlay_path": "assets/basin_monthly/amazon_2020-01.png",
+        "soil_moisture_idx": 75.4,
+        "flood_pulse_idx": 71.6,
+        "drought_fire_idx": 13.0
       },
       {
         "month": "2020-02",
@@ -146,7 +262,11 @@
         "active_phenomena": [
           "rainy_season"
         ],
-        "event_id": null
+        "event_id": null,
+        "basin_overlay_path": "assets/basin_monthly/amazon_2020-02.png",
+        "soil_moisture_idx": 77.2,
+        "flood_pulse_idx": 61.8,
+        "drought_fire_idx": 4.1
       },
       {
         "month": "2020-03",
@@ -162,7 +282,11 @@
           "rainy_season",
           "seasonal_flood"
         ],
-        "event_id": null
+        "event_id": null,
+        "basin_overlay_path": "assets/basin_monthly/amazon_2020-03.png",
+        "soil_moisture_idx": 78.8,
+        "flood_pulse_idx": 63.9,
+        "drought_fire_idx": 21.5
       },
       {
         "month": "2020-04",
@@ -178,7 +302,11 @@
           "rainy_season",
           "seasonal_flood"
         ],
-        "event_id": null
+        "event_id": null,
+        "basin_overlay_path": "assets/basin_monthly/amazon_2020-04.png",
+        "soil_moisture_idx": 80.8,
+        "flood_pulse_idx": 70.6,
+        "drought_fire_idx": 10.4
       },
       {
         "month": "2020-05",
@@ -194,7 +322,11 @@
           "rainy_season",
           "seasonal_flood"
         ],
-        "event_id": null
+        "event_id": null,
+        "basin_overlay_path": "assets/basin_monthly/amazon_2020-05.png",
+        "soil_moisture_idx": 83.4,
+        "flood_pulse_idx": 68.3,
+        "drought_fire_idx": 30.7
       },
       {
         "month": "2020-06",
@@ -211,7 +343,11 @@
           "dry_season",
           "clearing_land_opening"
         ],
-        "event_id": null
+        "event_id": null,
+        "basin_overlay_path": "assets/basin_monthly/amazon_2020-06.png",
+        "soil_moisture_idx": 79.2,
+        "flood_pulse_idx": 57.2,
+        "drought_fire_idx": 51.5
       },
       {
         "month": "2020-07",
@@ -227,7 +363,11 @@
           "dry_season",
           "clearing_land_opening"
         ],
-        "event_id": null
+        "event_id": null,
+        "basin_overlay_path": "assets/basin_monthly/amazon_2020-07.png",
+        "soil_moisture_idx": 74.3,
+        "flood_pulse_idx": 46.8,
+        "drought_fire_idx": 63.1
       },
       {
         "month": "2020-08",
@@ -245,7 +385,11 @@
           "fire_season",
           "low_river_levels"
         ],
-        "event_id": null
+        "event_id": null,
+        "basin_overlay_path": "assets/basin_monthly/amazon_2020-08.png",
+        "soil_moisture_idx": 64.1,
+        "flood_pulse_idx": 28.7,
+        "drought_fire_idx": 83.0
       },
       {
         "month": "2020-09",
@@ -263,7 +407,11 @@
           "fire_season",
           "low_river_levels"
         ],
-        "event_id": null
+        "event_id": null,
+        "basin_overlay_path": "assets/basin_monthly/amazon_2020-09.png",
+        "soil_moisture_idx": 60.2,
+        "flood_pulse_idx": 17.2,
+        "drought_fire_idx": 94.1
       },
       {
         "month": "2020-10",
@@ -281,7 +429,11 @@
           "fire_season",
           "low_river_levels"
         ],
-        "event_id": null
+        "event_id": null,
+        "basin_overlay_path": "assets/basin_monthly/amazon_2020-10.png",
+        "soil_moisture_idx": 56.7,
+        "flood_pulse_idx": 14.6,
+        "drought_fire_idx": 81.7
       },
       {
         "month": "2020-11",
@@ -294,7 +446,11 @@
         "s1_scenes": 811,
         "nisar_scenes": 0,
         "active_phenomena": [],
-        "event_id": null
+        "event_id": null,
+        "basin_overlay_path": "assets/basin_monthly/amazon_2020-11.png",
+        "soil_moisture_idx": 62.6,
+        "flood_pulse_idx": 17.7,
+        "drought_fire_idx": 56.8
       },
       {
         "month": "2020-12",
@@ -309,7 +465,11 @@
         "active_phenomena": [
           "rainy_season"
         ],
-        "event_id": null
+        "event_id": null,
+        "basin_overlay_path": "assets/basin_monthly/amazon_2020-12.png",
+        "soil_moisture_idx": 71.5,
+        "flood_pulse_idx": 37.0,
+        "drought_fire_idx": 43.5
       },
       {
         "month": "2021-01",
@@ -324,7 +484,11 @@
         "active_phenomena": [
           "rainy_season"
         ],
-        "event_id": null
+        "event_id": null,
+        "basin_overlay_path": "assets/basin_monthly/amazon_2021-01.png",
+        "soil_moisture_idx": 80.1,
+        "flood_pulse_idx": 62.1,
+        "drought_fire_idx": 12.4
       },
       {
         "month": "2021-02",
@@ -339,7 +503,11 @@
         "active_phenomena": [
           "rainy_season"
         ],
-        "event_id": null
+        "event_id": null,
+        "basin_overlay_path": "assets/basin_monthly/amazon_2021-02.png",
+        "soil_moisture_idx": 83.7,
+        "flood_pulse_idx": 73.0,
+        "drought_fire_idx": 4.2
       },
       {
         "month": "2021-03",
@@ -355,7 +523,11 @@
           "rainy_season",
           "seasonal_flood"
         ],
-        "event_id": null
+        "event_id": null,
+        "basin_overlay_path": "assets/basin_monthly/amazon_2021-03.png",
+        "soil_moisture_idx": 86.7,
+        "flood_pulse_idx": 80.7,
+        "drought_fire_idx": 2.4
       },
       {
         "month": "2021-04",
@@ -371,7 +543,11 @@
           "rainy_season",
           "seasonal_flood"
         ],
-        "event_id": null
+        "event_id": null,
+        "basin_overlay_path": "assets/basin_monthly/amazon_2021-04.png",
+        "soil_moisture_idx": 86.3,
+        "flood_pulse_idx": 93.1,
+        "drought_fire_idx": 7.0
       },
       {
         "month": "2021-05",
@@ -387,7 +563,11 @@
           "rainy_season",
           "seasonal_flood"
         ],
-        "event_id": null
+        "event_id": null,
+        "basin_overlay_path": "assets/basin_monthly/amazon_2021-05.png",
+        "soil_moisture_idx": 83.2,
+        "flood_pulse_idx": 82.6,
+        "drought_fire_idx": 40.3
       },
       {
         "month": "2021-06",
@@ -404,7 +584,11 @@
           "dry_season",
           "clearing_land_opening"
         ],
-        "event_id": "manaus_flood_2021"
+        "event_id": "manaus_flood_2021",
+        "basin_overlay_path": "assets/basin_monthly/amazon_2021-06.png",
+        "soil_moisture_idx": 80.0,
+        "flood_pulse_idx": 68.8,
+        "drought_fire_idx": 54.0
       },
       {
         "month": "2021-07",
@@ -420,7 +604,11 @@
           "dry_season",
           "clearing_land_opening"
         ],
-        "event_id": null
+        "event_id": null,
+        "basin_overlay_path": "assets/basin_monthly/amazon_2021-07.png",
+        "soil_moisture_idx": 73.4,
+        "flood_pulse_idx": 48.6,
+        "drought_fire_idx": 61.9
       },
       {
         "month": "2021-08",
@@ -438,7 +626,11 @@
           "fire_season",
           "low_river_levels"
         ],
-        "event_id": null
+        "event_id": null,
+        "basin_overlay_path": "assets/basin_monthly/amazon_2021-08.png",
+        "soil_moisture_idx": 64.7,
+        "flood_pulse_idx": 29.5,
+        "drought_fire_idx": 91.1
       },
       {
         "month": "2021-09",
@@ -456,7 +648,11 @@
           "fire_season",
           "low_river_levels"
         ],
-        "event_id": null
+        "event_id": null,
+        "basin_overlay_path": "assets/basin_monthly/amazon_2021-09.png",
+        "soil_moisture_idx": 63.2,
+        "flood_pulse_idx": 20.0,
+        "drought_fire_idx": 82.6
       },
       {
         "month": "2021-10",
@@ -474,7 +670,11 @@
           "fire_season",
           "low_river_levels"
         ],
-        "event_id": null
+        "event_id": null,
+        "basin_overlay_path": "assets/basin_monthly/amazon_2021-10.png",
+        "soil_moisture_idx": 60.0,
+        "flood_pulse_idx": 19.4,
+        "drought_fire_idx": 69.9
       },
       {
         "month": "2021-11",
@@ -487,7 +687,11 @@
         "s1_scenes": 796,
         "nisar_scenes": 0,
         "active_phenomena": [],
-        "event_id": null
+        "event_id": null,
+        "basin_overlay_path": "assets/basin_monthly/amazon_2021-11.png",
+        "soil_moisture_idx": 73.9,
+        "flood_pulse_idx": 28.8,
+        "drought_fire_idx": 48.9
       },
       {
         "month": "2021-12",
@@ -502,7 +706,11 @@
         "active_phenomena": [
           "rainy_season"
         ],
-        "event_id": null
+        "event_id": null,
+        "basin_overlay_path": "assets/basin_monthly/amazon_2021-12.png",
+        "soil_moisture_idx": 79.4,
+        "flood_pulse_idx": 47.7,
+        "drought_fire_idx": 22.0
       },
       {
         "month": "2022-01",
@@ -517,7 +725,11 @@
         "active_phenomena": [
           "rainy_season"
         ],
-        "event_id": null
+        "event_id": null,
+        "basin_overlay_path": "assets/basin_monthly/amazon_2022-01.png",
+        "soil_moisture_idx": 82.1,
+        "flood_pulse_idx": 48.8,
+        "drought_fire_idx": 21.9
       },
       {
         "month": "2022-02",
@@ -532,7 +744,11 @@
         "active_phenomena": [
           "rainy_season"
         ],
-        "event_id": null
+        "event_id": null,
+        "basin_overlay_path": "assets/basin_monthly/amazon_2022-02.png",
+        "soil_moisture_idx": 84.5,
+        "flood_pulse_idx": 54.2,
+        "drought_fire_idx": 0.0
       },
       {
         "month": "2022-03",
@@ -548,7 +764,11 @@
           "rainy_season",
           "seasonal_flood"
         ],
-        "event_id": null
+        "event_id": null,
+        "basin_overlay_path": "assets/basin_monthly/amazon_2022-03.png",
+        "soil_moisture_idx": 87.3,
+        "flood_pulse_idx": 77.3,
+        "drought_fire_idx": 2.4
       },
       {
         "month": "2022-04",
@@ -564,7 +784,11 @@
           "rainy_season",
           "seasonal_flood"
         ],
-        "event_id": null
+        "event_id": null,
+        "basin_overlay_path": "assets/basin_monthly/amazon_2022-04.png",
+        "soil_moisture_idx": 85.6,
+        "flood_pulse_idx": 91.5,
+        "drought_fire_idx": 27.9
       },
       {
         "month": "2022-05",
@@ -580,7 +804,11 @@
           "rainy_season",
           "seasonal_flood"
         ],
-        "event_id": null
+        "event_id": null,
+        "basin_overlay_path": "assets/basin_monthly/amazon_2022-05.png",
+        "soil_moisture_idx": 81.9,
+        "flood_pulse_idx": 79.8,
+        "drought_fire_idx": 52.6
       },
       {
         "month": "2022-06",
@@ -597,7 +825,11 @@
           "dry_season",
           "clearing_land_opening"
         ],
-        "event_id": null
+        "event_id": null,
+        "basin_overlay_path": "assets/basin_monthly/amazon_2022-06.png",
+        "soil_moisture_idx": 79.6,
+        "flood_pulse_idx": 63.3,
+        "drought_fire_idx": 56.6
       },
       {
         "month": "2022-07",
@@ -613,7 +845,11 @@
           "dry_season",
           "clearing_land_opening"
         ],
-        "event_id": null
+        "event_id": null,
+        "basin_overlay_path": "assets/basin_monthly/amazon_2022-07.png",
+        "soil_moisture_idx": 72.8,
+        "flood_pulse_idx": 45.4,
+        "drought_fire_idx": 66.0
       },
       {
         "month": "2022-08",
@@ -631,7 +867,11 @@
           "fire_season",
           "low_river_levels"
         ],
-        "event_id": null
+        "event_id": null,
+        "basin_overlay_path": "assets/basin_monthly/amazon_2022-08.png",
+        "soil_moisture_idx": 66.4,
+        "flood_pulse_idx": 34.6,
+        "drought_fire_idx": 91.2
       },
       {
         "month": "2022-09",
@@ -649,7 +889,11 @@
           "fire_season",
           "low_river_levels"
         ],
-        "event_id": null
+        "event_id": null,
+        "basin_overlay_path": "assets/basin_monthly/amazon_2022-09.png",
+        "soil_moisture_idx": 64.1,
+        "flood_pulse_idx": 21.5,
+        "drought_fire_idx": 94.1
       },
       {
         "month": "2022-10",
@@ -667,7 +911,11 @@
           "fire_season",
           "low_river_levels"
         ],
-        "event_id": null
+        "event_id": null,
+        "basin_overlay_path": "assets/basin_monthly/amazon_2022-10.png",
+        "soil_moisture_idx": 63.7,
+        "flood_pulse_idx": 15.3,
+        "drought_fire_idx": 75.7
       },
       {
         "month": "2022-11",
@@ -680,7 +928,11 @@
         "s1_scenes": 501,
         "nisar_scenes": 0,
         "active_phenomena": [],
-        "event_id": null
+        "event_id": null,
+        "basin_overlay_path": "assets/basin_monthly/amazon_2022-11.png",
+        "soil_moisture_idx": 65.6,
+        "flood_pulse_idx": 23.4,
+        "drought_fire_idx": 64.5
       },
       {
         "month": "2022-12",
@@ -695,7 +947,11 @@
         "active_phenomena": [
           "rainy_season"
         ],
-        "event_id": null
+        "event_id": null,
+        "basin_overlay_path": "assets/basin_monthly/amazon_2022-12.png",
+        "soil_moisture_idx": 69.9,
+        "flood_pulse_idx": 26.5,
+        "drought_fire_idx": 34.9
       },
       {
         "month": "2023-01",
@@ -710,7 +966,11 @@
         "active_phenomena": [
           "rainy_season"
         ],
-        "event_id": null
+        "event_id": null,
+        "basin_overlay_path": "assets/basin_monthly/amazon_2023-01.png",
+        "soil_moisture_idx": 80.9,
+        "flood_pulse_idx": 35.6,
+        "drought_fire_idx": 17.2
       },
       {
         "month": "2023-02",
@@ -725,7 +985,11 @@
         "active_phenomena": [
           "rainy_season"
         ],
-        "event_id": null
+        "event_id": null,
+        "basin_overlay_path": "assets/basin_monthly/amazon_2023-02.png",
+        "soil_moisture_idx": 81.8,
+        "flood_pulse_idx": 55.3,
+        "drought_fire_idx": 11.1
       },
       {
         "month": "2023-03",
@@ -741,7 +1005,11 @@
           "rainy_season",
           "seasonal_flood"
         ],
-        "event_id": null
+        "event_id": null,
+        "basin_overlay_path": "assets/basin_monthly/amazon_2023-03.png",
+        "soil_moisture_idx": 82.6,
+        "flood_pulse_idx": 71.6,
+        "drought_fire_idx": 10.0
       },
       {
         "month": "2023-04",
@@ -757,7 +1025,11 @@
           "rainy_season",
           "seasonal_flood"
         ],
-        "event_id": null
+        "event_id": null,
+        "basin_overlay_path": "assets/basin_monthly/amazon_2023-04.png",
+        "soil_moisture_idx": 84.3,
+        "flood_pulse_idx": 79.5,
+        "drought_fire_idx": 19.1
       },
       {
         "month": "2023-05",
@@ -773,7 +1045,11 @@
           "rainy_season",
           "seasonal_flood"
         ],
-        "event_id": null
+        "event_id": null,
+        "basin_overlay_path": "assets/basin_monthly/amazon_2023-05.png",
+        "soil_moisture_idx": 81.9,
+        "flood_pulse_idx": 74.2,
+        "drought_fire_idx": 47.1
       },
       {
         "month": "2023-06",
@@ -790,7 +1066,11 @@
           "dry_season",
           "clearing_land_opening"
         ],
-        "event_id": null
+        "event_id": null,
+        "basin_overlay_path": "assets/basin_monthly/amazon_2023-06.png",
+        "soil_moisture_idx": 80.0,
+        "flood_pulse_idx": 60.2,
+        "drought_fire_idx": 58.5
       },
       {
         "month": "2023-07",
@@ -806,7 +1086,11 @@
           "dry_season",
           "clearing_land_opening"
         ],
-        "event_id": null
+        "event_id": null,
+        "basin_overlay_path": "assets/basin_monthly/amazon_2023-07.png",
+        "soil_moisture_idx": 71.8,
+        "flood_pulse_idx": 36.3,
+        "drought_fire_idx": 63.1
       },
       {
         "month": "2023-08",
@@ -824,7 +1108,11 @@
           "fire_season",
           "low_river_levels"
         ],
-        "event_id": null
+        "event_id": null,
+        "basin_overlay_path": "assets/basin_monthly/amazon_2023-08.png",
+        "soil_moisture_idx": 63.9,
+        "flood_pulse_idx": 23.6,
+        "drought_fire_idx": 78.7
       },
       {
         "month": "2023-09",
@@ -842,7 +1130,11 @@
           "fire_season",
           "low_river_levels"
         ],
-        "event_id": null
+        "event_id": null,
+        "basin_overlay_path": "assets/basin_monthly/amazon_2023-09.png",
+        "soil_moisture_idx": 52.9,
+        "flood_pulse_idx": 9.4,
+        "drought_fire_idx": 85.7
       },
       {
         "month": "2023-10",
@@ -860,7 +1152,11 @@
           "fire_season",
           "low_river_levels"
         ],
-        "event_id": "severe_drought_2023"
+        "event_id": "severe_drought_2023",
+        "basin_overlay_path": "assets/basin_monthly/amazon_2023-10.png",
+        "soil_moisture_idx": 49.8,
+        "flood_pulse_idx": 4.2,
+        "drought_fire_idx": 81.5
       },
       {
         "month": "2023-11",
@@ -873,7 +1169,11 @@
         "s1_scenes": 492,
         "nisar_scenes": 0,
         "active_phenomena": [],
-        "event_id": null
+        "event_id": null,
+        "basin_overlay_path": "assets/basin_monthly/amazon_2023-11.png",
+        "soil_moisture_idx": 39.9,
+        "flood_pulse_idx": 6.0,
+        "drought_fire_idx": 74.6
       },
       {
         "month": "2023-12",
@@ -888,7 +1188,11 @@
         "active_phenomena": [
           "rainy_season"
         ],
-        "event_id": null
+        "event_id": null,
+        "basin_overlay_path": "assets/basin_monthly/amazon_2023-12.png",
+        "soil_moisture_idx": 54.0,
+        "flood_pulse_idx": 20.0,
+        "drought_fire_idx": 49.9
       },
       {
         "month": "2024-01",
@@ -903,7 +1207,11 @@
         "active_phenomena": [
           "rainy_season"
         ],
-        "event_id": null
+        "event_id": null,
+        "basin_overlay_path": "assets/basin_monthly/amazon_2024-01.png",
+        "soil_moisture_idx": 68.7,
+        "flood_pulse_idx": 40.7,
+        "drought_fire_idx": 30.3
       },
       {
         "month": "2024-02",
@@ -918,7 +1226,11 @@
         "active_phenomena": [
           "rainy_season"
         ],
-        "event_id": null
+        "event_id": null,
+        "basin_overlay_path": "assets/basin_monthly/amazon_2024-02.png",
+        "soil_moisture_idx": 68.9,
+        "flood_pulse_idx": 49.0,
+        "drought_fire_idx": 45.8
       },
       {
         "month": "2024-03",
@@ -934,7 +1246,11 @@
           "rainy_season",
           "seasonal_flood"
         ],
-        "event_id": null
+        "event_id": null,
+        "basin_overlay_path": "assets/basin_monthly/amazon_2024-03.png",
+        "soil_moisture_idx": 69.1,
+        "flood_pulse_idx": 58.1,
+        "drought_fire_idx": 45.3
       },
       {
         "month": "2024-04",
@@ -950,7 +1266,11 @@
           "rainy_season",
           "seasonal_flood"
         ],
-        "event_id": null
+        "event_id": null,
+        "basin_overlay_path": "assets/basin_monthly/amazon_2024-04.png",
+        "soil_moisture_idx": 74.0,
+        "flood_pulse_idx": 54.9,
+        "drought_fire_idx": 23.3
       },
       {
         "month": "2024-05",
@@ -966,7 +1286,11 @@
           "rainy_season",
           "seasonal_flood"
         ],
-        "event_id": null
+        "event_id": null,
+        "basin_overlay_path": "assets/basin_monthly/amazon_2024-05.png",
+        "soil_moisture_idx": 75.5,
+        "flood_pulse_idx": 55.5,
+        "drought_fire_idx": 49.2
       },
       {
         "month": "2024-06",
@@ -983,7 +1307,11 @@
           "dry_season",
           "clearing_land_opening"
         ],
-        "event_id": null
+        "event_id": null,
+        "basin_overlay_path": "assets/basin_monthly/amazon_2024-06.png",
+        "soil_moisture_idx": 69.5,
+        "flood_pulse_idx": 48.7,
+        "drought_fire_idx": 59.4
       },
       {
         "month": "2024-07",
@@ -999,7 +1327,11 @@
           "dry_season",
           "clearing_land_opening"
         ],
-        "event_id": null
+        "event_id": null,
+        "basin_overlay_path": "assets/basin_monthly/amazon_2024-07.png",
+        "soil_moisture_idx": 63.2,
+        "flood_pulse_idx": 32.6,
+        "drought_fire_idx": 74.3
       },
       {
         "month": "2024-08",
@@ -1017,7 +1349,11 @@
           "fire_season",
           "low_river_levels"
         ],
-        "event_id": null
+        "event_id": null,
+        "basin_overlay_path": "assets/basin_monthly/amazon_2024-08.png",
+        "soil_moisture_idx": 55.5,
+        "flood_pulse_idx": 15.8,
+        "drought_fire_idx": 96.6
       },
       {
         "month": "2024-09",
@@ -1035,7 +1371,11 @@
           "fire_season",
           "low_river_levels"
         ],
-        "event_id": "drought_fires_2024"
+        "event_id": "drought_fires_2024",
+        "basin_overlay_path": "assets/basin_monthly/amazon_2024-09.png",
+        "soil_moisture_idx": 48.4,
+        "flood_pulse_idx": 4.8,
+        "drought_fire_idx": 100.0
       },
       {
         "month": "2024-10",
@@ -1053,7 +1393,11 @@
           "fire_season",
           "low_river_levels"
         ],
-        "event_id": null
+        "event_id": null,
+        "basin_overlay_path": "assets/basin_monthly/amazon_2024-10.png",
+        "soil_moisture_idx": 49.3,
+        "flood_pulse_idx": 0.0,
+        "drought_fire_idx": 78.5
       },
       {
         "month": "2024-11",
@@ -1066,7 +1410,11 @@
         "s1_scenes": 509,
         "nisar_scenes": 0,
         "active_phenomena": [],
-        "event_id": null
+        "event_id": null,
+        "basin_overlay_path": "assets/basin_monthly/amazon_2024-11.png",
+        "soil_moisture_idx": 65.2,
+        "flood_pulse_idx": 6.4,
+        "drought_fire_idx": 74.0
       },
       {
         "month": "2024-12",
@@ -1081,7 +1429,11 @@
         "active_phenomena": [
           "rainy_season"
         ],
-        "event_id": null
+        "event_id": null,
+        "basin_overlay_path": "assets/basin_monthly/amazon_2024-12.png",
+        "soil_moisture_idx": 69.8,
+        "flood_pulse_idx": 22.6,
+        "drought_fire_idx": 52.1
       },
       {
         "month": "2025-01",
@@ -1096,7 +1448,11 @@
         "active_phenomena": [
           "rainy_season"
         ],
-        "event_id": null
+        "event_id": null,
+        "basin_overlay_path": "assets/basin_monthly/amazon_2025-01.png",
+        "soil_moisture_idx": 76.3,
+        "flood_pulse_idx": 47.9,
+        "drought_fire_idx": 22.7
       },
       {
         "month": "2025-02",
@@ -1111,7 +1467,11 @@
         "active_phenomena": [
           "rainy_season"
         ],
-        "event_id": null
+        "event_id": null,
+        "basin_overlay_path": "assets/basin_monthly/amazon_2025-02.png",
+        "soil_moisture_idx": 85.2,
+        "flood_pulse_idx": 56.2,
+        "drought_fire_idx": 7.8
       },
       {
         "month": "2025-03",
@@ -1127,7 +1487,11 @@
           "rainy_season",
           "seasonal_flood"
         ],
-        "event_id": null
+        "event_id": null,
+        "basin_overlay_path": "assets/basin_monthly/amazon_2025-03.png",
+        "soil_moisture_idx": 87.9,
+        "flood_pulse_idx": 90.1,
+        "drought_fire_idx": 20.4
       },
       {
         "month": "2025-04",
@@ -1143,7 +1507,11 @@
           "rainy_season",
           "seasonal_flood"
         ],
-        "event_id": null
+        "event_id": null,
+        "basin_overlay_path": "assets/basin_monthly/amazon_2025-04.png",
+        "soil_moisture_idx": 86.8,
+        "flood_pulse_idx": 97.0,
+        "drought_fire_idx": 6.3
       },
       {
         "month": "2025-05",
@@ -1159,7 +1527,11 @@
           "rainy_season",
           "seasonal_flood"
         ],
-        "event_id": null
+        "event_id": null,
+        "basin_overlay_path": "assets/basin_monthly/amazon_2025-05.png",
+        "soil_moisture_idx": 84.4,
+        "flood_pulse_idx": 83.3,
+        "drought_fire_idx": 43.8
       },
       {
         "month": "2025-06",
@@ -1176,7 +1548,11 @@
           "dry_season",
           "clearing_land_opening"
         ],
-        "event_id": null
+        "event_id": null,
+        "basin_overlay_path": "assets/basin_monthly/amazon_2025-06.png",
+        "soil_moisture_idx": 81.7,
+        "flood_pulse_idx": 76.2,
+        "drought_fire_idx": 52.3
       },
       {
         "month": "2025-07",
@@ -1192,7 +1568,11 @@
           "dry_season",
           "clearing_land_opening"
         ],
-        "event_id": null
+        "event_id": null,
+        "basin_overlay_path": "assets/basin_monthly/amazon_2025-07.png",
+        "soil_moisture_idx": 74.1,
+        "flood_pulse_idx": 54.1,
+        "drought_fire_idx": 53.9
       },
       {
         "month": "2025-08",
@@ -1210,7 +1590,11 @@
           "fire_season",
           "low_river_levels"
         ],
-        "event_id": null
+        "event_id": null,
+        "basin_overlay_path": "assets/basin_monthly/amazon_2025-08.png",
+        "soil_moisture_idx": 67.9,
+        "flood_pulse_idx": 33.0,
+        "drought_fire_idx": 69.2
       },
       {
         "month": "2025-09",
@@ -1228,7 +1612,11 @@
           "fire_season",
           "low_river_levels"
         ],
-        "event_id": null
+        "event_id": null,
+        "basin_overlay_path": "assets/basin_monthly/amazon_2025-09.png",
+        "soil_moisture_idx": 60.8,
+        "flood_pulse_idx": 24.1,
+        "drought_fire_idx": 74.3
       },
       {
         "month": "2025-10",
@@ -1246,7 +1634,11 @@
           "fire_season",
           "low_river_levels"
         ],
-        "event_id": null
+        "event_id": null,
+        "basin_overlay_path": "assets/basin_monthly/amazon_2025-10.png",
+        "soil_moisture_idx": 60.8,
+        "flood_pulse_idx": 21.2,
+        "drought_fire_idx": 73.1
       },
       {
         "month": "2025-11",
@@ -1259,7 +1651,11 @@
         "s1_scenes": 838,
         "nisar_scenes": 202,
         "active_phenomena": [],
-        "event_id": null
+        "event_id": null,
+        "basin_overlay_path": "assets/basin_monthly/amazon_2025-11.png",
+        "soil_moisture_idx": 60.8,
+        "flood_pulse_idx": 31.9,
+        "drought_fire_idx": 64.7
       },
       {
         "month": "2025-12",
@@ -1274,7 +1670,11 @@
         "active_phenomena": [
           "rainy_season"
         ],
-        "event_id": null
+        "event_id": null,
+        "basin_overlay_path": "assets/basin_monthly/amazon_2025-12.png",
+        "soil_moisture_idx": 73.8,
+        "flood_pulse_idx": 45.9,
+        "drought_fire_idx": 47.9
       },
       {
         "month": "2026-01",
@@ -1289,7 +1689,11 @@
         "active_phenomena": [
           "rainy_season"
         ],
-        "event_id": null
+        "event_id": null,
+        "basin_overlay_path": "assets/basin_monthly/amazon_2026-01.png",
+        "soil_moisture_idx": 78.8,
+        "flood_pulse_idx": 57.7,
+        "drought_fire_idx": 24.8
       },
       {
         "month": "2026-02",
@@ -1304,7 +1708,11 @@
         "active_phenomena": [
           "rainy_season"
         ],
-        "event_id": null
+        "event_id": null,
+        "basin_overlay_path": "assets/basin_monthly/amazon_2026-02.png",
+        "soil_moisture_idx": 83.0,
+        "flood_pulse_idx": 76.1,
+        "drought_fire_idx": 4.4
       },
       {
         "month": "2026-03",
@@ -1320,7 +1728,11 @@
           "rainy_season",
           "seasonal_flood"
         ],
-        "event_id": null
+        "event_id": null,
+        "basin_overlay_path": "assets/basin_monthly/amazon_2026-03.png",
+        "soil_moisture_idx": 84.8,
+        "flood_pulse_idx": 75.0,
+        "drought_fire_idx": 12.1
       },
       {
         "month": "2026-04",
@@ -1336,7 +1748,11 @@
           "rainy_season",
           "seasonal_flood"
         ],
-        "event_id": null
+        "event_id": null,
+        "basin_overlay_path": "assets/basin_monthly/amazon_2026-04.png",
+        "soil_moisture_idx": 84.3,
+        "flood_pulse_idx": 81.8,
+        "drought_fire_idx": 13.9
       },
       {
         "month": "2026-05",
@@ -1352,7 +1768,11 @@
           "rainy_season",
           "seasonal_flood"
         ],
-        "event_id": null
+        "event_id": null,
+        "basin_overlay_path": "assets/basin_monthly/amazon_2026-05.png",
+        "soil_moisture_idx": 83.2,
+        "flood_pulse_idx": 87.3,
+        "drought_fire_idx": 41.9
       },
       {
         "month": "2026-06",
@@ -1369,7 +1789,11 @@
           "dry_season",
           "clearing_land_opening"
         ],
-        "event_id": null
+        "event_id": null,
+        "basin_overlay_path": "assets/basin_monthly/amazon_2026-06.png",
+        "soil_moisture_idx": 80.7,
+        "flood_pulse_idx": 68.3,
+        "drought_fire_idx": 48.3
       },
       {
         "month": "2026-07",
@@ -1385,7 +1809,11 @@
           "dry_season",
           "clearing_land_opening"
         ],
-        "event_id": null
+        "event_id": null,
+        "basin_overlay_path": "assets/basin_monthly/amazon_2026-07.png",
+        "soil_moisture_idx": 77.7,
+        "flood_pulse_idx": 50.0,
+        "drought_fire_idx": 56.2
       },
       {
         "month": "2026-08",
@@ -1403,7 +1831,11 @@
           "fire_season",
           "low_river_levels"
         ],
-        "event_id": null
+        "event_id": null,
+        "basin_overlay_path": "assets/basin_monthly/amazon_2026-08.png",
+        "soil_moisture_idx": 77.7,
+        "flood_pulse_idx": 29.7,
+        "drought_fire_idx": 91.9
       },
       {
         "month": "2026-09",
@@ -1421,7 +1853,11 @@
           "fire_season",
           "low_river_levels"
         ],
-        "event_id": null
+        "event_id": null,
+        "basin_overlay_path": "assets/basin_monthly/amazon_2026-09.png",
+        "soil_moisture_idx": 55.3,
+        "flood_pulse_idx": 16.6,
+        "drought_fire_idx": 89.4
       },
       {
         "month": "2026-10",
@@ -1439,7 +1875,11 @@
           "fire_season",
           "low_river_levels"
         ],
-        "event_id": "nisar_lband_2026"
+        "event_id": "nisar_lband_2026",
+        "basin_overlay_path": "assets/basin_monthly/amazon_2026-10.png",
+        "soil_moisture_idx": 52.5,
+        "flood_pulse_idx": 12.0,
+        "drought_fire_idx": 74.5
       },
       {
         "month": "2026-11",
@@ -1452,7 +1892,11 @@
         "s1_scenes": 316,
         "nisar_scenes": 63,
         "active_phenomena": [],
-        "event_id": null
+        "event_id": null,
+        "basin_overlay_path": "assets/basin_monthly/amazon_2026-11.png",
+        "soil_moisture_idx": 50.7,
+        "flood_pulse_idx": 14.2,
+        "drought_fire_idx": 70.6
       },
       {
         "month": "2026-12",
@@ -1467,7 +1911,11 @@
         "active_phenomena": [
           "rainy_season"
         ],
-        "event_id": null
+        "event_id": null,
+        "basin_overlay_path": "assets/basin_monthly/amazon_2026-12.png",
+        "soil_moisture_idx": 73.8,
+        "flood_pulse_idx": 45.9,
+        "drought_fire_idx": 47.9
       }
     ]
   },
@@ -3765,6 +4213,13 @@
       "url": "https://www.spaceappschallenge.org/2026/challenges/dancing-with-the-sars/",
       "publisher": "NASA Science Mission Directorate",
       "accessed": "2026-11-13"
+    },
+    {
+      "id": "smap_l4",
+      "title": "NASA SMAP Level-4 Analyzed Surface Soil Moisture (GIBS 2020\u20132026 Monthly L-Band Radiometer)",
+      "url": "https://smap.jpl.nasa.gov/",
+      "publisher": "NASA GIBS / NSIDC DAAC",
+      "accessed": "2026-11-14"
     }
   ]
 }

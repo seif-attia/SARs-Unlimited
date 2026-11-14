@@ -32,7 +32,7 @@ const DEFAULT_ORBIT_VIEW = {
 }
 
 const SRTM_TOPOGRAPHY_URL =
-  'https://gibs.earthdata.nasa.gov/wmts/epsg3857/best/SRTM_Color_Index/default/default/GoogleMapsCompatible_Level12/{z}/{y}/{x}.png'
+  'https://gibs.earthdata.nasa.gov/wmts/epsg3857/best/ASTER_GDEM_Color_Index/default/default/GoogleMapsCompatible_Level12/{z}/{y}/{x}.png'
 
 const SHADED_RELIEF_URL =
   'https://gibs.earthdata.nasa.gov/wmts/epsg3857/best/ASTER_GDEM_Color_Shaded_Relief/default/default/GoogleMapsCompatible_Level12/{z}/{y}/{x}.jpg'
@@ -207,7 +207,7 @@ function createSrtmTopographyProvider(cacheBust?: number): Cesium.ImageryProvide
   return new Cesium.UrlTemplateImageryProvider({
     url: `${SRTM_TOPOGRAPHY_URL}${query}`,
     maximumLevel: 11,
-    credit: 'NASA SRTM Radar Topography'
+    credit: 'NASA ASTER GDEM & SRTM Radar Topography'
   })
 }
 
@@ -218,6 +218,101 @@ function createShadedReliefProvider(cacheBust?: number): Cesium.ImageryProvider 
     maximumLevel: 11,
     credit: 'NASA ASTER GDEM Shaded Relief'
   })
+}
+
+type PolarCapMode = 'satellite' | 'srtm' | 'relief'
+
+let polarCapUrlCache: Record<PolarCapMode, { northUrl: string; southUrl: string }> | null = null
+
+// NASA GIBS elevation/relief tiles stop at ±83° and Web Mercator stops at ±85.051°,
+// leaving visible circles at both poles. Paint EPSG:4326 polar caps across ±81.5°..±90.0°
+// with feathered latitude alpha so topography, relief, and imagery seal seamlessly at the poles.
+function getPolarCapUrls(mode: PolarCapMode): { northUrl: string; southUrl: string } {
+  if (!polarCapUrlCache) {
+    const buildCap = (isNorth: boolean, capMode: PolarCapMode): string => {
+      const w = 128
+      const h = 96
+      const canvas = document.createElement('canvas')
+      canvas.width = w
+      canvas.height = h
+      const ctx = canvas.getContext('2d')
+      if (!ctx) return ''
+
+      const imgData = ctx.createImageData(w, h)
+      for (let row = 0; row < h; row++) {
+        // Row 0 = northern edge (+90° for north cap, -81.5° for south cap)
+        const fracNorthToSouth = row / (h - 1)
+        const lat = isNorth ? 90.0 - fracNorthToSouth * 8.5 : -81.5 - fracNorthToSouth * 8.5
+        const absLat = Math.abs(lat)
+
+        // Satellite Web Mercator works out to ~85.05°, whereas GIBS ASTER cuts off near ±83°
+        const fadeStart = capMode === 'satellite' ? 84.4 : 81.8
+        const fadeEnd = capMode === 'satellite' ? 85.15 : 83.2
+        const tAlpha = Math.max(0, Math.min(1, (absLat - fadeStart) / (fadeEnd - fadeStart)))
+        const alpha = Math.round(tAlpha * tAlpha * (3 - 2 * tAlpha) * 255)
+
+        // Radial fraction from cap boundary toward ±90° pole center
+        const poleRatio = Math.max(0, Math.min(1, (absLat - 81.5) / 8.5))
+        let r: number
+        let g: number
+        let b: number
+        if (capMode === 'srtm') {
+          if (isNorth) {
+            // Arctic Ocean deep bathymetric blue-teal matching ASTER_GDEM_Color_Index north edge
+            r = Math.round(6 + 6 * (1 - poleRatio))
+            g = Math.round(74 + 14 * (1 - poleRatio))
+            b = Math.round(168 + 18 * (1 - poleRatio))
+          } else {
+            // High East Antarctic Polar Plateau (2,400–2,850 m -> ochre/yellow-tan scale)
+            r = Math.round(160 + 26 * poleRatio)
+            g = Math.round(162 + 12 * poleRatio)
+            b = Math.round(46 + 24 * poleRatio)
+          }
+        } else if (capMode === 'relief') {
+          if (isNorth) {
+            // Arctic ocean GIBS shaded relief slate-blue
+            r = 76
+            g = 111
+            b = 146
+          } else {
+            // Antarctic Ice Sheet shaded relief neutral silver-slate
+            r = Math.round(92 + 18 * poleRatio)
+            g = Math.round(112 + 14 * poleRatio)
+            b = Math.round(130 + 6 * poleRatio)
+          }
+        } else {
+          if (isNorth) {
+            // Arctic sea ice / dark polar ocean
+            r = Math.round(14 + 8 * poleRatio)
+            g = Math.round(30 + 10 * poleRatio)
+            b = Math.round(52 + 12 * poleRatio)
+          } else {
+            // Antarctic continental ice sheet
+            r = Math.round(212 + 16 * poleRatio)
+            g = Math.round(224 + 14 * poleRatio)
+            b = Math.round(236 + 10 * poleRatio)
+          }
+        }
+
+        for (let col = 0; col < w; col++) {
+          const idx = (row * w + col) * 4
+          imgData.data[idx] = r
+          imgData.data[idx + 1] = g
+          imgData.data[idx + 2] = b
+          imgData.data[idx + 3] = alpha
+        }
+      }
+      ctx.putImageData(imgData, 0, 0)
+      return canvas.toDataURL('image/png')
+    }
+
+    polarCapUrlCache = {
+      satellite: { northUrl: buildCap(true, 'satellite'), southUrl: buildCap(false, 'satellite') },
+      srtm: { northUrl: buildCap(true, 'srtm'), southUrl: buildCap(false, 'srtm') },
+      relief: { northUrl: buildCap(true, 'relief'), southUrl: buildCap(false, 'relief') }
+    }
+  }
+  return polarCapUrlCache[mode]
 }
 
 function createBordersProvider(cacheBust?: number): Cesium.ImageryProvider {
@@ -234,15 +329,29 @@ export function GlobeViewer(): React.JSX.Element {
 
   // Lazy-loaded ImageryLayer refs (null when unchecked -> 0 network/VRAM usage)
   const satelliteLayerRef = useRef<Cesium.ImageryLayer | null>(null)
+  const satellitePolarLayersRef = useRef<Cesium.ImageryLayer[]>([])
   const srtmLayerRef = useRef<Cesium.ImageryLayer | null>(null)
+  const srtmPolarLayersRef = useRef<Cesium.ImageryLayer[]>([])
   const reliefLayerRef = useRef<Cesium.ImageryLayer | null>(null)
+  const reliefPolarLayersRef = useRef<Cesium.ImageryLayer[]>([])
+  const polarTokenRef = useRef<Record<PolarCapMode, number>>({
+    satellite: 0,
+    srtm: 0,
+    relief: 0
+  })
   const labelsLayerRef = useRef<Cesium.ImageryLayer | null>(null)
+  const basinProgressionLayerRef = useRef<Cesium.ImageryLayer | null>(null)
+  const basinProviderCacheRef = useRef<Map<string, Cesium.SingleTileImageryProvider>>(new Map())
+  const basinReqSeqRef = useRef<number>(0)
   const sarOverlayLayerRef = useRef<Cesium.ImageryLayer | null>(null)
   const sarRequestSeqRef = useRef<number>(0)
 
   // Dancing with the SARs — Amazon 2020-2026 Offline Dataset & Story State
   const [sarDataset, setSarDataset] = useState<AmazonSarDataset | null>(null)
   const [selectedMonthIndex, setSelectedMonthIndex] = useState<number>(81) // 2026-10
+  const [isPlaying, setIsPlaying] = useState<boolean>(false)
+  const [playbackSpeed, setPlaybackSpeed] = useState<1 | 2 | 4>(1)
+  const [showBasinProgression, setShowBasinProgression] = useState<boolean>(true)
   const [selectionMode, setSelectionMode] = useState<'phenomenon' | 'event' | null>(null)
   const [activePhenomenonId, setActivePhenomenonId] = useState<string | null>(null)
   const [activeEventId, setActiveEventId] = useState<string | null>(null)
@@ -329,18 +438,43 @@ export function GlobeViewer(): React.JSX.Element {
     }
   }, [autoRotate])
 
+  const removePolarCaps = useCallback(
+    (viewer: Cesium.Viewer, capsRef: React.MutableRefObject<Cesium.ImageryLayer[]>): void => {
+      if (viewer.isDestroyed()) return
+      for (const layer of capsRef.current) {
+        if (viewer.imageryLayers.contains(layer)) {
+          viewer.imageryLayers.remove(layer, true)
+        }
+      }
+      capsRef.current = []
+    },
+    []
+  )
+
   // Ensure proper layer stacking order without re-fetching existing layers
-  const enforceLayerOrder = (viewer: Cesium.Viewer): void => {
+  const enforceLayerOrder = useCallback((viewer: Cesium.Viewer): void => {
     if (viewer.isDestroyed()) return
     const layers = viewer.imageryLayers
     if (satelliteLayerRef.current && layers.contains(satelliteLayerRef.current)) {
       layers.raiseToTop(satelliteLayerRef.current)
     }
+    for (const cap of satellitePolarLayersRef.current) {
+      if (layers.contains(cap)) layers.raiseToTop(cap)
+    }
     if (reliefLayerRef.current && layers.contains(reliefLayerRef.current)) {
       layers.raiseToTop(reliefLayerRef.current)
     }
+    for (const cap of reliefPolarLayersRef.current) {
+      if (layers.contains(cap)) layers.raiseToTop(cap)
+    }
     if (srtmLayerRef.current && layers.contains(srtmLayerRef.current)) {
       layers.raiseToTop(srtmLayerRef.current)
+    }
+    for (const cap of srtmPolarLayersRef.current) {
+      if (layers.contains(cap)) layers.raiseToTop(cap)
+    }
+    if (basinProgressionLayerRef.current && layers.contains(basinProgressionLayerRef.current)) {
+      layers.raiseToTop(basinProgressionLayerRef.current)
     }
     if (sarOverlayLayerRef.current && layers.contains(sarOverlayLayerRef.current)) {
       layers.raiseToTop(sarOverlayLayerRef.current)
@@ -349,7 +483,43 @@ export function GlobeViewer(): React.JSX.Element {
       layers.raiseToTop(labelsLayerRef.current)
     }
     viewer.scene.requestRender()
-  }
+  }, [])
+
+  const mountPolarCaps = useCallback(
+    (
+      viewer: Cesium.Viewer,
+      mode: PolarCapMode,
+      alpha: number,
+      capsRef: React.MutableRefObject<Cesium.ImageryLayer[]>
+    ): void => {
+      const token = ++polarTokenRef.current[mode]
+      removePolarCaps(viewer, capsRef)
+      const { northUrl, southUrl } = getPolarCapUrls(mode)
+      if (!northUrl || !southUrl) return
+
+      Promise.all([
+        Cesium.SingleTileImageryProvider.fromUrl(northUrl, {
+          rectangle: Cesium.Rectangle.fromDegrees(-180, 81.5, 180, 90.0)
+        }),
+        Cesium.SingleTileImageryProvider.fromUrl(southUrl, {
+          rectangle: Cesium.Rectangle.fromDegrees(-180, -90.0, 180, -81.5)
+        })
+      ])
+        .then(([northProv, southProv]) => {
+          if (viewer.isDestroyed() || polarTokenRef.current[mode] !== token) return
+          const nLayer = viewer.imageryLayers.addImageryProvider(northProv)
+          const sLayer = viewer.imageryLayers.addImageryProvider(southProv)
+          nLayer.alpha = alpha
+          sLayer.alpha = alpha
+          capsRef.current = [nLayer, sLayer]
+          enforceLayerOrder(viewer)
+        })
+        .catch(() => {
+          // Ignore polar cap load cancellation
+        })
+    },
+    [enforceLayerOrder, removePolarCaps]
+  )
 
   // Fly smoothly to an AOI bbox on the 3D globe
   const flyToBbox = useCallback((bbox: [number, number, number, number]): void => {
@@ -372,6 +542,7 @@ export function GlobeViewer(): React.JSX.Element {
 
   const handleSelectPhenomenon = useCallback(
     (phen: AmazonPhenomenon): void => {
+      setIsPlaying(false)
       setSelectionMode('phenomenon')
       setActivePhenomenonId(phen.id)
       setActiveEventId(null)
@@ -392,6 +563,7 @@ export function GlobeViewer(): React.JSX.Element {
 
   const handleSelectEvent = useCallback(
     (evt: AmazonEvent): void => {
+      setIsPlaying(false)
       setSelectionMode('event')
       setActiveEventId(evt.id)
       setActivePhenomenonId(null)
@@ -408,21 +580,14 @@ export function GlobeViewer(): React.JSX.Element {
 
   const handleSelectMonthIndex = useCallback(
     (idx: number): void => {
+      setIsPlaying(false)
       setSelectedMonthIndex(idx)
       if (!sarDataset) return
       const pt = sarDataset.timeline.months[idx]
       if (!pt) return
-      // In generic browsing mode, follow seasonal phenomenon transitions cleanly if user hasn't locked an event
-      if (selectionMode !== 'event') {
-        if (pt.event_id) {
-          const evt = sarDataset.events.find((e) => e.id === pt.event_id)
-          if (evt) {
-            handleSelectEvent(evt)
-            return
-          }
-        }
+      if (selectionMode === 'phenomenon') {
         const matchPhenId = pt.active_phenomena[0]
-        if (matchPhenId && selectionMode === 'phenomenon' && activePhenomenonId !== matchPhenId) {
+        if (matchPhenId && activePhenomenonId !== matchPhenId) {
           const phen = sarDataset.phenomena.find((p) => p.id === matchPhenId)
           if (phen) {
             setActivePhenomenonId(phen.id)
@@ -433,7 +598,7 @@ export function GlobeViewer(): React.JSX.Element {
         }
       }
     },
-    [activePhenomenonId, handleSelectEvent, sarDataset, selectionMode]
+    [activePhenomenonId, sarDataset, selectionMode]
   )
 
   const handleClearInspector = useCallback((): void => {
@@ -497,9 +662,10 @@ export function GlobeViewer(): React.JSX.Element {
         // Ignore fallback error
       })
 
-    // 2. Load ONLY the single primary Satellite layer at startup
+    // 2. Load ONLY the single primary Satellite layer at startup (+ polar caps to close ±85.05° holes)
     const satLayer = viewer.imageryLayers.addImageryProvider(createOpticalSatelliteProvider())
     satelliteLayerRef.current = satLayer
+    mountPolarCaps(viewer, 'satellite', 1.0, satellitePolarLayersRef)
 
     // Configure lightweight GPU & Tile Quadtree settings
     const { scene, camera } = viewer
@@ -605,12 +771,20 @@ export function GlobeViewer(): React.JSX.Element {
       scene.preUpdate.removeEventListener(onPreUpdate)
       camera.changed.removeEventListener(updateTelemetry)
       handler.destroy()
+      satelliteLayerRef.current = null
+      satellitePolarLayersRef.current = []
+      srtmLayerRef.current = null
+      srtmPolarLayersRef.current = []
+      reliefLayerRef.current = null
+      reliefPolarLayersRef.current = []
+      basinProgressionLayerRef.current = null
+      sarOverlayLayerRef.current = null
       if (!viewer.isDestroyed()) {
         viewer.destroy()
       }
       viewerRef.current = null
     }
-  }, [])
+  }, [mountPolarCaps])
 
   // Load offline Amazon SAR 2020-2026 Atlas once via Electron IPC
   useEffect(() => {
@@ -629,7 +803,35 @@ export function GlobeViewer(): React.JSX.Element {
     }
   }, [])
 
-  // Sync clickable 3D markers for the 4 Anchor Events + Madeira Porto Velho on the globe
+  // Playback timer & state actions for real-time 2020-2026 monthly progression
+  const handleTogglePlay = useCallback((): void => {
+    setAutoRotate(false)
+    setShowBasinProgression(true)
+    setIsPlaying((prev) => !prev)
+  }, [])
+
+  const handleCycleSpeed = useCallback((): void => {
+    setPlaybackSpeed((prev) => (prev === 1 ? 2 : prev === 2 ? 4 : 1))
+  }, [])
+
+  const handleToggleBasinProgression = useCallback((): void => {
+    setShowBasinProgression((prev) => {
+      if (prev) setIsPlaying(false)
+      return !prev
+    })
+  }, [])
+
+  useEffect(() => {
+    if (!isPlaying || !sarDataset || sarDataset.timeline.months.length === 0) return
+    const total = sarDataset.timeline.months.length
+    const delayMs = Math.round(650 / playbackSpeed)
+    const id = window.setInterval(() => {
+      setSelectedMonthIndex((prev) => (prev + 1) % total)
+    }, delayMs)
+    return () => window.clearInterval(id)
+  }, [isPlaying, playbackSpeed, sarDataset])
+
+  // Sync clickable 3D markers + Amazon Biome boundary outline on the globe
   useEffect(() => {
     const viewer = viewerRef.current
     if (!viewer || viewer.isDestroyed() || !sarDataset) return
@@ -646,6 +848,23 @@ export function GlobeViewer(): React.JSX.Element {
     }
 
     viewer.entities.removeAll()
+
+    // Subtle Amazon Rainforest Biome boundary perimeter
+    if (sarDataset.amazon_basin_outline?.length >= 3) {
+      const flatDegrees: number[] = []
+      for (const [lon, lat] of sarDataset.amazon_basin_outline) {
+        flatDegrees.push(lon, lat)
+      }
+      viewer.entities.add({
+        id: 'amazon-biome-outline',
+        polyline: {
+          positions: Cesium.Cartesian3.fromDegreesArray(flatDegrees),
+          width: 1.8,
+          clampToGround: false,
+          material: Cesium.Color.fromCssColorString('#22D3EE').withAlpha(0.55)
+        }
+      })
+    }
 
     for (const evt of sarDataset.events) {
       const col = Cesium.Color.fromCssColorString(evt.color)
@@ -740,7 +959,88 @@ export function GlobeViewer(): React.JSX.Element {
       .catch((err) => {
         console.error('Failed to drape SAR overlay:', err)
       })
-  }, [activeSarLayer])
+  }, [activeSarLayer, enforceLayerOrder])
+
+  // Drape & double-buffer Whole-Amazon Monthly Progression (2020-01 .. 2026-12)
+  useEffect(() => {
+    const viewer = viewerRef.current
+    if (!viewer || viewer.isDestroyed()) return
+
+    if (!showBasinProgression || !sarDataset) {
+      ++basinReqSeqRef.current
+      if (basinProgressionLayerRef.current) {
+        viewer.imageryLayers.remove(basinProgressionLayerRef.current, true)
+        basinProgressionLayerRef.current = null
+        viewer.scene.requestRender()
+      }
+      return
+    }
+
+    const months = sarDataset.timeline.months
+    const monthObj = months[selectedMonthIndex]
+    const relPath = monthObj?.basin_overlay_path
+    if (!relPath) return
+
+    const [west, south, east, north] = sarDataset.amazon_basin_bbox ?? [-79.5, -18.0, -44.5, 8.5]
+    const rect = Cesium.Rectangle.fromDegrees(west, south, east, north)
+
+    const applyProvider = (provider: Cesium.SingleTileImageryProvider): void => {
+      if (viewer.isDestroyed()) return
+      const nextLayer = viewer.imageryLayers.addImageryProvider(provider)
+      nextLayer.alpha = 0.78
+      const prevLayer = basinProgressionLayerRef.current
+      basinProgressionLayerRef.current = nextLayer
+      enforceLayerOrder(viewer)
+      if (prevLayer && viewer.imageryLayers.contains(prevLayer)) {
+        viewer.imageryLayers.remove(prevLayer, false)
+      }
+      viewer.scene.requestRender()
+    }
+
+    const cached = basinProviderCacheRef.current.get(relPath)
+    if (cached) {
+      ++basinReqSeqRef.current
+      applyProvider(cached)
+    } else {
+      const reqId = ++basinReqSeqRef.current
+      window.api
+        ?.getAssetDataUrl(relPath)
+        .then((dataUrl) =>
+          Cesium.SingleTileImageryProvider.fromUrl(dataUrl, {
+            rectangle: rect
+          })
+        )
+        .then((provider) => {
+          basinProviderCacheRef.current.set(relPath, provider)
+          if (viewer.isDestroyed() || reqId !== basinReqSeqRef.current) return
+          applyProvider(provider)
+        })
+        .catch((err) => {
+          console.error('Failed to drape Whole-Amazon progression overlay:', err)
+        })
+    }
+
+    // Prefetch next 3 months silently for silky smooth 1x/2x/4x playback
+    for (let step = 1; step <= 3; step++) {
+      const nextM = months[(selectedMonthIndex + step) % months.length]
+      const nextRel = nextM?.basin_overlay_path
+      if (nextRel && !basinProviderCacheRef.current.has(nextRel)) {
+        window.api
+          ?.getAssetDataUrl(nextRel)
+          .then((dataUrl) =>
+            Cesium.SingleTileImageryProvider.fromUrl(dataUrl, {
+              rectangle: rect
+            })
+          )
+          .then((prov) => {
+            basinProviderCacheRef.current.set(nextRel, prov)
+          })
+          .catch(() => {
+            // Ignore speculative prefetch error
+          })
+      }
+    }
+  }, [enforceLayerOrder, sarDataset, selectedMonthIndex, showBasinProgression])
 
   // Sync overlay alpha slider without recreating imagery provider
   useEffect(() => {
@@ -753,7 +1053,7 @@ export function GlobeViewer(): React.JSX.Element {
     }
   }, [overlayOpacity])
 
-  // Lazy-toggle Optical Satellite Imagery
+  // Lazy-toggle Optical Satellite Imagery + Polar Caps
   const handleToggleSatellite = (checked?: boolean): void => {
     const viewer = viewerRef.current
     if (!viewer || viewer.isDestroyed()) return
@@ -764,15 +1064,18 @@ export function GlobeViewer(): React.JSX.Element {
       satelliteLayerRef.current = viewer.imageryLayers.addImageryProvider(
         createOpticalSatelliteProvider()
       )
+      mountPolarCaps(viewer, 'satellite', 1.0, satellitePolarLayersRef)
       enforceLayerOrder(viewer)
     } else if (!next && satelliteLayerRef.current) {
+      ++polarTokenRef.current.satellite
       viewer.imageryLayers.remove(satelliteLayerRef.current, true)
       satelliteLayerRef.current = null
+      removePolarCaps(viewer, satellitePolarLayersRef)
       viewer.scene.requestRender()
     }
   }
 
-  // Lazy-toggle NASA SRTM Radar Topography (only loads tiles when checked)
+  // Lazy-toggle NASA ASTER/SRTM Radar Topography + Polar Caps (full -90..+90 coverage)
   const handleToggleSrtmTopography = (checked?: boolean): void => {
     const viewer = viewerRef.current
     if (!viewer || viewer.isDestroyed()) return
@@ -783,15 +1086,18 @@ export function GlobeViewer(): React.JSX.Element {
       const layer = viewer.imageryLayers.addImageryProvider(createSrtmTopographyProvider())
       layer.alpha = 0.65
       srtmLayerRef.current = layer
+      mountPolarCaps(viewer, 'srtm', 0.65, srtmPolarLayersRef)
       enforceLayerOrder(viewer)
     } else if (!next && srtmLayerRef.current) {
+      ++polarTokenRef.current.srtm
       viewer.imageryLayers.remove(srtmLayerRef.current, true)
       srtmLayerRef.current = null
+      removePolarCaps(viewer, srtmPolarLayersRef)
       viewer.scene.requestRender()
     }
   }
 
-  // Lazy-toggle Topographic Shaded Relief (only loads tiles when checked)
+  // Lazy-toggle Topographic Shaded Relief + Polar Caps (full -90..+90 coverage)
   const handleToggleShadedRelief = (checked?: boolean): void => {
     const viewer = viewerRef.current
     if (!viewer || viewer.isDestroyed()) return
@@ -802,10 +1108,13 @@ export function GlobeViewer(): React.JSX.Element {
       const layer = viewer.imageryLayers.addImageryProvider(createShadedReliefProvider())
       layer.alpha = 0.65
       reliefLayerRef.current = layer
+      mountPolarCaps(viewer, 'relief', 0.65, reliefPolarLayersRef)
       enforceLayerOrder(viewer)
     } else if (!next && reliefLayerRef.current) {
+      ++polarTokenRef.current.relief
       viewer.imageryLayers.remove(reliefLayerRef.current, true)
       reliefLayerRef.current = null
+      removePolarCaps(viewer, reliefPolarLayersRef)
       viewer.scene.requestRender()
     }
   }
@@ -855,6 +1164,7 @@ export function GlobeViewer(): React.JSX.Element {
       satelliteLayerRef.current = viewer.imageryLayers.addImageryProvider(
         createOpticalSatelliteProvider(bust)
       )
+      mountPolarCaps(viewer, 'satellite', 1.0, satellitePolarLayersRef)
     }
 
     if (reliefLayerRef.current) {
@@ -862,6 +1172,7 @@ export function GlobeViewer(): React.JSX.Element {
       const freshRelief = viewer.imageryLayers.addImageryProvider(createShadedReliefProvider(bust))
       freshRelief.alpha = 0.65
       reliefLayerRef.current = freshRelief
+      mountPolarCaps(viewer, 'relief', 0.65, reliefPolarLayersRef)
     }
 
     if (srtmLayerRef.current) {
@@ -869,6 +1180,7 @@ export function GlobeViewer(): React.JSX.Element {
       const freshSrtm = viewer.imageryLayers.addImageryProvider(createSrtmTopographyProvider(bust))
       freshSrtm.alpha = 0.65
       srtmLayerRef.current = freshSrtm
+      mountPolarCaps(viewer, 'srtm', 0.65, srtmPolarLayersRef)
     }
 
     if (labelsLayerRef.current) {
@@ -1218,10 +1530,18 @@ export function GlobeViewer(): React.JSX.Element {
           selectedMonthIndex={selectedMonthIndex}
           activePhenomenonId={activePhenomenonId}
           activeEventId={activeEventId}
+          isPlaying={isPlaying}
+          playbackSpeed={playbackSpeed}
+          showBasinProgression={showBasinProgression}
           onSelectMonthIndex={handleSelectMonthIndex}
           onSelectPhenomenon={handleSelectPhenomenon}
           onSelectEvent={handleSelectEvent}
-          onFlyAmazonOverview={() => flyToBbox([-70.0, -12.0, -52.0, 1.5])}
+          onFlyAmazonOverview={() =>
+            flyToBbox(sarDataset.amazon_basin_bbox ?? [-79.5, -18.0, -44.5, 8.5])
+          }
+          onTogglePlay={handleTogglePlay}
+          onCycleSpeed={handleCycleSpeed}
+          onToggleBasinProgression={handleToggleBasinProgression}
         />
       )}
 
