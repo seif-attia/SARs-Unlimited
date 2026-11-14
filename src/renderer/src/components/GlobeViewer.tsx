@@ -6,6 +6,8 @@ import {
   Globe,
   Layers,
   Menu,
+  Moon,
+  Mountain,
   Orbit,
   RefreshCw,
   RotateCcw,
@@ -27,11 +29,27 @@ const DEFAULT_ORBIT_VIEW = {
   height: 12_500_000
 }
 
+function createEsriDiscardPolicy(service: string, level: number, cacheBust?: number): Cesium.TileDiscardPolicy {
+  const query = cacheBust ? `?t=${cacheBust}` : ''
+  return new Cesium.DiscardMissingTileImagePolicy({
+    missingImageUrl: `https://services.arcgisonline.com/ArcGIS/rest/services/${service}/MapServer/tile/${level}/0/0${query}`,
+    pixelsToCheck: [
+      new Cesium.Cartesian2(0, 0),
+      new Cesium.Cartesian2(200, 20),
+      new Cesium.Cartesian2(20, 200),
+      new Cesium.Cartesian2(80, 110),
+      new Cesium.Cartesian2(160, 130)
+    ],
+    disableCheckIfAllPixelsAreTransparent: true
+  })
+}
+
 function createOpticalSatelliteProvider(cacheBust?: number): Cesium.ImageryProvider {
   const query = cacheBust ? `?t=${cacheBust}` : ''
   return new Cesium.UrlTemplateImageryProvider({
     url: `https://services.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}${query}`,
     maximumLevel: 19,
+    tileDiscardPolicy: createEsriDiscardPolicy('World_Imagery', 19, cacheBust),
     credit: 'Esri World Imagery'
   })
 }
@@ -156,7 +174,29 @@ function createBordersProvider(cacheBust?: number): Cesium.ImageryProvider {
   const query = cacheBust ? `?t=${cacheBust}` : ''
   return new Cesium.UrlTemplateImageryProvider({
     url: `https://services.arcgisonline.com/ArcGIS/rest/services/Reference/World_Boundaries_and_Places/MapServer/tile/{z}/{y}/{x}${query}`,
-    maximumLevel: 18
+    maximumLevel: 18,
+    tileDiscardPolicy: createEsriDiscardPolicy('Reference/World_Boundaries_and_Places', 18, cacheBust)
+  })
+}
+
+function createNightLightsProvider(cacheBust?: number): Cesium.ImageryProvider {
+  const query = cacheBust ? `?t=${cacheBust}` : ''
+  return new Cesium.UrlTemplateImageryProvider({
+    url: `https://gibs.earthdata.nasa.gov/wmts/epsg3857/best/VIIRS_CityLights_2012/default/default/GoogleMapsCompatible_Level8/{z}/{y}/{x}.jpg${query}`,
+    maximumLevel: 8,
+    credit: 'NASA Earth at Night (VIIRS)'
+  })
+}
+
+const SRTM_TOPOGRAPHY_URL =
+  'https://gibs.earthdata.nasa.gov/wmts/epsg3857/best/SRTM_Color_Index/default/default/GoogleMapsCompatible_Level12/{z}/{y}/{x}.png'
+
+function createSrtmTopographyProvider(cacheBust?: number): Cesium.ImageryProvider {
+  const query = cacheBust ? `?t=${cacheBust}` : ''
+  return new Cesium.UrlTemplateImageryProvider({
+    url: `${SRTM_TOPOGRAPHY_URL}${query}`,
+    maximumLevel: 11,
+    credit: 'NASA SRTM Radar Topography'
   })
 }
 
@@ -164,28 +204,34 @@ export function GlobeViewer(): React.JSX.Element {
   const containerRef = useRef<HTMLDivElement | null>(null)
   const viewerRef = useRef<Cesium.Viewer | null>(null)
 
-  // ImageryLayer refs (Optical Satellite + Polar Caps are permanent; Labels can be toggled)
+  // ImageryLayer refs (Optical Satellite + Polar Caps are permanent; Topography, Labels & Dark Mode can be toggled)
   const northPolarLayerRef = useRef<Cesium.ImageryLayer | null>(null)
   const southPolarLayerRef = useRef<Cesium.ImageryLayer | null>(null)
   const satelliteLayerRef = useRef<Cesium.ImageryLayer | null>(null)
+  const nightLightsLayerRef = useRef<Cesium.ImageryLayer | null>(null)
+  const srtmLayerRef = useRef<Cesium.ImageryLayer | null>(null)
   const labelsLayerRef = useRef<Cesium.ImageryLayer | null>(null)
 
   // Menu & Refresh state
   const [menuOpen, setMenuOpen] = useState<boolean>(false)
   const [isRefreshing, setIsRefreshing] = useState<boolean>(false)
 
-  // Labels are ON by default and can be toggled off
+  // Labels are ON by default; Dark Mode & Topography can be toggled
   const [showBorders, setShowBorders] = useState<boolean>(true)
+  const [showTopography, setShowTopography] = useState<boolean>(false)
+  const [darkMode, setDarkMode] = useState<boolean>(false)
   const [showAtmosphere, setShowAtmosphere] = useState<boolean>(false)
   const [autoRotate, setAutoRotate] = useState<boolean>(false)
 
   // On-Screen HUD Controls visibility (Menu Checkboxes)
   const [showTelemetryHud, setShowTelemetryHud] = useState<boolean>(true)
   const [showQuickBar, setShowQuickBar] = useState<boolean>(true)
+  const [showAltitudeLegend, setShowAltitudeLegend] = useState<boolean>(true)
   const [showNavButtons, setShowNavButtons] = useState<boolean>(true)
   const [showControlsHint, setShowControlsHint] = useState<boolean>(true)
 
   const autoRotateRef = useRef<boolean>(false)
+  const darkModeRef = useRef<boolean>(false)
   const userInteractingRef = useRef<boolean>(false)
 
   const [telemetry, setTelemetry] = useState<CameraTelemetry>({
@@ -204,6 +250,29 @@ export function GlobeViewer(): React.JSX.Element {
     }
   }, [autoRotate])
 
+  // Apply day or night tone to base satellite + polar cap layers
+  const applyEarthDayNightStyle = (isNight: boolean): void => {
+    const baseLayers = [
+      northPolarLayerRef.current,
+      southPolarLayerRef.current,
+      satelliteLayerRef.current
+    ]
+    for (const layer of baseLayers) {
+      if (!layer) continue
+      if (isNight) {
+        layer.brightness = 0.22
+        layer.contrast = 1.3
+        layer.saturation = 0.35
+        layer.gamma = 0.78
+      } else {
+        layer.brightness = 1.0
+        layer.contrast = 1.0
+        layer.saturation = 1.0
+        layer.gamma = 1.0
+      }
+    }
+  }
+
   // Ensure proper layer stacking order without re-fetching existing layers
   const enforceLayerOrder = (viewer: Cesium.Viewer): void => {
     if (viewer.isDestroyed()) return
@@ -216,6 +285,12 @@ export function GlobeViewer(): React.JSX.Element {
     }
     if (satelliteLayerRef.current && layers.contains(satelliteLayerRef.current)) {
       layers.raiseToTop(satelliteLayerRef.current)
+    }
+    if (nightLightsLayerRef.current && layers.contains(nightLightsLayerRef.current)) {
+      layers.raiseToTop(nightLightsLayerRef.current)
+    }
+    if (srtmLayerRef.current && layers.contains(srtmLayerRef.current)) {
+      layers.raiseToTop(srtmLayerRef.current)
     }
     if (labelsLayerRef.current && layers.contains(labelsLayerRef.current)) {
       layers.raiseToTop(labelsLayerRef.current)
@@ -261,6 +336,7 @@ export function GlobeViewer(): React.JSX.Element {
       .then((provider) => {
         if (!viewer.isDestroyed()) {
           northPolarLayerRef.current = viewer.imageryLayers.addImageryProvider(provider, 0)
+          applyEarthDayNightStyle(darkModeRef.current)
           enforceLayerOrder(viewer)
         }
       })
@@ -270,6 +346,7 @@ export function GlobeViewer(): React.JSX.Element {
       .then((provider) => {
         if (!viewer.isDestroyed()) {
           southPolarLayerRef.current = viewer.imageryLayers.addImageryProvider(provider, 0)
+          applyEarthDayNightStyle(darkModeRef.current)
           enforceLayerOrder(viewer)
         }
       })
@@ -386,6 +463,53 @@ export function GlobeViewer(): React.JSX.Element {
     }
   }, [])
 
+  // Toggle Dark Mode (Earth at Night with VIIRS City Lights)
+  const handleToggleDarkMode = (checked?: boolean): void => {
+    const viewer = viewerRef.current
+    if (!viewer || viewer.isDestroyed()) return
+    const next = typeof checked === 'boolean' ? checked : !darkMode
+    setDarkMode(next)
+    darkModeRef.current = next
+
+    applyEarthDayNightStyle(next)
+
+    if (next && !nightLightsLayerRef.current) {
+      const lightsLayer = viewer.imageryLayers.addImageryProvider(createNightLightsProvider())
+      lightsLayer.colorToAlpha = Cesium.Color.BLACK
+      lightsLayer.colorToAlphaThreshold = 0.12
+      lightsLayer.brightness = 1.65
+      lightsLayer.contrast = 1.25
+      lightsLayer.alpha = 0.95
+      nightLightsLayerRef.current = lightsLayer
+      enforceLayerOrder(viewer)
+    } else if (!next && nightLightsLayerRef.current) {
+      viewer.imageryLayers.remove(nightLightsLayerRef.current, true)
+      nightLightsLayerRef.current = null
+      viewer.scene.requestRender()
+    } else {
+      viewer.scene.requestRender()
+    }
+  }
+
+  // Toggle Topography (Altitude Color Heatmap)
+  const handleToggleTopography = (checked?: boolean): void => {
+    const viewer = viewerRef.current
+    if (!viewer || viewer.isDestroyed()) return
+    const next = typeof checked === 'boolean' ? checked : !showTopography
+    setShowTopography(next)
+
+    if (next && !srtmLayerRef.current) {
+      const layer = viewer.imageryLayers.addImageryProvider(createSrtmTopographyProvider())
+      layer.alpha = 0.65
+      srtmLayerRef.current = layer
+      enforceLayerOrder(viewer)
+    } else if (!next && srtmLayerRef.current) {
+      viewer.imageryLayers.remove(srtmLayerRef.current, true)
+      srtmLayerRef.current = null
+      viewer.scene.requestRender()
+    }
+  }
+
   // Toggle Borders & Place Labels
   const handleToggleBorders = (checked?: boolean): void => {
     const viewer = viewerRef.current
@@ -439,6 +563,7 @@ export function GlobeViewer(): React.JSX.Element {
       .then((provider) => {
         if (!viewer.isDestroyed()) {
           northPolarLayerRef.current = viewer.imageryLayers.addImageryProvider(provider, 0)
+          applyEarthDayNightStyle(darkModeRef.current)
           enforceLayerOrder(viewer)
         }
       })
@@ -448,6 +573,7 @@ export function GlobeViewer(): React.JSX.Element {
       .then((provider) => {
         if (!viewer.isDestroyed()) {
           southPolarLayerRef.current = viewer.imageryLayers.addImageryProvider(provider, 0)
+          applyEarthDayNightStyle(darkModeRef.current)
           enforceLayerOrder(viewer)
         }
       })
@@ -458,6 +584,25 @@ export function GlobeViewer(): React.JSX.Element {
       satelliteLayerRef.current = viewer.imageryLayers.addImageryProvider(
         createOpticalSatelliteProvider(bust)
       )
+      applyEarthDayNightStyle(darkModeRef.current)
+    }
+
+    if (nightLightsLayerRef.current) {
+      viewer.imageryLayers.remove(nightLightsLayerRef.current, true)
+      const freshLights = viewer.imageryLayers.addImageryProvider(createNightLightsProvider(bust))
+      freshLights.colorToAlpha = Cesium.Color.BLACK
+      freshLights.colorToAlphaThreshold = 0.12
+      freshLights.brightness = 1.65
+      freshLights.contrast = 1.25
+      freshLights.alpha = 0.95
+      nightLightsLayerRef.current = freshLights
+    }
+
+    if (srtmLayerRef.current) {
+      viewer.imageryLayers.remove(srtmLayerRef.current, true)
+      const freshSrtm = viewer.imageryLayers.addImageryProvider(createSrtmTopographyProvider(bust))
+      freshSrtm.alpha = 0.65
+      srtmLayerRef.current = freshSrtm
     }
 
     if (labelsLayerRef.current) {
@@ -575,6 +720,24 @@ export function GlobeViewer(): React.JSX.Element {
                 <label className="menu-checkbox-row">
                   <input
                     type="checkbox"
+                    checked={showTopography}
+                    onChange={(e) => handleToggleTopography(e.target.checked)}
+                  />
+                  <span>Topography (Altitude Colors)</span>
+                </label>
+
+                <label className="menu-checkbox-row">
+                  <input
+                    type="checkbox"
+                    checked={darkMode}
+                    onChange={(e) => handleToggleDarkMode(e.target.checked)}
+                  />
+                  <span>Dark Mode (Earth at Night)</span>
+                </label>
+
+                <label className="menu-checkbox-row">
+                  <input
+                    type="checkbox"
                     checked={showBorders}
                     onChange={(e) => handleToggleBorders(e.target.checked)}
                   />
@@ -626,6 +789,15 @@ export function GlobeViewer(): React.JSX.Element {
                 <label className="menu-checkbox-row">
                   <input
                     type="checkbox"
+                    checked={showAltitudeLegend}
+                    onChange={(e) => setShowAltitudeLegend(e.target.checked)}
+                  />
+                  <span>Topography Altitude Legend</span>
+                </label>
+
+                <label className="menu-checkbox-row">
+                  <input
+                    type="checkbox"
                     checked={showNavButtons}
                     onChange={(e) => setShowNavButtons(e.target.checked)}
                   />
@@ -663,10 +835,28 @@ export function GlobeViewer(): React.JSX.Element {
               <Layers size={14} className="hud-icon-cyan" />
               <button
                 type="button"
+                className={`basemap-chip ${showTopography ? 'active' : ''}`}
+                onClick={() => handleToggleTopography()}
+                title="Toggle Altitude Color Topography Layer"
+              >
+                <Mountain size={13} style={{ display: 'inline', marginRight: 5, verticalAlign: '-2px' }} />
+                Topography
+              </button>
+              <button
+                type="button"
                 className={`basemap-chip ${showBorders ? 'active' : ''}`}
                 onClick={() => handleToggleBorders()}
               >
                 Labels
+              </button>
+              <button
+                type="button"
+                className={`basemap-chip ${darkMode ? 'active' : ''}`}
+                onClick={() => handleToggleDarkMode()}
+                title="Toggle Earth Night Mode"
+              >
+                <Moon size={13} style={{ display: 'inline', marginRight: 5, verticalAlign: '-2px' }} />
+                Dark Mode
               </button>
             </div>
           )}
@@ -698,6 +888,37 @@ export function GlobeViewer(): React.JSX.Element {
           </div>
         )}
       </header>
+
+      {/* Compact Topography (Altitude) Scale Legend — shown when Topography is active */}
+      {showAltitudeLegend && showTopography && (
+        <aside className="hud-legend-card">
+          <div className="legend-header">
+            <span>SRTM RADAR TOPOGRAPHY · ALTITUDE SCALE (METERS ASL)</span>
+          </div>
+          <div className="legend-items">
+            <div className="legend-item-row">
+              <span className="legend-swatch" style={{ backgroundColor: '#ffffff' }} />
+              <span className="legend-label">&gt; 3,500 m · High Alpine / Mountain Peaks</span>
+            </div>
+            <div className="legend-item-row">
+              <span className="legend-swatch" style={{ backgroundColor: '#b97a57' }} />
+              <span className="legend-label">1,500 – 3,500 m · Mountain Ranges &amp; Plateaus</span>
+            </div>
+            <div className="legend-item-row">
+              <span className="legend-swatch" style={{ backgroundColor: '#f5e663' }} />
+              <span className="legend-label">500 – 1,500 m · Uplands &amp; Highlands</span>
+            </div>
+            <div className="legend-item-row">
+              <span className="legend-swatch" style={{ backgroundColor: '#22b14c' }} />
+              <span className="legend-label">50 – 500 m · Interior Plains &amp; Valleys</span>
+            </div>
+            <div className="legend-item-row">
+              <span className="legend-swatch" style={{ backgroundColor: '#00a2e8' }} />
+              <span className="legend-label">0 – 50 m · Coastal Lowlands &amp; River Deltas</span>
+            </div>
+          </div>
+        </aside>
+      )}
 
       {/* Bottom-Right Navigation Controls */}
       {showNavButtons && (
