@@ -3953,6 +3953,7 @@ body,
   .sars-sidebar-edge-arrow.is-open {
     left: min(376px, calc(100vw - 16px));
   }
+}
 
 /* --------------------------------------------------------------------------
    RIGHT SIDEBAR: LOCAL AI ASSISTANT (WEBLLM / QWEN2.5-3B-INSTRUCT)
