@@ -1,5 +1,5 @@
 import React from 'react'
-import { ArrowUp, Radar, Search, X } from 'lucide-react'
+import { Radar, Sparkles } from 'lucide-react'
 import type {
   DatasetStatus,
   PhenomenonDefinition,
@@ -17,8 +17,8 @@ export interface DashboardHeaderProps {
   lockedRegionId: string | null
   onSelectAmazonRegion: (regionId: string | null) => void
   studyRegionOptions: Array<{ id: string; name: string }>
-  searchQuery: string
-  onChangeSearchQuery: (q: string) => void
+  isAiSidebarOpen: boolean
+  onToggleAiSidebar: () => void
   showTelemetryHud: boolean
   cameraTelemetry: {
     lat: string
@@ -40,8 +40,8 @@ export const DashboardHeader: React.FC<DashboardHeaderProps> = ({
   lockedRegionId,
   onSelectAmazonRegion,
   studyRegionOptions,
-  searchQuery,
-  onChangeSearchQuery,
+  isAiSidebarOpen,
+  onToggleAiSidebar,
   showTelemetryHud,
   cameraTelemetry,
   datasetStatus,
@@ -83,7 +83,7 @@ export const DashboardHeader: React.FC<DashboardHeaderProps> = ({
         <SettingsMenu {...settingsProps} />
       </div>
 
-      {/* RIGHT: Demo Status, Telemetry & Search Box */}
+      {/* RIGHT: Demo Status, Telemetry & Local AI Ask for Help Button */}
       <div className="sars-top-header__right">
         {datasetStatus === 'DEMO' && (
           <div
@@ -102,31 +102,16 @@ export const DashboardHeader: React.FC<DashboardHeaderProps> = ({
           </div>
         )}
 
-        <div className="sars-search-box">
-          <Search size={13} className="sars-search-box__icon" />
-          <input
-            type="text"
-            className="sars-search-box__input"
-            placeholder="Ask anything..."
-            value={searchQuery}
-            onChange={(e) => onChangeSearchQuery(e.target.value)}
-            aria-label="Filter SAR events or regions"
-          />
-          {searchQuery ? (
-            <button
-              type="button"
-              className="sars-search-box__clear"
-              onClick={() => onChangeSearchQuery('')}
-              title="Clear filter"
-            >
-              <X size={12} />
-            </button>
-          ) : (
-            <span className="sars-search-box__submit" aria-hidden="true">
-              <ArrowUp size={12} />
-            </span>
-          )}
-        </div>
+        <button
+          type="button"
+          className={`sars-ask-help-btn ${isAiSidebarOpen ? 'is-active' : ''}`}
+          onClick={onToggleAiSidebar}
+          aria-expanded={isAiSidebarOpen}
+          title="Open Local AI Assistant (Qwen2.5-3B-Instruct via WebLLM)"
+        >
+          <Sparkles size={14} className="sars-ask-help-btn__icon" />
+          <span>Ask for help</span>
+        </button>
       </div>
     </header>
   )

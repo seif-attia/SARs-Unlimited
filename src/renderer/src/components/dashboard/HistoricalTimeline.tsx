@@ -9,6 +9,7 @@ export interface HistoricalTimelineProps {
   allEvents: EventRecord[]
   selectedEvent: EventRecord | null
   hasLeftPanel?: boolean
+  hasRightPanel?: boolean
   onSelectEvent: (ev: EventRecord) => void
   onStartPlayback?: () => void
   onStopTour: () => void
@@ -44,6 +45,7 @@ export const HistoricalTimeline: React.FC<HistoricalTimelineProps> = ({
   allEvents,
   selectedEvent,
   hasLeftPanel = false,
+  hasRightPanel = false,
   onSelectEvent,
   onStartPlayback,
   onStopTour,
@@ -135,7 +137,7 @@ export const HistoricalTimeline: React.FC<HistoricalTimelineProps> = ({
 
   return (
     <section
-      className={`sars-timeline-bar ${hasLeftPanel ? 'has-left-panel' : ''}`}
+      className={`sars-timeline-bar ${hasLeftPanel ? 'has-left-panel' : ''} ${hasRightPanel ? 'has-right-panel' : ''}`}
       aria-label="Historical SAR Timeline (Jan 2015 - Dec 2026)"
     >
       <div className="sars-timeline-main-row">
