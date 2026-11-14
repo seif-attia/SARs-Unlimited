@@ -42,7 +42,7 @@ export const GLOBAL_PHENOMENON_SLOTS: PhenomenonDefinition[] = [
         dielectricAndMoisture:
           'Dry masonry rubble and cooled basalt maintain relatively stable low dielectric permittivity (εr ≈ 4–6), isolating geometric range change and surface texture as the primary radar signal.',
         polarizationAndWavelength:
-          'Each full rainbow InSAR phase cycle represents half a radar wavelength of line-of-sight ground motion (~2.8 cm in C-band, ~12 cm in L-band). Longer 24 cm L-band preserves fringe coherence near high-strain fault cores.'
+          'Each full rainbow InSAR phase cycle represents half a radar wavelength of line-of-sight ground motion (~2.8 cm in C-band, ~12.5 cm in L-band). Longer ~25 cm L-band preserves fringe coherence near high-strain fault cores.'
       },
       environmentalAndHumanImpact: {
         environmentalImpact:
@@ -59,7 +59,7 @@ export const GLOBAL_PHENOMENON_SLOTS: PhenomenonDefinition[] = [
       },
       dataUsedAndMethodology: {
         satelliteMission: 'ESA Copernicus Sentinel-1A & NASA-ISRO NISAR Mode',
-        sensorAndBand: 'C-Band SAR (5.6 cm) IW GRDH / InSAR & L-Band (24 cm)',
+        sensorAndBand: 'C-Band SAR (5.6 cm) IW GRDH / InSAR & L-Band (~25 cm)',
         acquisitionDates: '2021-11-01 (La Palma) · 2023-02-09 (Türkiye–Syria, 3 days post-quake)',
         processingMethodology:
           'Differential Interferometric SAR (DInSAR) phase wrapping paired with Radiometrically Terrain-Corrected (RTC) log-amplitude change (|ΔVV|, ΔVH).',
@@ -387,7 +387,7 @@ export const GLOBAL_PHENOMENON_SLOTS: PhenomenonDefinition[] = [
         dielectricAndMoisture:
           'When boreal soil water freezes in autumn, its dielectric constant drops precipitously from ~80 to ~3.2, producing an unmistakable microwave step change across Siberia, Alaska, and Canada.',
         polarizationAndWavelength:
-          '24 cm L-band (SMAP & NISAR) penetrates vegetation and snow cover to sense topsoil moisture and freeze state across all weather and solar lighting conditions.'
+          '~25 cm L-band (SMAP & NISAR) penetrates vegetation and snow cover to sense topsoil moisture and freeze state across all weather and solar lighting conditions.'
       },
       environmentalAndHumanImpact: {
         environmentalImpact:
@@ -404,7 +404,7 @@ export const GLOBAL_PHENOMENON_SLOTS: PhenomenonDefinition[] = [
       },
       dataUsedAndMethodology: {
         satelliteMission: 'NASA SMAP, JAXA GCOM-W1 AMSR2, ESA Sentinel-1 & NASA-ISRO NISAR',
-        sensorAndBand: 'L-Band (1.41 GHz / 24 cm), C-Band (5.4 GHz / 5.6 cm) & Passive Microwave',
+        sensorAndBand: 'L-Band (1.41 GHz / ~21 cm), C-Band (5.4 GHz / 5.6 cm) & Passive Microwave',
         acquisitionDates: 'Monthly composites 2015-01 through 2026-12 (144 frames)',
         processingMethodology:
           'Multi-sensor planetary synthesis combining NASA GIBS SMAP L4 Soil Moisture, SMAP L3 Freeze/Thaw, AMSR2 Sea Ice, and Sentinel-1 RTC crisis overlays.',
@@ -457,7 +457,7 @@ export const AMAZON_PHENOMENON_SLOTS: PhenomenonDefinition[] = [
         dielectricAndMoisture:
           'Heavy wet-season rain raises leaf and soil water content, boosting upper-canopy reflectivity (+0.6 to +1.2 dB in Sentinel-1 C-band VV) and triggering early inundated-forest returns.',
         polarizationAndWavelength:
-          'C-band (5.6 cm) reacts strongly to leaf/twig surface wetness in the upper crown, whereas L-band (24 cm) penetrates rain cells and upper leaves to inspect trunks.'
+          'C-band (5.6 cm) reacts strongly to leaf/twig surface wetness in the upper crown, whereas L-band (~25 cm) penetrates rain cells and upper leaves to inspect trunks.'
       },
       environmentalAndHumanImpact: {
         environmentalImpact:
@@ -493,7 +493,7 @@ export const AMAZON_PHENOMENON_SLOTS: PhenomenonDefinition[] = [
     displayName: 'Pheno 2 · Seasonal Flood & Flooded Forest',
     scientificTitle: 'AMAZON FLOOD PULSE · SUB-CANOPY TRUNK DOUBLE-BOUNCE',
     description:
-      'Annual 10–12 meter Amazon flood-pulse wave cresting in Mar–Apr along the Madeira River (Porto Velho) and May–Jun at Manaus, mapped via C-band water masks and 24 cm L-band sub-canopy double-bounce.',
+      'Annual 10–12 meter Amazon flood-pulse wave cresting in Mar–Apr along the Madeira River (Porto Velho) and May–Jun at Manaus, mapped via C-band water masks and ~25 cm L-band sub-canopy double-bounce.',
     geographicScope: 'amazon',
     associatedRegions: ['porto_velho', 'manaus', 'madeira', 'mamiraua', 'purus'],
     startDate: '2015-01',
@@ -524,7 +524,7 @@ export const AMAZON_PHENOMENON_SLOTS: PhenomenonDefinition[] = [
         dielectricAndMoisture:
           'High-dielectric floodwater (εr ≈ 80) beneath várzea/igapó trees reflects incident microwaves forward onto vertical tree trunks and straight back to the satellite.',
         polarizationAndWavelength:
-          'HH / HHHH co-polarization maximizes double-bounce off horizontal water + vertical trunks; 24 cm NISAR L-band penetrates closed 30 m forest canopies to reveal flooded forests beneath.'
+          'HH / HHHH co-polarization maximizes double-bounce off horizontal water + vertical trunks; ~25 cm NISAR L-band penetrates closed 30 m forest canopies to reveal flooded forests beneath.'
       },
       environmentalAndHumanImpact: {
         environmentalImpact:
@@ -541,7 +541,7 @@ export const AMAZON_PHENOMENON_SLOTS: PhenomenonDefinition[] = [
       },
       dataUsedAndMethodology: {
         satelliteMission: 'ESA Sentinel-1A, NASA JPL OPERA & NASA-ISRO NISAR',
-        sensorAndBand: 'C-Band (5.6 cm) VV/VH & NISAR L-Band (24 cm) HHHH GCOV',
+        sensorAndBand: 'C-Band (5.6 cm) VV/VH & NISAR L-Band (~25 cm) HHHH GCOV',
         acquisitionDates: '2021-06-19 (Manaus Record Flood) · 2025-04-09 (Madeira) · 2026-06-23 (NISAR Flood)',
         processingMethodology:
           'Multi-temporal flood change detection (Peak vs. Low-Water Baseline) and polarimetric L-band covariance (GCOV) decomposition.',
@@ -591,7 +591,7 @@ export const AMAZON_PHENOMENON_SLOTS: PhenomenonDefinition[] = [
         dielectricAndMoisture:
           'Lower leaf moisture and drier surface soil reduce the effective dielectric constant across sunlit crowns, decreasing C-band VH cross-polarization by -0.8 to -1.8 dB.',
         polarizationAndWavelength:
-          'C-band (5.6 cm) senses rapid top-leaf water stress during dry spells, while 24 cm L-band remains stable over deep woody trunks unless drought causes structural branch mortality.'
+          'C-band (5.6 cm) senses rapid top-leaf water stress during dry spells, while ~25 cm L-band remains stable over deep woody trunks unless drought causes structural branch mortality.'
       },
       environmentalAndHumanImpact: {
         environmentalImpact:
@@ -658,7 +658,7 @@ export const AMAZON_PHENOMENON_SLOTS: PhenomenonDefinition[] = [
         dielectricAndMoisture:
           'Freshly felled slash dries rapidly under equatorial sun, making cleared geometric polygons persistently dark in VH (-2 to -6 dB drop) regardless of cloud cover.',
         polarizationAndWavelength:
-          'Cross-polarization (Sentinel-1 VH and NISAR HVHV) is the premier deforestation detector; L-band (24 cm) directly measures loss of heavy woody trunk biomass (~150+ Mg/ha).'
+          'Cross-polarization (Sentinel-1 VH and NISAR HVHV) is the premier deforestation detector; L-band (~25 cm) directly measures loss of heavy woody trunk biomass (~150+ Mg/ha).'
       },
       environmentalAndHumanImpact: {
         environmentalImpact:
@@ -675,7 +675,7 @@ export const AMAZON_PHENOMENON_SLOTS: PhenomenonDefinition[] = [
       },
       dataUsedAndMethodology: {
         satelliteMission: 'ESA Sentinel-1A, NASA JPL OPERA & NASA-ISRO NISAR',
-        sensorAndBand: 'C-Band ΔVH (5.6 cm), OPERA DIST-ALERT-S1 & NISAR L-Band SHSH/HVHV (24 cm)',
+        sensorAndBand: 'C-Band ΔVH (5.6 cm), OPERA DIST-ALERT-S1 & NISAR L-Band SHSH/HVHV (~25 cm)',
         acquisitionDates: '2019-08-26 (BR-163) · 2024-10-13 (Apuí ΔVH) · 2026-02-24 (OPERA DIST) · 2026-10-21 (NISAR)',
         processingMethodology:
           'Multi-year cross-pol log-ratio differencing (ΔVH) and OPERA L3 Surface Disturbance Alert confidence classification.',
@@ -725,7 +725,7 @@ export const AMAZON_PHENOMENON_SLOTS: PhenomenonDefinition[] = [
         dielectricAndMoisture:
           'Extreme vapor pressure deficit (VPD) and fire heat vaporize surface soil and litter moisture, dropping surface permittivity until November rains arrive.',
         polarizationAndWavelength:
-          'Both C-band (5.6 cm) and L-band (24 cm) penetrate dense biomass smoke without attenuation, separating active burn scars from unburned smoke-covered forest.'
+          'Both C-band (5.6 cm) and L-band (~25 cm) penetrate dense biomass smoke without attenuation, separating active burn scars from unburned smoke-covered forest.'
       },
       environmentalAndHumanImpact: {
         environmentalImpact:
@@ -783,7 +783,7 @@ export const AMAZON_PHENOMENON_SLOTS: PhenomenonDefinition[] = [
         when: 'Annual Aug – Oct low-water season (Historic lows: Nov 2015, Oct 2023, Sep–Oct 2024)',
         where: 'Rio Madeira at Porto Velho, Rio Solimões at Tefé & Rio Negro at Manaus',
         observations:
-          'OPERA DSWx-S1 shows Madeira open water compressed to 5.79% (Oct 2024); Manaus stage fell to 12.11 m (2024) and 12.70 m (2023); 15.48% exposed channel bars in 2015–16 El Niño.'
+          'OPERA DSWx-S1 shows Madeira open water compressed to 5.79% (Oct 2024); Manaus stage fell to 12.66 m (2024) and 12.70 m (2023); 15.48% exposed channel bars in 2015–16 El Niño.'
       },
       whySarDetectsIt: {
         primaryMechanism: 'Roughness Inversion (Smooth Specular Water → Bright Rough Sandbars)',
@@ -828,7 +828,7 @@ export const AMAZON_PHENOMENON_SLOTS: PhenomenonDefinition[] = [
     displayName: 'Pheno 7 · Compound El Niño & Lake Tefé Droughts',
     scientificTitle: 'AMAZON MEGA-DROUGHT COMPARATOR · 2015–16 EL NIÑO VS. 2023–24 COMPOUND DROUGHT',
     description:
-      'Decadal comparative analysis of the 2015–16 Super El Niño drought, the Oct 2023 Lake Tefé thermal crisis (39.1 °C), and the 2024 all-time low river stage (12.11 m at Manaus).',
+      'Decadal comparative analysis of the 2015–16 Super El Niño drought, the Oct 2023 Lake Tefé thermal crisis (39.1 °C), and the 2024 all-time low river stage (12.66 m at Manaus).',
     geographicScope: 'amazon',
     associatedRegions: ['tefe', 'manaus', 'apui_labrea', 'mamiraua'],
     startDate: '2015-01',
@@ -846,11 +846,11 @@ export const AMAZON_PHENOMENON_SLOTS: PhenomenonDefinition[] = [
     scientificExplanation: {
       whatHappened: {
         description:
-          'Three historic droughts struck the Amazon within a decade: the 2015–16 "Godzilla" El Niño, the Sep–Nov 2023 Lake Tefé contraction (-13.45% water area loss and 39.1 °C water temperatures), and the 2024 historic low (Manaus 12.11 m, discharge 30,069 m³/s).',
+          'Three historic droughts struck the Amazon within a decade: the 2015–16 "Godzilla" El Niño, the Sep–Nov 2023 Lake Tefé contraction (-13.45% water area loss and 39.1 °C water temperatures), and the 2024 historic low (Manaus 12.66 m, discharge 30,069 m³/s).',
         when: 'Nov 2015 – Jan 2016 · Sep – Nov 2023 · Aug – Oct 2024',
         where: 'Lake Tefé & Mamirauá (Middle Solimões), Manaus Confluence & Southern Amazonas',
         observations:
-          'Lake Tefé open water contracted by -13.45% in Oct 2023 (VV p10 rose from -19.19 dB to -14.87 dB as mirror water became mudflats); Manaus stage hit 12.70 m (2023) and 12.11 m (2024).'
+          'Lake Tefé open water contracted by -13.45% in Oct 2023 (VV p10 rose from -19.19 dB to -14.87 dB as mirror water became mudflats); Manaus stage hit 12.70 m (2023) and 12.66 m (2024).'
       },
       whySarDetectsIt: {
         primaryMechanism: 'Multi-Year Shoreline Contraction & Specular-to-Mudflat Backscatter Shift',
@@ -892,10 +892,10 @@ export const AMAZON_PHENOMENON_SLOTS: PhenomenonDefinition[] = [
     id: 'amazon-pheno-8',
     code: 'Pheno 8',
     shortLabel: 'NISAR L-Band',
-    displayName: 'Pheno 8 · NISAR L-Band (24 cm) Sub-Canopy Polarimetry',
+    displayName: 'Pheno 8 · NISAR L-Band (~25 cm) Sub-Canopy Polarimetry',
     scientificTitle: 'NASA–ISRO NISAR L-BAND (24 CM) · VALIDATED GCOV POLARIMETRY & C-BAND FUSION',
     description:
-      'Validated 2026 NASA-ISRO NISAR Level-2 GCOV dual-polarization (HHHH + HVHV) passes over Manaus and Apuí (Track 140), demonstrating 24 cm L-band sub-canopy penetration alongside simultaneous NASA OPERA Sentinel-1 C-band.',
+      'Validated 2026 NASA-ISRO NISAR Level-2 GCOV dual-polarization (HHHH + HVHV) passes over Manaus and Apuí (Track 140), demonstrating ~25 cm L-band sub-canopy penetration alongside simultaneous NASA OPERA Sentinel-1 C-band.',
     geographicScope: 'amazon',
     associatedRegions: ['manaus', 'apui_labrea', 'porto_velho', 'mamiraua'],
     startDate: '2025-01',
@@ -920,9 +920,9 @@ export const AMAZON_PHENOMENON_SLOTS: PhenomenonDefinition[] = [
           'L-band HHHH median -6.6 dB (p90 = +0.22 dB) vs. HVHV median -11.61 dB (+5.01 dB co/cross-pol separation); Jun→Oct ΔHHHH captures 13.06% flooded double-bounce drop and 13.66% exposed bank rise.'
       },
       whySarDetectsIt: {
-        primaryMechanism: '24 cm L-Band Deep Canopy Penetration & Polarimetric Covariance (HHHH vs. HVHV)',
+        primaryMechanism: '~25 cm L-Band Deep Canopy Penetration & Polarimetric Covariance (HHHH vs. HVHV)',
         roughnessAndBackscatter:
-          'Whereas 5.6 cm C-band scatters off upper-crown leaves and twigs, NISAR’s 24 cm L-band wavelength passes straight through foliage to scatter off large woody trunks, forest floor roughness, and sub-canopy water.',
+          'Whereas 5.6 cm C-band scatters off upper-crown leaves and twigs, NISAR’s ~25 cm L-band wavelength passes straight through foliage to scatter off large woody trunks, forest floor roughness, and sub-canopy water.',
         dielectricAndMoisture:
           'Comparing June flood peak vs. October dry transition on identical Track 140 isolates high-dielectric flooded igapó trunk double-bounce (HHHH) from dry forest floor scattering.',
         polarizationAndWavelength:
@@ -943,7 +943,7 @@ export const AMAZON_PHENOMENON_SLOTS: PhenomenonDefinition[] = [
       },
       dataUsedAndMethodology: {
         satelliteMission: 'NASA–ISRO SAR (NISAR) & NASA JPL OPERA (Sentinel-1D)',
-        sensorAndBand: 'L-Band SAR (24 cm, 1.25 GHz) Dual-Pol HHHH/HVHV + C-Band OPERA DSWx-S1',
+        sensorAndBand: 'L-Band SAR (~25 cm, 1.25 GHz) Dual-Pol HHHH/HVHV + C-Band OPERA DSWx-S1',
         acquisitionDates: '2026-06-23 · 2026-10-21 · 2026-11-02 (NISAR GCOV) & 2026-11-03 (OPERA S1D)',
         processingMethodology:
           'Geocoded Polarimetric Covariance (NISAR_L2_PR_GCOV v1) dB scaling, RGB dual-pol compositing, and C-band/L-band co-registration.',

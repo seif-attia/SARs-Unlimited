@@ -413,7 +413,7 @@ export function SarStoryCard({
             </div>
             <div className="physics-card">
               <div className="physics-label">
-                Polarization &amp; Wavelength (L 24 cm vs. C 5.6 cm)
+                Polarization &amp; Wavelength (L ~25 cm vs. C 5.6 cm)
               </div>
               <p>
                 {physics.polarization_note} {physics.frequency_comparison}
@@ -423,7 +423,7 @@ export function SarStoryCard({
                 viewBox="0 0 300 84"
                 className="sar-penetration-svg"
                 role="img"
-                aria-label="C-band 5.6 cm, S-band 12 cm, and NISAR L-band 24 cm canopy penetration diagram"
+                aria-label="C-band 5.6 cm, S-band ~10 cm, and NISAR L-band ~25 cm canopy penetration diagram"
               >
                 <defs>
                   <linearGradient id="waterFloor" x1="0" y1="0" x2="1" y2="0">
@@ -454,7 +454,7 @@ export function SarStoryCard({
                 <text x="14" y="13" fill="#38bdf8" fontSize="8" fontWeight="700">
                   C-Band (5.6 cm): Crown Leaves
                 </text>
-                {/* S-band 12 cm */}
+                {/* S-band ~10 cm */}
                 <path
                   d="M118 8 L164 38 L128 24"
                   stroke="#c084fc"
@@ -463,9 +463,9 @@ export function SarStoryCard({
                   strokeDasharray="4 2"
                 />
                 <text x="116" y="13" fill="#c084fc" fontSize="8" fontWeight="700">
-                  S-Band (12 cm): Branches
+                  S-Band (~10 cm): Branches
                 </text>
-                {/* L-band 24 cm */}
+                {/* L-band ~25 cm */}
                 <path
                   d="M214 8 L249 67 L256 48 L224 16"
                   stroke="#fbbf24"
@@ -473,7 +473,7 @@ export function SarStoryCard({
                   fill="none"
                 />
                 <text x="206" y="13" fill="#fbbf24" fontSize="8" fontWeight="700">
-                  L-Band (24 cm): Trunks+Water
+                  L-Band (~25 cm): Trunks+Water
                 </text>
               </svg>
             </div>

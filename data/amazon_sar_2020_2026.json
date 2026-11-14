@@ -149,7 +149,7 @@
       "river": "Rio Negro / Rio Solim\u00f5es / Amazonas",
       "typical_flood_season": "May\u2013Jun (peak ~Jun)",
       "typical_low_water_season": "Sep\u2013Nov (lowest ~Oct)",
-      "why": "Anchor gauge for the record June 2021 flood (30.02 m), 2023 drought (12.70 m), 2024 historic low (12.11 m), and real 2026 NISAR L-band Track 140 acquisitions capturing seasonal flood vs. dry transition over flooded igap\u00f3 forest.",
+      "why": "Anchor gauge for the record June 2021 flood (30.02 m), 2023 drought (12.70 m), 2024 historic low (12.66 m), and real 2026 NISAR L-band Track 140 acquisitions capturing seasonal flood vs. dry transition over flooded igap\u00f3 forest.",
       "area_km2": 3195.7
     },
     "porto_velho": {
@@ -3748,7 +3748,7 @@
         "roughness_mechanism": "Dense Amazon terra firme crowns produce diffuse volume scattering across C- and L-band all year round, while smooth rising water surfaces begin turning dark via specular reflection.",
         "dielectric_mechanism": "Liquid water has a very high dielectric constant (~80 vs ~3\u20135 for dry vegetation/soil). Heavy wet-season rain raises leaf and soil moisture, boosting upper-canopy reflectivity (+0.6 to +1.2 dB in Sentinel-1 C-band VV) and triggering early inundated-forest returns.",
         "polarization_note": "VV tracks top-crown dielectric moisture + vertical stem scattering; VH preserves cross-polarized volume structure to separate rain-wet forest from open water.",
-        "frequency_comparison": "C-band (5.6 cm) reacts strongly to leaf/twig surface wetness in the upper crown, whereas L-band (24 cm) passes cleanly through rain cells and upper leaves to inspect trunks."
+        "frequency_comparison": "C-band (5.6 cm) reacts strongly to leaf/twig surface wetness in the upper crown, whereas L-band (~25 cm) passes cleanly through rain cells and upper leaves to inspect trunks."
       },
       "drivers": {
         "natural_driver": "Southward migration of the Intertropical Convergence Zone (ITCZ) and Amazon moisture convergence.",
@@ -3952,7 +3952,7 @@
         "roughness_mechanism": "Two opposite roughness signatures appear side-by-side: calm open rivers become radar mirrors (specular reflection away from satellite, very dark), while flooded forest trunks standing in water form 90\u00b0 corner reflectors.",
         "dielectric_mechanism": "High dielectric floodwater beneath v\u00e1rzea/igap\u00f3 trees reflects incident microwaves forward onto vertical trunks and back to the sensor\u2014producing intense trunk\u2013water double-bounce (+3.5 to +5.5 dB enhancement).",
         "polarization_note": "HH (horizontal co-pol) maximizes double-bounce off horizontal water + vertical trunks; OPERA DSWx-S1 fuses C-band backscatter to classify Open Water vs. Inundated Vegetation.",
-        "frequency_comparison": "Sentinel-1 C-band (5.6 cm) maps open channels and sparse inundated shrubs; NISAR L-band (24 cm) penetrates closed 30 m forest canopies to reveal hidden flooded forests beneath."
+        "frequency_comparison": "Sentinel-1 C-band (5.6 cm) maps open channels and sparse inundated shrubs; NISAR L-band (~25 cm) penetrates closed 30 m forest canopies to reveal hidden flooded forests beneath."
       },
       "drivers": {
         "natural_driver": "Asynchronous timing of southern Andes/Madeira rains (peaking Mar\u2013Apr) vs. northern Rio Negro crest (May\u2013Jun).",
@@ -4039,7 +4039,7 @@
           "title": "Manaus Flood Peak NISAR L-Band HHHH (Jun 2026)",
           "role": "lband_flood",
           "sensor": "NISAR",
-          "band": "L-band (24 cm)",
+          "band": "L-band (~25 cm)",
           "polarization": "HHHH",
           "acquisition_date": "2026-06-23",
           "granule_id": "NISAR_L2_PR_GCOV_023_140_D_090_4005_DHDH_A_20260623T221633_20260623T221711_P05023_N_F_J_001",
@@ -4192,7 +4192,7 @@
         "roughness_mechanism": "Standing terra firme tree geometry remains physically rough, so spatial texture persists even as radar brightness shifts with moisture; dried pasture grasses look smoother.",
         "dielectric_mechanism": "Reduced leaf water potential and lower topsoil moisture decrease the surface dielectric constant across sunlit uplands, lowering C-band VH cross-polarization by -0.8 to -1.8 dB.",
         "polarization_note": "VH / VV ratio isolates canopy water content changes separately from soil roughness variations.",
-        "frequency_comparison": "C-band (5.6 cm) senses rapid top-leaf water stress during dry spells, while L-band (24 cm) remains stable over deep woody trunks unless drought causes branch dieback."
+        "frequency_comparison": "C-band (5.6 cm) senses rapid top-leaf water stress during dry spells, while L-band (~25 cm) remains stable over deep woody trunks unless drought causes branch dieback."
       },
       "drivers": {
         "natural_driver": "Seasonal northward ITCZ shift (Jun\u2013Oct), amplified strongly during El Ni\u00f1o & warm Tropical North Atlantic phases.",
@@ -4391,7 +4391,7 @@
         "roughness_mechanism": "Intact rainforest is a deep 3D volume of randomly oriented branches and leaves (strong depolarizing volume scatter). Felling replaces this with flat cleared soil/pasture, collapsing volume scattering in sharp rectangular geometric plots.",
         "dielectric_mechanism": "Freshly felled logs briefly retain sap water, then dry rapidly under sun\u2014making clearings persistently darker in cross-polarization regardless of afternoon cloud cover.",
         "polarization_note": "Cross-polarization (Sentinel-1 VH and NISAR HV) is the premier deforestation detector: VH drops -2 to -6 dB immediately after felling.",
-        "frequency_comparison": "C-band (5.6 cm) detects early understory/crown thinning; L-band (24 cm) directly measures loss of heavy woody trunks and aboveground carbon biomass (~150+ Mg/ha drop)."
+        "frequency_comparison": "C-band (5.6 cm) detects early understory/crown thinning; L-band (~25 cm) directly measures loss of heavy woody trunks and aboveground carbon biomass (~150+ Mg/ha drop)."
       },
       "drivers": {
         "natural_driver": "Drier Jun\u2013Oct terrain permits bulldozers and chainsaws to enter upland terra firme.",
@@ -4468,7 +4468,7 @@
           "title": "NISAR L-Band over Apu\u00ed Frontier (Oct 2026)",
           "role": "rgb",
           "sensor": "NISAR",
-          "band": "L-band (24 cm)",
+          "band": "L-band (~25 cm)",
           "polarization": "SHSH",
           "acquisition_date": "2026-10-21",
           "granule_id": "NISAR_L2_PR_GCOV_033_140_D_092_2005_SHSH_A_20261021T221736_20261021T221811_P05036_N_F_J_001",
@@ -4616,7 +4616,7 @@
         "roughness_mechanism": "Fire consumes fine leaves and twigs (reducing cross-pol volume scatter) while leaving charred bare soil and skeletal standing snags exposed to radar pulses.",
         "dielectric_mechanism": "Intense heat vaporizes surface soil and litter moisture, dropping the surface dielectric constant sharply until the first Nov\u2013Dec rains trigger post-fire ash runoff.",
         "polarization_note": "Pre-fire vs. post-fire \u0394VH (-2.0 to -4.5 dB drop) combined with NASA FIRMS thermal hotspots separates active burn scars from unburned smoke-covered forest.",
-        "frequency_comparison": "Both C-band (5.6 cm) and L-band (24 cm) penetrate dense biomass smoke without attenuation; L-band distinguishes understory ground fires (snags left) from stand-replacing clear-cuts."
+        "frequency_comparison": "Both C-band (5.6 cm) and L-band (~25 cm) penetrate dense biomass smoke without attenuation; L-band distinguishes understory ground fires (snags left) from stand-replacing clear-cuts."
       },
       "drivers": {
         "natural_driver": "Late-dry VPD spike and drought-desiccated litter turn escaped agricultural fires into megafires.",
@@ -4806,7 +4806,7 @@
         "roughness_mechanism": "When flooded, smooth river water reflects microwaves away like a mirror (<-16 dB). As water drops in Sep\u2013Oct, rippled sandbars, mudflats, and rocks replace water\u2014jumping +4 to +8 dB brighter in C- and L-band!",
         "dielectric_mechanism": "Drying exposed riverbeds rapidly lose water dielectric response while gaining rough geometric micro-relief that backscatters strongly to SAR.",
         "polarization_note": "OPERA DSWx-S1 shrinks water masks cleanly to thin low-flow threads while \u0394VV highlights every newly exposed sandbar shoal blocking river barges.",
-        "frequency_comparison": "C-band (5.6 cm) is acutely sensitive to small centimeter-scale sand ripples on newly exposed bars; L-band (24 cm) differentiates smoother wet mudflats from coarser cobbles."
+        "frequency_comparison": "C-band (5.6 cm) is acutely sensitive to small centimeter-scale sand ripples on newly exposed bars; L-band (~25 cm) differentiates smoother wet mudflats from coarser cobbles."
       },
       "drivers": {
         "natural_driver": "Seasonal baseflow recession peaking Sep\u2013Oct, pushed to extremes by 2023/2024 warm-Atlantic/El Ni\u00f1o droughts.",
@@ -5482,7 +5482,7 @@
         "roughness_mechanism": "Charred eucalypt crowns lose small leaves/twigs responsible for C-band VH volume scattering, causing a sharp \u0394VH drop.",
         "dielectric_mechanism": "Pyrolysis desiccates surface fuel (low \u03b5r) until ash exposes bare soil dielectric contrast.",
         "polarization_note": "VH/VV ratio drops immediately across high-intensity crown fire corridors.",
-        "frequency_comparison": "C-band (5.6 cm) maps leaf/twig scorch within days; L-band (24 cm) persists years to track trunk mortality."
+        "frequency_comparison": "C-band (5.6 cm) maps leaf/twig scorch within days; L-band (~25 cm) persists years to track trunk mortality."
       },
       "drivers": {
         "natural_driver": "Record positive Indian Ocean Dipole (IOD) & prolonged 2019 extreme heatwave/lightning ignitions.",
@@ -5802,7 +5802,7 @@
         "roughness_mechanism": "Calm flood lakes act as smooth specular mirrors (VV < -15 dB, dark cyan), while flooded tree trunks create intense vertical-horizontal corner reflectors (emerald/violet).",
         "dielectric_mechanism": "Rising water fills the floodplain floor with \u03b5r \u2248 80 liquid water, jumping trunk\u2013water dihedral backscatter +3.8 to +5.5 dB higher than the Oct 2020 low-water baseline.",
         "polarization_note": "Compare Event Peak (Jun 2021) vs. Low-Water Baseline (Oct 2020): VV double-bounce + HH L-band penetration reveal where water stood inside closed forest.",
-        "frequency_comparison": "C-band (5.6 cm) captures open flooded avenues and low v\u00e1rzea scrub; 24 cm L-band penetrates tall dense igap\u00f3 crowns along Rio Negro islands."
+        "frequency_comparison": "C-band (5.6 cm) captures open flooded avenues and low v\u00e1rzea scrub; ~25 cm L-band penetrates tall dense igap\u00f3 crowns along Rio Negro islands."
       },
       "drivers": {
         "natural_driver": "La Ni\u00f1a convective reinforcement flooded the northern Negro & western Solim\u00f5es sub-basins simultaneously.",
@@ -6368,7 +6368,7 @@
         "roughness_mechanism": "Intact city blocks act as coherent dihedral wall\u2013ground reflectors; building collapse scrambles phase coherence and shifts |\u0394VV|.",
         "dielectric_mechanism": "Mid-winter dry stone rubble keeps dielectric variance low while geometric range shifts encode fault displacement.",
         "polarization_note": "VV amplitude + InSAR interferometric phase pairs resolve both vertical uplift and strike-slip shear across the fault.",
-        "frequency_comparison": "C-band (5.6 cm) saturates very near high-gradient fault cores, where NISAR L-band (24 cm) preserves fringe coherence."
+        "frequency_comparison": "C-band (5.6 cm) saturates very near high-gradient fault cores, where NISAR L-band (~25 cm) preserves fringe coherence."
       },
       "drivers": {
         "natural_driver": "Mw 7.8 strike-slip rupture along the East Anatolian Fault Zone (2023-02-06) + Mw 7.5 Elbistan trigger.",
@@ -6690,7 +6690,7 @@
         "roughness_mechanism": "Ridged deformed pack ice produces bright microwave scattering compared to dark wind-sheltered pancake/frazil leads.",
         "dielectric_mechanism": "Seawater salt expulsion lowers first-year sea ice permittivity (\u03b5r ~3.5 vs ~80 open polar ocean).",
         "polarization_note": "HH/HV SAR + AMSR2 brightness temperature cleanly separate drifting icebergs, thin leads, and perennial fast ice.",
-        "frequency_comparison": "NISAR L-band (24 cm) penetrates surface snow metamorphism to map sea-ice motion & calving continuously at polar night."
+        "frequency_comparison": "NISAR L-band (~25 cm) penetrates surface snow metamorphism to map sea-ice motion & calving continuously at polar night."
       },
       "drivers": {
         "natural_driver": "Warm subsurface Southern Ocean circumpolar upwelling & poleward storm heat transport.",
@@ -7219,8 +7219,8 @@
         -59.75,
         -7.25
       ],
-      "headline_metric": "Manaus record 12.11 m \u00b7 140,328 INPE biome fire hotspots (Aug\u2013Oct 2024)",
-      "summary": "Worse than 2023: Aug\u2013Oct 2024 broke all-time low water records (Manaus 12.11 m, Madeira 1.24 m) while fueling massive fires across southern Amazonas (Apu\u00ed\u2013L\u00e1brea). Cloud- & smoke-penetrating Sentinel-1 \u0394VH exposes deforestation clearings and fire scars hidden beneath choking smoke.",
+      "headline_metric": "Manaus record 12.66 m \u00b7 140,328 INPE biome fire hotspots (Aug\u2013Oct 2024)",
+      "summary": "Worse than 2023: Aug\u2013Oct 2024 broke all-time low water records (Manaus 12.66 m, Madeira 1.24 m) while fueling massive fires across southern Amazonas (Apu\u00ed\u2013L\u00e1brea). Cloud- & smoke-penetrating Sentinel-1 \u0394VH exposes deforestation clearings and fire scars hidden beneath choking smoke.",
       "sar_physics": {
         "primary_sensitivity": "Volume Scattering Loss & Smoke-Penetrating Burn Scars",
         "roughness_mechanism": "Freshly burned and cleared plots lose dense foliage volume scatterers, causing C-band VH backscatter to plummet -2.0 to -4.8 dB along BR-230 expansion fishbones.",
@@ -7452,14 +7452,14 @@
         -60.025,
         -3.15
       ],
-      "headline_metric": "NASA-ISRO NISAR L-band (24 cm) GCOV Validated Passes (Oct\u2013Nov 2026 vs Jun 2026)",
+      "headline_metric": "NASA-ISRO NISAR L-band (~25 cm) GCOV Validated Passes (Oct\u2013Nov 2026 vs Jun 2026)",
       "summary": "Real validated NASA-ISRO NISAR Level-2 GCOV dual-polarization (HHHH + HVHV) acquisitions over Manaus & the Amazon Basin (Oct 21 & Nov 2, 2026, Track 140), compared directly with June 2026 flood-peak NISAR data and simultaneous NASA OPERA Sentinel-1 C-band masks.",
       "sar_physics": {
-        "primary_sensitivity": "24 cm L-Band Sub-Canopy Penetration & Co/Cross-Pol Separation",
-        "roughness_mechanism": "NISAR's 24 cm L-band wavelength passes through small twigs/leaves to scatter off major trunks, soil surface roughness, and smooth blackwater Rio Negro channels.",
+        "primary_sensitivity": "~25 cm L-Band Sub-Canopy Penetration & Co/Cross-Pol Separation",
+        "roughness_mechanism": "NISAR's ~25 cm L-band wavelength passes through small twigs/leaves to scatter off major trunks, soil surface roughness, and smooth blackwater Rio Negro channels.",
         "dielectric_mechanism": "Comparing Jun 2026 flood peak vs. Oct\u2013Nov 2026 dry transition on identical Track 140 shows flooded-forest HHHH double-bounce turning back to dry forest floor scattering.",
         "polarization_note": "HHHH (co-pol) highlights specular water darkness and trunk-water double-bounce brightness; HVHV (cross-pol) quantitatively measures 3D woody forest biomass density.",
-        "frequency_comparison": "Overlay NISAR L-band (24 cm) beside simultaneous NASA OPERA DSWx-S1 Sentinel-1 C-band (5.6 cm) from Oct 2026 to see deep sub-canopy structure vs. upper-crown sensitivity."
+        "frequency_comparison": "Overlay NISAR L-band (~25 cm) beside simultaneous NASA OPERA DSWx-S1 Sentinel-1 C-band (5.6 cm) from Oct 2026 to see deep sub-canopy structure vs. upper-crown sensitivity."
       },
       "drivers": {
         "natural_driver": "2026 Rio Negro flood-to-dry seasonal pulse captured across identical 12-day repeat NISAR orbits.",
@@ -7521,7 +7521,7 @@
           "title": "NISAR L-Band HHHH Co-Pol (dB, Trunk/Water)",
           "role": "after",
           "sensor": "NISAR",
-          "band": "L-band (24 cm)",
+          "band": "L-band (~25 cm)",
           "polarization": "HHHH",
           "acquisition_date": "2026-10-21",
           "granule_id": "NISAR_L2_PR_GCOV_033_140_D_090_4005_DHDH_A_20261021T221629_20261021T221704_P05036_N_F_J_001",
@@ -7558,7 +7558,7 @@
           "title": "NISAR L-Band HVHV Cross-Pol (dB, Canopy Volume)",
           "role": "polarization",
           "sensor": "NISAR",
-          "band": "L-band (24 cm)",
+          "band": "L-band (~25 cm)",
           "polarization": "HVHV",
           "acquisition_date": "2026-10-21",
           "granule_id": "NISAR_L2_PR_GCOV_033_140_D_090_4005_DHDH_A_20261021T221629_20261021T221704_P05036_N_F_J_001",
@@ -7595,7 +7595,7 @@
           "title": "NISAR Jun Flood vs Oct Transition (\u0394HHHH)",
           "role": "change",
           "sensor": "NISAR",
-          "band": "L-band (24 cm)",
+          "band": "L-band (~25 cm)",
           "polarization": "\u0394HHHH",
           "acquisition_date": "2026-06-23 -> 2026-10-21",
           "granule_id": "NISAR_L2_PR_GCOV_033_140_D_090_4005_DHDH_A_20261021T221629_20261021T221704_P05036_N_F_J_001",
@@ -7627,7 +7627,7 @@
           "title": "NISAR Dual-Pol RGB Composite (Manaus)",
           "role": "rgb",
           "sensor": "NISAR",
-          "band": "L-band (24 cm)",
+          "band": "L-band (~25 cm)",
           "polarization": "HHHH/HVHV",
           "acquisition_date": "2026-10-21",
           "granule_id": "NISAR_L2_PR_GCOV_033_140_D_090_4005_DHDH_A_20261021T221629_20261021T221704_P05036_N_F_J_001",
@@ -7699,7 +7699,7 @@
           "title": "NISAR Nov 2026 Full Swath (Track 140)",
           "role": "swath",
           "sensor": "NISAR",
-          "band": "L-band (24 cm)",
+          "band": "L-band (~25 cm)",
           "polarization": "HHHH/HVHV",
           "acquisition_date": "2026-11-02",
           "granule_id": "NISAR_L2_PR_GCOV_034_140_D_090_4005_DHDH_A_20261102T221630_20261102T221704_P05036_N_F_J_001",

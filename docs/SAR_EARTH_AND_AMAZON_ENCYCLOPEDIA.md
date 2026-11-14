@@ -21,12 +21,23 @@ Unlike optical satellites that rely on sunlight and are blinded by equatorial cl
 | Band / Mission | Wavelength | Primary Scattering Target | Key Earth Observation Capability |
 | :--- | :--- | :--- | :--- |
 | **C-Band** (Sentinel-1, OPERA DSWx/DIST) | **5.6 cm** | Upper canopy leaves, ocean capillary ripples, urban geometry, exposed sandbars | Rapid 6–12 day change detection (`ΔVV`, `ΔVH`), global flood mapping through clouds, InSAR fault fringes |
-| **S-Band** (NISAR S-SAR / ISRO) | **12 cm** | Intermediate branches, crops, wetlands, glaciers | Bridges fine agricultural roughness and medium vegetation penetration |
-| **L-Band** (NASA-ISRO **NISAR** GCOV, ALOS-2 PALSAR-2) | **24 cm** | Sub-canopy trunks, deep woody biomass, flooded forest double-bounce, peatland & InSAR coherence | Penetrates dense tropical rainforest crowns to track below-canopy inundation (`HHHH`), woody biomass (`HVHV`), and coherent ground slip |
+| **S-Band** (NISAR S-SAR / ISRO) | **~10 cm** | Intermediate branches, crops, wetlands, glaciers | Bridges fine agricultural roughness and medium vegetation penetration |
+| **L-Band** (NASA-ISRO **NISAR** GCOV, ALOS-2 PALSAR-2) | **~25 cm** | Sub-canopy trunks, deep woody biomass, flooded forest double-bounce, peatland & InSAR coherence | Penetrates dense tropical rainforest crowns to track below-canopy inundation (`HHHH`), woody biomass (`HVHV`), and coherent ground slip |
+
+### 1.3 Polarization Key
+
+| Signal | Scattering Type | Meaning |
+| :--- | :--- | :--- |
+| High `HV` / `VH` | Volume scattering | Intact forest |
+| Low `HV` / `VH` | Surface scattering | Cleared land, pasture, burn scar |
+| Very strong `HH` | Double-bounce | Flooded forest |
+| Very low `HH` and `HV` | Specular reflection | Calm open water |
+
+The first letter is what the radar sends, the second is what it receives (`HV` = sent horizontal, received vertical).
 
 ---
 
-### 1.3 Verified 12-Year Planetary & Amazon Telemetry Summary (2015–2026)
+### 1.4 Verified 12-Year Planetary & Amazon Telemetry Summary (2015–2026)
 
 Extracted directly from the validated `144`-month dataset (`data/amazon_sar_2020_2026.json`):
 
@@ -34,6 +45,8 @@ Extracted directly from the validated `144`-month dataset (`data/amazon_sar_2020
 - **Amazon Lowest Observed Discharge (Manaus):** `30,069.2 m³/s` (`2024-10`) *(Note: `2026-12` holds `0.0 m³/s` beyond the Nov 13, 2026 observed river cutoff)*
 - **Peak Single-Month Amazon Active Fires (MODIS C6.1):** `48,322` detections (`2024-09`)
 - **Amazon SMAP Soil Moisture Index Range:** Peak `87.7%` (`2025-03`) · Trough `39.7%` (`2023-11`)
+- **Fire detections 2024 vs 2023 (INPE):** `140,346` vs `98,639` (`+42.3%`); record `218,637` in `2004`
+- **Burned area 2024 vs 2023 (MapBiomas):** at least `+66%`; 2025 burned area `7.7` million acres (`3.1` million ha), the smallest since 1985
 - **Global Frozen Land Coverage Range:** Peak `42.1%` (`2024-01`, Northern Hemisphere winter peak) · Minimum `6.2%` (`2018-08`, boreal summer thaw)
 - **Polar Sea-Ice Concentration Index:** Observed GIBS AMSR2 peak `100.0%` (`2015-11`); recorded series minimum `8.7%` starting `2025-09` (*see instrumentation note below*)
 
@@ -53,11 +66,12 @@ Extracted directly from the validated `144`-month dataset (`data/amazon_sar_2020
 | **2026** | 12 (11 obs Q) | 138,698 | 217,403 | 54,018 | 79,879 | 73.4% | 22.9% | 8.7%* | 8,666 | **3,704** |
 
 > **Data Continuity Notes:**
-> 1. **Sentinel-1 Constellation Gap (2022–2024):** Annual ASF Sentinel-1 acquisitions over Amazonia dropped from `10,043` (`2020`) and `9,906` (`2021`) to `5,593–5,858` during `2022–2024` after the Dec 2021 Sentinel-1B power anomaly, recovering in `2025` (`8,921`) with Sentinel-1C commissioning alongside `394` provisional and `3,704` (`2026`) **NISAR L-band** scenes.
-> 2. **GIBS AMSR2 Sea-Ice Feed Transition (`2025-09`..`2026-12`):** From `2025-09` onward, `global_sea_ice_idx` remains flat at `8.7%` because the NASA GIBS `AMSRU2_Sea_Ice_Concentration_12km` WMS feed returned baseline background fill after August 2025 rather than physical global sea-ice loss.
-> 3. **2015-01..2015-03 Pre-Launch SMAP Mapping:** Because NASA SMAP science operations began in April 2015, January–March 2015 soil moisture layers use the matching `2016` seasonal baseline while `AMSRU2` polar sea ice uses direct `2015-01..03-15` observations.
+> 1. **MODIS vs. INPE Fire Counts:** MODIS counts (above table) and INPE counts (bullets above) come from different sources and areas; do not compare or combine them.
+> 2. **Sentinel-1 Constellation Gap (2022–2024):** Annual ASF Sentinel-1 acquisitions over Amazonia dropped from `10,043` (`2020`) and `9,906` (`2021`) to `5,593–5,858` during `2022–2024` after the Dec 2021 Sentinel-1B power anomaly, recovering in `2025` (`8,921`) with Sentinel-1C commissioning alongside `394` provisional and `3,704` (`2026`) **NISAR L-band** scenes.
+> 3. **GIBS AMSR2 Sea-Ice Feed Transition (`2025-09`..`2026-12`):** From `2025-09` onward, `global_sea_ice_idx` remains flat at `8.7%` because the NASA GIBS `AMSRU2_Sea_Ice_Concentration_12km` WMS feed returned baseline background fill after August 2025 rather than physical global sea-ice loss.
+> 4. **2015-01..2015-03 Pre-Launch SMAP Mapping:** Because NASA SMAP science operations began in April 2015, January–March 2015 soil moisture layers use the matching `2016` seasonal baseline while `AMSRU2` polar sea ice uses direct `2015-01..03-15` observations.
 
-### 1.4 Four Global Earth Surface-Change Regimes Observed on the 3D Globe
+### 1.5 Four Global Earth Surface-Change Regimes Observed on the 3D Globe
 
 1. **Equatorial Hydrological Belt & Wetlands (Amazon, Congo, Pantanal):** High-dielectric soil saturation and seasonal river pulses driven by ITCZ migration (`SMAP` indices cycling between `39.7%` drought troughs and `87.7%` wet peaks).
 2. **Boreal Freeze/Thaw Breath (Siberia, Canada, Alaska):** Across `144` months, global frozen land fraction oscillates nearly `7x` every year from `6.2%` (`2018-08`) to `42.1%` (`2024-01`), tracking active permafrost thaw and winter frost lockup (`SMAP` L-band radiometer).
@@ -102,11 +116,11 @@ Extracted directly from the validated `144`-month dataset (`data/amazon_sar_2020
 
 #### 2. Seasonal Flood (`seasonal_flood`)
 - **Typical Timing:** `Peak ~Mar – Jun (Madeira at Porto Velho: ~Mar – Apr)` · **Primary Region:** Porto Velho / Rio Madeira (`porto_velho`) & Manaus NISAR corridor
-- **Primary SAR Physics:** Dielectric constant + trunk–water **corner double-bounce** (`VV` and **NISAR L-band** `HHHH` penetrating 24 cm beneath flooded forest canopy).
+- **Primary SAR Physics:** Dielectric constant + trunk–water **corner double-bounce** (`VV` and **NISAR L-band** `HHHH`, whose ~25 cm wavelength reaches the trunks beneath flooded forest canopy).
 - **Verified Layer Evidence & Metrics:**
   - `OPERA L3 DSWx-S1` (`2025-04-09`, `OPERA_L3_DSWx-S1_T20LLR_20250409T095727Z_20260406T193636Z_S1A_30_v1.0`): **`10.47%` open water**, **`0.28%` inundated vegetation**.
   - `Sentinel-1 C-band VV` (`2025-03-16`, `S1A_IW_GRDH_1SDV_20250316T095735_20250316T095800_058328_0735FE_rtc`): `p10 = -8.05 dB`, `median = -6.52 dB`, `p90 = -5.84 dB`.
-  - `NISAR L-band HHHH` (`2026-06-23`, `NISAR_L2_PR_GCOV_023_140_D_090_4005_DHDH_A_20260623T221633_20260623T221711_P05023_N_F_J_001`): `p10 = -15.01 dB`, `median = -6.59 dB`, `p90 = -0.58 dB`.
+  - `NISAR L-band HHHH` (`2026-06-23`, Manaus corridor, track 140, `NISAR_L2_PR_GCOV_023_140_D_090_4005_DHDH_A_20260623T221633_20260623T221711_P05023_N_F_J_001`): `p10 = -15.01 dB`, `median = -6.59 dB`, `p90 = -0.58 dB`.
 - **Natural Driver:** Asynchronous flood timing of southern Andes/Madeira rains (peaking Mar–Apr) vs. northern Rio Negro crest (May–Jun).
 - **Human Driver:** Riverine *várzea* agriculture, floating stilt communities, and hydropower dams (Santo Antônio / Jirau near Porto Velho).
 
@@ -166,7 +180,7 @@ Extracted directly from the validated `144`-month dataset (`data/amazon_sar_2020
 | 11 | `antarctic_sea_ice_2023` | Global | `2023-09` | **Antarctic Winter Sea-Ice Record Deficit** | `20.00, -62.50` | `15.15%` missing marginal pack ice vs. 2020 winter max |
 | 12 | `severe_drought_2023` | Amazon | `2023-10` | **Severe Drought (Lake Tefé / Solimões)** | `-64.70, -3.33` | `-13.45%` water area contracted into bright mudflats |
 | 13 | `brazil_rs_flood_2024` | Global | `2024-05` | **Porto Alegre & Guaíba Catastrophic Flood** | `-51.25, -30.01` | `+14.3%` submerged delta + `8.18%` urban double-bounce |
-| 14 | `drought_fires_2024` | Amazon | `2024-09` | **Record Drought & Megafires (Apuí–Lábrea)** | `-59.75, -7.25` | `4.22%` `ΔVH ≤ -2 dB` scars · `5,144` local high-conf fires |
+| 14 | `drought_fires_2024` | Amazon | `2024-09` | **Record Drought & Fires (Apuí–Lábrea)** | `-59.75, -7.25` | `4.22%` `ΔVH ≤ -2 dB` scars · `5,144` local high-conf fires |
 | 15 | `nisar_lband_2026` | Amazon | `2026-10` | **NASA-ISRO NISAR L-Band Validated Passes** | `-60.03, -3.15` | `HHHH -6.6 dB` vs `HVHV -11.61 dB` (`+5.01 dB` pol gap) |
 
 ---
@@ -185,23 +199,24 @@ Extracted directly from the validated `144`-month dataset (`data/amazon_sar_2020
 
 3. **`manaus_flood_2021` — Record Rio Negro Flood at Manaus (`2021-06`)**
    - **Coordinates:** Center `[-60.025, -3.15]`, BBox `[-60.35, -3.35, -59.7, -2.95]` (`4` layers comparing Oct 2020 low-water baseline vs. Jun 2021 flood crest)
-   - **Granules & Stats:** `Sentinel-1 C-band` (`2021-06-19`, `S1A_IW_GRDH_1SDV_20210619T093925_20210619T093950_038407_04883E_rtc` vs. baseline `2020-10-10`, `S1A_IW_GRDH_1SDV_20201010T093924_20201010T093949_034732_040BDF_rtc`) -> `30.02 m` 119-year record crest, **`22.44%` open water**, **`0.99%` flooded *igapó* forest**, **`+4.34%` newly inundated water** (`VV`: `p10 = -18.65 dB`, `median = -6.63 dB`, `p90 = -5.51 dB`).
+   - **Granules & Stats:** `Sentinel-1 C-band` (`2021-06-19`, `S1A_IW_GRDH_1SDV_20210619T093925_20210619T093950_038407_04883E_rtc` vs. baseline `2020-10-10`, `S1A_IW_GRDH_1SDV_20201010T093924_20201010T093949_034732_040BDF_rtc`) -> `30.02 m` crest on 16 June 2021, the highest in 119 years of records; **`22.44%` open water**, **`0.99%` flooded *igapó* forest**, **`+4.34%` newly inundated water** (`VV`: `p10 = -18.65 dB`, `median = -6.63 dB`, `p90 = -5.51 dB`).
    - **Physics & Drivers:** Dielectric flood specular dark channels paired with bright sub-canopy double-bounce. Driven by La Niña convective rainstorms flooding Rio Negro & Solimões simultaneously, submerging Manaus waterfronts and Iranduba neighborhoods.
 
 4. **`severe_drought_2023` — Severe Drought at Lake Tefé (`2023-10`, Sep – Nov 2023)**
    - **Coordinates:** Center `[-64.7, -3.325]`, BBox `[-64.85, -3.45, -64.55, -3.2]` (`3` layers: May 2023 high-water vs. Oct 2023 contraction)
-   - **Granules & Stats:** `Sentinel-1 C-band` (`2023-10-22`, `S1A_IW_GRDH_1SDV_20231022T100428_20231022T100453_050876_0621D8_rtc` vs. `2023-05-19`, `S1A_IW_GRDH_1SDV_20230519T100421_20230519T100446_048601_05D86E_rtc`) -> Manaus fell to `12.70 m`, Lake Tefé hit `39.1 °C`, and open water shrank by **`-13.45%`** (`VV` `p10` rose from `-19.19 dB` to `-14.87 dB` as mirror water vanished into rough mudflats).
+   - **Granules & Stats:** `Sentinel-1 C-band` (`2023-10-22`, `S1A_IW_GRDH_1SDV_20231022T100428_20231022T100453_050876_0621D8_rtc` vs. `2023-05-19`, `S1A_IW_GRDH_1SDV_20230519T100421_20230519T100446_048601_05D86E_rtc`) -> the Rio Negro at Manaus fell to `12.70 m` on 27 October 2023, a record at the time; Lake Tefé hit `39.1 °C`, and open water shrank by **`-13.45%`** (`VV` `p10` rose from `-19.19 dB` to `-14.87 dB` as mirror water vanished into rough mudflats).
    - **Physics & Drivers:** Specular-to-rough surface inversion under compound 2023 El Niño + record Tropical North Atlantic warmth, stranding river towns and causing mass river dolphin mortality in shallowed Lake Tefé.
 
 5. **`drought_fires_2024` — Record Drought & Fires in Apuí–Lábrea (`2024-09`, Aug – Oct 2024)**
    - **Coordinates:** Center `[-59.75, -7.25]`, BBox `[-60.5, -8.5, -58.5, -6.5]` (`4` layers fusing MODIS thermal detections & Jul–Oct S1 ΔVH)
-   - **Granules & Stats:** `Sentinel-1 ΔVH` (`2024-10-13`, `S1A_IW_GRDH_1SDV_20241013T094050_20241013T094115_056082_06DC84_rtc` vs. `2024-07-09`, `S1A_IW_GRDH_1SDV_20240709T094049_20240709T094114_054682_06A842_rtc`) + `MODIS_C61_Brazil_2024` -> **`4.22%` canopy loss (`ΔVH ≤ -2 dB`)**, **`0.13%` severe loss**, **`5,144` local high-confidence fire detections**, coinciding with Manaus's lowest stage (`12.11 m`) and lowest observed 12-year discharge (`30,069.2 m³/s`, `2024-10`).
+   - **Granules & Stats:** `Sentinel-1 ΔVH` (`2024-10-13`, `S1A_IW_GRDH_1SDV_20241013T094050_20241013T094115_056082_06DC84_rtc` vs. `2024-07-09`, `S1A_IW_GRDH_1SDV_20240709T094049_20240709T094114_054682_06A842_rtc`) + `MODIS_C61_Brazil_2024` -> **`4.22%` canopy loss (`ΔVH ≤ -2 dB`)**, **`0.13%` severe loss**, **`5,144` local high-confidence fire detections**, coinciding with a new record low for the Rio Negro at Manaus: `12.66 m` on 4 October 2024, the lowest in 122 years of records, and the lowest observed 12-year discharge (`30,069.2 m³/s`, `2024-10`).
    - **Physics & Drivers:** Multi-year 2023–2024 soil moisture deficit (`39.7%` Nov 2023 trough; `64.6%` 2024 annual mean) combined with escaped pasture clearing along BR-230.
 
 6. **`nisar_lband_2026` — NASA-ISRO NISAR L-Band Validated Passes (`2026-10`, Oct – Nov 2026 vs. Jun 2026)**
-   - **Coordinates:** Center `[-60.025, -3.15]`, BBox `[-60.35, -3.35, -59.7, -2.95]` (`6` multi-sensor layers)
-   - **Granules & Stats:** `NISAR L2 PR GCOV` (`2026-10-21`, `NISAR_L2_PR_GCOV_033_140_D_090_4005_DHDH_A_20261021T221629_20261021T221704_P05036_N_F_J_001` & `2026-11-02`, `NISAR_L2_PR_GCOV_034_140_D_090_4005_DHDH_A_20261102T221630_20261102T221704_P05036_N_F_J_001` vs. Jun 23 provisional flood pass) + `OPERA DSWx-S1` (`2026-11-03`, `OPERA_L3_DSWx-S1_T20MQB_20261103T093832Z_20261104T040557Z_S1D_30_v1.0`) -> **`HHHH` median `-6.6 dB` (`p90 = +0.22 dB`) vs. `HVHV` median `-11.61 dB`** (`+5.01 dB` co/cross-pol separation); `ΔHHHH` Jun→Oct captures **`13.06%` flooded double-bounce drop** as floodwaters receded and **`13.66%` exposed bank roughness rise**; OPERA confirms **`20.11%` open water** & **`3.79%` inundated vegetation**.
-   - **Physics & Drivers:** Direct operational **24 cm L-band** sub-canopy penetration across repeat 12-day NISAR orbits.
+   - **Rondônia study-area scene:** `NISAR_L2_PR_GCOV_033_161` (track 161, acquired 23 Oct 2026, L-band, `HH` + `HV`), near Machadinho d'Oeste.
+   - **Manaus-corridor scenes (track 140), Center `[-60.025, -3.15]`, BBox `[-60.35, -3.35, -59.7, -2.95]` (`6` multi-sensor layers):** `NISAR L2 PR GCOV` (`2026-10-21`, `NISAR_L2_PR_GCOV_033_140_D_090_4005_DHDH_A_20261021T221629_20261021T221704_P05036_N_F_J_001` & `2026-11-02`, `NISAR_L2_PR_GCOV_034_140_D_090_4005_DHDH_A_20261102T221630_20261102T221704_P05036_N_F_J_001` vs. the 23 Jun 2026 flood pass) + `OPERA DSWx-S1` (`2026-11-03`, `OPERA_L3_DSWx-S1_T20MQB_20261103T093832Z_20261104T040557Z_S1D_30_v1.0`).
+   - **Stats:** scene-box **`HHHH` median `-6.6 dB`** (`p90 = +0.22 dB`) vs. **`HVHV` median `-11.61 dB`** (`+5.01 dB` co/cross-pol separation); `ΔHHHH` Jun→Oct captures **`13.06%` flooded double-bounce drop** as floodwaters receded and **`13.66%` exposed bank roughness rise**; OPERA confirms **`20.11%` open water** & **`3.79%` inundated vegetation**.
+   - **Physics & Drivers:** NISAR (launched July 2025, NASA-ISRO) observes land twice every 12 days, day and night, through cloud and light rain; its ~25 cm L-band reaches below the forest canopy.
 
 ---
 
@@ -261,4 +276,16 @@ Extracted directly from the validated `144`-month dataset (`data/amazon_sar_2020
 - **Interactive SAR Lab (Inside Story Card):**
   - **Split-Screen Swipe Comparator:** Drag horizontally over any crisis or phenomenon preview to wipe dynamically between `Before ⟷ After` or **`C-band ⟷ NISAR L-band`**.
   - **Live Radar `dB` & Scattering Probe:** Hover anywhere on the preview image to read pixel backscatter intensity (`dB`) and surface regime (Specular Water/Oil Mirror, Dry Bare Soil, 3D Canopy Volume Scattering, Urban/Flooded Forest Double-Bounce, Active Burn/Hotspot).
-  - **C/S/L-Band Canopy Diagram:** Inspect `5.6 cm`, `12 cm`, and `24 cm` microwave penetration depth directly alongside each phenomenon's backscatter histogram and natural/human drivers.
+  - **C/S/L-Band Canopy Diagram:** Inspect `5.6 cm`, `~10 cm`, and `~25 cm` microwave penetration depth directly alongside each phenomenon's backscatter histogram and natural/human drivers.
+
+---
+
+## 5. Sources
+
+- NOAA Climate.gov, "Drought parches central Amazon" (Oct 2023): https://climate.gov/news-features/event-tracker/drought-parches-central-amazon-october-2023
+- AP via ABC News, Rio Negro at its lowest level in 122 years (Oct 2024): https://abcnews.go.com/International/wireStory/drought-dried-amazon-river-tributary-lowest-level-122-114506659
+- Al Jazeera, Lake Tefé and dolphin deaths (Oct 2023): https://www.aljazeera.com/news/2023/10/3/deaths-of-120-amazon-dolphins-linked-to-severe-drought-high-temperatures
+- Portal Amazônia, Rio Negro record marks since 1902: https://portalamazonia.com/amazonas/cheia-do-rio-negro-confira-as-10-marcas-recordes-ja-registradas-desde-1902/
+- Rainforest Foundation US, 2024 Amazon fires: https://rainforestfoundation.org/2024-amazon-fires-scorched-an-area-equivalent-to-the-entire-state-of-california/
+- Rainforest Foundation US, 2025 Brazilian Amazon fires: https://rainforestfoundation.org/2025-brazilian-amazon-fires-fell-to-their-lowest-level-in-four-decades/
+- NASA, "5 things to know about NISAR": https://www.nasa.gov/missions/nisar/5-things-to-know-about-powerful-new-u-s-india-satellite-nisar/

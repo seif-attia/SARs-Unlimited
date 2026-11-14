@@ -154,7 +154,7 @@ export const DATASET_LEGENDS: Record<SarsDatasetId, LayerLegend> = {
     ]
   },
   nisar: {
-    title: 'NASA–ISRO NISAR L-Band (24 cm) Polarimetric Backscatter (GCOV)',
+    title: 'NASA–ISRO NISAR L-Band (~25 cm) Polarimetric Backscatter (GCOV)',
     unit: 'L-Band Gamma0 & Sub-Canopy Dihedral Indicator',
     items: [
       {

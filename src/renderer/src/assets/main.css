@@ -539,8 +539,8 @@ body,
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 10px;
-  padding: 0 14px 0 18px;
+  gap: 8px;
+  padding: 0 12px 0 14px;
   background: var(--sars-bg-glass);
   border: 1px solid var(--sars-border);
   border-radius: 18px;
@@ -551,9 +551,9 @@ body,
 .sars-top-header__left {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 7px;
   min-width: 0;
-  flex: 1;
+  flex: 1 1 auto;
 }
 
 .sars-top-header__right {
@@ -592,6 +592,8 @@ body,
   display: flex;
   align-items: center;
   gap: 6px;
+  min-width: 0;
+  flex: 0 1 auto;
 }
 
 .sars-nav-pill {
@@ -599,7 +601,7 @@ body,
   align-items: center;
   gap: 6px;
   height: 34px;
-  padding: 0 12px;
+  padding: 0 10px;
   background: rgba(255, 255, 255, 0.07);
   border: 1px solid var(--sars-border);
   border-radius: 999px;
@@ -608,6 +610,7 @@ body,
   font-weight: 500;
   cursor: pointer;
   white-space: nowrap;
+  flex-shrink: 0;
   transition: background 0.15s ease, border-color 0.15s ease;
 }
 
@@ -619,6 +622,9 @@ body,
 
 .sars-nav-pill--primary {
   background: rgba(255, 255, 255, 0.11);
+  min-width: 0;
+  max-width: 100%;
+  flex-shrink: 1;
 }
 
 .sars-nav-pill.is-touring {
@@ -638,7 +644,8 @@ body,
 
 .sars-nav-pill__active-name {
   font-weight: 600;
-  max-width: 205px;
+  max-width: clamp(95px, 13vw, 195px);
+  min-width: 0;
   overflow: hidden;
   text-overflow: ellipsis;
 }
@@ -3751,4 +3758,132 @@ body,
 
 .sars-custom-overlay-pane.is-blank {
   min-height: 100%;
+}
+
+/* --------------------------------------------------------------------------
+   LIGHT THEME POLISH (High-Contrast Light Glass UI)
+   -------------------------------------------------------------------------- */
+.sars-theme-light .sars-brand__logo,
+.sars-theme-light .sars-brand__wordmark {
+  filter: brightness(0.14) saturate(1.1);
+}
+
+.sars-theme-light .sars-nav-pill {
+  background: rgba(15, 23, 42, 0.06);
+}
+
+.sars-theme-light .sars-nav-pill:hover,
+.sars-theme-light .sars-nav-pill.is-open {
+  background: rgba(15, 23, 42, 0.12);
+}
+
+.sars-theme-light .sars-nav-pill--primary {
+  background: rgba(15, 23, 42, 0.09);
+}
+
+.sars-theme-light .sars-nav-pill.is-touring {
+  background: rgba(37, 99, 235, 0.16);
+  border-color: rgba(37, 99, 235, 0.55);
+  color: #1e3a8a;
+}
+
+.sars-theme-light .sars-search-box {
+  background: rgba(255, 255, 255, 0.82);
+  border-color: rgba(51, 65, 85, 0.24);
+}
+
+.sars-theme-light .sars-search-box__submit,
+.sars-theme-light .sars-search-box__clear {
+  background: #0f172a;
+  color: #f8fafc;
+}
+
+.sars-theme-light .sars-unified-sidebar__header {
+  background: rgba(15, 23, 42, 0.03);
+}
+
+.sars-theme-light .sars-unified-sidebar__tab {
+  background: rgba(15, 23, 42, 0.05);
+}
+
+.sars-theme-light .sars-unified-sidebar__tab:hover {
+  background: rgba(37, 99, 235, 0.1);
+  border-color: rgba(37, 99, 235, 0.4);
+}
+
+.sars-theme-light .sars-unified-sidebar__tab.is-active {
+  background: rgba(37, 99, 235, 0.16);
+  border-color: rgba(37, 99, 235, 0.58);
+}
+
+.sars-theme-light .sars-unified-sidebar__count {
+  background: rgba(15, 23, 42, 0.08);
+}
+
+.sars-theme-light .sars-timeline-icon-btn {
+  background: rgba(15, 23, 42, 0.06);
+}
+
+.sars-theme-light .sars-chart-tab {
+  border-color: rgba(51, 65, 85, 0.2);
+  background: rgba(15, 23, 42, 0.04);
+}
+
+.sars-theme-light .sars-chart-tab.is-active {
+  background: rgba(37, 99, 235, 0.16);
+  border-color: rgba(37, 99, 235, 0.58);
+}
+
+/* --------------------------------------------------------------------------
+   RESPONSIVE CASCADE OVERRIDES (Applied after .sars-unified-sidebar)
+   -------------------------------------------------------------------------- */
+@media (max-width: 1360px) {
+  .sars-nav-pill__tag {
+    display: none;
+  }
+  .sars-unified-sidebar {
+    width: 356px;
+  }
+  .sars-sidebar-edge-arrow.is-open {
+    left: 372px;
+  }
+}
+
+@media (max-width: 1200px) {
+  .sars-telemetry-pill {
+    display: none;
+  }
+  .sars-top-header__left {
+    gap: 5px;
+  }
+  .sars-brand {
+    gap: 6px;
+    padding-right: 2px;
+  }
+  .sars-brand__logo {
+    height: 19px;
+  }
+  .sars-brand__wordmark {
+    height: 11px;
+  }
+  .sars-nav-pill {
+    height: 32px;
+    padding: 0 9px;
+    font-size: 11.5px;
+    gap: 5px;
+  }
+  .sars-search-box {
+    width: clamp(120px, 14vw, 175px);
+    height: 32px;
+  }
+}
+
+@media (max-width: 1080px) {
+  .sars-unified-sidebar {
+    top: 178px;
+    width: min(360px, calc(100vw - 32px));
+  }
+  .sars-sidebar-edge-arrow.is-open {
+    left: min(376px, calc(100vw - 16px));
+  }
 }

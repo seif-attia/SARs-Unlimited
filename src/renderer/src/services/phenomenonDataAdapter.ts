@@ -240,7 +240,7 @@ const VERIFIED_EVENT_METRICS: Record<
     country: 'Brazil (Amazonas)'
   },
   drought_fires_2024: {
-    magnitude: '12.11 m Stage · 5,144 Fires',
+    magnitude: '12.66 m Stage · 5,144 Fires',
     severity: '4.22% ΔVH Canopy Loss',
     affectedArea: '48,828.5 km² Apuí–Lábrea',
     country: 'Brazil (Amazonas)'
@@ -768,7 +768,7 @@ export function buildSynchronizedStatistics(params: {
             : selectedEvent.eventId === 'severe_drought_2023'
               ? '12.70 m'
               : selectedEvent.eventId === 'drought_fires_2024'
-                ? '12.11 m'
+                ? '12.66 m'
                 : selectedEvent.eventId === 'nisar_lband_2026'
                   ? '+5.01 dB'
                   : selectedEvent.magnitude.split('·')[0].trim()
