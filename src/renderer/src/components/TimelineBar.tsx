@@ -24,6 +24,7 @@ interface TimelineBarProps {
   playbackSpeed: 1 | 2 | 4
   showBasinProgression: boolean
   liveScope: 'planet' | 'amazon'
+  isTouring: boolean
   onSelectMonthIndex: (index: number) => void
   onSelectPhenomenon: (phenomenon: AmazonPhenomenon) => void
   onSelectEvent: (event: AmazonEvent) => void
@@ -33,9 +34,10 @@ interface TimelineBarProps {
   onToggleBasinProgression: () => void
   onChangeLiveScope: (scope: 'planet' | 'amazon') => void
   onFlyTheater: (theater: TheaterTarget) => void
+  onToggleTour: () => void
 }
 
-const YEAR_TICKS = [2020, 2021, 2022, 2023, 2024, 2025, 2026]
+const YEAR_TICKS = [2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024, 2025, 2026]
 
 export function TimelineBar({
   months,
@@ -48,6 +50,7 @@ export function TimelineBar({
   playbackSpeed,
   showBasinProgression,
   liveScope,
+  isTouring,
   onSelectMonthIndex,
   onSelectPhenomenon,
   onSelectEvent,
@@ -56,13 +59,40 @@ export function TimelineBar({
   onCycleSpeed,
   onToggleBasinProgression,
   onChangeLiveScope,
-  onFlyTheater
+  onFlyTheater,
+  onToggleTour
 }: TimelineBarProps): React.JSX.Element {
   const current = months[selectedMonthIndex] ?? months[0]
   const totalMax = Math.max(months.length - 1, 1)
 
   const monthIndexMap = new Map<string, number>()
   months.forEach((m, idx) => monthIndexMap.set(m.month, idx))
+
+  // Build normalized dual-trace SVG sparklines over 2015-2026
+  const maxQ = Math.max(...months.map((m) => m.discharge_manaus_m3s || 1), 1)
+  const maxFire = Math.max(...months.map((m) => m.fire_hotspots_amazon || 1), 1)
+  const primarySpark = months
+    .map((m, idx) => {
+      const x = (idx / totalMax) * 1000
+      const norm =
+        liveScope === 'planet'
+          ? (m.global_sea_ice_idx ?? 50) / 100
+          : (m.discharge_manaus_m3s || 0) / maxQ
+      const y = 26 - Math.max(0.04, Math.min(0.96, norm)) * 22
+      return `${x.toFixed(1)},${y.toFixed(1)}`
+    })
+    .join(' ')
+  const secondarySpark = months
+    .map((m, idx) => {
+      const x = (idx / totalMax) * 1000
+      const norm =
+        liveScope === 'planet'
+          ? (m.global_frozen_pct ?? 20) / 45
+          : (m.fire_hotspots_amazon || 0) / maxFire
+      const y = 26 - Math.max(0.04, Math.min(0.96, norm)) * 22
+      return `${x.toFixed(1)},${y.toFixed(1)}`
+    })
+    .join(' ')
 
   return (
     <section className="sar-timeline-dock" aria-label="Dancing with the SARs Timeline & Phenomena">
@@ -73,7 +103,7 @@ export function TimelineBar({
             type="button"
             className={`sar-scope-btn ${liveScope === 'planet' ? 'active' : ''}`}
             onClick={() => onChangeLiveScope('planet')}
-            title="Show Whole-Planet 84-month SMAP moisture, freeze/thaw, floodplains, fires & polar sea ice"
+            title="Show Whole-Planet 144-month (2015–2026) SMAP moisture, freeze/thaw, floodplains, fires & polar sea ice"
           >
             <Globe size={12} />
             <span>Planet Live</span>
@@ -82,7 +112,7 @@ export function TimelineBar({
             type="button"
             className={`sar-scope-btn ${liveScope === 'amazon' ? 'active' : ''}`}
             onClick={() => onChangeLiveScope('amazon')}
-            title="Focus Whole-Amazon 84-month SMAP + GloFAS + FIRMS hydrological cycle"
+            title="Focus Whole-Amazon 144-month (2015–2026) SMAP + GloFAS + FIRMS hydrological cycle"
           >
             <Sparkles size={12} />
             <span>Amazon Live</span>
@@ -152,22 +182,32 @@ export function TimelineBar({
           type="button"
           className={`sar-live-basin-toggle ${showBasinProgression ? 'active' : ''}`}
           onClick={onToggleBasinProgression}
-          title="Toggle live 2020–2026 monthly surface-change progression overlay"
+          title="Toggle live 2015–2026 monthly surface-change progression overlay"
         >
           <Radio size={12} />
           <span>{showBasinProgression ? 'Live ON' : 'Live OFF'}</span>
         </button>
+
+        <button
+          type="button"
+          className={`sar-tour-btn ${isTouring ? 'active' : ''}`}
+          onClick={onToggleTour}
+          title="Auto-fly through 8 signature 2015–2026 global & Amazon SAR crises"
+        >
+          <Compass size={12} />
+          <span>{isTouring ? 'Stop Tour' : 'Guided Tour'}</span>
+        </button>
       </div>
 
-      {/* Row 2: 2020–2026 Temporal Scrubber & Clickable Specific Event Dots (Table 2) */}
+      {/* Row 2: 2015–2026 Temporal Scrubber & Clickable Crisis Event Dots */}
       <div className="sar-scrubber-row">
         <div className="sar-month-readout">
           <button
             type="button"
             className={`sar-play-btn ${isPlaying ? 'playing' : ''}`}
             onClick={onTogglePlay}
-            aria-label={isPlaying ? 'Pause monthly progression' : 'Play 2020–2026 progression'}
-            title={isPlaying ? 'Pause playback' : 'Play monthly Amazon progression'}
+            aria-label={isPlaying ? 'Pause monthly progression' : 'Play 2015–2026 progression'}
+            title={isPlaying ? 'Pause playback' : 'Play monthly progression (2015–2026)'}
           >
             {isPlaying ? <Pause size={12} /> : <Play size={12} />}
           </button>
@@ -202,6 +242,27 @@ export function TimelineBar({
         </div>
 
         <div className="sar-track-wrap">
+          <svg
+            className="sar-timeline-sparkline"
+            viewBox="0 0 1000 28"
+            preserveAspectRatio="none"
+            aria-hidden="true"
+          >
+            <polyline
+              fill="none"
+              stroke={liveScope === 'planet' ? '#64d2ff' : '#22d3ee'}
+              strokeWidth="1.5"
+              strokeOpacity="0.65"
+              points={primarySpark}
+            />
+            <polyline
+              fill="none"
+              stroke={liveScope === 'planet' ? '#818cf8' : '#fb7185'}
+              strokeWidth="1.35"
+              strokeOpacity="0.7"
+              points={secondarySpark}
+            />
+          </svg>
           <input
             type="range"
             className="sar-month-slider"
@@ -209,7 +270,7 @@ export function TimelineBar({
             max={totalMax}
             value={selectedMonthIndex}
             onChange={(e) => onSelectMonthIndex(Number(e.target.value))}
-            aria-label="2020 to 2026 monthly timeline scrubber"
+            aria-label="2015 to 2026 monthly timeline scrubber"
           />
 
           {/* Year tick labels underneath */}

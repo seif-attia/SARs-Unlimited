@@ -1673,3 +1673,239 @@ input {
   width: 100%;
   height: 148px;
 }
+
+/* ----------------------------------------------------------------------------
+   Ultimate Package — Interactive SAR Lab, Swipe Comparator, Probe & Guided Tour
+   -------------------------------------------------------------------------- */
+
+.sar-lab-panel {
+  margin-top: 8px;
+  padding: 8px 10px 10px;
+  border-radius: 12px;
+  background: rgba(6, 13, 25, 0.72);
+  border: 1px solid rgba(100, 210, 255, 0.22);
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.sar-lab-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  color: #bae6fd;
+}
+
+.sar-lab-head > span:first-child {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.sar-lab-split-pct {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: var(--ios-cyan);
+}
+
+.sar-swipe-box {
+  position: relative;
+  width: 100%;
+  height: 138px;
+  border-radius: 9px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  background: radial-gradient(circle at center, rgba(15, 32, 54, 0.9), rgba(4, 9, 18, 0.98));
+  cursor: crosshair;
+  user-select: none;
+  touch-action: none;
+}
+
+.sar-swipe-img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  pointer-events: none;
+}
+
+.sar-swipe-divider {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: rgba(236, 254, 255, 0.9);
+  box-shadow: 0 0 10px rgba(34, 211, 238, 0.9);
+  transform: translateX(-1px);
+  pointer-events: none;
+}
+
+.sar-swipe-handle {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 2px 6px;
+  border-radius: 999px;
+  background: rgba(8, 22, 42, 0.92);
+  border: 1px solid rgba(100, 210, 255, 0.75);
+  color: #ecfeff;
+  font-size: 10px;
+  font-weight: 700;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.55);
+}
+
+.sar-swipe-tag {
+  position: absolute;
+  top: 6px;
+  padding: 2px 6px;
+  border-radius: 6px;
+  background: rgba(4, 10, 22, 0.78);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  color: #e2e8f0;
+  font-family: var(--font-mono);
+  font-size: 9px;
+  font-weight: 600;
+  pointer-events: none;
+}
+
+.sar-swipe-tag.left {
+  left: 6px;
+}
+
+.sar-swipe-tag.right {
+  right: 6px;
+}
+
+.sar-probe-pill {
+  position: absolute;
+  left: 6px;
+  right: 6px;
+  bottom: 6px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 8px;
+  border-radius: 8px;
+  background: rgba(4, 10, 22, 0.86);
+  border: 1px solid rgba(100, 210, 255, 0.3);
+  color: var(--text-secondary);
+  font-family: var(--font-mono);
+  font-size: 9.5px;
+  pointer-events: none;
+  backdrop-filter: blur(8px);
+}
+
+.sar-probe-pill strong {
+  color: #f8fafc;
+}
+
+.sar-penetration-svg {
+  width: 100%;
+  height: auto;
+  margin-top: 7px;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.sar-timeline-sparkline {
+  position: absolute;
+  left: 6px;
+  right: 6px;
+  top: 2px;
+  width: calc(100% - 12px);
+  height: 22px;
+  pointer-events: none;
+  z-index: 1;
+  opacity: 0.85;
+}
+
+.sar-tour-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 5px 10px;
+  border-radius: 999px;
+  border: 1px solid rgba(168, 85, 247, 0.45);
+  background: rgba(168, 85, 247, 0.14);
+  color: #f3e8ff;
+  font-size: 10.5px;
+  font-weight: 700;
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: all 0.2s var(--ease-ios);
+}
+
+.sar-tour-btn:hover {
+  background: rgba(168, 85, 247, 0.28);
+}
+
+.sar-tour-btn.active {
+  border-color: rgba(216, 180, 254, 0.9);
+  background: rgba(168, 85, 247, 0.34);
+  box-shadow: 0 0 16px -3px rgba(168, 85, 247, 0.7);
+}
+
+.sar-tour-banner {
+  position: absolute;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 11;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  max-width: min(720px, calc(100vw - 260px));
+  padding: 8px 14px;
+  border-radius: 999px;
+  border: 1px solid rgba(192, 132, 252, 0.55);
+  background: rgba(10, 15, 28, 0.82);
+  backdrop-filter: blur(18px);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.48);
+  pointer-events: auto;
+}
+
+.sar-tour-stop-badge {
+  padding: 3px 8px;
+  border-radius: 999px;
+  background: rgba(168, 85, 247, 0.28);
+  color: #f3e8ff;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+.sar-tour-stop-title {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  min-width: 0;
+}
+
+.sar-tour-stop-title strong {
+  font-size: 12px;
+  color: #f8fafc;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.sar-tour-stop-title span {
+  font-size: 10.5px;
+  color: var(--text-secondary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.sar-tour-controls {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  flex-shrink: 0;
+}

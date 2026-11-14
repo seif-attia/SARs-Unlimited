@@ -2,6 +2,8 @@ import { useCallback, useEffect, useRef, useState } from 'react'
 import * as Cesium from 'cesium'
 import 'cesium/Build/Cesium/Widgets/widgets.css'
 import {
+  ChevronLeft,
+  ChevronRight,
   Compass,
   Globe,
   Layers,
@@ -30,6 +32,17 @@ const DEFAULT_ORBIT_VIEW = {
   lat: -5.2,
   height: 4_800_000
 }
+
+const TOUR_STOP_IDS = [
+  'el_nino_drought_2015',
+  'larsen_c_a68_2017',
+  'manaus_flood_2021',
+  'lapalma_volcano_2021',
+  'pakistan_flood_2022',
+  'turkiye_insar_2023',
+  'drought_fires_2024',
+  'nisar_lband_2026'
+] as const
 
 const SRTM_TOPOGRAPHY_URL =
   'https://gibs.earthdata.nasa.gov/wmts/epsg3857/best/ASTER_GDEM_Color_Index/default/default/GoogleMapsCompatible_Level12/{z}/{y}/{x}.png'
@@ -348,9 +361,12 @@ export function GlobeViewer(): React.JSX.Element {
 
   // Dancing with the SARs — Amazon 2020-2026 Offline Dataset & Story State
   const [sarDataset, setSarDataset] = useState<AmazonSarDataset | null>(null)
-  const [selectedMonthIndex, setSelectedMonthIndex] = useState<number>(81) // 2026-10
+  const [selectedMonthIndex, setSelectedMonthIndex] = useState<number>(141) // 2026-10
   const [isPlaying, setIsPlaying] = useState<boolean>(false)
   const [playbackSpeed, setPlaybackSpeed] = useState<1 | 2 | 4>(1)
+  const [isTouring, setIsTouring] = useState<boolean>(false)
+  const [tourStopIdx, setTourStopIdx] = useState<number>(0)
+  const tourStopIdxRef = useRef<number>(0)
   const [showBasinProgression, setShowBasinProgression] = useState<boolean>(true)
   const [liveScope, setLiveScope] = useState<'planet' | 'amazon'>('planet')
   const [selectionMode, setSelectionMode] = useState<'phenomenon' | 'event' | null>(null)
@@ -544,6 +560,7 @@ export function GlobeViewer(): React.JSX.Element {
   const handleFlyTheater = useCallback(
     (theater: 'planet' | 'amazon' | 'arctic' | 'antarctica' | 'monsoon'): void => {
       const viewer = viewerRef.current
+      setIsTouring(false)
       setAutoRotate(false)
       setShowBasinProgression(true)
       if (theater === 'amazon') {
@@ -575,8 +592,27 @@ export function GlobeViewer(): React.JSX.Element {
     [handleFlyTheater]
   )
 
+  const applyEventSelection = useCallback(
+    (evt: AmazonEvent): void => {
+      setIsPlaying(false)
+      setLiveScope(evt.scope === 'global' ? 'planet' : 'amazon')
+      setSelectionMode('event')
+      setActiveEventId(evt.id)
+      setActivePhenomenonId(null)
+      const def = evt.layers.find((l) => l.id === evt.default_layer_id) ?? evt.layers[0] ?? null
+      setActiveSarLayer(def)
+      if (sarDataset) {
+        const mIdx = sarDataset.timeline.months.findIndex((m) => m.month === evt.timeline_month)
+        if (mIdx >= 0) setSelectedMonthIndex(mIdx)
+      }
+      flyToBbox(def?.bbox ?? evt.bbox)
+    },
+    [flyToBbox, sarDataset]
+  )
+
   const handleSelectPhenomenon = useCallback(
     (phen: AmazonPhenomenon): void => {
+      setIsTouring(false)
       setIsPlaying(false)
       setLiveScope('amazon')
       setShowBasinProgression(true)
@@ -600,24 +636,45 @@ export function GlobeViewer(): React.JSX.Element {
 
   const handleSelectEvent = useCallback(
     (evt: AmazonEvent): void => {
-      setIsPlaying(false)
-      setLiveScope(evt.scope === 'global' ? 'planet' : 'amazon')
-      setSelectionMode('event')
-      setActiveEventId(evt.id)
-      setActivePhenomenonId(null)
-      const def = evt.layers.find((l) => l.id === evt.default_layer_id) ?? evt.layers[0] ?? null
-      setActiveSarLayer(def)
-      if (sarDataset) {
-        const mIdx = sarDataset.timeline.months.findIndex((m) => m.month === evt.timeline_month)
-        if (mIdx >= 0) setSelectedMonthIndex(mIdx)
-      }
-      flyToBbox(def?.bbox ?? evt.bbox)
+      setIsTouring(false)
+      applyEventSelection(evt)
     },
-    [flyToBbox, sarDataset]
+    [applyEventSelection]
   )
+
+  const handleJumpTourStop = useCallback(
+    (nextIdx: number): void => {
+      if (!sarDataset) return
+      const wrapped =
+        ((nextIdx % TOUR_STOP_IDS.length) + TOUR_STOP_IDS.length) % TOUR_STOP_IDS.length
+      tourStopIdxRef.current = wrapped
+      setTourStopIdx(wrapped)
+      const evtId = TOUR_STOP_IDS[wrapped]
+      const evt = sarDataset.events.find((e) => e.id === evtId)
+      if (evt) applyEventSelection(evt)
+    },
+    [applyEventSelection, sarDataset]
+  )
+
+  const handleToggleTour = useCallback((): void => {
+    if (!sarDataset) return
+    setAutoRotate(false)
+    setIsPlaying(false)
+    setIsTouring((prev) => {
+      const next = !prev
+      if (next) {
+        tourStopIdxRef.current = 0
+        setTourStopIdx(0)
+        const evt = sarDataset.events.find((e) => e.id === TOUR_STOP_IDS[0])
+        if (evt) applyEventSelection(evt)
+      }
+      return next
+    })
+  }, [applyEventSelection, sarDataset])
 
   const handleSelectMonthIndex = useCallback(
     (idx: number): void => {
+      setIsTouring(false)
       setIsPlaying(false)
       setSelectedMonthIndex(idx)
       if (!sarDataset) return
@@ -640,6 +697,7 @@ export function GlobeViewer(): React.JSX.Element {
   )
 
   const handleClearInspector = useCallback((): void => {
+    setIsTouring(false)
     setSelectionMode(null)
     setActivePhenomenonId(null)
     setActiveEventId(null)
@@ -824,14 +882,18 @@ export function GlobeViewer(): React.JSX.Element {
     }
   }, [mountPolarCaps])
 
-  // Load offline Amazon SAR 2020-2026 Atlas once via Electron IPC
+  // Load offline Amazon SAR 2015-2026 Atlas once via Electron IPC
   useEffect(() => {
     let active = true
     window.api
       ?.getDataset?.()
       .then((raw) => {
         if (!active) return
-        setSarDataset(raw as AmazonSarDataset)
+        const ds = raw as AmazonSarDataset
+        setSarDataset(ds)
+        if (ds?.timeline?.months?.length) {
+          setSelectedMonthIndex(Math.max(0, ds.timeline.months.length - 3))
+        }
       })
       .catch((err) => {
         console.error('Failed to load offline SAR dataset:', err)
@@ -841,8 +903,9 @@ export function GlobeViewer(): React.JSX.Element {
     }
   }, [])
 
-  // Playback timer & state actions for real-time 2020-2026 monthly progression
+  // Playback timer & state actions for real-time 2015-2026 monthly progression
   const handleTogglePlay = useCallback((): void => {
+    setIsTouring(false)
     setAutoRotate(false)
     setShowBasinProgression(true)
     setIsPlaying((prev) => !prev)
@@ -868,6 +931,15 @@ export function GlobeViewer(): React.JSX.Element {
     }, delayMs)
     return () => window.clearInterval(id)
   }, [isPlaying, playbackSpeed, sarDataset])
+
+  // Auto-advance Guided Tour stops every 5.8s across signature 2015-2026 crises
+  useEffect(() => {
+    if (!isTouring || !sarDataset) return
+    const id = window.setInterval(() => {
+      handleJumpTourStop(tourStopIdxRef.current + 1)
+    }, 5800)
+    return () => window.clearInterval(id)
+  }, [handleJumpTourStop, isTouring, sarDataset])
 
   // Sync clickable 3D markers + Amazon Biome boundary outline on the globe
   useEffect(() => {
@@ -906,9 +978,11 @@ export function GlobeViewer(): React.JSX.Element {
 
     for (const evt of sarDataset.events) {
       const col = Cesium.Color.fromCssColorString(evt.color)
-      // Offset Manaus Nov 2026 NISAR pin slightly northeast so both Manaus Jun 2021 and NISAR 2026 dots are clickable
-      const lonOffset = evt.id === 'nisar_lband_2026' ? 0.42 : 0
-      const latOffset = evt.id === 'nisar_lband_2026' ? 0.28 : 0
+      // Offset colliding Manaus-area pins so 2015 El Nino, 2021 Flood, and 2026 NISAR stay clickable
+      const lonOffset =
+        evt.id === 'nisar_lband_2026' ? 0.42 : evt.id === 'el_nino_drought_2015' ? -0.42 : 0
+      const latOffset =
+        evt.id === 'nisar_lband_2026' ? 0.28 : evt.id === 'el_nino_drought_2015' ? -0.26 : 0
       viewer.entities.add({
         id: `evt-pin:${evt.id}`,
         position: Cesium.Cartesian3.fromDegrees(
@@ -1578,6 +1652,7 @@ export function GlobeViewer(): React.JSX.Element {
           playbackSpeed={playbackSpeed}
           showBasinProgression={showBasinProgression}
           liveScope={liveScope}
+          isTouring={isTouring}
           onSelectMonthIndex={handleSelectMonthIndex}
           onSelectPhenomenon={handleSelectPhenomenon}
           onSelectEvent={handleSelectEvent}
@@ -1587,8 +1662,59 @@ export function GlobeViewer(): React.JSX.Element {
           onToggleBasinProgression={handleToggleBasinProgression}
           onChangeLiveScope={handleChangeLiveScope}
           onFlyTheater={handleFlyTheater}
+          onToggleTour={handleToggleTour}
         />
       )}
+
+      {/* Floating Guided Tour Banner across 8 signature 2015-2026 crises */}
+      {sarDataset &&
+        isTouring &&
+        (() => {
+          const stopEvt = sarDataset.events.find((e) => e.id === TOUR_STOP_IDS[tourStopIdx])
+          if (!stopEvt) return null
+          return (
+            <div className="sar-tour-banner" role="region" aria-label="Guided SAR Tour">
+              <span className="sar-tour-stop-badge">
+                TOUR {tourStopIdx + 1}/{TOUR_STOP_IDS.length}
+              </span>
+              <div className="sar-tour-stop-title">
+                <strong>
+                  {stopEvt.timing} · {stopEvt.name}
+                </strong>
+                <span>{stopEvt.headline_metric}</span>
+              </div>
+              <div className="sar-tour-controls">
+                <button
+                  type="button"
+                  className="sar-step-btn"
+                  onClick={() => handleJumpTourStop(tourStopIdx - 1)}
+                  title="Previous Tour Stop"
+                  aria-label="Previous Tour Stop"
+                >
+                  <ChevronLeft size={14} />
+                </button>
+                <button
+                  type="button"
+                  className="sar-step-btn"
+                  onClick={() => handleJumpTourStop(tourStopIdx + 1)}
+                  title="Next Tour Stop"
+                  aria-label="Next Tour Stop"
+                >
+                  <ChevronRight size={14} />
+                </button>
+                <button
+                  type="button"
+                  className="sar-step-btn"
+                  onClick={() => setIsTouring(false)}
+                  title="Stop Guided Tour"
+                  aria-label="Stop Guided Tour"
+                >
+                  <X size={13} />
+                </button>
+              </div>
+            </div>
+          )
+        })()}
 
       {/* Right-Side Interactive SAR Physics & Story Inspector Card */}
       {sarDataset && selectionMode && (

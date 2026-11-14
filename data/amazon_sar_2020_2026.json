@@ -1,10 +1,10 @@
 {
   "schema_version": "2.0.0",
-  "title": "Dancing with the SARs \u2014 Planet & Amazon Surface Change Atlas (2020\u20132026)",
+  "title": "Dancing with the SARs \u2014 Planet & Amazon Surface Change Atlas (2015\u20132026)",
   "challenge_url": "https://www.spaceappschallenge.org/2026/challenges/dancing-with-the-sars/",
-  "generated_at": "2026-11-14T01:40:10Z",
+  "generated_at": "2026-11-14T02:06:44Z",
   "temporal_range": {
-    "start": "2020-01-01",
+    "start": "2015-01-01",
     "end": "2026-12-31",
     "observed_end": "2026-11-13"
   },
@@ -307,10 +307,1470 @@
         -62.5
       ],
       "why": "In September 2023\u2014supposed to be peak Austral winter freeze\u2014Antarctic sea ice fell >1.6 million km\u00b2 below its 1981\u20132010 maximum. Active SAR and passive microwave AMSR2 pierce polar night and Southern Ocean storms."
+    },
+    "global_ant_larsen": {
+      "id": "global_ant_larsen",
+      "name": "Larsen C Giant Iceberg A-68 Calving",
+      "bbox": [
+        -61.8,
+        -68.4,
+        -59.6,
+        -67.0
+      ],
+      "center": [
+        -60.7,
+        -67.7
+      ],
+      "why": "In July 2017\u2014during perpetual Antarctic winter polar night\u2014a 1-trillion-ton iceberg (A-68) broke free from the Larsen C Ice Shelf. Active C-band SAR pierced 24-hour darkness and cloud cover to watch the widening dark Weddell rift lead."
+    },
+    "global_amz_br163": {
+      "id": "global_amz_br163",
+      "name": "Aug 2019 BR-163 Clearing & Fire Surge",
+      "bbox": [
+        -55.65,
+        -7.35,
+        -55.1,
+        -6.8
+      ],
+      "center": [
+        -55.38,
+        -7.08
+      ],
+      "why": "Sentinel-1 C-band VH cuts straight through the August 2019 smoke blankets along Par\u00e1's BR-163 frontier, exposing rectangular pasture clearing cuts made weeks ahead of organized slash burning."
+    },
+    "global_mus_spill": {
+      "id": "global_mus_spill",
+      "name": "Mauritius Wakashio Oil Slick Damping",
+      "bbox": [
+        57.62,
+        -20.48,
+        57.82,
+        -20.3
+      ],
+      "center": [
+        57.72,
+        -20.39
+      ],
+      "why": "After MV Wakashio grounded off Pointe d'Esny, thick marine fuel oil smoothed centimeter-scale gravity-capillary waves inside the turquoise lagoon\u2014producing a pitch-black specular ribbon in Sentinel-1 C-band VV radar."
+    },
+    "global_esp_lapalma": {
+      "id": "global_esp_lapalma",
+      "name": "La Palma Cumbre Vieja Lava & Deformation",
+      "bbox": [
+        -17.96,
+        28.54,
+        -17.8,
+        28.68
+      ],
+      "center": [
+        -17.88,
+        28.61
+      ],
+      "why": "During the 85-day Cumbre Vieja eruption, dense SO2 and tephra ash clouds blinded optical satellites. Sentinel-1 microwave radar pierced the plume to map advancing jagged aa basalt flows (+\u0394VH) and magma inflation."
+    },
+    "global_bra_rs": {
+      "id": "global_bra_rs",
+      "name": "Porto Alegre & Gua\u00edba Catastrophic Flood",
+      "bbox": [
+        -51.45,
+        -30.18,
+        -51.05,
+        -29.85
+      ],
+      "center": [
+        -51.25,
+        -30.01
+      ],
+      "why": "Amazonian 'flying rivers' stalled over Rio Grande do Sul in May 2024. Sentinel-1 simultaneously reveals dark specular floodwater submerging rice/soy deltas (-\u0394VV) alongside blazing urban building\u2013water double-bounce (+\u0394VV) inside Porto Alegre."
     }
   },
   "timeline": {
     "months": [
+      {
+        "month": "2015-01",
+        "year": 2015,
+        "month_num": 1,
+        "discharge_manaus_m3s": 155246.4,
+        "discharge_porto_velho_m3s": 34971.6,
+        "precip_mm": 385.5,
+        "fire_hotspots_amazon": 697,
+        "s1_scenes": 15,
+        "nisar_scenes": 0,
+        "active_phenomena": [
+          "rainy_season"
+        ],
+        "event_id": null,
+        "basin_overlay_path": "assets/basin_monthly/amazon_2015-01.png",
+        "soil_moisture_idx": 64.9,
+        "flood_pulse_idx": 64.4,
+        "drought_fire_idx": 31.4,
+        "planet_overlay_path": "assets/planet_monthly/planet_2015-01.png",
+        "global_frozen_pct": 41.3,
+        "global_sea_ice_idx": 89.9
+      },
+      {
+        "month": "2015-02",
+        "year": 2015,
+        "month_num": 2,
+        "discharge_manaus_m3s": 192302.7,
+        "discharge_porto_velho_m3s": 42362.2,
+        "precip_mm": 283.3,
+        "fire_hotspots_amazon": 363,
+        "s1_scenes": 25,
+        "nisar_scenes": 0,
+        "active_phenomena": [
+          "rainy_season"
+        ],
+        "event_id": null,
+        "basin_overlay_path": "assets/basin_monthly/amazon_2015-02.png",
+        "soil_moisture_idx": 68.3,
+        "flood_pulse_idx": 81.8,
+        "drought_fire_idx": 20.9,
+        "planet_overlay_path": "assets/planet_monthly/planet_2015-02.png",
+        "global_frozen_pct": 40.5,
+        "global_sea_ice_idx": 81.9
+      },
+      {
+        "month": "2015-03",
+        "year": 2015,
+        "month_num": 3,
+        "discharge_manaus_m3s": 199828.3,
+        "discharge_porto_velho_m3s": 47657.4,
+        "precip_mm": 441.2,
+        "fire_hotspots_amazon": 138,
+        "s1_scenes": 20,
+        "nisar_scenes": 0,
+        "active_phenomena": [
+          "rainy_season",
+          "seasonal_flood"
+        ],
+        "event_id": null,
+        "basin_overlay_path": "assets/basin_monthly/amazon_2015-03.png",
+        "soil_moisture_idx": 78.8,
+        "flood_pulse_idx": 86.4,
+        "drought_fire_idx": 5.2,
+        "planet_overlay_path": "assets/planet_monthly/planet_2015-03.png",
+        "global_frozen_pct": 33.8,
+        "global_sea_ice_idx": 82.9
+      },
+      {
+        "month": "2015-04",
+        "year": 2015,
+        "month_num": 4,
+        "discharge_manaus_m3s": 217616.6,
+        "discharge_porto_velho_m3s": 38406.3,
+        "precip_mm": 301.1,
+        "fire_hotspots_amazon": 234,
+        "s1_scenes": 52,
+        "nisar_scenes": 0,
+        "active_phenomena": [
+          "rainy_season",
+          "seasonal_flood"
+        ],
+        "event_id": null,
+        "basin_overlay_path": "assets/basin_monthly/amazon_2015-04.png",
+        "soil_moisture_idx": 84.8,
+        "flood_pulse_idx": 89.7,
+        "drought_fire_idx": 13.8,
+        "planet_overlay_path": "assets/planet_monthly/planet_2015-04.png",
+        "global_frozen_pct": 24.3,
+        "global_sea_ice_idx": 91.7
+      },
+      {
+        "month": "2015-05",
+        "year": 2015,
+        "month_num": 5,
+        "discharge_manaus_m3s": 226484.8,
+        "discharge_porto_velho_m3s": 34324.4,
+        "precip_mm": 376.3,
+        "fire_hotspots_amazon": 408,
+        "s1_scenes": 194,
+        "nisar_scenes": 0,
+        "active_phenomena": [
+          "rainy_season",
+          "seasonal_flood"
+        ],
+        "event_id": null,
+        "basin_overlay_path": "assets/basin_monthly/amazon_2015-05.png",
+        "soil_moisture_idx": 86.9,
+        "flood_pulse_idx": 90.1,
+        "drought_fire_idx": 22.8,
+        "planet_overlay_path": "assets/planet_monthly/planet_2015-05.png",
+        "global_frozen_pct": 15.7,
+        "global_sea_ice_idx": 98.2
+      },
+      {
+        "month": "2015-06",
+        "year": 2015,
+        "month_num": 6,
+        "discharge_manaus_m3s": 210734.5,
+        "discharge_porto_velho_m3s": 23879.0,
+        "precip_mm": 151.1,
+        "fire_hotspots_amazon": 1861,
+        "s1_scenes": 71,
+        "nisar_scenes": 0,
+        "active_phenomena": [
+          "seasonal_flood",
+          "dry_season",
+          "clearing_land_opening"
+        ],
+        "event_id": null,
+        "basin_overlay_path": "assets/basin_monthly/amazon_2015-06.png",
+        "soil_moisture_idx": 84.1,
+        "flood_pulse_idx": 77.4,
+        "drought_fire_idx": 47.3,
+        "planet_overlay_path": "assets/planet_monthly/planet_2015-06.png",
+        "global_frozen_pct": 8.8,
+        "global_sea_ice_idx": 98.3
+      },
+      {
+        "month": "2015-07",
+        "year": 2015,
+        "month_num": 7,
+        "discharge_manaus_m3s": 172964.7,
+        "discharge_porto_velho_m3s": 15611.5,
+        "precip_mm": 71.0,
+        "fire_hotspots_amazon": 3190,
+        "s1_scenes": 61,
+        "nisar_scenes": 0,
+        "active_phenomena": [
+          "dry_season",
+          "clearing_land_opening"
+        ],
+        "event_id": null,
+        "basin_overlay_path": "assets/basin_monthly/amazon_2015-07.png",
+        "soil_moisture_idx": 78.3,
+        "flood_pulse_idx": 59.8,
+        "drought_fire_idx": 56.0,
+        "planet_overlay_path": "assets/planet_monthly/planet_2015-07.png",
+        "global_frozen_pct": 6.9,
+        "global_sea_ice_idx": 92.1
+      },
+      {
+        "month": "2015-08",
+        "year": 2015,
+        "month_num": 8,
+        "discharge_manaus_m3s": 128261.8,
+        "discharge_porto_velho_m3s": 11044.1,
+        "precip_mm": 26.5,
+        "fire_hotspots_amazon": 17856,
+        "s1_scenes": 70,
+        "nisar_scenes": 0,
+        "active_phenomena": [
+          "dry_season",
+          "clearing_land_opening",
+          "fire_season",
+          "low_river_levels"
+        ],
+        "event_id": null,
+        "basin_overlay_path": "assets/basin_monthly/amazon_2015-08.png",
+        "soil_moisture_idx": 68.2,
+        "flood_pulse_idx": 40.7,
+        "drought_fire_idx": 83.9,
+        "planet_overlay_path": "assets/planet_monthly/planet_2015-08.png",
+        "global_frozen_pct": 6.8,
+        "global_sea_ice_idx": 83.8
+      },
+      {
+        "month": "2015-09",
+        "year": 2015,
+        "month_num": 9,
+        "discharge_manaus_m3s": 86819.5,
+        "discharge_porto_velho_m3s": 8388.1,
+        "precip_mm": 11.5,
+        "fire_hotspots_amazon": 28321,
+        "s1_scenes": 80,
+        "nisar_scenes": 0,
+        "active_phenomena": [
+          "dry_season",
+          "clearing_land_opening",
+          "fire_season",
+          "low_river_levels"
+        ],
+        "event_id": null,
+        "basin_overlay_path": "assets/basin_monthly/amazon_2015-09.png",
+        "soil_moisture_idx": 59.7,
+        "flood_pulse_idx": 23.5,
+        "drought_fire_idx": 91.4,
+        "planet_overlay_path": "assets/planet_monthly/planet_2015-09.png",
+        "global_frozen_pct": 10.4,
+        "global_sea_ice_idx": 79.5
+      },
+      {
+        "month": "2015-10",
+        "year": 2015,
+        "month_num": 10,
+        "discharge_manaus_m3s": 60550.6,
+        "discharge_porto_velho_m3s": 8878.9,
+        "precip_mm": 50.6,
+        "fire_hotspots_amazon": 21102,
+        "s1_scenes": 75,
+        "nisar_scenes": 0,
+        "active_phenomena": [
+          "dry_season",
+          "clearing_land_opening",
+          "fire_season",
+          "low_river_levels"
+        ],
+        "event_id": null,
+        "basin_overlay_path": "assets/basin_monthly/amazon_2015-10.png",
+        "soil_moisture_idx": 48.3,
+        "flood_pulse_idx": 14.6,
+        "drought_fire_idx": 86.6,
+        "planet_overlay_path": "assets/planet_monthly/planet_2015-10.png",
+        "global_frozen_pct": 21.6,
+        "global_sea_ice_idx": 93.3
+      },
+      {
+        "month": "2015-11",
+        "year": 2015,
+        "month_num": 11,
+        "discharge_manaus_m3s": 69285.8,
+        "discharge_porto_velho_m3s": 11853.4,
+        "precip_mm": 155.3,
+        "fire_hotspots_amazon": 11209,
+        "s1_scenes": 98,
+        "nisar_scenes": 0,
+        "active_phenomena": [],
+        "event_id": "el_nino_drought_2015",
+        "basin_overlay_path": "assets/basin_monthly/amazon_2015-11.png",
+        "soil_moisture_idx": 50.1,
+        "flood_pulse_idx": 19.9,
+        "drought_fire_idx": 76.4,
+        "planet_overlay_path": "assets/planet_monthly/planet_2015-11.png",
+        "global_frozen_pct": 31.8,
+        "global_sea_ice_idx": 100.0
+      },
+      {
+        "month": "2015-12",
+        "year": 2015,
+        "month_num": 12,
+        "discharge_manaus_m3s": 79913.0,
+        "discharge_porto_velho_m3s": 14287.1,
+        "precip_mm": 206.7,
+        "fire_hotspots_amazon": 8279,
+        "s1_scenes": 93,
+        "nisar_scenes": 0,
+        "active_phenomena": [
+          "rainy_season"
+        ],
+        "event_id": null,
+        "basin_overlay_path": "assets/basin_monthly/amazon_2015-12.png",
+        "soil_moisture_idx": 51.9,
+        "flood_pulse_idx": 26.0,
+        "drought_fire_idx": 71.5,
+        "planet_overlay_path": "assets/planet_monthly/planet_2015-12.png",
+        "global_frozen_pct": 37.4,
+        "global_sea_ice_idx": 93.9
+      },
+      {
+        "month": "2016-01",
+        "year": 2016,
+        "month_num": 1,
+        "discharge_manaus_m3s": 99198.8,
+        "discharge_porto_velho_m3s": 22881.0,
+        "precip_mm": 101.7,
+        "fire_hotspots_amazon": 3050,
+        "s1_scenes": 158,
+        "nisar_scenes": 0,
+        "active_phenomena": [
+          "rainy_season"
+        ],
+        "event_id": null,
+        "basin_overlay_path": "assets/basin_monthly/amazon_2016-01.png",
+        "soil_moisture_idx": 64.9,
+        "flood_pulse_idx": 37.5,
+        "drought_fire_idx": 55.3,
+        "planet_overlay_path": "assets/planet_monthly/planet_2016-01.png",
+        "global_frozen_pct": 41.3,
+        "global_sea_ice_idx": 81.9
+      },
+      {
+        "month": "2016-02",
+        "year": 2016,
+        "month_num": 2,
+        "discharge_manaus_m3s": 100430.6,
+        "discharge_porto_velho_m3s": 35870.8,
+        "precip_mm": 316.8,
+        "fire_hotspots_amazon": 1139,
+        "s1_scenes": 112,
+        "nisar_scenes": 0,
+        "active_phenomena": [
+          "rainy_season"
+        ],
+        "event_id": null,
+        "basin_overlay_path": "assets/basin_monthly/amazon_2016-02.png",
+        "soil_moisture_idx": 68.3,
+        "flood_pulse_idx": 43.5,
+        "drought_fire_idx": 39.4,
+        "planet_overlay_path": "assets/planet_monthly/planet_2016-02.png",
+        "global_frozen_pct": 40.5,
+        "global_sea_ice_idx": 75.9
+      },
+      {
+        "month": "2016-03",
+        "year": 2016,
+        "month_num": 3,
+        "discharge_manaus_m3s": 155059.8,
+        "discharge_porto_velho_m3s": 44503.6,
+        "precip_mm": 441.2,
+        "fire_hotspots_amazon": 1732,
+        "s1_scenes": 91,
+        "nisar_scenes": 0,
+        "active_phenomena": [
+          "rainy_season",
+          "seasonal_flood"
+        ],
+        "event_id": null,
+        "basin_overlay_path": "assets/basin_monthly/amazon_2016-03.png",
+        "soil_moisture_idx": 78.8,
+        "flood_pulse_idx": 69.1,
+        "drought_fire_idx": 46.1,
+        "planet_overlay_path": "assets/planet_monthly/planet_2016-03.png",
+        "global_frozen_pct": 33.8,
+        "global_sea_ice_idx": 79.1
+      },
+      {
+        "month": "2016-04",
+        "year": 2016,
+        "month_num": 4,
+        "discharge_manaus_m3s": 195177.7,
+        "discharge_porto_velho_m3s": 33040.7,
+        "precip_mm": 385.5,
+        "fire_hotspots_amazon": 528,
+        "s1_scenes": 63,
+        "nisar_scenes": 0,
+        "active_phenomena": [
+          "rainy_season",
+          "seasonal_flood"
+        ],
+        "event_id": null,
+        "basin_overlay_path": "assets/basin_monthly/amazon_2016-04.png",
+        "soil_moisture_idx": 80.4,
+        "flood_pulse_idx": 78.8,
+        "drought_fire_idx": 26.9,
+        "planet_overlay_path": "assets/planet_monthly/planet_2016-04.png",
+        "global_frozen_pct": 24.4,
+        "global_sea_ice_idx": 80.8
+      },
+      {
+        "month": "2016-05",
+        "year": 2016,
+        "month_num": 5,
+        "discharge_manaus_m3s": 187826.5,
+        "discharge_porto_velho_m3s": 21779.6,
+        "precip_mm": 268.4,
+        "fire_hotspots_amazon": 788,
+        "s1_scenes": 101,
+        "nisar_scenes": 0,
+        "active_phenomena": [
+          "rainy_season",
+          "seasonal_flood"
+        ],
+        "event_id": null,
+        "basin_overlay_path": "assets/basin_monthly/amazon_2016-05.png",
+        "soil_moisture_idx": 78.8,
+        "flood_pulse_idx": 67.9,
+        "drought_fire_idx": 33.4,
+        "planet_overlay_path": "assets/planet_monthly/planet_2016-05.png",
+        "global_frozen_pct": 15.0,
+        "global_sea_ice_idx": 90.7
+      },
+      {
+        "month": "2016-06",
+        "year": 2016,
+        "month_num": 6,
+        "discharge_manaus_m3s": 180212.8,
+        "discharge_porto_velho_m3s": 13060.2,
+        "precip_mm": 207.7,
+        "fire_hotspots_amazon": 1879,
+        "s1_scenes": 66,
+        "nisar_scenes": 0,
+        "active_phenomena": [
+          "seasonal_flood",
+          "dry_season",
+          "clearing_land_opening"
+        ],
+        "event_id": null,
+        "basin_overlay_path": "assets/basin_monthly/amazon_2016-06.png",
+        "soil_moisture_idx": 75.0,
+        "flood_pulse_idx": 60.1,
+        "drought_fire_idx": 47.5,
+        "planet_overlay_path": "assets/planet_monthly/planet_2016-06.png",
+        "global_frozen_pct": 8.3,
+        "global_sea_ice_idx": 94.5
+      },
+      {
+        "month": "2016-07",
+        "year": 2016,
+        "month_num": 7,
+        "discharge_manaus_m3s": 158091.9,
+        "discharge_porto_velho_m3s": 8854.1,
+        "precip_mm": 43.3,
+        "fire_hotspots_amazon": 6456,
+        "s1_scenes": 148,
+        "nisar_scenes": 0,
+        "active_phenomena": [
+          "dry_season",
+          "clearing_land_opening"
+        ],
+        "event_id": null,
+        "basin_overlay_path": "assets/basin_monthly/amazon_2016-07.png",
+        "soil_moisture_idx": 67.8,
+        "flood_pulse_idx": 49.8,
+        "drought_fire_idx": 67.4,
+        "planet_overlay_path": "assets/planet_monthly/planet_2016-07.png",
+        "global_frozen_pct": 6.5,
+        "global_sea_ice_idx": 88.6
+      },
+      {
+        "month": "2016-08",
+        "year": 2016,
+        "month_num": 8,
+        "discharge_manaus_m3s": 111784.3,
+        "discharge_porto_velho_m3s": 6399.5,
+        "precip_mm": 71.1,
+        "fire_hotspots_amazon": 19074,
+        "s1_scenes": 137,
+        "nisar_scenes": 0,
+        "active_phenomena": [
+          "dry_season",
+          "clearing_land_opening",
+          "fire_season",
+          "low_river_levels"
+        ],
+        "event_id": null,
+        "basin_overlay_path": "assets/basin_monthly/amazon_2016-08.png",
+        "soil_moisture_idx": 57.5,
+        "flood_pulse_idx": 31.0,
+        "drought_fire_idx": 85.0,
+        "planet_overlay_path": "assets/planet_monthly/planet_2016-08.png",
+        "global_frozen_pct": 7.0,
+        "global_sea_ice_idx": 82.5
+      },
+      {
+        "month": "2016-09",
+        "year": 2016,
+        "month_num": 9,
+        "discharge_manaus_m3s": 86752.8,
+        "discharge_porto_velho_m3s": 5915.4,
+        "precip_mm": 203.6,
+        "fire_hotspots_amazon": 19079,
+        "s1_scenes": 252,
+        "nisar_scenes": 0,
+        "active_phenomena": [
+          "dry_season",
+          "clearing_land_opening",
+          "fire_season",
+          "low_river_levels"
+        ],
+        "event_id": null,
+        "basin_overlay_path": "assets/basin_monthly/amazon_2016-09.png",
+        "soil_moisture_idx": 58.2,
+        "flood_pulse_idx": 22.4,
+        "drought_fire_idx": 85.0,
+        "planet_overlay_path": "assets/planet_monthly/planet_2016-09.png",
+        "global_frozen_pct": 10.7,
+        "global_sea_ice_idx": 77.3
+      },
+      {
+        "month": "2016-10",
+        "year": 2016,
+        "month_num": 10,
+        "discharge_manaus_m3s": 85752.8,
+        "discharge_porto_velho_m3s": 6501.2,
+        "precip_mm": 144.0,
+        "fire_hotspots_amazon": 10201,
+        "s1_scenes": 454,
+        "nisar_scenes": 0,
+        "active_phenomena": [
+          "dry_season",
+          "clearing_land_opening",
+          "fire_season",
+          "low_river_levels"
+        ],
+        "event_id": null,
+        "basin_overlay_path": "assets/basin_monthly/amazon_2016-10.png",
+        "soil_moisture_idx": 53.3,
+        "flood_pulse_idx": 23.3,
+        "drought_fire_idx": 74.8,
+        "planet_overlay_path": "assets/planet_monthly/planet_2016-10.png",
+        "global_frozen_pct": 23.4,
+        "global_sea_ice_idx": 85.2
+      },
+      {
+        "month": "2016-11",
+        "year": 2016,
+        "month_num": 11,
+        "discharge_manaus_m3s": 92606.3,
+        "discharge_porto_velho_m3s": 11123.2,
+        "precip_mm": 138.2,
+        "fire_hotspots_amazon": 5818,
+        "s1_scenes": 417,
+        "nisar_scenes": 0,
+        "active_phenomena": [],
+        "event_id": null,
+        "basin_overlay_path": "assets/basin_monthly/amazon_2016-11.png",
+        "soil_moisture_idx": 62.5,
+        "flood_pulse_idx": 28.5,
+        "drought_fire_idx": 65.7,
+        "planet_overlay_path": "assets/planet_monthly/planet_2016-11.png",
+        "global_frozen_pct": 31.9,
+        "global_sea_ice_idx": 89.6
+      },
+      {
+        "month": "2016-12",
+        "year": 2016,
+        "month_num": 12,
+        "discharge_manaus_m3s": 108793.3,
+        "discharge_porto_velho_m3s": 17415.8,
+        "precip_mm": 398.5,
+        "fire_hotspots_amazon": 1977,
+        "s1_scenes": 463,
+        "nisar_scenes": 0,
+        "active_phenomena": [
+          "rainy_season"
+        ],
+        "event_id": null,
+        "basin_overlay_path": "assets/basin_monthly/amazon_2016-12.png",
+        "soil_moisture_idx": 72.5,
+        "flood_pulse_idx": 37.4,
+        "drought_fire_idx": 48.3,
+        "planet_overlay_path": "assets/planet_monthly/planet_2016-12.png",
+        "global_frozen_pct": 39.1,
+        "global_sea_ice_idx": 85.6
+      },
+      {
+        "month": "2017-01",
+        "year": 2017,
+        "month_num": 1,
+        "discharge_manaus_m3s": 175295.9,
+        "discharge_porto_velho_m3s": 29643.5,
+        "precip_mm": 382.8,
+        "fire_hotspots_amazon": 161,
+        "s1_scenes": 475,
+        "nisar_scenes": 0,
+        "active_phenomena": [
+          "rainy_season"
+        ],
+        "event_id": null,
+        "basin_overlay_path": "assets/basin_monthly/amazon_2017-01.png",
+        "soil_moisture_idx": 79.6,
+        "flood_pulse_idx": 68.7,
+        "drought_fire_idx": 7.7,
+        "planet_overlay_path": "assets/planet_monthly/planet_2017-01.png",
+        "global_frozen_pct": 41.6,
+        "global_sea_ice_idx": 76.2
+      },
+      {
+        "month": "2017-02",
+        "year": 2017,
+        "month_num": 2,
+        "discharge_manaus_m3s": 199061.0,
+        "discharge_porto_velho_m3s": 34498.8,
+        "precip_mm": 317.6,
+        "fire_hotspots_amazon": 60,
+        "s1_scenes": 470,
+        "nisar_scenes": 0,
+        "active_phenomena": [
+          "rainy_season"
+        ],
+        "event_id": null,
+        "basin_overlay_path": "assets/basin_monthly/amazon_2017-02.png",
+        "soil_moisture_idx": 82.3,
+        "flood_pulse_idx": 79.6,
+        "drought_fire_idx": 0.0,
+        "planet_overlay_path": "assets/planet_monthly/planet_2017-02.png",
+        "global_frozen_pct": 40.0,
+        "global_sea_ice_idx": 74.4
+      },
+      {
+        "month": "2017-03",
+        "year": 2017,
+        "month_num": 3,
+        "discharge_manaus_m3s": 215526.1,
+        "discharge_porto_velho_m3s": 41319.4,
+        "precip_mm": 314.6,
+        "fire_hotspots_amazon": 167,
+        "s1_scenes": 601,
+        "nisar_scenes": 0,
+        "active_phenomena": [
+          "rainy_season",
+          "seasonal_flood"
+        ],
+        "event_id": null,
+        "basin_overlay_path": "assets/basin_monthly/amazon_2017-03.png",
+        "soil_moisture_idx": 84.1,
+        "flood_pulse_idx": 88.8,
+        "drought_fire_idx": 8.3,
+        "planet_overlay_path": "assets/planet_monthly/planet_2017-03.png",
+        "global_frozen_pct": 35.2,
+        "global_sea_ice_idx": 75.8
+      },
+      {
+        "month": "2017-04",
+        "year": 2017,
+        "month_num": 4,
+        "discharge_manaus_m3s": 216025.9,
+        "discharge_porto_velho_m3s": 38741.3,
+        "precip_mm": 210.5,
+        "fire_hotspots_amazon": 151,
+        "s1_scenes": 564,
+        "nisar_scenes": 0,
+        "active_phenomena": [
+          "rainy_season",
+          "seasonal_flood"
+        ],
+        "event_id": null,
+        "basin_overlay_path": "assets/basin_monthly/amazon_2017-04.png",
+        "soil_moisture_idx": 84.8,
+        "flood_pulse_idx": 87.3,
+        "drought_fire_idx": 6.7,
+        "planet_overlay_path": "assets/planet_monthly/planet_2017-04.png",
+        "global_frozen_pct": 25.5,
+        "global_sea_ice_idx": 83.4
+      },
+      {
+        "month": "2017-05",
+        "year": 2017,
+        "month_num": 5,
+        "discharge_manaus_m3s": 208927.6,
+        "discharge_porto_velho_m3s": 29366.7,
+        "precip_mm": 125.0,
+        "fire_hotspots_amazon": 755,
+        "s1_scenes": 668,
+        "nisar_scenes": 0,
+        "active_phenomena": [
+          "rainy_season",
+          "seasonal_flood"
+        ],
+        "event_id": null,
+        "basin_overlay_path": "assets/basin_monthly/amazon_2017-05.png",
+        "soil_moisture_idx": 82.6,
+        "flood_pulse_idx": 79.6,
+        "drought_fire_idx": 32.7,
+        "planet_overlay_path": "assets/planet_monthly/planet_2017-05.png",
+        "global_frozen_pct": 16.0,
+        "global_sea_ice_idx": 91.5
+      },
+      {
+        "month": "2017-06",
+        "year": 2017,
+        "month_num": 6,
+        "discharge_manaus_m3s": 179361.2,
+        "discharge_porto_velho_m3s": 20566.8,
+        "precip_mm": 79.2,
+        "fire_hotspots_amazon": 1584,
+        "s1_scenes": 695,
+        "nisar_scenes": 0,
+        "active_phenomena": [
+          "seasonal_flood",
+          "dry_season",
+          "clearing_land_opening"
+        ],
+        "event_id": null,
+        "basin_overlay_path": "assets/basin_monthly/amazon_2017-06.png",
+        "soil_moisture_idx": 76.5,
+        "flood_pulse_idx": 63.9,
+        "drought_fire_idx": 44.7,
+        "planet_overlay_path": "assets/planet_monthly/planet_2017-06.png",
+        "global_frozen_pct": 8.8,
+        "global_sea_ice_idx": 94.4
+      },
+      {
+        "month": "2017-07",
+        "year": 2017,
+        "month_num": 7,
+        "discharge_manaus_m3s": 154599.1,
+        "discharge_porto_velho_m3s": 12504.2,
+        "precip_mm": 21.0,
+        "fire_hotspots_amazon": 5501,
+        "s1_scenes": 690,
+        "nisar_scenes": 0,
+        "active_phenomena": [
+          "dry_season",
+          "clearing_land_opening"
+        ],
+        "event_id": "larsen_c_a68_2017",
+        "basin_overlay_path": "assets/basin_monthly/amazon_2017-07.png",
+        "soil_moisture_idx": 65.7,
+        "flood_pulse_idx": 50.2,
+        "drought_fire_idx": 64.8,
+        "planet_overlay_path": "assets/planet_monthly/planet_2017-07.png",
+        "global_frozen_pct": 6.7,
+        "global_sea_ice_idx": 89.4
+      },
+      {
+        "month": "2017-08",
+        "year": 2017,
+        "month_num": 8,
+        "discharge_manaus_m3s": 99480.7,
+        "discharge_porto_velho_m3s": 8460.0,
+        "precip_mm": 16.5,
+        "fire_hotspots_amazon": 17760,
+        "s1_scenes": 732,
+        "nisar_scenes": 0,
+        "active_phenomena": [
+          "dry_season",
+          "clearing_land_opening",
+          "fire_season",
+          "low_river_levels"
+        ],
+        "event_id": null,
+        "basin_overlay_path": "assets/basin_monthly/amazon_2017-08.png",
+        "soil_moisture_idx": 57.8,
+        "flood_pulse_idx": 27.6,
+        "drought_fire_idx": 83.8,
+        "planet_overlay_path": "assets/planet_monthly/planet_2017-08.png",
+        "global_frozen_pct": 6.9,
+        "global_sea_ice_idx": 81.9
+      },
+      {
+        "month": "2017-09",
+        "year": 2017,
+        "month_num": 9,
+        "discharge_manaus_m3s": 76122.7,
+        "discharge_porto_velho_m3s": 7773.7,
+        "precip_mm": 67.7,
+        "fire_hotspots_amazon": 40607,
+        "s1_scenes": 710,
+        "nisar_scenes": 0,
+        "active_phenomena": [
+          "dry_season",
+          "clearing_land_opening",
+          "fire_season",
+          "low_river_levels"
+        ],
+        "event_id": null,
+        "basin_overlay_path": "assets/basin_monthly/amazon_2017-09.png",
+        "soil_moisture_idx": 49.7,
+        "flood_pulse_idx": 19.2,
+        "drought_fire_idx": 97.2,
+        "planet_overlay_path": "assets/planet_monthly/planet_2017-09.png",
+        "global_frozen_pct": 10.8,
+        "global_sea_ice_idx": 79.2
+      },
+      {
+        "month": "2017-10",
+        "year": 2017,
+        "month_num": 10,
+        "discharge_manaus_m3s": 84056.2,
+        "discharge_porto_velho_m3s": 8590.5,
+        "precip_mm": 89.7,
+        "fire_hotspots_amazon": 15706,
+        "s1_scenes": 710,
+        "nisar_scenes": 0,
+        "active_phenomena": [
+          "dry_season",
+          "clearing_land_opening",
+          "fire_season",
+          "low_river_levels"
+        ],
+        "event_id": null,
+        "basin_overlay_path": "assets/basin_monthly/amazon_2017-10.png",
+        "soil_moisture_idx": 52.9,
+        "flood_pulse_idx": 23.5,
+        "drought_fire_idx": 81.8,
+        "planet_overlay_path": "assets/planet_monthly/planet_2017-10.png",
+        "global_frozen_pct": 22.3,
+        "global_sea_ice_idx": 89.6
+      },
+      {
+        "month": "2017-11",
+        "year": 2017,
+        "month_num": 11,
+        "discharge_manaus_m3s": 98715.8,
+        "discharge_porto_velho_m3s": 12398.2,
+        "precip_mm": 99.2,
+        "fire_hotspots_amazon": 7543,
+        "s1_scenes": 690,
+        "nisar_scenes": 0,
+        "active_phenomena": [],
+        "event_id": null,
+        "basin_overlay_path": "assets/basin_monthly/amazon_2017-11.png",
+        "soil_moisture_idx": 60.4,
+        "flood_pulse_idx": 32.0,
+        "drought_fire_idx": 69.9,
+        "planet_overlay_path": "assets/planet_monthly/planet_2017-11.png",
+        "global_frozen_pct": 31.9,
+        "global_sea_ice_idx": 96.0
+      },
+      {
+        "month": "2017-12",
+        "year": 2017,
+        "month_num": 12,
+        "discharge_manaus_m3s": 117641.0,
+        "discharge_porto_velho_m3s": 22349.5,
+        "precip_mm": 303.1,
+        "fire_hotspots_amazon": 4497,
+        "s1_scenes": 714,
+        "nisar_scenes": 0,
+        "active_phenomena": [
+          "rainy_season"
+        ],
+        "event_id": null,
+        "basin_overlay_path": "assets/basin_monthly/amazon_2017-12.png",
+        "soil_moisture_idx": 70.4,
+        "flood_pulse_idx": 43.8,
+        "drought_fire_idx": 61.6,
+        "planet_overlay_path": "assets/planet_monthly/planet_2017-12.png",
+        "global_frozen_pct": 37.7,
+        "global_sea_ice_idx": 90.7
+      },
+      {
+        "month": "2018-01",
+        "year": 2018,
+        "month_num": 1,
+        "discharge_manaus_m3s": 139440.5,
+        "discharge_porto_velho_m3s": 42018.7,
+        "precip_mm": 245.6,
+        "fire_hotspots_amazon": 521,
+        "s1_scenes": 672,
+        "nisar_scenes": 0,
+        "active_phenomena": [
+          "rainy_season"
+        ],
+        "event_id": null,
+        "basin_overlay_path": "assets/basin_monthly/amazon_2018-01.png",
+        "soil_moisture_idx": 79.4,
+        "flood_pulse_idx": 59.1,
+        "drought_fire_idx": 26.7,
+        "planet_overlay_path": "assets/planet_monthly/planet_2018-01.png",
+        "global_frozen_pct": 41.1,
+        "global_sea_ice_idx": 79.5
+      },
+      {
+        "month": "2018-02",
+        "year": 2018,
+        "month_num": 2,
+        "discharge_manaus_m3s": 152629.2,
+        "discharge_porto_velho_m3s": 50636.9,
+        "precip_mm": 142.9,
+        "fire_hotspots_amazon": 412,
+        "s1_scenes": 672,
+        "nisar_scenes": 0,
+        "active_phenomena": [
+          "rainy_season"
+        ],
+        "event_id": null,
+        "basin_overlay_path": "assets/basin_monthly/amazon_2018-02.png",
+        "soil_moisture_idx": 80.5,
+        "flood_pulse_idx": 67.5,
+        "drought_fire_idx": 22.9,
+        "planet_overlay_path": "assets/planet_monthly/planet_2018-02.png",
+        "global_frozen_pct": 41.1,
+        "global_sea_ice_idx": 73.8
+      },
+      {
+        "month": "2018-03",
+        "year": 2018,
+        "month_num": 3,
+        "discharge_manaus_m3s": 150032.4,
+        "discharge_porto_velho_m3s": 51446.3,
+        "precip_mm": 218.0,
+        "fire_hotspots_amazon": 632,
+        "s1_scenes": 687,
+        "nisar_scenes": 0,
+        "active_phenomena": [
+          "rainy_season",
+          "seasonal_flood"
+        ],
+        "event_id": null,
+        "basin_overlay_path": "assets/basin_monthly/amazon_2018-03.png",
+        "soil_moisture_idx": 79.1,
+        "flood_pulse_idx": 67.9,
+        "drought_fire_idx": 29.8,
+        "planet_overlay_path": "assets/planet_monthly/planet_2018-03.png",
+        "global_frozen_pct": 37.2,
+        "global_sea_ice_idx": 79.1
+      },
+      {
+        "month": "2018-04",
+        "year": 2018,
+        "month_num": 4,
+        "discharge_manaus_m3s": 180011.3,
+        "discharge_porto_velho_m3s": 39402.9,
+        "precip_mm": 307.9,
+        "fire_hotspots_amazon": 202,
+        "s1_scenes": 691,
+        "nisar_scenes": 0,
+        "active_phenomena": [
+          "rainy_season",
+          "seasonal_flood"
+        ],
+        "event_id": null,
+        "basin_overlay_path": "assets/basin_monthly/amazon_2018-04.png",
+        "soil_moisture_idx": 85.1,
+        "flood_pulse_idx": 75.7,
+        "drought_fire_idx": 11.4,
+        "planet_overlay_path": "assets/planet_monthly/planet_2018-04.png",
+        "global_frozen_pct": 24.3,
+        "global_sea_ice_idx": 85.9
+      },
+      {
+        "month": "2018-05",
+        "year": 2018,
+        "month_num": 5,
+        "discharge_manaus_m3s": 219557.2,
+        "discharge_porto_velho_m3s": 24666.6,
+        "precip_mm": 220.9,
+        "fire_hotspots_amazon": 792,
+        "s1_scenes": 682,
+        "nisar_scenes": 0,
+        "active_phenomena": [
+          "rainy_season",
+          "seasonal_flood"
+        ],
+        "event_id": null,
+        "basin_overlay_path": "assets/basin_monthly/amazon_2018-05.png",
+        "soil_moisture_idx": 83.5,
+        "flood_pulse_idx": 81.7,
+        "drought_fire_idx": 33.5,
+        "planet_overlay_path": "assets/planet_monthly/planet_2018-05.png",
+        "global_frozen_pct": 16.6,
+        "global_sea_ice_idx": 90.3
+      },
+      {
+        "month": "2018-06",
+        "year": 2018,
+        "month_num": 6,
+        "discharge_manaus_m3s": 214809.0,
+        "discharge_porto_velho_m3s": 15828.6,
+        "precip_mm": 92.8,
+        "fire_hotspots_amazon": 1714,
+        "s1_scenes": 654,
+        "nisar_scenes": 0,
+        "active_phenomena": [
+          "seasonal_flood",
+          "dry_season",
+          "clearing_land_opening"
+        ],
+        "event_id": null,
+        "basin_overlay_path": "assets/basin_monthly/amazon_2018-06.png",
+        "soil_moisture_idx": 79.7,
+        "flood_pulse_idx": 75.5,
+        "drought_fire_idx": 46.0,
+        "planet_overlay_path": "assets/planet_monthly/planet_2018-06.png",
+        "global_frozen_pct": 8.4,
+        "global_sea_ice_idx": 93.9
+      },
+      {
+        "month": "2018-07",
+        "year": 2018,
+        "month_num": 7,
+        "discharge_manaus_m3s": 155111.6,
+        "discharge_porto_velho_m3s": 9059.3,
+        "precip_mm": 63.4,
+        "fire_hotspots_amazon": 3708,
+        "s1_scenes": 654,
+        "nisar_scenes": 0,
+        "active_phenomena": [
+          "dry_season",
+          "clearing_land_opening"
+        ],
+        "event_id": null,
+        "basin_overlay_path": "assets/basin_monthly/amazon_2018-07.png",
+        "soil_moisture_idx": 68.6,
+        "flood_pulse_idx": 48.7,
+        "drought_fire_idx": 58.5,
+        "planet_overlay_path": "assets/planet_monthly/planet_2018-07.png",
+        "global_frozen_pct": 6.3,
+        "global_sea_ice_idx": 90.3
+      },
+      {
+        "month": "2018-08",
+        "year": 2018,
+        "month_num": 8,
+        "discharge_manaus_m3s": 125588.1,
+        "discharge_porto_velho_m3s": 8814.2,
+        "precip_mm": 52.2,
+        "fire_hotspots_amazon": 8036,
+        "s1_scenes": 675,
+        "nisar_scenes": 0,
+        "active_phenomena": [
+          "dry_season",
+          "clearing_land_opening",
+          "fire_season",
+          "low_river_levels"
+        ],
+        "event_id": null,
+        "basin_overlay_path": "assets/basin_monthly/amazon_2018-08.png",
+        "soil_moisture_idx": 67.3,
+        "flood_pulse_idx": 37.7,
+        "drought_fire_idx": 71.0,
+        "planet_overlay_path": "assets/planet_monthly/planet_2018-08.png",
+        "global_frozen_pct": 6.2,
+        "global_sea_ice_idx": 81.5
+      },
+      {
+        "month": "2018-09",
+        "year": 2018,
+        "month_num": 9,
+        "discharge_manaus_m3s": 101087.3,
+        "discharge_porto_velho_m3s": 6836.0,
+        "precip_mm": 45.6,
+        "fire_hotspots_amazon": 16941,
+        "s1_scenes": 702,
+        "nisar_scenes": 0,
+        "active_phenomena": [
+          "dry_season",
+          "clearing_land_opening",
+          "fire_season",
+          "low_river_levels"
+        ],
+        "event_id": null,
+        "basin_overlay_path": "assets/basin_monthly/amazon_2018-09.png",
+        "soil_moisture_idx": 58.4,
+        "flood_pulse_idx": 28.1,
+        "drought_fire_idx": 83.0,
+        "planet_overlay_path": "assets/planet_monthly/planet_2018-09.png",
+        "global_frozen_pct": 12.3,
+        "global_sea_ice_idx": 79.0
+      },
+      {
+        "month": "2018-10",
+        "year": 2018,
+        "month_num": 10,
+        "discharge_manaus_m3s": 80235.0,
+        "discharge_porto_velho_m3s": 8259.6,
+        "precip_mm": 63.5,
+        "fire_hotspots_amazon": 7147,
+        "s1_scenes": 692,
+        "nisar_scenes": 0,
+        "active_phenomena": [
+          "dry_season",
+          "clearing_land_opening",
+          "fire_season",
+          "low_river_levels"
+        ],
+        "event_id": null,
+        "basin_overlay_path": "assets/basin_monthly/amazon_2018-10.png",
+        "soil_moisture_idx": 53.1,
+        "flood_pulse_idx": 22.0,
+        "drought_fire_idx": 69.1,
+        "planet_overlay_path": "assets/planet_monthly/planet_2018-10.png",
+        "global_frozen_pct": 21.6,
+        "global_sea_ice_idx": 85.1
+      },
+      {
+        "month": "2018-11",
+        "year": 2018,
+        "month_num": 11,
+        "discharge_manaus_m3s": 97294.0,
+        "discharge_porto_velho_m3s": 16648.7,
+        "precip_mm": 242.9,
+        "fire_hotspots_amazon": 4306,
+        "s1_scenes": 740,
+        "nisar_scenes": 0,
+        "active_phenomena": [],
+        "event_id": null,
+        "basin_overlay_path": "assets/basin_monthly/amazon_2018-11.png",
+        "soil_moisture_idx": 61.3,
+        "flood_pulse_idx": 34.0,
+        "drought_fire_idx": 60.9,
+        "planet_overlay_path": "assets/planet_monthly/planet_2018-11.png",
+        "global_frozen_pct": 32.3,
+        "global_sea_ice_idx": 97.7
+      },
+      {
+        "month": "2018-12",
+        "year": 2018,
+        "month_num": 12,
+        "discharge_manaus_m3s": 141616.6,
+        "discharge_porto_velho_m3s": 34785.2,
+        "precip_mm": 279.5,
+        "fire_hotspots_amazon": 705,
+        "s1_scenes": 788,
+        "nisar_scenes": 0,
+        "active_phenomena": [
+          "rainy_season"
+        ],
+        "event_id": null,
+        "basin_overlay_path": "assets/basin_monthly/amazon_2018-12.png",
+        "soil_moisture_idx": 76.2,
+        "flood_pulse_idx": 58.3,
+        "drought_fire_idx": 31.6,
+        "planet_overlay_path": "assets/planet_monthly/planet_2018-12.png",
+        "global_frozen_pct": 38.6,
+        "global_sea_ice_idx": 90.7
+      },
+      {
+        "month": "2019-01",
+        "year": 2019,
+        "month_num": 1,
+        "discharge_manaus_m3s": 158271.2,
+        "discharge_porto_velho_m3s": 42745.6,
+        "precip_mm": 273.3,
+        "fire_hotspots_amazon": 434,
+        "s1_scenes": 737,
+        "nisar_scenes": 0,
+        "active_phenomena": [
+          "rainy_season"
+        ],
+        "event_id": null,
+        "basin_overlay_path": "assets/basin_monthly/amazon_2019-01.png",
+        "soil_moisture_idx": 78.0,
+        "flood_pulse_idx": 67.6,
+        "drought_fire_idx": 23.8,
+        "planet_overlay_path": "assets/planet_monthly/planet_2019-01.png",
+        "global_frozen_pct": 41.3,
+        "global_sea_ice_idx": 78.6
+      },
+      {
+        "month": "2019-02",
+        "year": 2019,
+        "month_num": 2,
+        "discharge_manaus_m3s": 197418.0,
+        "discharge_porto_velho_m3s": 50396.0,
+        "precip_mm": 235.4,
+        "fire_hotspots_amazon": 484,
+        "s1_scenes": 667,
+        "nisar_scenes": 0,
+        "active_phenomena": [
+          "rainy_season"
+        ],
+        "event_id": null,
+        "basin_overlay_path": "assets/basin_monthly/amazon_2019-02.png",
+        "soil_moisture_idx": 80.5,
+        "flood_pulse_idx": 87.6,
+        "drought_fire_idx": 25.5,
+        "planet_overlay_path": "assets/planet_monthly/planet_2019-02.png",
+        "global_frozen_pct": 40.1,
+        "global_sea_ice_idx": 76.5
+      },
+      {
+        "month": "2019-03",
+        "year": 2019,
+        "month_num": 3,
+        "discharge_manaus_m3s": 188188.9,
+        "discharge_porto_velho_m3s": 48706.6,
+        "precip_mm": 157.6,
+        "fire_hotspots_amazon": 3250,
+        "s1_scenes": 772,
+        "nisar_scenes": 0,
+        "active_phenomena": [
+          "rainy_season",
+          "seasonal_flood"
+        ],
+        "event_id": null,
+        "basin_overlay_path": "assets/basin_monthly/amazon_2019-03.png",
+        "soil_moisture_idx": 80.6,
+        "flood_pulse_idx": 84.0,
+        "drought_fire_idx": 56.3,
+        "planet_overlay_path": "assets/planet_monthly/planet_2019-03.png",
+        "global_frozen_pct": 34.7,
+        "global_sea_ice_idx": 78.4
+      },
+      {
+        "month": "2019-04",
+        "year": 2019,
+        "month_num": 4,
+        "discharge_manaus_m3s": 197720.8,
+        "discharge_porto_velho_m3s": 40363.0,
+        "precip_mm": 235.2,
+        "fire_hotspots_amazon": 1320,
+        "s1_scenes": 710,
+        "nisar_scenes": 0,
+        "active_phenomena": [
+          "rainy_season",
+          "seasonal_flood"
+        ],
+        "event_id": null,
+        "basin_overlay_path": "assets/basin_monthly/amazon_2019-04.png",
+        "soil_moisture_idx": 81.0,
+        "flood_pulse_idx": 83.5,
+        "drought_fire_idx": 41.7,
+        "planet_overlay_path": "assets/planet_monthly/planet_2019-04.png",
+        "global_frozen_pct": 25.0,
+        "global_sea_ice_idx": 84.6
+      },
+      {
+        "month": "2019-05",
+        "year": 2019,
+        "month_num": 5,
+        "discharge_manaus_m3s": 214224.2,
+        "discharge_porto_velho_m3s": 30165.5,
+        "precip_mm": 287.6,
+        "fire_hotspots_amazon": 959,
+        "s1_scenes": 711,
+        "nisar_scenes": 0,
+        "active_phenomena": [
+          "rainy_season",
+          "seasonal_flood"
+        ],
+        "event_id": null,
+        "basin_overlay_path": "assets/basin_monthly/amazon_2019-05.png",
+        "soil_moisture_idx": 84.3,
+        "flood_pulse_idx": 81.5,
+        "drought_fire_idx": 36.6,
+        "planet_overlay_path": "assets/planet_monthly/planet_2019-05.png",
+        "global_frozen_pct": 16.2,
+        "global_sea_ice_idx": 88.8
+      },
+      {
+        "month": "2019-06",
+        "year": 2019,
+        "month_num": 6,
+        "discharge_manaus_m3s": 206860.8,
+        "discharge_porto_velho_m3s": 17160.2,
+        "precip_mm": 159.8,
+        "fire_hotspots_amazon": 2192,
+        "s1_scenes": 676,
+        "nisar_scenes": 0,
+        "active_phenomena": [
+          "seasonal_flood",
+          "dry_season",
+          "clearing_land_opening"
+        ],
+        "event_id": null,
+        "basin_overlay_path": "assets/basin_monthly/amazon_2019-06.png",
+        "soil_moisture_idx": 78.1,
+        "flood_pulse_idx": 71.6,
+        "drought_fire_idx": 50.0,
+        "planet_overlay_path": "assets/planet_monthly/planet_2019-06.png",
+        "global_frozen_pct": 8.2,
+        "global_sea_ice_idx": 92.5
+      },
+      {
+        "month": "2019-07",
+        "year": 2019,
+        "month_num": 7,
+        "discharge_manaus_m3s": 177068.1,
+        "discharge_porto_velho_m3s": 10811.3,
+        "precip_mm": 97.8,
+        "fire_hotspots_amazon": 5055,
+        "s1_scenes": 695,
+        "nisar_scenes": 0,
+        "active_phenomena": [
+          "dry_season",
+          "clearing_land_opening"
+        ],
+        "event_id": null,
+        "basin_overlay_path": "assets/basin_monthly/amazon_2019-07.png",
+        "soil_moisture_idx": 67.7,
+        "flood_pulse_idx": 58.1,
+        "drought_fire_idx": 63.5,
+        "planet_overlay_path": "assets/planet_monthly/planet_2019-07.png",
+        "global_frozen_pct": 11.7,
+        "global_sea_ice_idx": 88.1
+      },
+      {
+        "month": "2019-08",
+        "year": 2019,
+        "month_num": 8,
+        "discharge_manaus_m3s": 128969.5,
+        "discharge_porto_velho_m3s": 8385.9,
+        "precip_mm": 53.8,
+        "fire_hotspots_amazon": 26974,
+        "s1_scenes": 791,
+        "nisar_scenes": 0,
+        "active_phenomena": [
+          "dry_season",
+          "clearing_land_opening",
+          "fire_season",
+          "low_river_levels"
+        ],
+        "event_id": "amazon_fire_surge_2019",
+        "basin_overlay_path": "assets/basin_monthly/amazon_2019-08.png",
+        "soil_moisture_idx": 57.6,
+        "flood_pulse_idx": 38.5,
+        "drought_fire_idx": 90.6,
+        "planet_overlay_path": "assets/planet_monthly/planet_2019-08.png",
+        "global_frozen_pct": 6.6,
+        "global_sea_ice_idx": 78.8
+      },
+      {
+        "month": "2019-09",
+        "year": 2019,
+        "month_num": 9,
+        "discharge_manaus_m3s": 87372.6,
+        "discharge_porto_velho_m3s": 6154.5,
+        "precip_mm": 103.0,
+        "fire_hotspots_amazon": 25013,
+        "s1_scenes": 782,
+        "nisar_scenes": 0,
+        "active_phenomena": [
+          "dry_season",
+          "clearing_land_opening",
+          "fire_season",
+          "low_river_levels"
+        ],
+        "event_id": null,
+        "basin_overlay_path": "assets/basin_monthly/amazon_2019-09.png",
+        "soil_moisture_idx": 49.4,
+        "flood_pulse_idx": 22.2,
+        "drought_fire_idx": 89.3,
+        "planet_overlay_path": "assets/planet_monthly/planet_2019-09.png",
+        "global_frozen_pct": 10.4,
+        "global_sea_ice_idx": 77.2
+      },
+      {
+        "month": "2019-10",
+        "year": 2019,
+        "month_num": 10,
+        "discharge_manaus_m3s": 79691.7,
+        "discharge_porto_velho_m3s": 8020.3,
+        "precip_mm": 119.8,
+        "fire_hotspots_amazon": 6880,
+        "s1_scenes": 797,
+        "nisar_scenes": 0,
+        "active_phenomena": [
+          "dry_season",
+          "clearing_land_opening",
+          "fire_season",
+          "low_river_levels"
+        ],
+        "event_id": null,
+        "basin_overlay_path": "assets/basin_monthly/amazon_2019-10.png",
+        "soil_moisture_idx": 56.8,
+        "flood_pulse_idx": 21.0,
+        "drought_fire_idx": 68.5,
+        "planet_overlay_path": "assets/planet_monthly/planet_2019-10.png",
+        "global_frozen_pct": 21.0,
+        "global_sea_ice_idx": 83.3
+      },
+      {
+        "month": "2019-11",
+        "year": 2019,
+        "month_num": 11,
+        "discharge_manaus_m3s": 103841.1,
+        "discharge_porto_velho_m3s": 10183.1,
+        "precip_mm": 158.5,
+        "fire_hotspots_amazon": 5535,
+        "s1_scenes": 822,
+        "nisar_scenes": 0,
+        "active_phenomena": [],
+        "event_id": null,
+        "basin_overlay_path": "assets/basin_monthly/amazon_2019-11.png",
+        "soil_moisture_idx": 64.2,
+        "flood_pulse_idx": 32.7,
+        "drought_fire_idx": 64.9,
+        "planet_overlay_path": "assets/planet_monthly/planet_2019-11.png",
+        "global_frozen_pct": 31.4,
+        "global_sea_ice_idx": 96.5
+      },
+      {
+        "month": "2019-12",
+        "year": 2019,
+        "month_num": 12,
+        "discharge_manaus_m3s": 143963.7,
+        "discharge_porto_velho_m3s": 21886.6,
+        "precip_mm": 263.8,
+        "fire_hotspots_amazon": 1431,
+        "s1_scenes": 838,
+        "nisar_scenes": 0,
+        "active_phenomena": [
+          "rainy_season"
+        ],
+        "event_id": null,
+        "basin_overlay_path": "assets/basin_monthly/amazon_2019-12.png",
+        "soil_moisture_idx": 75.4,
+        "flood_pulse_idx": 54.2,
+        "drought_fire_idx": 43.1,
+        "planet_overlay_path": "assets/planet_monthly/planet_2019-12.png",
+        "global_frozen_pct": 37.7,
+        "global_sea_ice_idx": 91.7
+      },
       {
         "month": "2020-01",
         "year": 2020,
@@ -327,11 +1787,11 @@
         "event_id": "aus_fires_2020",
         "basin_overlay_path": "assets/basin_monthly/amazon_2020-01.png",
         "soil_moisture_idx": 75.2,
-        "flood_pulse_idx": 71.6,
+        "flood_pulse_idx": 67.7,
         "drought_fire_idx": 13.0,
         "planet_overlay_path": "assets/planet_monthly/planet_2020-01.png",
         "global_frozen_pct": 40.7,
-        "global_sea_ice_idx": 82.7
+        "global_sea_ice_idx": 82.0
       },
       {
         "month": "2020-02",
@@ -349,11 +1809,11 @@
         "event_id": null,
         "basin_overlay_path": "assets/basin_monthly/amazon_2020-02.png",
         "soil_moisture_idx": 77.0,
-        "flood_pulse_idx": 61.8,
+        "flood_pulse_idx": 57.6,
         "drought_fire_idx": 4.1,
         "planet_overlay_path": "assets/planet_monthly/planet_2020-02.png",
         "global_frozen_pct": 39.4,
-        "global_sea_ice_idx": 79.6
+        "global_sea_ice_idx": 78.9
       },
       {
         "month": "2020-03",
@@ -372,11 +1832,11 @@
         "event_id": null,
         "basin_overlay_path": "assets/basin_monthly/amazon_2020-03.png",
         "soil_moisture_idx": 78.6,
-        "flood_pulse_idx": 63.9,
+        "flood_pulse_idx": 60.0,
         "drought_fire_idx": 21.5,
         "planet_overlay_path": "assets/planet_monthly/planet_2020-03.png",
         "global_frozen_pct": 32.8,
-        "global_sea_ice_idx": 83.2
+        "global_sea_ice_idx": 82.5
       },
       {
         "month": "2020-04",
@@ -395,11 +1855,11 @@
         "event_id": null,
         "basin_overlay_path": "assets/basin_monthly/amazon_2020-04.png",
         "soil_moisture_idx": 80.6,
-        "flood_pulse_idx": 70.6,
+        "flood_pulse_idx": 67.4,
         "drought_fire_idx": 10.4,
         "planet_overlay_path": "assets/planet_monthly/planet_2020-04.png",
         "global_frozen_pct": 22.5,
-        "global_sea_ice_idx": 87.9
+        "global_sea_ice_idx": 87.1
       },
       {
         "month": "2020-05",
@@ -418,11 +1878,11 @@
         "event_id": null,
         "basin_overlay_path": "assets/basin_monthly/amazon_2020-05.png",
         "soil_moisture_idx": 83.3,
-        "flood_pulse_idx": 68.3,
+        "flood_pulse_idx": 66.4,
         "drought_fire_idx": 30.7,
         "planet_overlay_path": "assets/planet_monthly/planet_2020-05.png",
         "global_frozen_pct": 15.9,
-        "global_sea_ice_idx": 92.4
+        "global_sea_ice_idx": 91.6
       },
       {
         "month": "2020-06",
@@ -442,11 +1902,11 @@
         "event_id": null,
         "basin_overlay_path": "assets/basin_monthly/amazon_2020-06.png",
         "soil_moisture_idx": 79.0,
-        "flood_pulse_idx": 57.2,
+        "flood_pulse_idx": 56.2,
         "drought_fire_idx": 51.5,
         "planet_overlay_path": "assets/planet_monthly/planet_2020-06.png",
         "global_frozen_pct": 8.8,
-        "global_sea_ice_idx": 96.2
+        "global_sea_ice_idx": 95.4
       },
       {
         "month": "2020-07",
@@ -465,11 +1925,11 @@
         "event_id": null,
         "basin_overlay_path": "assets/basin_monthly/amazon_2020-07.png",
         "soil_moisture_idx": 74.2,
-        "flood_pulse_idx": 46.8,
+        "flood_pulse_idx": 46.2,
         "drought_fire_idx": 63.1,
         "planet_overlay_path": "assets/planet_monthly/planet_2020-07.png",
         "global_frozen_pct": 7.1,
-        "global_sea_ice_idx": 86.4
+        "global_sea_ice_idx": 85.6
       },
       {
         "month": "2020-08",
@@ -487,14 +1947,14 @@
           "fire_season",
           "low_river_levels"
         ],
-        "event_id": null,
+        "event_id": "mauritius_spill_2020",
         "basin_overlay_path": "assets/basin_monthly/amazon_2020-08.png",
         "soil_moisture_idx": 64.0,
-        "flood_pulse_idx": 28.7,
+        "flood_pulse_idx": 28.2,
         "drought_fire_idx": 83.0,
         "planet_overlay_path": "assets/planet_monthly/planet_2020-08.png",
         "global_frozen_pct": 6.8,
-        "global_sea_ice_idx": 80.3
+        "global_sea_ice_idx": 79.6
       },
       {
         "month": "2020-09",
@@ -515,11 +1975,11 @@
         "event_id": null,
         "basin_overlay_path": "assets/basin_monthly/amazon_2020-09.png",
         "soil_moisture_idx": 60.0,
-        "flood_pulse_idx": 17.2,
+        "flood_pulse_idx": 16.8,
         "drought_fire_idx": 94.1,
         "planet_overlay_path": "assets/planet_monthly/planet_2020-09.png",
         "global_frozen_pct": 10.5,
-        "global_sea_ice_idx": 78.6
+        "global_sea_ice_idx": 77.9
       },
       {
         "month": "2020-10",
@@ -540,11 +2000,11 @@
         "event_id": null,
         "basin_overlay_path": "assets/basin_monthly/amazon_2020-10.png",
         "soil_moisture_idx": 56.6,
-        "flood_pulse_idx": 14.6,
+        "flood_pulse_idx": 14.4,
         "drought_fire_idx": 81.7,
         "planet_overlay_path": "assets/planet_monthly/planet_2020-10.png",
         "global_frozen_pct": 21.1,
-        "global_sea_ice_idx": 83.0
+        "global_sea_ice_idx": 82.3
       },
       {
         "month": "2020-11",
@@ -560,11 +2020,11 @@
         "event_id": null,
         "basin_overlay_path": "assets/basin_monthly/amazon_2020-11.png",
         "soil_moisture_idx": 62.4,
-        "flood_pulse_idx": 17.7,
+        "flood_pulse_idx": 17.2,
         "drought_fire_idx": 56.8,
         "planet_overlay_path": "assets/planet_monthly/planet_2020-11.png",
         "global_frozen_pct": 29.4,
-        "global_sea_ice_idx": 97.1
+        "global_sea_ice_idx": 96.2
       },
       {
         "month": "2020-12",
@@ -582,11 +2042,11 @@
         "event_id": null,
         "basin_overlay_path": "assets/basin_monthly/amazon_2020-12.png",
         "soil_moisture_idx": 71.3,
-        "flood_pulse_idx": 37.0,
+        "flood_pulse_idx": 35.9,
         "drought_fire_idx": 43.5,
         "planet_overlay_path": "assets/planet_monthly/planet_2020-12.png",
         "global_frozen_pct": 40.2,
-        "global_sea_ice_idx": 95.1
+        "global_sea_ice_idx": 94.2
       },
       {
         "month": "2021-01",
@@ -604,11 +2064,11 @@
         "event_id": null,
         "basin_overlay_path": "assets/basin_monthly/amazon_2021-01.png",
         "soil_moisture_idx": 79.9,
-        "flood_pulse_idx": 62.1,
+        "flood_pulse_idx": 59.0,
         "drought_fire_idx": 12.4,
         "planet_overlay_path": "assets/planet_monthly/planet_2021-01.png",
         "global_frozen_pct": 41.8,
-        "global_sea_ice_idx": 83.0
+        "global_sea_ice_idx": 82.3
       },
       {
         "month": "2021-02",
@@ -626,11 +2086,11 @@
         "event_id": null,
         "basin_overlay_path": "assets/basin_monthly/amazon_2021-02.png",
         "soil_moisture_idx": 83.6,
-        "flood_pulse_idx": 73.0,
+        "flood_pulse_idx": 68.6,
         "drought_fire_idx": 4.2,
         "planet_overlay_path": "assets/planet_monthly/planet_2021-02.png",
         "global_frozen_pct": 41.5,
-        "global_sea_ice_idx": 80.3
+        "global_sea_ice_idx": 79.6
       },
       {
         "month": "2021-03",
@@ -649,11 +2109,11 @@
         "event_id": null,
         "basin_overlay_path": "assets/basin_monthly/amazon_2021-03.png",
         "soil_moisture_idx": 86.6,
-        "flood_pulse_idx": 80.7,
+        "flood_pulse_idx": 76.5,
         "drought_fire_idx": 2.4,
         "planet_overlay_path": "assets/planet_monthly/planet_2021-03.png",
         "global_frozen_pct": 34.9,
-        "global_sea_ice_idx": 84.2
+        "global_sea_ice_idx": 83.5
       },
       {
         "month": "2021-04",
@@ -672,11 +2132,11 @@
         "event_id": null,
         "basin_overlay_path": "assets/basin_monthly/amazon_2021-04.png",
         "soil_moisture_idx": 86.1,
-        "flood_pulse_idx": 93.1,
+        "flood_pulse_idx": 89.1,
         "drought_fire_idx": 7.0,
         "planet_overlay_path": "assets/planet_monthly/planet_2021-04.png",
         "global_frozen_pct": 23.2,
-        "global_sea_ice_idx": 90.8
+        "global_sea_ice_idx": 90.0
       },
       {
         "month": "2021-05",
@@ -695,11 +2155,11 @@
         "event_id": null,
         "basin_overlay_path": "assets/basin_monthly/amazon_2021-05.png",
         "soil_moisture_idx": 83.1,
-        "flood_pulse_idx": 82.6,
+        "flood_pulse_idx": 80.4,
         "drought_fire_idx": 40.3,
         "planet_overlay_path": "assets/planet_monthly/planet_2021-05.png",
         "global_frozen_pct": 15.5,
-        "global_sea_ice_idx": 95.7
+        "global_sea_ice_idx": 94.8
       },
       {
         "month": "2021-06",
@@ -719,11 +2179,11 @@
         "event_id": "manaus_flood_2021",
         "basin_overlay_path": "assets/basin_monthly/amazon_2021-06.png",
         "soil_moisture_idx": 79.9,
-        "flood_pulse_idx": 68.8,
+        "flood_pulse_idx": 67.7,
         "drought_fire_idx": 54.0,
         "planet_overlay_path": "assets/planet_monthly/planet_2021-06.png",
         "global_frozen_pct": 8.3,
-        "global_sea_ice_idx": 97.3
+        "global_sea_ice_idx": 96.4
       },
       {
         "month": "2021-07",
@@ -742,11 +2202,11 @@
         "event_id": null,
         "basin_overlay_path": "assets/basin_monthly/amazon_2021-07.png",
         "soil_moisture_idx": 73.3,
-        "flood_pulse_idx": 48.6,
+        "flood_pulse_idx": 48.0,
         "drought_fire_idx": 61.9,
         "planet_overlay_path": "assets/planet_monthly/planet_2021-07.png",
         "global_frozen_pct": 6.4,
-        "global_sea_ice_idx": 90.7
+        "global_sea_ice_idx": 89.9
       },
       {
         "month": "2021-08",
@@ -767,11 +2227,11 @@
         "event_id": null,
         "basin_overlay_path": "assets/basin_monthly/amazon_2021-08.png",
         "soil_moisture_idx": 64.5,
-        "flood_pulse_idx": 29.5,
+        "flood_pulse_idx": 29.2,
         "drought_fire_idx": 91.1,
         "planet_overlay_path": "assets/planet_monthly/planet_2021-08.png",
         "global_frozen_pct": 6.7,
-        "global_sea_ice_idx": 86.0
+        "global_sea_ice_idx": 85.2
       },
       {
         "month": "2021-09",
@@ -792,11 +2252,11 @@
         "event_id": null,
         "basin_overlay_path": "assets/basin_monthly/amazon_2021-09.png",
         "soil_moisture_idx": 63.0,
-        "flood_pulse_idx": 20.0,
+        "flood_pulse_idx": 19.8,
         "drought_fire_idx": 82.6,
         "planet_overlay_path": "assets/planet_monthly/planet_2021-09.png",
         "global_frozen_pct": 9.8,
-        "global_sea_ice_idx": 82.1
+        "global_sea_ice_idx": 81.4
       },
       {
         "month": "2021-10",
@@ -814,14 +2274,14 @@
           "fire_season",
           "low_river_levels"
         ],
-        "event_id": null,
+        "event_id": "lapalma_volcano_2021",
         "basin_overlay_path": "assets/basin_monthly/amazon_2021-10.png",
         "soil_moisture_idx": 59.9,
-        "flood_pulse_idx": 19.4,
+        "flood_pulse_idx": 19.1,
         "drought_fire_idx": 69.9,
         "planet_overlay_path": "assets/planet_monthly/planet_2021-10.png",
         "global_frozen_pct": 21.2,
-        "global_sea_ice_idx": 89.3
+        "global_sea_ice_idx": 88.5
       },
       {
         "month": "2021-11",
@@ -837,11 +2297,11 @@
         "event_id": null,
         "basin_overlay_path": "assets/basin_monthly/amazon_2021-11.png",
         "soil_moisture_idx": 73.7,
-        "flood_pulse_idx": 28.8,
+        "flood_pulse_idx": 28.0,
         "drought_fire_idx": 48.9,
         "planet_overlay_path": "assets/planet_monthly/planet_2021-11.png",
         "global_frozen_pct": 31.6,
-        "global_sea_ice_idx": 100.0
+        "global_sea_ice_idx": 99.1
       },
       {
         "month": "2021-12",
@@ -859,11 +2319,11 @@
         "event_id": null,
         "basin_overlay_path": "assets/basin_monthly/amazon_2021-12.png",
         "soil_moisture_idx": 79.2,
-        "flood_pulse_idx": 47.7,
+        "flood_pulse_idx": 45.3,
         "drought_fire_idx": 22.0,
         "planet_overlay_path": "assets/planet_monthly/planet_2021-12.png",
         "global_frozen_pct": 38.2,
-        "global_sea_ice_idx": 92.9
+        "global_sea_ice_idx": 92.0
       },
       {
         "month": "2022-01",
@@ -881,11 +2341,11 @@
         "event_id": null,
         "basin_overlay_path": "assets/basin_monthly/amazon_2022-01.png",
         "soil_moisture_idx": 81.9,
-        "flood_pulse_idx": 48.8,
+        "flood_pulse_idx": 45.9,
         "drought_fire_idx": 21.9,
         "planet_overlay_path": "assets/planet_monthly/planet_2022-01.png",
         "global_frozen_pct": 40.5,
-        "global_sea_ice_idx": 82.3
+        "global_sea_ice_idx": 81.6
       },
       {
         "month": "2022-02",
@@ -903,11 +2363,11 @@
         "event_id": null,
         "basin_overlay_path": "assets/basin_monthly/amazon_2022-02.png",
         "soil_moisture_idx": 84.4,
-        "flood_pulse_idx": 54.2,
+        "flood_pulse_idx": 50.8,
         "drought_fire_idx": 0.0,
         "planet_overlay_path": "assets/planet_monthly/planet_2022-02.png",
         "global_frozen_pct": 39.8,
-        "global_sea_ice_idx": 76.8
+        "global_sea_ice_idx": 76.2
       },
       {
         "month": "2022-03",
@@ -926,11 +2386,11 @@
         "event_id": null,
         "basin_overlay_path": "assets/basin_monthly/amazon_2022-03.png",
         "soil_moisture_idx": 87.1,
-        "flood_pulse_idx": 77.3,
+        "flood_pulse_idx": 73.7,
         "drought_fire_idx": 2.4,
         "planet_overlay_path": "assets/planet_monthly/planet_2022-03.png",
         "global_frozen_pct": 36.2,
-        "global_sea_ice_idx": 77.5
+        "global_sea_ice_idx": 76.8
       },
       {
         "month": "2022-04",
@@ -949,11 +2409,11 @@
         "event_id": null,
         "basin_overlay_path": "assets/basin_monthly/amazon_2022-04.png",
         "soil_moisture_idx": 85.4,
-        "flood_pulse_idx": 91.5,
+        "flood_pulse_idx": 88.4,
         "drought_fire_idx": 27.9,
         "planet_overlay_path": "assets/planet_monthly/planet_2022-04.png",
         "global_frozen_pct": 24.7,
-        "global_sea_ice_idx": 87.0
+        "global_sea_ice_idx": 86.2
       },
       {
         "month": "2022-05",
@@ -972,11 +2432,11 @@
         "event_id": null,
         "basin_overlay_path": "assets/basin_monthly/amazon_2022-05.png",
         "soil_moisture_idx": 81.7,
-        "flood_pulse_idx": 79.8,
+        "flood_pulse_idx": 78.3,
         "drought_fire_idx": 52.6,
         "planet_overlay_path": "assets/planet_monthly/planet_2022-05.png",
         "global_frozen_pct": 15.0,
-        "global_sea_ice_idx": 94.8
+        "global_sea_ice_idx": 93.9
       },
       {
         "month": "2022-06",
@@ -996,11 +2456,11 @@
         "event_id": null,
         "basin_overlay_path": "assets/basin_monthly/amazon_2022-06.png",
         "soil_moisture_idx": 79.5,
-        "flood_pulse_idx": 63.3,
+        "flood_pulse_idx": 62.5,
         "drought_fire_idx": 56.6,
         "planet_overlay_path": "assets/planet_monthly/planet_2022-06.png",
         "global_frozen_pct": 9.4,
-        "global_sea_ice_idx": 94.0
+        "global_sea_ice_idx": 93.2
       },
       {
         "month": "2022-07",
@@ -1019,11 +2479,11 @@
         "event_id": null,
         "basin_overlay_path": "assets/basin_monthly/amazon_2022-07.png",
         "soil_moisture_idx": 72.7,
-        "flood_pulse_idx": 45.4,
+        "flood_pulse_idx": 45.1,
         "drought_fire_idx": 66.0,
         "planet_overlay_path": "assets/planet_monthly/planet_2022-07.png",
         "global_frozen_pct": 6.2,
-        "global_sea_ice_idx": 89.8
+        "global_sea_ice_idx": 89.0
       },
       {
         "month": "2022-08",
@@ -1044,11 +2504,11 @@
         "event_id": "pakistan_flood_2022",
         "basin_overlay_path": "assets/basin_monthly/amazon_2022-08.png",
         "soil_moisture_idx": 66.3,
-        "flood_pulse_idx": 34.6,
+        "flood_pulse_idx": 34.3,
         "drought_fire_idx": 91.2,
         "planet_overlay_path": "assets/planet_monthly/planet_2022-08.png",
         "global_frozen_pct": 11.7,
-        "global_sea_ice_idx": 82.8
+        "global_sea_ice_idx": 82.0
       },
       {
         "month": "2022-09",
@@ -1069,11 +2529,11 @@
         "event_id": null,
         "basin_overlay_path": "assets/basin_monthly/amazon_2022-09.png",
         "soil_moisture_idx": 64.0,
-        "flood_pulse_idx": 21.5,
+        "flood_pulse_idx": 21.2,
         "drought_fire_idx": 94.1,
         "planet_overlay_path": "assets/planet_monthly/planet_2022-09.png",
         "global_frozen_pct": 14.6,
-        "global_sea_ice_idx": 80.1
+        "global_sea_ice_idx": 79.4
       },
       {
         "month": "2022-10",
@@ -1094,11 +2554,11 @@
         "event_id": null,
         "basin_overlay_path": "assets/basin_monthly/amazon_2022-10.png",
         "soil_moisture_idx": 63.5,
-        "flood_pulse_idx": 15.3,
+        "flood_pulse_idx": 14.9,
         "drought_fire_idx": 75.7,
         "planet_overlay_path": "assets/planet_monthly/planet_2022-10.png",
         "global_frozen_pct": 19.1,
-        "global_sea_ice_idx": 88.2
+        "global_sea_ice_idx": 87.5
       },
       {
         "month": "2022-11",
@@ -1114,11 +2574,11 @@
         "event_id": null,
         "basin_overlay_path": "assets/basin_monthly/amazon_2022-11.png",
         "soil_moisture_idx": 65.4,
-        "flood_pulse_idx": 23.4,
+        "flood_pulse_idx": 22.9,
         "drought_fire_idx": 64.5,
         "planet_overlay_path": "assets/planet_monthly/planet_2022-11.png",
         "global_frozen_pct": 30.8,
-        "global_sea_ice_idx": 99.2
+        "global_sea_ice_idx": 98.4
       },
       {
         "month": "2022-12",
@@ -1136,11 +2596,11 @@
         "event_id": null,
         "basin_overlay_path": "assets/basin_monthly/amazon_2022-12.png",
         "soil_moisture_idx": 69.7,
-        "flood_pulse_idx": 26.5,
+        "flood_pulse_idx": 25.6,
         "drought_fire_idx": 34.9,
         "planet_overlay_path": "assets/planet_monthly/planet_2022-12.png",
         "global_frozen_pct": 39.8,
-        "global_sea_ice_idx": 90.0
+        "global_sea_ice_idx": 89.2
       },
       {
         "month": "2023-01",
@@ -1158,11 +2618,11 @@
         "event_id": null,
         "basin_overlay_path": "assets/basin_monthly/amazon_2023-01.png",
         "soil_moisture_idx": 80.7,
-        "flood_pulse_idx": 35.6,
+        "flood_pulse_idx": 33.7,
         "drought_fire_idx": 17.2,
         "planet_overlay_path": "assets/planet_monthly/planet_2023-01.png",
         "global_frozen_pct": 40.4,
-        "global_sea_ice_idx": 77.5
+        "global_sea_ice_idx": 76.9
       },
       {
         "month": "2023-02",
@@ -1180,11 +2640,11 @@
         "event_id": "turkiye_insar_2023",
         "basin_overlay_path": "assets/basin_monthly/amazon_2023-02.png",
         "soil_moisture_idx": 81.7,
-        "flood_pulse_idx": 55.3,
+        "flood_pulse_idx": 52.3,
         "drought_fire_idx": 11.1,
         "planet_overlay_path": "assets/planet_monthly/planet_2023-02.png",
         "global_frozen_pct": 39.7,
-        "global_sea_ice_idx": 75.0
+        "global_sea_ice_idx": 74.4
       },
       {
         "month": "2023-03",
@@ -1203,11 +2663,11 @@
         "event_id": null,
         "basin_overlay_path": "assets/basin_monthly/amazon_2023-03.png",
         "soil_moisture_idx": 82.5,
-        "flood_pulse_idx": 71.6,
+        "flood_pulse_idx": 68.3,
         "drought_fire_idx": 10.0,
         "planet_overlay_path": "assets/planet_monthly/planet_2023-03.png",
         "global_frozen_pct": 34.9,
-        "global_sea_ice_idx": 77.8
+        "global_sea_ice_idx": 77.1
       },
       {
         "month": "2023-04",
@@ -1226,11 +2686,11 @@
         "event_id": null,
         "basin_overlay_path": "assets/basin_monthly/amazon_2023-04.png",
         "soil_moisture_idx": 84.1,
-        "flood_pulse_idx": 79.5,
+        "flood_pulse_idx": 75.8,
         "drought_fire_idx": 19.1,
         "planet_overlay_path": "assets/planet_monthly/planet_2023-04.png",
         "global_frozen_pct": 25.8,
-        "global_sea_ice_idx": 86.2
+        "global_sea_ice_idx": 85.4
       },
       {
         "month": "2023-05",
@@ -1249,11 +2709,11 @@
         "event_id": null,
         "basin_overlay_path": "assets/basin_monthly/amazon_2023-05.png",
         "soil_moisture_idx": 81.8,
-        "flood_pulse_idx": 74.2,
+        "flood_pulse_idx": 72.1,
         "drought_fire_idx": 47.1,
         "planet_overlay_path": "assets/planet_monthly/planet_2023-05.png",
         "global_frozen_pct": 15.4,
-        "global_sea_ice_idx": 91.1
+        "global_sea_ice_idx": 90.3
       },
       {
         "month": "2023-06",
@@ -1273,11 +2733,11 @@
         "event_id": null,
         "basin_overlay_path": "assets/basin_monthly/amazon_2023-06.png",
         "soil_moisture_idx": 79.9,
-        "flood_pulse_idx": 60.2,
+        "flood_pulse_idx": 59.0,
         "drought_fire_idx": 58.5,
         "planet_overlay_path": "assets/planet_monthly/planet_2023-06.png",
         "global_frozen_pct": 9.1,
-        "global_sea_ice_idx": 91.2
+        "global_sea_ice_idx": 90.4
       },
       {
         "month": "2023-07",
@@ -1296,11 +2756,11 @@
         "event_id": "canada_boreal_2023",
         "basin_overlay_path": "assets/basin_monthly/amazon_2023-07.png",
         "soil_moisture_idx": 71.6,
-        "flood_pulse_idx": 36.3,
+        "flood_pulse_idx": 35.8,
         "drought_fire_idx": 63.1,
         "planet_overlay_path": "assets/planet_monthly/planet_2023-07.png",
         "global_frozen_pct": 7.0,
-        "global_sea_ice_idx": 84.6
+        "global_sea_ice_idx": 83.8
       },
       {
         "month": "2023-08",
@@ -1321,11 +2781,11 @@
         "event_id": null,
         "basin_overlay_path": "assets/basin_monthly/amazon_2023-08.png",
         "soil_moisture_idx": 63.7,
-        "flood_pulse_idx": 23.6,
+        "flood_pulse_idx": 23.2,
         "drought_fire_idx": 78.7,
         "planet_overlay_path": "assets/planet_monthly/planet_2023-08.png",
         "global_frozen_pct": 6.8,
-        "global_sea_ice_idx": 78.4
+        "global_sea_ice_idx": 77.7
       },
       {
         "month": "2023-09",
@@ -1346,11 +2806,11 @@
         "event_id": "antarctic_sea_ice_2023",
         "basin_overlay_path": "assets/basin_monthly/amazon_2023-09.png",
         "soil_moisture_idx": 52.7,
-        "flood_pulse_idx": 9.4,
+        "flood_pulse_idx": 9.2,
         "drought_fire_idx": 85.7,
         "planet_overlay_path": "assets/planet_monthly/planet_2023-09.png",
         "global_frozen_pct": 10.4,
-        "global_sea_ice_idx": 76.3
+        "global_sea_ice_idx": 75.6
       },
       {
         "month": "2023-10",
@@ -1371,11 +2831,11 @@
         "event_id": "severe_drought_2023",
         "basin_overlay_path": "assets/basin_monthly/amazon_2023-10.png",
         "soil_moisture_idx": 49.6,
-        "flood_pulse_idx": 4.2,
+        "flood_pulse_idx": 4.1,
         "drought_fire_idx": 81.5,
         "planet_overlay_path": "assets/planet_monthly/planet_2023-10.png",
         "global_frozen_pct": 19.2,
-        "global_sea_ice_idx": 84.2
+        "global_sea_ice_idx": 83.5
       },
       {
         "month": "2023-11",
@@ -1391,11 +2851,11 @@
         "event_id": null,
         "basin_overlay_path": "assets/basin_monthly/amazon_2023-11.png",
         "soil_moisture_idx": 39.7,
-        "flood_pulse_idx": 6.0,
+        "flood_pulse_idx": 5.8,
         "drought_fire_idx": 74.6,
         "planet_overlay_path": "assets/planet_monthly/planet_2023-11.png",
         "global_frozen_pct": 31.2,
-        "global_sea_ice_idx": 98.1
+        "global_sea_ice_idx": 97.3
       },
       {
         "month": "2023-12",
@@ -1413,11 +2873,11 @@
         "event_id": null,
         "basin_overlay_path": "assets/basin_monthly/amazon_2023-12.png",
         "soil_moisture_idx": 53.8,
-        "flood_pulse_idx": 20.0,
+        "flood_pulse_idx": 18.7,
         "drought_fire_idx": 49.9,
         "planet_overlay_path": "assets/planet_monthly/planet_2023-12.png",
         "global_frozen_pct": 39.0,
-        "global_sea_ice_idx": 90.0
+        "global_sea_ice_idx": 89.2
       },
       {
         "month": "2024-01",
@@ -1435,11 +2895,11 @@
         "event_id": null,
         "basin_overlay_path": "assets/basin_monthly/amazon_2024-01.png",
         "soil_moisture_idx": 68.5,
-        "flood_pulse_idx": 40.7,
+        "flood_pulse_idx": 39.1,
         "drought_fire_idx": 30.3,
         "planet_overlay_path": "assets/planet_monthly/planet_2024-01.png",
         "global_frozen_pct": 42.1,
-        "global_sea_ice_idx": 82.8
+        "global_sea_ice_idx": 82.1
       },
       {
         "month": "2024-02",
@@ -1457,11 +2917,11 @@
         "event_id": null,
         "basin_overlay_path": "assets/basin_monthly/amazon_2024-02.png",
         "soil_moisture_idx": 68.8,
-        "flood_pulse_idx": 49.0,
+        "flood_pulse_idx": 46.4,
         "drought_fire_idx": 45.8,
         "planet_overlay_path": "assets/planet_monthly/planet_2024-02.png",
         "global_frozen_pct": 39.2,
-        "global_sea_ice_idx": 76.3
+        "global_sea_ice_idx": 75.6
       },
       {
         "month": "2024-03",
@@ -1480,11 +2940,11 @@
         "event_id": null,
         "basin_overlay_path": "assets/basin_monthly/amazon_2024-03.png",
         "soil_moisture_idx": 68.9,
-        "flood_pulse_idx": 58.1,
+        "flood_pulse_idx": 54.6,
         "drought_fire_idx": 45.3,
         "planet_overlay_path": "assets/planet_monthly/planet_2024-03.png",
         "global_frozen_pct": 34.5,
-        "global_sea_ice_idx": 80.0
+        "global_sea_ice_idx": 79.3
       },
       {
         "month": "2024-04",
@@ -1503,11 +2963,11 @@
         "event_id": null,
         "basin_overlay_path": "assets/basin_monthly/amazon_2024-04.png",
         "soil_moisture_idx": 73.8,
-        "flood_pulse_idx": 54.9,
+        "flood_pulse_idx": 52.4,
         "drought_fire_idx": 23.3,
         "planet_overlay_path": "assets/planet_monthly/planet_2024-04.png",
         "global_frozen_pct": 23.5,
-        "global_sea_ice_idx": 89.2
+        "global_sea_ice_idx": 88.4
       },
       {
         "month": "2024-05",
@@ -1523,14 +2983,14 @@
           "rainy_season",
           "seasonal_flood"
         ],
-        "event_id": null,
+        "event_id": "brazil_rs_flood_2024",
         "basin_overlay_path": "assets/basin_monthly/amazon_2024-05.png",
         "soil_moisture_idx": 75.4,
-        "flood_pulse_idx": 55.5,
+        "flood_pulse_idx": 54.1,
         "drought_fire_idx": 49.2,
         "planet_overlay_path": "assets/planet_monthly/planet_2024-05.png",
         "global_frozen_pct": 15.4,
-        "global_sea_ice_idx": 93.3
+        "global_sea_ice_idx": 92.4
       },
       {
         "month": "2024-06",
@@ -1550,11 +3010,11 @@
         "event_id": null,
         "basin_overlay_path": "assets/basin_monthly/amazon_2024-06.png",
         "soil_moisture_idx": 69.3,
-        "flood_pulse_idx": 48.7,
+        "flood_pulse_idx": 48.1,
         "drought_fire_idx": 59.4,
         "planet_overlay_path": "assets/planet_monthly/planet_2024-06.png",
         "global_frozen_pct": 9.3,
-        "global_sea_ice_idx": 93.0
+        "global_sea_ice_idx": 92.2
       },
       {
         "month": "2024-07",
@@ -1573,11 +3033,11 @@
         "event_id": null,
         "basin_overlay_path": "assets/basin_monthly/amazon_2024-07.png",
         "soil_moisture_idx": 63.1,
-        "flood_pulse_idx": 32.6,
+        "flood_pulse_idx": 32.2,
         "drought_fire_idx": 74.3,
         "planet_overlay_path": "assets/planet_monthly/planet_2024-07.png",
         "global_frozen_pct": 6.8,
-        "global_sea_ice_idx": 83.5
+        "global_sea_ice_idx": 82.7
       },
       {
         "month": "2024-08",
@@ -1598,11 +3058,11 @@
         "event_id": null,
         "basin_overlay_path": "assets/basin_monthly/amazon_2024-08.png",
         "soil_moisture_idx": 55.3,
-        "flood_pulse_idx": 15.8,
+        "flood_pulse_idx": 15.6,
         "drought_fire_idx": 96.6,
         "planet_overlay_path": "assets/planet_monthly/planet_2024-08.png",
         "global_frozen_pct": 6.9,
-        "global_sea_ice_idx": 77.2
+        "global_sea_ice_idx": 76.5
       },
       {
         "month": "2024-09",
@@ -1623,11 +3083,11 @@
         "event_id": "drought_fires_2024",
         "basin_overlay_path": "assets/basin_monthly/amazon_2024-09.png",
         "soil_moisture_idx": 48.3,
-        "flood_pulse_idx": 4.8,
+        "flood_pulse_idx": 4.7,
         "drought_fire_idx": 100.0,
         "planet_overlay_path": "assets/planet_monthly/planet_2024-09.png",
         "global_frozen_pct": 10.6,
-        "global_sea_ice_idx": 75.4
+        "global_sea_ice_idx": 74.7
       },
       {
         "month": "2024-10",
@@ -1652,7 +3112,7 @@
         "drought_fire_idx": 78.5,
         "planet_overlay_path": "assets/planet_monthly/planet_2024-10.png",
         "global_frozen_pct": 21.4,
-        "global_sea_ice_idx": 82.1
+        "global_sea_ice_idx": 81.3
       },
       {
         "month": "2024-11",
@@ -1668,11 +3128,11 @@
         "event_id": null,
         "basin_overlay_path": "assets/basin_monthly/amazon_2024-11.png",
         "soil_moisture_idx": 65.1,
-        "flood_pulse_idx": 6.4,
+        "flood_pulse_idx": 5.9,
         "drought_fire_idx": 74.0,
         "planet_overlay_path": "assets/planet_monthly/planet_2024-11.png",
         "global_frozen_pct": 30.7,
-        "global_sea_ice_idx": 93.5
+        "global_sea_ice_idx": 92.7
       },
       {
         "month": "2024-12",
@@ -1690,11 +3150,11 @@
         "event_id": null,
         "basin_overlay_path": "assets/basin_monthly/amazon_2024-12.png",
         "soil_moisture_idx": 69.6,
-        "flood_pulse_idx": 22.6,
+        "flood_pulse_idx": 21.1,
         "drought_fire_idx": 52.1,
         "planet_overlay_path": "assets/planet_monthly/planet_2024-12.png",
         "global_frozen_pct": 38.1,
-        "global_sea_ice_idx": 90.5
+        "global_sea_ice_idx": 89.7
       },
       {
         "month": "2025-01",
@@ -1712,11 +3172,11 @@
         "event_id": null,
         "basin_overlay_path": "assets/basin_monthly/amazon_2025-01.png",
         "soil_moisture_idx": 76.2,
-        "flood_pulse_idx": 47.9,
+        "flood_pulse_idx": 45.5,
         "drought_fire_idx": 22.7,
         "planet_overlay_path": "assets/planet_monthly/planet_2025-01.png",
         "global_frozen_pct": 40.2,
-        "global_sea_ice_idx": 82.1
+        "global_sea_ice_idx": 81.4
       },
       {
         "month": "2025-02",
@@ -1734,11 +3194,11 @@
         "event_id": null,
         "basin_overlay_path": "assets/basin_monthly/amazon_2025-02.png",
         "soil_moisture_idx": 85.1,
-        "flood_pulse_idx": 56.2,
+        "flood_pulse_idx": 53.2,
         "drought_fire_idx": 7.8,
         "planet_overlay_path": "assets/planet_monthly/planet_2025-02.png",
         "global_frozen_pct": 41.1,
-        "global_sea_ice_idx": 75.3
+        "global_sea_ice_idx": 74.7
       },
       {
         "month": "2025-03",
@@ -1757,11 +3217,11 @@
         "event_id": null,
         "basin_overlay_path": "assets/basin_monthly/amazon_2025-03.png",
         "soil_moisture_idx": 87.7,
-        "flood_pulse_idx": 90.1,
+        "flood_pulse_idx": 85.7,
         "drought_fire_idx": 20.4,
         "planet_overlay_path": "assets/planet_monthly/planet_2025-03.png",
         "global_frozen_pct": 34.4,
-        "global_sea_ice_idx": 79.0
+        "global_sea_ice_idx": 78.3
       },
       {
         "month": "2025-04",
@@ -1780,11 +3240,11 @@
         "event_id": null,
         "basin_overlay_path": "assets/basin_monthly/amazon_2025-04.png",
         "soil_moisture_idx": 86.6,
-        "flood_pulse_idx": 97.0,
+        "flood_pulse_idx": 93.1,
         "drought_fire_idx": 6.3,
         "planet_overlay_path": "assets/planet_monthly/planet_2025-04.png",
         "global_frozen_pct": 23.6,
-        "global_sea_ice_idx": 87.6
+        "global_sea_ice_idx": 86.8
       },
       {
         "month": "2025-05",
@@ -1803,11 +3263,11 @@
         "event_id": null,
         "basin_overlay_path": "assets/basin_monthly/amazon_2025-05.png",
         "soil_moisture_idx": 84.2,
-        "flood_pulse_idx": 83.3,
+        "flood_pulse_idx": 80.6,
         "drought_fire_idx": 43.8,
         "planet_overlay_path": "assets/planet_monthly/planet_2025-05.png",
         "global_frozen_pct": 15.7,
-        "global_sea_ice_idx": 92.2
+        "global_sea_ice_idx": 91.4
       },
       {
         "month": "2025-06",
@@ -1827,11 +3287,11 @@
         "event_id": null,
         "basin_overlay_path": "assets/basin_monthly/amazon_2025-06.png",
         "soil_moisture_idx": 81.6,
-        "flood_pulse_idx": 76.2,
+        "flood_pulse_idx": 75.0,
         "drought_fire_idx": 52.3,
         "planet_overlay_path": "assets/planet_monthly/planet_2025-06.png",
         "global_frozen_pct": 9.6,
-        "global_sea_ice_idx": 92.1
+        "global_sea_ice_idx": 91.3
       },
       {
         "month": "2025-07",
@@ -1850,11 +3310,11 @@
         "event_id": null,
         "basin_overlay_path": "assets/basin_monthly/amazon_2025-07.png",
         "soil_moisture_idx": 73.9,
-        "flood_pulse_idx": 54.1,
+        "flood_pulse_idx": 53.6,
         "drought_fire_idx": 53.9,
         "planet_overlay_path": "assets/planet_monthly/planet_2025-07.png",
         "global_frozen_pct": 6.7,
-        "global_sea_ice_idx": 85.2
+        "global_sea_ice_idx": 84.4
       },
       {
         "month": "2025-08",
@@ -1875,11 +3335,11 @@
         "event_id": null,
         "basin_overlay_path": "assets/basin_monthly/amazon_2025-08.png",
         "soil_moisture_idx": 67.8,
-        "flood_pulse_idx": 33.0,
+        "flood_pulse_idx": 32.7,
         "drought_fire_idx": 69.2,
         "planet_overlay_path": "assets/planet_monthly/planet_2025-08.png",
         "global_frozen_pct": 7.1,
-        "global_sea_ice_idx": 79.1
+        "global_sea_ice_idx": 78.4
       },
       {
         "month": "2025-09",
@@ -1900,11 +3360,11 @@
         "event_id": null,
         "basin_overlay_path": "assets/basin_monthly/amazon_2025-09.png",
         "soil_moisture_idx": 60.6,
-        "flood_pulse_idx": 24.1,
+        "flood_pulse_idx": 23.9,
         "drought_fire_idx": 74.3,
         "planet_overlay_path": "assets/planet_monthly/planet_2025-09.png",
         "global_frozen_pct": 11.0,
-        "global_sea_ice_idx": 8.8
+        "global_sea_ice_idx": 8.7
       },
       {
         "month": "2025-10",
@@ -1925,11 +3385,11 @@
         "event_id": null,
         "basin_overlay_path": "assets/basin_monthly/amazon_2025-10.png",
         "soil_moisture_idx": 60.6,
-        "flood_pulse_idx": 21.2,
+        "flood_pulse_idx": 20.9,
         "drought_fire_idx": 73.1,
         "planet_overlay_path": "assets/planet_monthly/planet_2025-10.png",
         "global_frozen_pct": 21.7,
-        "global_sea_ice_idx": 8.8
+        "global_sea_ice_idx": 8.7
       },
       {
         "month": "2025-11",
@@ -1945,11 +3405,11 @@
         "event_id": null,
         "basin_overlay_path": "assets/basin_monthly/amazon_2025-11.png",
         "soil_moisture_idx": 60.6,
-        "flood_pulse_idx": 31.9,
+        "flood_pulse_idx": 31.1,
         "drought_fire_idx": 64.7,
         "planet_overlay_path": "assets/planet_monthly/planet_2025-11.png",
         "global_frozen_pct": 31.3,
-        "global_sea_ice_idx": 8.8
+        "global_sea_ice_idx": 8.7
       },
       {
         "month": "2025-12",
@@ -1967,11 +3427,11 @@
         "event_id": null,
         "basin_overlay_path": "assets/basin_monthly/amazon_2025-12.png",
         "soil_moisture_idx": 73.7,
-        "flood_pulse_idx": 45.9,
+        "flood_pulse_idx": 44.6,
         "drought_fire_idx": 47.9,
         "planet_overlay_path": "assets/planet_monthly/planet_2025-12.png",
         "global_frozen_pct": 37.2,
-        "global_sea_ice_idx": 8.8
+        "global_sea_ice_idx": 8.7
       },
       {
         "month": "2026-01",
@@ -1989,11 +3449,11 @@
         "event_id": null,
         "basin_overlay_path": "assets/basin_monthly/amazon_2026-01.png",
         "soil_moisture_idx": 78.6,
-        "flood_pulse_idx": 57.7,
+        "flood_pulse_idx": 54.7,
         "drought_fire_idx": 24.8,
         "planet_overlay_path": "assets/planet_monthly/planet_2026-01.png",
         "global_frozen_pct": 38.8,
-        "global_sea_ice_idx": 8.8
+        "global_sea_ice_idx": 8.7
       },
       {
         "month": "2026-02",
@@ -2011,11 +3471,11 @@
         "event_id": null,
         "basin_overlay_path": "assets/basin_monthly/amazon_2026-02.png",
         "soil_moisture_idx": 82.8,
-        "flood_pulse_idx": 76.1,
+        "flood_pulse_idx": 72.6,
         "drought_fire_idx": 4.4,
         "planet_overlay_path": "assets/planet_monthly/planet_2026-02.png",
         "global_frozen_pct": 39.3,
-        "global_sea_ice_idx": 8.8
+        "global_sea_ice_idx": 8.7
       },
       {
         "month": "2026-03",
@@ -2034,11 +3494,11 @@
         "event_id": null,
         "basin_overlay_path": "assets/basin_monthly/amazon_2026-03.png",
         "soil_moisture_idx": 84.7,
-        "flood_pulse_idx": 75.0,
+        "flood_pulse_idx": 71.2,
         "drought_fire_idx": 12.1,
         "planet_overlay_path": "assets/planet_monthly/planet_2026-03.png",
         "global_frozen_pct": 34.5,
-        "global_sea_ice_idx": 8.8
+        "global_sea_ice_idx": 8.7
       },
       {
         "month": "2026-04",
@@ -2057,11 +3517,11 @@
         "event_id": null,
         "basin_overlay_path": "assets/basin_monthly/amazon_2026-04.png",
         "soil_moisture_idx": 84.2,
-        "flood_pulse_idx": 81.8,
+        "flood_pulse_idx": 77.8,
         "drought_fire_idx": 13.9,
         "planet_overlay_path": "assets/planet_monthly/planet_2026-04.png",
         "global_frozen_pct": 26.2,
-        "global_sea_ice_idx": 8.8
+        "global_sea_ice_idx": 8.7
       },
       {
         "month": "2026-05",
@@ -2080,11 +3540,11 @@
         "event_id": null,
         "basin_overlay_path": "assets/basin_monthly/amazon_2026-05.png",
         "soil_moisture_idx": 83.0,
-        "flood_pulse_idx": 87.3,
+        "flood_pulse_idx": 84.2,
         "drought_fire_idx": 41.9,
         "planet_overlay_path": "assets/planet_monthly/planet_2026-05.png",
         "global_frozen_pct": 15.7,
-        "global_sea_ice_idx": 8.8
+        "global_sea_ice_idx": 8.7
       },
       {
         "month": "2026-06",
@@ -2104,11 +3564,11 @@
         "event_id": null,
         "basin_overlay_path": "assets/basin_monthly/amazon_2026-06.png",
         "soil_moisture_idx": 80.5,
-        "flood_pulse_idx": 68.3,
+        "flood_pulse_idx": 67.0,
         "drought_fire_idx": 48.3,
         "planet_overlay_path": "assets/planet_monthly/planet_2026-06.png",
         "global_frozen_pct": 7.8,
-        "global_sea_ice_idx": 8.8
+        "global_sea_ice_idx": 8.7
       },
       {
         "month": "2026-07",
@@ -2127,11 +3587,11 @@
         "event_id": null,
         "basin_overlay_path": "assets/basin_monthly/amazon_2026-07.png",
         "soil_moisture_idx": 77.6,
-        "flood_pulse_idx": 50.0,
+        "flood_pulse_idx": 49.3,
         "drought_fire_idx": 56.2,
         "planet_overlay_path": "assets/planet_monthly/planet_2026-07.png",
         "global_frozen_pct": 6.4,
-        "global_sea_ice_idx": 8.8
+        "global_sea_ice_idx": 8.7
       },
       {
         "month": "2026-08",
@@ -2152,11 +3612,11 @@
         "event_id": null,
         "basin_overlay_path": "assets/basin_monthly/amazon_2026-08.png",
         "soil_moisture_idx": 77.6,
-        "flood_pulse_idx": 29.7,
+        "flood_pulse_idx": 29.2,
         "drought_fire_idx": 91.9,
         "planet_overlay_path": "assets/planet_monthly/planet_2026-08.png",
         "global_frozen_pct": 7.0,
-        "global_sea_ice_idx": 8.8
+        "global_sea_ice_idx": 8.7
       },
       {
         "month": "2026-09",
@@ -2177,11 +3637,11 @@
         "event_id": null,
         "basin_overlay_path": "assets/basin_monthly/amazon_2026-09.png",
         "soil_moisture_idx": 55.2,
-        "flood_pulse_idx": 16.6,
+        "flood_pulse_idx": 16.2,
         "drought_fire_idx": 89.4,
         "planet_overlay_path": "assets/planet_monthly/planet_2026-09.png",
         "global_frozen_pct": 10.5,
-        "global_sea_ice_idx": 8.8
+        "global_sea_ice_idx": 8.7
       },
       {
         "month": "2026-10",
@@ -2202,11 +3662,11 @@
         "event_id": "nisar_lband_2026",
         "basin_overlay_path": "assets/basin_monthly/amazon_2026-10.png",
         "soil_moisture_idx": 52.3,
-        "flood_pulse_idx": 12.0,
+        "flood_pulse_idx": 11.7,
         "drought_fire_idx": 74.5,
         "planet_overlay_path": "assets/planet_monthly/planet_2026-10.png",
         "global_frozen_pct": 22.0,
-        "global_sea_ice_idx": 8.8
+        "global_sea_ice_idx": 8.7
       },
       {
         "month": "2026-11",
@@ -2222,11 +3682,11 @@
         "event_id": null,
         "basin_overlay_path": "assets/basin_monthly/amazon_2026-11.png",
         "soil_moisture_idx": 50.5,
-        "flood_pulse_idx": 14.2,
+        "flood_pulse_idx": 13.6,
         "drought_fire_idx": 70.6,
         "planet_overlay_path": "assets/planet_monthly/planet_2026-11.png",
         "global_frozen_pct": 29.5,
-        "global_sea_ice_idx": 8.8
+        "global_sea_ice_idx": 8.7
       },
       {
         "month": "2026-12",
@@ -2244,11 +3704,11 @@
         "event_id": null,
         "basin_overlay_path": "assets/basin_monthly/amazon_2026-12.png",
         "soil_moisture_idx": 73.7,
-        "flood_pulse_idx": 45.9,
+        "flood_pulse_idx": 44.6,
         "drought_fire_idx": 47.9,
         "planet_overlay_path": "assets/planet_monthly/planet_2026-12.png",
         "global_frozen_pct": 37.2,
-        "global_sea_ice_idx": 8.8
+        "global_sea_ice_idx": 8.7
       }
     ]
   },
@@ -2375,86 +3835,86 @@
         {
           "month_num": 1,
           "label": "Jan",
-          "discharge_m3s": 128618.2,
-          "precip_mm": 211.6,
-          "fire_hotspots": 376
+          "discharge_m3s": 135648.4,
+          "precip_mm": 239.2,
+          "fire_hotspots": 625
         },
         {
           "month_num": 2,
           "label": "Feb",
-          "discharge_m3s": 142806.7,
-          "precip_mm": 254.7,
-          "fire_hotspots": 361
+          "discharge_m3s": 153457.4,
+          "precip_mm": 256.6,
+          "fire_hotspots": 415
         },
         {
           "month_num": 3,
           "label": "Mar",
-          "discharge_m3s": 170507.3,
-          "precip_mm": 260.2,
-          "fire_hotspots": 429
+          "discharge_m3s": 175182.2,
+          "precip_mm": 282.8,
+          "fire_hotspots": 743
         },
         {
           "month_num": 4,
           "label": "Apr",
-          "discharge_m3s": 194647.5,
-          "precip_mm": 223.0,
-          "fire_hotspots": 291
+          "discharge_m3s": 197423.7,
+          "precip_mm": 250.1,
+          "fire_hotspots": 372
         },
         {
           "month_num": 5,
           "label": "May",
-          "discharge_m3s": 200590.1,
-          "precip_mm": 234.9,
-          "fire_hotspots": 1602
+          "discharge_m3s": 205095.9,
+          "precip_mm": 243.5,
+          "fire_hotspots": 1243
         },
         {
           "month_num": 6,
           "label": "Jun",
-          "discharge_m3s": 184920.1,
-          "precip_mm": 128.6,
-          "fire_hotspots": 2955
+          "discharge_m3s": 190534.9,
+          "precip_mm": 132.5,
+          "fire_hotspots": 2493
         },
         {
           "month_num": 7,
           "label": "Jul",
-          "discharge_m3s": 143936.2,
-          "precip_mm": 46.5,
-          "fire_hotspots": 5181
+          "discharge_m3s": 152115.7,
+          "precip_mm": 51.8,
+          "fire_hotspots": 5014
         },
         {
           "month_num": 8,
           "label": "Aug",
-          "discharge_m3s": 101124.3,
-          "precip_mm": 40.2,
-          "fire_hotspots": 23064
+          "discharge_m3s": 108496.2,
+          "precip_mm": 41.8,
+          "fire_hotspots": 20929
         },
         {
           "month_num": 9,
           "label": "Sep",
-          "discharge_m3s": 70473.4,
-          "precip_mm": 54.6,
-          "fire_hotspots": 26715
+          "discharge_m3s": 77622.4,
+          "precip_mm": 67.8,
+          "fire_hotspots": 26414
         },
         {
           "month_num": 10,
           "label": "Oct",
-          "discharge_m3s": 57924.8,
-          "precip_mm": 97.2,
-          "fire_hotspots": 11619
+          "discharge_m3s": 66313.3,
+          "precip_mm": 95.7,
+          "fire_hotspots": 11864
         },
         {
           "month_num": 11,
           "label": "Nov",
-          "discharge_m3s": 66906.5,
-          "precip_mm": 127.1,
-          "fire_hotspots": 6260
+          "discharge_m3s": 77507.4,
+          "precip_mm": 140.3,
+          "fire_hotspots": 6519
         },
         {
           "month_num": 12,
           "label": "Dec",
-          "discharge_m3s": 94622.1,
-          "precip_mm": 243.6,
-          "fire_hotspots": 1555
+          "discharge_m3s": 105423.6,
+          "precip_mm": 264.9,
+          "fire_hotspots": 2384
         }
       ]
     },
@@ -2616,86 +4076,86 @@
         {
           "month_num": 1,
           "label": "Jan",
-          "discharge_m3s": 25525.3,
-          "precip_mm": 314.1,
-          "fire_hotspots": 376
+          "discharge_m3s": 29244.8,
+          "precip_mm": 333.2,
+          "fire_hotspots": 625
         },
         {
           "month_num": 2,
           "label": "Feb",
-          "discharge_m3s": 31960.5,
-          "precip_mm": 300.4,
-          "fire_hotspots": 361
+          "discharge_m3s": 36457.4,
+          "precip_mm": 325.0,
+          "fire_hotspots": 415
         },
         {
           "month_num": 3,
           "label": "Mar",
-          "discharge_m3s": 35276.0,
-          "precip_mm": 294.5,
-          "fire_hotspots": 429
+          "discharge_m3s": 40047.1,
+          "precip_mm": 327.6,
+          "fire_hotspots": 743
         },
         {
           "month_num": 4,
           "label": "Apr",
-          "discharge_m3s": 32334.0,
-          "precip_mm": 251.3,
-          "fire_hotspots": 291
+          "discharge_m3s": 34691.0,
+          "precip_mm": 268.4,
+          "fire_hotspots": 372
         },
         {
           "month_num": 5,
           "label": "May",
-          "discharge_m3s": 20837.1,
-          "precip_mm": 105.2,
-          "fire_hotspots": 1602
+          "discharge_m3s": 23846.9,
+          "precip_mm": 136.1,
+          "fire_hotspots": 1243
         },
         {
           "month_num": 6,
           "label": "Jun",
-          "discharge_m3s": 11787.3,
-          "precip_mm": 40.4,
-          "fire_hotspots": 2955
+          "discharge_m3s": 14417.2,
+          "precip_mm": 39.6,
+          "fire_hotspots": 2493
         },
         {
           "month_num": 7,
           "label": "Jul",
-          "discharge_m3s": 7371.6,
-          "precip_mm": 10.4,
-          "fire_hotspots": 5181
+          "discharge_m3s": 9036.8,
+          "precip_mm": 8.7,
+          "fire_hotspots": 5014
         },
         {
           "month_num": 8,
           "label": "Aug",
-          "discharge_m3s": 5945.0,
-          "precip_mm": 48.4,
-          "fire_hotspots": 23064
+          "discharge_m3s": 7059.9,
+          "precip_mm": 47.7,
+          "fire_hotspots": 20929
         },
         {
           "month_num": 9,
           "label": "Sep",
-          "discharge_m3s": 4996.6,
-          "precip_mm": 74.7,
-          "fire_hotspots": 26715
+          "discharge_m3s": 5837.0,
+          "precip_mm": 81.2,
+          "fire_hotspots": 26414
         },
         {
           "month_num": 10,
           "label": "Oct",
-          "discharge_m3s": 4879.0,
-          "precip_mm": 130.3,
-          "fire_hotspots": 11619
+          "discharge_m3s": 6200.3,
+          "precip_mm": 146.9,
+          "fire_hotspots": 11864
         },
         {
           "month_num": 11,
           "label": "Nov",
-          "discharge_m3s": 7595.8,
-          "precip_mm": 205.2,
-          "fire_hotspots": 6260
+          "discharge_m3s": 9614.8,
+          "precip_mm": 239.5,
+          "fire_hotspots": 6519
         },
         {
           "month_num": 12,
           "label": "Dec",
-          "discharge_m3s": 14798.7,
-          "precip_mm": 258.8,
-          "fire_hotspots": 1555
+          "discharge_m3s": 18137.8,
+          "precip_mm": 310.0,
+          "fire_hotspots": 2384
         }
       ]
     },
@@ -2814,86 +4274,86 @@
         {
           "month_num": 1,
           "label": "Jan",
-          "discharge_m3s": 128618.2,
-          "precip_mm": 211.6,
-          "fire_hotspots": 376
+          "discharge_m3s": 135648.4,
+          "precip_mm": 239.2,
+          "fire_hotspots": 625
         },
         {
           "month_num": 2,
           "label": "Feb",
-          "discharge_m3s": 142806.7,
-          "precip_mm": 254.7,
-          "fire_hotspots": 361
+          "discharge_m3s": 153457.4,
+          "precip_mm": 256.6,
+          "fire_hotspots": 415
         },
         {
           "month_num": 3,
           "label": "Mar",
-          "discharge_m3s": 170507.3,
-          "precip_mm": 260.2,
-          "fire_hotspots": 429
+          "discharge_m3s": 175182.2,
+          "precip_mm": 282.8,
+          "fire_hotspots": 743
         },
         {
           "month_num": 4,
           "label": "Apr",
-          "discharge_m3s": 194647.5,
-          "precip_mm": 223.0,
-          "fire_hotspots": 291
+          "discharge_m3s": 197423.7,
+          "precip_mm": 250.1,
+          "fire_hotspots": 372
         },
         {
           "month_num": 5,
           "label": "May",
-          "discharge_m3s": 200590.1,
-          "precip_mm": 234.9,
-          "fire_hotspots": 1602
+          "discharge_m3s": 205095.9,
+          "precip_mm": 243.5,
+          "fire_hotspots": 1243
         },
         {
           "month_num": 6,
           "label": "Jun",
-          "discharge_m3s": 184920.1,
-          "precip_mm": 128.6,
-          "fire_hotspots": 2955
+          "discharge_m3s": 190534.9,
+          "precip_mm": 132.5,
+          "fire_hotspots": 2493
         },
         {
           "month_num": 7,
           "label": "Jul",
-          "discharge_m3s": 143936.2,
-          "precip_mm": 46.5,
-          "fire_hotspots": 5181
+          "discharge_m3s": 152115.7,
+          "precip_mm": 51.8,
+          "fire_hotspots": 5014
         },
         {
           "month_num": 8,
           "label": "Aug",
-          "discharge_m3s": 101124.3,
-          "precip_mm": 40.2,
-          "fire_hotspots": 23064
+          "discharge_m3s": 108496.2,
+          "precip_mm": 41.8,
+          "fire_hotspots": 20929
         },
         {
           "month_num": 9,
           "label": "Sep",
-          "discharge_m3s": 70473.4,
-          "precip_mm": 54.6,
-          "fire_hotspots": 26715
+          "discharge_m3s": 77622.4,
+          "precip_mm": 67.8,
+          "fire_hotspots": 26414
         },
         {
           "month_num": 10,
           "label": "Oct",
-          "discharge_m3s": 57924.8,
-          "precip_mm": 97.2,
-          "fire_hotspots": 11619
+          "discharge_m3s": 66313.3,
+          "precip_mm": 95.7,
+          "fire_hotspots": 11864
         },
         {
           "month_num": 11,
           "label": "Nov",
-          "discharge_m3s": 66906.5,
-          "precip_mm": 127.1,
-          "fire_hotspots": 6260
+          "discharge_m3s": 77507.4,
+          "precip_mm": 140.3,
+          "fire_hotspots": 6519
         },
         {
           "month_num": 12,
           "label": "Dec",
-          "discharge_m3s": 94622.1,
-          "precip_mm": 243.6,
-          "fire_hotspots": 1555
+          "discharge_m3s": 105423.6,
+          "precip_mm": 264.9,
+          "fire_hotspots": 2384
         }
       ]
     },
@@ -3043,86 +4503,86 @@
         {
           "month_num": 1,
           "label": "Jan",
-          "discharge_m3s": 5.4,
-          "precip_mm": 283.7,
-          "fire_hotspots": 376
+          "discharge_m3s": 6.1,
+          "precip_mm": 299.4,
+          "fire_hotspots": 625
         },
         {
           "month_num": 2,
           "label": "Feb",
-          "discharge_m3s": 7.9,
-          "precip_mm": 341.5,
-          "fire_hotspots": 361
+          "discharge_m3s": 8.3,
+          "precip_mm": 332.1,
+          "fire_hotspots": 415
         },
         {
           "month_num": 3,
           "label": "Mar",
-          "discharge_m3s": 9.1,
-          "precip_mm": 320.4,
-          "fire_hotspots": 429
+          "discharge_m3s": 9.6,
+          "precip_mm": 334.0,
+          "fire_hotspots": 743
         },
         {
           "month_num": 4,
           "label": "Apr",
-          "discharge_m3s": 9.3,
-          "precip_mm": 222.5,
-          "fire_hotspots": 291
+          "discharge_m3s": 9.6,
+          "precip_mm": 244.3,
+          "fire_hotspots": 372
         },
         {
           "month_num": 5,
           "label": "May",
-          "discharge_m3s": 6.7,
-          "precip_mm": 91.9,
-          "fire_hotspots": 1602
+          "discharge_m3s": 7.2,
+          "precip_mm": 122.3,
+          "fire_hotspots": 1243
         },
         {
           "month_num": 6,
           "label": "Jun",
-          "discharge_m3s": 3.7,
-          "precip_mm": 37.7,
-          "fire_hotspots": 2955
+          "discharge_m3s": 4.2,
+          "precip_mm": 39.5,
+          "fire_hotspots": 2493
         },
         {
           "month_num": 7,
           "label": "Jul",
-          "discharge_m3s": 1.9,
-          "precip_mm": 10.6,
-          "fire_hotspots": 5181
+          "discharge_m3s": 2.2,
+          "precip_mm": 12.0,
+          "fire_hotspots": 5014
         },
         {
           "month_num": 8,
           "label": "Aug",
-          "discharge_m3s": 1.0,
-          "precip_mm": 31.8,
-          "fire_hotspots": 23064
+          "discharge_m3s": 1.1,
+          "precip_mm": 34.4,
+          "fire_hotspots": 20929
         },
         {
           "month_num": 9,
           "label": "Sep",
-          "discharge_m3s": 0.7,
-          "precip_mm": 58.8,
-          "fire_hotspots": 26715
+          "discharge_m3s": 0.9,
+          "precip_mm": 70.6,
+          "fire_hotspots": 26414
         },
         {
           "month_num": 10,
           "label": "Oct",
-          "discharge_m3s": 0.8,
-          "precip_mm": 135.3,
-          "fire_hotspots": 11619
+          "discharge_m3s": 1.2,
+          "precip_mm": 156.4,
+          "fire_hotspots": 11864
         },
         {
           "month_num": 11,
           "label": "Nov",
-          "discharge_m3s": 1.5,
-          "precip_mm": 145.7,
-          "fire_hotspots": 6260
+          "discharge_m3s": 2.0,
+          "precip_mm": 191.7,
+          "fire_hotspots": 6519
         },
         {
           "month_num": 12,
           "label": "Dec",
-          "discharge_m3s": 2.8,
-          "precip_mm": 221.0,
-          "fire_hotspots": 1555
+          "discharge_m3s": 3.6,
+          "precip_mm": 262.5,
+          "fire_hotspots": 2384
         }
       ]
     },
@@ -3232,86 +4692,86 @@
         {
           "month_num": 1,
           "label": "Jan",
-          "discharge_m3s": 5.4,
-          "precip_mm": 283.7,
-          "fire_hotspots": 376
+          "discharge_m3s": 6.1,
+          "precip_mm": 299.4,
+          "fire_hotspots": 625
         },
         {
           "month_num": 2,
           "label": "Feb",
-          "discharge_m3s": 7.9,
-          "precip_mm": 341.5,
-          "fire_hotspots": 361
+          "discharge_m3s": 8.3,
+          "precip_mm": 332.1,
+          "fire_hotspots": 415
         },
         {
           "month_num": 3,
           "label": "Mar",
-          "discharge_m3s": 9.1,
-          "precip_mm": 320.4,
-          "fire_hotspots": 429
+          "discharge_m3s": 9.6,
+          "precip_mm": 334.0,
+          "fire_hotspots": 743
         },
         {
           "month_num": 4,
           "label": "Apr",
-          "discharge_m3s": 9.3,
-          "precip_mm": 222.5,
-          "fire_hotspots": 291
+          "discharge_m3s": 9.6,
+          "precip_mm": 244.3,
+          "fire_hotspots": 372
         },
         {
           "month_num": 5,
           "label": "May",
-          "discharge_m3s": 6.7,
-          "precip_mm": 91.9,
-          "fire_hotspots": 1602
+          "discharge_m3s": 7.2,
+          "precip_mm": 122.3,
+          "fire_hotspots": 1243
         },
         {
           "month_num": 6,
           "label": "Jun",
-          "discharge_m3s": 3.7,
-          "precip_mm": 37.7,
-          "fire_hotspots": 2955
+          "discharge_m3s": 4.2,
+          "precip_mm": 39.5,
+          "fire_hotspots": 2493
         },
         {
           "month_num": 7,
           "label": "Jul",
-          "discharge_m3s": 1.9,
-          "precip_mm": 10.6,
-          "fire_hotspots": 5181
+          "discharge_m3s": 2.2,
+          "precip_mm": 12.0,
+          "fire_hotspots": 5014
         },
         {
           "month_num": 8,
           "label": "Aug",
-          "discharge_m3s": 1.0,
-          "precip_mm": 31.8,
-          "fire_hotspots": 23064
+          "discharge_m3s": 1.1,
+          "precip_mm": 34.4,
+          "fire_hotspots": 20929
         },
         {
           "month_num": 9,
           "label": "Sep",
-          "discharge_m3s": 0.7,
-          "precip_mm": 58.8,
-          "fire_hotspots": 26715
+          "discharge_m3s": 0.9,
+          "precip_mm": 70.6,
+          "fire_hotspots": 26414
         },
         {
           "month_num": 10,
           "label": "Oct",
-          "discharge_m3s": 0.8,
-          "precip_mm": 135.3,
-          "fire_hotspots": 11619
+          "discharge_m3s": 1.2,
+          "precip_mm": 156.4,
+          "fire_hotspots": 11864
         },
         {
           "month_num": 11,
           "label": "Nov",
-          "discharge_m3s": 1.5,
-          "precip_mm": 145.7,
-          "fire_hotspots": 6260
+          "discharge_m3s": 2.0,
+          "precip_mm": 191.7,
+          "fire_hotspots": 6519
         },
         {
           "month_num": 12,
           "label": "Dec",
-          "discharge_m3s": 2.8,
-          "precip_mm": 221.0,
-          "fire_hotspots": 1555
+          "discharge_m3s": 3.6,
+          "precip_mm": 262.5,
+          "fire_hotspots": 2384
         }
       ]
     },
@@ -3428,91 +4888,574 @@
         {
           "month_num": 1,
           "label": "Jan",
-          "discharge_m3s": 25525.3,
-          "precip_mm": 314.1,
-          "fire_hotspots": 376
+          "discharge_m3s": 29244.8,
+          "precip_mm": 333.2,
+          "fire_hotspots": 625
         },
         {
           "month_num": 2,
           "label": "Feb",
-          "discharge_m3s": 31960.5,
-          "precip_mm": 300.4,
-          "fire_hotspots": 361
+          "discharge_m3s": 36457.4,
+          "precip_mm": 325.0,
+          "fire_hotspots": 415
         },
         {
           "month_num": 3,
           "label": "Mar",
-          "discharge_m3s": 35276.0,
-          "precip_mm": 294.5,
-          "fire_hotspots": 429
+          "discharge_m3s": 40047.1,
+          "precip_mm": 327.6,
+          "fire_hotspots": 743
         },
         {
           "month_num": 4,
           "label": "Apr",
-          "discharge_m3s": 32334.0,
-          "precip_mm": 251.3,
-          "fire_hotspots": 291
+          "discharge_m3s": 34691.0,
+          "precip_mm": 268.4,
+          "fire_hotspots": 372
         },
         {
           "month_num": 5,
           "label": "May",
-          "discharge_m3s": 20837.1,
-          "precip_mm": 105.2,
-          "fire_hotspots": 1602
+          "discharge_m3s": 23846.9,
+          "precip_mm": 136.1,
+          "fire_hotspots": 1243
         },
         {
           "month_num": 6,
           "label": "Jun",
-          "discharge_m3s": 11787.3,
-          "precip_mm": 40.4,
-          "fire_hotspots": 2955
+          "discharge_m3s": 14417.2,
+          "precip_mm": 39.6,
+          "fire_hotspots": 2493
         },
         {
           "month_num": 7,
           "label": "Jul",
-          "discharge_m3s": 7371.6,
-          "precip_mm": 10.4,
-          "fire_hotspots": 5181
+          "discharge_m3s": 9036.8,
+          "precip_mm": 8.7,
+          "fire_hotspots": 5014
         },
         {
           "month_num": 8,
           "label": "Aug",
-          "discharge_m3s": 5945.0,
-          "precip_mm": 48.4,
-          "fire_hotspots": 23064
+          "discharge_m3s": 7059.9,
+          "precip_mm": 47.7,
+          "fire_hotspots": 20929
         },
         {
           "month_num": 9,
           "label": "Sep",
-          "discharge_m3s": 4996.6,
-          "precip_mm": 74.7,
-          "fire_hotspots": 26715
+          "discharge_m3s": 5837.0,
+          "precip_mm": 81.2,
+          "fire_hotspots": 26414
         },
         {
           "month_num": 10,
           "label": "Oct",
-          "discharge_m3s": 4879.0,
-          "precip_mm": 130.3,
-          "fire_hotspots": 11619
+          "discharge_m3s": 6200.3,
+          "precip_mm": 146.9,
+          "fire_hotspots": 11864
         },
         {
           "month_num": 11,
           "label": "Nov",
-          "discharge_m3s": 7595.8,
-          "precip_mm": 205.2,
-          "fire_hotspots": 6260
+          "discharge_m3s": 9614.8,
+          "precip_mm": 239.5,
+          "fire_hotspots": 6519
         },
         {
           "month_num": 12,
           "label": "Dec",
-          "discharge_m3s": 14798.7,
-          "precip_mm": 258.8,
-          "fire_hotspots": 1555
+          "discharge_m3s": 18137.8,
+          "precip_mm": 310.0,
+          "fire_hotspots": 2384
         }
       ]
     }
   ],
   "events": [
+    {
+      "id": "el_nino_drought_2015",
+      "scope": "amazon",
+      "name": "2015\u201316 El Ni\u00f1o Mega-Drought Baseline",
+      "timing": "Nov 2015 \u2013 Jan 2016",
+      "timeline_month": "2015-11",
+      "color": "#F59E0B",
+      "region_id": "manaus",
+      "bbox": [
+        -60.35,
+        -3.35,
+        -59.7,
+        -2.95
+      ],
+      "center": [
+        -60.025,
+        -3.15
+      ],
+      "headline_metric": "15.48% exposed channel bars (\u0394VV \u2265 +2 dB) \u2014 historic comparator for 2023\u201324",
+      "summary": "Early Sentinel-1A C-band imagery captures the 2015\u201316 'Godzilla' El Ni\u00f1o drought at Manaus, revealing bright radar backscatter off exposed river mudflats/sandbars where specular water retreated.",
+      "default_layer_id": "crisis_elnino15_chg",
+      "sar_physics": {
+        "primary_sensitivity": "Rough Exposed Alluvium (+\u0394VV) + Canopy Water Deficit",
+        "roughness_mechanism": "Retreating river stage replaces smooth specular water with rough wet alluvial banks and tree roots.",
+        "dielectric_mechanism": "Drought reduces soil permittivity along terra firme ridges while muddy exposed bars reflect strongly back.",
+        "polarization_note": "VV co-pol cleanly separates newly rough exposed bars (+\u0394VV) from remaining specular channels.",
+        "frequency_comparison": "Early C-band archive provides the 10-year climate baseline now extended globally by NISAR L-band."
+      },
+      "drivers": {
+        "natural_driver": "2015\u20132016 Extreme El Ni\u00f1o warming collapsed convective wet-season moisture transport across central Amazonia.",
+        "human_driver": "Dry understory fuel accelerated dry-season fire escapes along Tapaj\u00f3s & Solim\u00f5es river corridors."
+      },
+      "comparison_pair": {
+        "before_label": "Normal High-Water Baseline (2017-05-11)",
+        "after_label": "El Ni\u00f1o Extreme Low (2016-01-17)",
+        "delta_summary": "15.48% channel sandbar exposure compared against 2023\u201324 drought",
+        "histogram": [
+          {
+            "range_db": "-24..-21",
+            "mid_db": -22.5,
+            "before_pct": 7.8,
+            "after_pct": 2.0
+          },
+          {
+            "range_db": "-21..-18",
+            "mid_db": -19.5,
+            "before_pct": 11.5,
+            "after_pct": 8.9
+          },
+          {
+            "range_db": "-18..-15",
+            "mid_db": -16.5,
+            "before_pct": 3.0,
+            "after_pct": 5.7
+          },
+          {
+            "range_db": "-15..-12",
+            "mid_db": -13.5,
+            "before_pct": 2.3,
+            "after_pct": 1.5
+          },
+          {
+            "range_db": "-12..-9",
+            "mid_db": -10.5,
+            "before_pct": 3.9,
+            "after_pct": 2.9
+          },
+          {
+            "range_db": "-9..-6",
+            "mid_db": -7.5,
+            "before_pct": 56.2,
+            "after_pct": 70.4
+          },
+          {
+            "range_db": "-6..-3",
+            "mid_db": -4.5,
+            "before_pct": 13.5,
+            "after_pct": 6.9
+          },
+          {
+            "range_db": "-3..0",
+            "mid_db": -1.5,
+            "before_pct": 1.4,
+            "after_pct": 1.3
+          },
+          {
+            "range_db": "0..3",
+            "mid_db": 1.5,
+            "before_pct": 0.4,
+            "after_pct": 0.4
+          }
+        ]
+      },
+      "layers": [
+        {
+          "id": "crisis_elnino15_chg",
+          "title": "El Ni\u00f1o Low-Water Sandbar Exposure (\u0394VV)",
+          "role": "change",
+          "sensor": "Sentinel-1",
+          "band": "C-band (5.6 cm)",
+          "polarization": "\u0394VV",
+          "acquisition_date": "2016-01-17",
+          "granule_id": "S1A_IW_GRDH_1SDV_20160117T093855_20160117T093920_009532_00DD8F_rtc",
+          "asset_path": "assets/crisis_elnino2015_drought.png",
+          "bbox": [
+            -60.35,
+            -3.35,
+            -59.7,
+            -2.95
+          ],
+          "stats": {
+            "exposed_mudflat_sandbar_pct": 15.48,
+            "desiccation_drop_pct": 1.76
+          },
+          "legend": [
+            {
+              "label": "Exposed Mudflats / Sandbars (+\u0394VV \u2265 +2 dB)",
+              "color": "#F59E0B"
+            },
+            {
+              "label": "Contracted Moisture Channel (\u0394VV \u2264 -2 dB)",
+              "color": "#38BDF8"
+            }
+          ],
+          "source_id": "pc_s1_rtc"
+        },
+        {
+          "id": "crisis_elnino15_vv",
+          "title": "El Ni\u00f1o Drought Sentinel-1 VV (Jan 2016)",
+          "role": "after",
+          "sensor": "Sentinel-1",
+          "band": "C-band (5.6 cm)",
+          "polarization": "VV",
+          "acquisition_date": "2016-01-17",
+          "granule_id": "S1A_IW_GRDH_1SDV_20160117T093855_20160117T093920_009532_00DD8F_rtc",
+          "asset_path": "assets/crisis_elnino2015_vv.png",
+          "bbox": [
+            -60.35,
+            -3.35,
+            -59.7,
+            -2.95
+          ],
+          "stats": {
+            "p10_db": -18.15,
+            "median_db": -7.05,
+            "p90_db": -6.12
+          },
+          "legend": [
+            {
+              "label": "Remaining Channel (<-15 dB)",
+              "color": "#111827"
+            },
+            {
+              "label": "Exposed Bars / Forest (>-7 dB)",
+              "color": "#E5E7EB"
+            }
+          ],
+          "source_id": "pc_s1_rtc"
+        }
+      ]
+    },
+    {
+      "id": "larsen_c_a68_2017",
+      "scope": "global",
+      "name": "Larsen C Giant Iceberg A-68 Calving",
+      "timing": "Jul 2017",
+      "timeline_month": "2017-07",
+      "color": "#38BDF8",
+      "region_id": "global_ant_larsen",
+      "bbox": [
+        -61.8,
+        -68.4,
+        -59.6,
+        -67.0
+      ],
+      "center": [
+        -60.7,
+        -67.7
+      ],
+      "headline_metric": "5,800 km\u00b2 calving fracture (13.94% open rift lead) tracked in Antarctic polar darkness",
+      "summary": "In July 2017\u2014during perpetual Antarctic winter polar night\u2014a 1-trillion-ton iceberg (A-68) broke free from the Larsen C Ice Shelf. Active C-band SAR pierced 24-hour darkness and cloud cover to watch the widening dark Weddell rift lead.",
+      "default_layer_id": "crisis_larsen_rift",
+      "sar_physics": {
+        "primary_sensitivity": "Glacial Firn Volume Scattering vs. Dark Open Rift Water",
+        "roughness_mechanism": "Thick continental shelf firn/crevasses scatter microwave energy brightly (-5 to -8 dB), whereas calm ocean leads reflect specularly away.",
+        "dielectric_mechanism": "Contrast between cold dry glacial firn (\u03b5r ~2.1) and high-dielectric saline seawater (\u03b5r ~80) sharply outlines every crack.",
+        "polarization_note": "HH polarization provides maximum contrast between rough sea-ice brash and consolidated calving shelf walls.",
+        "frequency_comparison": "C-band tracks surface crevasse fracture edges; NISAR L-band interferometry measures sub-surface ice-shelf flow acceleration."
+      },
+      "drivers": {
+        "natural_driver": "Multi-decadal structural rift propagation across pinning suture zones of Larsen C.",
+        "human_driver": "Antarctic Peninsula atmospheric and subsurface ocean warming weakens stabilizing sea-ice buttresses."
+      },
+      "comparison_pair": {
+        "before_label": "Pre-Calving Shelf (2017-06-15)",
+        "after_label": "Post-Calving Rift & Drift (2017-07-15)",
+        "delta_summary": "13.94% dark open seawater/thin lead opened as A-68 detached (~200 km long)",
+        "histogram": [
+          {
+            "range_db": "-24..-21",
+            "mid_db": -22.5,
+            "before_pct": 0.1,
+            "after_pct": 1.1
+          },
+          {
+            "range_db": "-21..-18",
+            "mid_db": -19.5,
+            "before_pct": 0.5,
+            "after_pct": 0.5
+          },
+          {
+            "range_db": "-18..-15",
+            "mid_db": -16.5,
+            "before_pct": 0.8,
+            "after_pct": 0.6
+          },
+          {
+            "range_db": "-15..-12",
+            "mid_db": -13.5,
+            "before_pct": 0.9,
+            "after_pct": 1.1
+          },
+          {
+            "range_db": "-12..-9",
+            "mid_db": -10.5,
+            "before_pct": 1.1,
+            "after_pct": 2.0
+          },
+          {
+            "range_db": "-9..-6",
+            "mid_db": -7.5,
+            "before_pct": 10.5,
+            "after_pct": 29.3
+          },
+          {
+            "range_db": "-6..-3",
+            "mid_db": -4.5,
+            "before_pct": 41.8,
+            "after_pct": 21.1
+          },
+          {
+            "range_db": "-3..0",
+            "mid_db": -1.5,
+            "before_pct": 4.3,
+            "after_pct": 11.9
+          },
+          {
+            "range_db": "0..3",
+            "mid_db": 1.5,
+            "before_pct": 39.9,
+            "after_pct": 32.4
+          }
+        ]
+      },
+      "layers": [
+        {
+          "id": "crisis_larsen_rift",
+          "title": "A-68 Calving Rift & Open Lead (\u0394HH)",
+          "role": "change",
+          "sensor": "Sentinel-1",
+          "band": "C-band (5.6 cm)",
+          "polarization": "\u0394HH",
+          "acquisition_date": "2017-07-15",
+          "granule_id": "S1B_IW_GRDH_1SSH_20170715T073708_20170715T073737_006495_00B6C1_rtc",
+          "asset_path": "assets/crisis_larsen_a68_rift.png",
+          "bbox": [
+            -61.8,
+            -68.4,
+            -59.6,
+            -67.0
+          ],
+          "stats": {
+            "rift_open_lead_pct": 13.94,
+            "calving_shift_pct": 4.48
+          },
+          "legend": [
+            {
+              "label": "Widened Polar Ocean Lead (\u0394HH \u2264 -2.2 dB)",
+              "color": "#38BDF8"
+            },
+            {
+              "label": "Adrift Fractured Ice Front (+\u0394HH)",
+              "color": "#E0F2FE"
+            }
+          ],
+          "source_id": "pc_s1_rtc"
+        },
+        {
+          "id": "crisis_larsen_hh",
+          "title": "Polar-Night C-Band HH Backscatter",
+          "role": "after",
+          "sensor": "Sentinel-1",
+          "band": "C-band (5.6 cm)",
+          "polarization": "HH",
+          "acquisition_date": "2017-07-15",
+          "granule_id": "S1B_IW_GRDH_1SSH_20170715T073708_20170715T073737_006495_00B6C1_rtc",
+          "asset_path": "assets/crisis_larsen_a68_hh.png",
+          "bbox": [
+            -61.8,
+            -68.4,
+            -59.6,
+            -67.0
+          ],
+          "stats": {
+            "p10_db": -7.48,
+            "median_db": -5.03,
+            "p90_db": 0.23
+          },
+          "legend": [
+            {
+              "label": "Open Polar Lead (<-17 dB)",
+              "color": "#111827"
+            },
+            {
+              "label": "Bright Shelf Crevasses (>-5 dB)",
+              "color": "#F8FAFC"
+            }
+          ],
+          "source_id": "pc_s1_rtc"
+        }
+      ]
+    },
+    {
+      "id": "amazon_fire_surge_2019",
+      "scope": "amazon",
+      "name": "Aug 2019 BR-163 Clearing & Fire Surge",
+      "timing": "Aug 2019",
+      "timeline_month": "2019-08",
+      "color": "#EF4444",
+      "region_id": "global_amz_br163",
+      "bbox": [
+        -55.65,
+        -7.35,
+        -55.1,
+        -6.8
+      ],
+      "center": [
+        -55.38,
+        -7.08
+      ],
+      "headline_metric": "23.47% fresh geometric clearing (\u0394VH \u2264 -2.2 dB) through Sao Paulo smoke plume",
+      "summary": "Sentinel-1 C-band VH cuts straight through the August 2019 smoke blankets along Par\u00e1's BR-163 frontier, exposing rectangular pasture clearing cuts made weeks ahead of organized slash burning.",
+      "default_layer_id": "crisis_br163_scars",
+      "sar_physics": {
+        "primary_sensitivity": "3D Canopy Depolarization Loss + Ash Exposure",
+        "roughness_mechanism": "Felled trees eliminate multi-bounce leaves/branches, dropping cross-polarized VH backscatter immediately before optical sensors can clear smoke.",
+        "dielectric_mechanism": "Felled slash dries rapidly (~12% fuel moisture) so backscatter falls before and during August burning.",
+        "polarization_note": "\u0394VH cross-pol isolates vertical forest structure loss far better than co-pol VV over sloped terrain.",
+        "frequency_comparison": "C-band catches newly felled clearings every 6\u201312 days; L-band reveals residual logs & selective understory degradation."
+      },
+      "drivers": {
+        "natural_driver": "Peak dry-season sunshine in Par\u00e1 (Aug\u2013Sep) aided escape into edge-degraded forest.",
+        "human_driver": "Coordinated BR-163 land-grabbing & pasture expansion peaked during the Aug 2019 'Day of Fire'."
+      },
+      "comparison_pair": {
+        "before_label": "Pre-Clearing Forest VH (2019-06-03)",
+        "after_label": "Post-Fire Frontier (2019-08-26)",
+        "delta_summary": "23.47% clear-cut volume drop + 29.79% edge fire thinning",
+        "histogram": [
+          {
+            "range_db": "-24..-21",
+            "mid_db": -22.5,
+            "before_pct": 0.0,
+            "after_pct": 0.0
+          },
+          {
+            "range_db": "-21..-18",
+            "mid_db": -19.5,
+            "before_pct": 0.0,
+            "after_pct": 2.0
+          },
+          {
+            "range_db": "-18..-15",
+            "mid_db": -16.5,
+            "before_pct": 0.0,
+            "after_pct": 17.1
+          },
+          {
+            "range_db": "-15..-12",
+            "mid_db": -13.5,
+            "before_pct": 80.8,
+            "after_pct": 80.9
+          },
+          {
+            "range_db": "-12..-9",
+            "mid_db": -10.5,
+            "before_pct": 19.2,
+            "after_pct": 0.0
+          },
+          {
+            "range_db": "-9..-6",
+            "mid_db": -7.5,
+            "before_pct": 0.0,
+            "after_pct": 0.0
+          },
+          {
+            "range_db": "-6..-3",
+            "mid_db": -4.5,
+            "before_pct": 0.0,
+            "after_pct": 0.0
+          },
+          {
+            "range_db": "-3..0",
+            "mid_db": -1.5,
+            "before_pct": 0.0,
+            "after_pct": 0.0
+          },
+          {
+            "range_db": "0..3",
+            "mid_db": 1.5,
+            "before_pct": 0.0,
+            "after_pct": 0.0
+          }
+        ]
+      },
+      "layers": [
+        {
+          "id": "crisis_br163_scars",
+          "title": "BR-163 Geometric Clearing & Burn Scars (\u0394VH)",
+          "role": "change",
+          "sensor": "Sentinel-1",
+          "band": "C-band (5.6 cm)",
+          "polarization": "\u0394VH",
+          "acquisition_date": "2019-08-26",
+          "granule_id": "S1A_IW_GRDH_1SDV_20190826T091535_20190826T091600_028738_034106_rtc",
+          "asset_path": "assets/crisis_br163_2019_scars.png",
+          "bbox": [
+            -55.65,
+            -7.35,
+            -55.1,
+            -6.8
+          ],
+          "stats": {
+            "geometric_clearing_pct": 23.47,
+            "canopy_thinning_pct": 29.79
+          },
+          "legend": [
+            {
+              "label": "Severe Clear-Cut / Burn Scar (\u0394VH \u2264 -2.2 dB)",
+              "color": "#EF4444"
+            },
+            {
+              "label": "Canopy Thinning (-2.2..-1.2 dB)",
+              "color": "#FF9100"
+            }
+          ],
+          "source_id": "pc_s1_rtc"
+        },
+        {
+          "id": "crisis_br163_vh",
+          "title": "Post-Fire C-Band VH Backscatter (BR-163)",
+          "role": "after",
+          "sensor": "Sentinel-1",
+          "band": "C-band (5.6 cm)",
+          "polarization": "VH",
+          "acquisition_date": "2019-08-26",
+          "granule_id": "S1A_IW_GRDH_1SDV_20190826T091535_20190826T091600_028738_034106_rtc",
+          "asset_path": "assets/crisis_br163_2019_vh.png",
+          "bbox": [
+            -55.65,
+            -7.35,
+            -55.1,
+            -6.8
+          ],
+          "stats": {
+            "p10_db": -15.89,
+            "median_db": -13.52,
+            "p90_db": -12.66
+          },
+          "legend": [
+            {
+              "label": "Cleared Pasture (-22..-16 dB)",
+              "color": "#111827"
+            },
+            {
+              "label": "Intact Terra Firme (-12..-9 dB)",
+              "color": "#D1D5DB"
+            }
+          ],
+          "source_id": "pc_s1_rtc"
+        }
+      ]
+    },
     {
       "id": "aus_fires_2020",
       "scope": "global",
@@ -3668,6 +5611,167 @@
             {
               "label": "Intact Eucalypt Canopy (-12..-9 dB)",
               "color": "#D1D5DB"
+            }
+          ],
+          "source_id": "pc_s1_rtc"
+        }
+      ]
+    },
+    {
+      "id": "mauritius_spill_2020",
+      "scope": "global",
+      "name": "Mauritius Wakashio Oil Slick Damping",
+      "timing": "Aug 2020",
+      "timeline_month": "2020-08",
+      "color": "#A855F7",
+      "region_id": "global_mus_spill",
+      "bbox": [
+        57.62,
+        -20.48,
+        57.82,
+        -20.3
+      ],
+      "center": [
+        57.72,
+        -20.39
+      ],
+      "headline_metric": "5.08% viscous oil slick (VV \u2264 -17 dB) damping Bragg ocean waves",
+      "summary": "After MV Wakashio grounded off Pointe d'Esny, thick marine fuel oil smoothed centimeter-scale gravity-capillary waves inside the turquoise lagoon\u2014producing a pitch-black specular ribbon in Sentinel-1 C-band VV radar.",
+      "default_layer_id": "crisis_mus_slick",
+      "sar_physics": {
+        "primary_sensitivity": "Surface Capillary-Wave Roughness Damping (Bragg Scattering)",
+        "roughness_mechanism": "Clean trade-wind sea swells create 5\u201310 cm Bragg ripples that backscatter radar; viscous oil kills ripple formation, turning the slick into a dark radar mirror.",
+        "dielectric_mechanism": "Floating oil lowers the effective air-sea interface permittivity only slightly compared to the huge roughness drop.",
+        "polarization_note": "VV co-polarization provides the highest sea-clutter-to-slick signal ratio at moderate wind speeds.",
+        "frequency_comparison": "C-band (5.6 cm) excels at detecting thin 10 \u03bcm sheens because capillary wave wavelengths match its radar band."
+      },
+      "drivers": {
+        "natural_driver": "Southeast trade-wind chop pushed oil slicks westward into mangrove nurseries.",
+        "human_driver": "Bulk carrier MV Wakashio reef grounding released >1,000 tonnes of low-sulfur fuel oil."
+      },
+      "comparison_pair": {
+        "before_label": "Clean Trade-Wind Ocean (2020-07-05)",
+        "after_label": "Oil-Damped Lagoon Plume (2020-08-10)",
+        "delta_summary": "5.08% heavy slick + 9.83% thin oil sheen mapped day/night",
+        "histogram": [
+          {
+            "range_db": "-24..-21",
+            "mid_db": -22.5,
+            "before_pct": 0.0,
+            "after_pct": 0.4
+          },
+          {
+            "range_db": "-21..-18",
+            "mid_db": -19.5,
+            "before_pct": 0.0,
+            "after_pct": 3.2
+          },
+          {
+            "range_db": "-18..-15",
+            "mid_db": -16.5,
+            "before_pct": 3.9,
+            "after_pct": 14.1
+          },
+          {
+            "range_db": "-15..-12",
+            "mid_db": -13.5,
+            "before_pct": 39.8,
+            "after_pct": 26.5
+          },
+          {
+            "range_db": "-12..-9",
+            "mid_db": -10.5,
+            "before_pct": 2.2,
+            "after_pct": 4.5
+          },
+          {
+            "range_db": "-9..-6",
+            "mid_db": -7.5,
+            "before_pct": 37.1,
+            "after_pct": 45.9
+          },
+          {
+            "range_db": "-6..-3",
+            "mid_db": -4.5,
+            "before_pct": 16.3,
+            "after_pct": 5.0
+          },
+          {
+            "range_db": "-3..0",
+            "mid_db": -1.5,
+            "before_pct": 0.5,
+            "after_pct": 0.3
+          },
+          {
+            "range_db": "0..3",
+            "mid_db": 1.5,
+            "before_pct": 0.2,
+            "after_pct": 0.1
+          }
+        ]
+      },
+      "layers": [
+        {
+          "id": "crisis_mus_slick",
+          "title": "Oil-Damped Capillary Bragg Slick (\u0394VV)",
+          "role": "change",
+          "sensor": "Sentinel-1",
+          "band": "C-band (5.6 cm)",
+          "polarization": "\u0394VV",
+          "acquisition_date": "2020-08-10",
+          "granule_id": "S1B_IW_GRDH_1SDV_20200810T013755_20200810T013820_022854_02B625_rtc",
+          "asset_path": "assets/crisis_mauritius_oil_slick.png",
+          "bbox": [
+            57.62,
+            -20.48,
+            57.82,
+            -20.3
+          ],
+          "stats": {
+            "heavy_oil_slick_pct": 5.08,
+            "bragg_damped_sheen_pct": 9.83
+          },
+          "legend": [
+            {
+              "label": "Viscous Fuel Oil Slick (VV \u2264 -17 dB)",
+              "color": "#A855F7"
+            },
+            {
+              "label": "Bragg-Damped Lagoon Sheen (-\u0394VV)",
+              "color": "#C084FC"
+            }
+          ],
+          "source_id": "pc_s1_rtc"
+        },
+        {
+          "id": "crisis_mus_vv",
+          "title": "Sentinel-1 VV Reef Backscatter (Aug 2020)",
+          "role": "after",
+          "sensor": "Sentinel-1",
+          "band": "C-band (5.6 cm)",
+          "polarization": "VV",
+          "acquisition_date": "2020-08-10",
+          "granule_id": "S1B_IW_GRDH_1SDV_20200810T013755_20200810T013820_022854_02B625_rtc",
+          "asset_path": "assets/crisis_mauritius_post_vv.png",
+          "bbox": [
+            57.62,
+            -20.48,
+            57.82,
+            -20.3
+          ],
+          "stats": {
+            "p10_db": -15.65,
+            "median_db": -8.65,
+            "p90_db": -6.34
+          },
+          "legend": [
+            {
+              "label": "Smooth Oil Mirror (<-18 dB)",
+              "color": "#111827"
+            },
+            {
+              "label": "Wind-Roughened Sea & Land (>-10 dB)",
+              "color": "#E5E7EB"
             }
           ],
           "source_id": "pc_s1_rtc"
@@ -3906,6 +6010,171 @@
             {
               "label": "Permanent River Channel",
               "color": "#1565C0"
+            }
+          ],
+          "source_id": "pc_s1_rtc"
+        }
+      ]
+    },
+    {
+      "id": "lapalma_volcano_2021",
+      "scope": "global",
+      "name": "La Palma Cumbre Vieja Lava & Deformation",
+      "timing": "Oct 2021",
+      "timeline_month": "2021-10",
+      "color": "#F97316",
+      "region_id": "global_esp_lapalma",
+      "bbox": [
+        -17.96,
+        28.54,
+        -17.8,
+        28.68
+      ],
+      "center": [
+        -17.88,
+        28.61
+      ],
+      "headline_metric": "+2.18% jagged aa-lava delta (+\u0394VH \u2265 +1.25 dB) mapped beneath volcanic ash plumes",
+      "summary": "During the 85-day Cumbre Vieja eruption, dense SO2 and tephra ash clouds blinded optical satellites. Sentinel-1 microwave radar pierced the plume to map advancing jagged aa basalt flows (+\u0394VH) and magma inflation.",
+      "default_layer_id": "crisis_lapalma_lava",
+      "sar_physics": {
+        "primary_sensitivity": "Centimeter Lava Surface Roughness (+\u0394VH) + Magma InSAR Phase",
+        "roughness_mechanism": "Cooling jagged 'aa' clinker basalt acts as a rough volume scatterer, surging +2 to +5 dB brighter than older banana terraces or smooth fine ash blankets.",
+        "dielectric_mechanism": "Solidified dense iron-rich basalt holds low water content (\u03b5r ~5), making geometry/roughness the dominant bright signal.",
+        "polarization_note": "Positive \u0394VH separates turbulent clinker basalt flows from smooth fine tephra deposits.",
+        "frequency_comparison": "NISAR L-band maintains InSAR phase coherence across ashfall zones where shorter C-band decorrelates rapidly."
+      },
+      "drivers": {
+        "natural_driver": "Deep mantle magma dike injection beneath Cumbre Vieja volcanic rift zone.",
+        "human_driver": "Advance lava-delta burial across Los Llanos & Todoque banana plantations and coastal infrastructure."
+      },
+      "comparison_pair": {
+        "before_label": "Pre-Eruption Valley (2021-09-02)",
+        "after_label": "Active Lava Delta (2021-11-01)",
+        "delta_summary": "+2.18% rough basalt advance mapped through opaque eruption ash",
+        "histogram": [
+          {
+            "range_db": "-24..-21",
+            "mid_db": -22.5,
+            "before_pct": 22.6,
+            "after_pct": 23.2
+          },
+          {
+            "range_db": "-21..-18",
+            "mid_db": -19.5,
+            "before_pct": 1.2,
+            "after_pct": 4.5
+          },
+          {
+            "range_db": "-18..-15",
+            "mid_db": -16.5,
+            "before_pct": 30.3,
+            "after_pct": 33.3
+          },
+          {
+            "range_db": "-15..-12",
+            "mid_db": -13.5,
+            "before_pct": 38.5,
+            "after_pct": 33.6
+          },
+          {
+            "range_db": "-12..-9",
+            "mid_db": -10.5,
+            "before_pct": 7.3,
+            "after_pct": 5.3
+          },
+          {
+            "range_db": "-9..-6",
+            "mid_db": -7.5,
+            "before_pct": 0.1,
+            "after_pct": 0.1
+          },
+          {
+            "range_db": "-6..-3",
+            "mid_db": -4.5,
+            "before_pct": 0.0,
+            "after_pct": 0.0
+          },
+          {
+            "range_db": "-3..0",
+            "mid_db": -1.5,
+            "before_pct": 0.0,
+            "after_pct": 0.0
+          },
+          {
+            "range_db": "0..3",
+            "mid_db": 1.5,
+            "before_pct": 0.0,
+            "after_pct": 0.0
+          }
+        ]
+      },
+      "layers": [
+        {
+          "id": "crisis_lapalma_lava",
+          "title": "Jagged Aa-Lava Flow (+\u0394VH) & Magma Fringe",
+          "role": "change",
+          "sensor": "Sentinel-1",
+          "band": "C-band (5.6 cm)",
+          "polarization": "\u0394VH + Phase",
+          "acquisition_date": "2021-11-01",
+          "granule_id": "S1A_IW_GRDH_1SDV_20211101T191350_20211101T191420_040382_04C94F_rtc",
+          "asset_path": "assets/crisis_lapalma_lava_insar.png",
+          "bbox": [
+            -17.96,
+            28.54,
+            -17.8,
+            28.68
+          ],
+          "stats": {
+            "rough_lava_flow_pct": 2.18,
+            "tephra_smooth_pct": 14.3
+          },
+          "legend": [
+            {
+              "label": "Active Rough Aa-Lava Flow (+\u0394VH \u2265 +1.25 dB)",
+              "color": "#F97316"
+            },
+            {
+              "label": "Fine Volcanic Ash Smoothing (-\u0394VH)",
+              "color": "#94A3B8"
+            },
+            {
+              "label": "Magma Chamber InSAR Strain Halo",
+              "color": "#EC4899"
+            }
+          ],
+          "source_id": "pc_s1_rtc"
+        },
+        {
+          "id": "crisis_lapalma_vh",
+          "title": "Ash-Penetrating Post-Eruption VH (Nov 2021)",
+          "role": "after",
+          "sensor": "Sentinel-1",
+          "band": "C-band (5.6 cm)",
+          "polarization": "VH",
+          "acquisition_date": "2021-11-01",
+          "granule_id": "S1A_IW_GRDH_1SDV_20211101T191350_20211101T191420_040382_04C94F_rtc",
+          "asset_path": "assets/crisis_lapalma_post_vh.png",
+          "bbox": [
+            -17.96,
+            28.54,
+            -17.8,
+            28.68
+          ],
+          "stats": {
+            "p10_db": -23.29,
+            "median_db": -15.64,
+            "p90_db": -12.76
+          },
+          "legend": [
+            {
+              "label": "Ocean / Smooth Ash (<-18 dB)",
+              "color": "#111827"
+            },
+            {
+              "label": "Jagged Basalt Lava Delta (>-8 dB)",
+              "color": "#F9FAFB"
             }
           ],
           "source_id": "pc_s1_rtc"
@@ -4765,6 +7034,167 @@
         }
       ],
       "scope": "amazon"
+    },
+    {
+      "id": "brazil_rs_flood_2024",
+      "scope": "global",
+      "name": "Porto Alegre & Gua\u00edba Catastrophic Flood",
+      "timing": "May 2024",
+      "timeline_month": "2024-05",
+      "color": "#0EA5E9",
+      "region_id": "global_bra_rs",
+      "bbox": [
+        -51.45,
+        -30.18,
+        -51.05,
+        -29.85
+      ],
+      "center": [
+        -51.25,
+        -30.01
+      ],
+      "headline_metric": "+14.3% submerged delta fields (-\u0394VV) & +8.18% urban double-bounce (+\u0394VV)",
+      "summary": "Amazonian 'flying rivers' stalled over Rio Grande do Sul in May 2024. Sentinel-1 simultaneously reveals dark specular floodwater submerging rice/soy deltas (-\u0394VV) alongside blazing urban building\u2013water double-bounce (+\u0394VV) inside Porto Alegre.",
+      "default_layer_id": "crisis_rs_flood",
+      "sar_physics": {
+        "primary_sensitivity": "Dual Dielectric Flood Mirror + Urban Dihedral Double-Bounce",
+        "roughness_mechanism": "Flat flooded farm deltas act as specular mirrors (-18 dB), whereas flooded concrete apartment blocks form 90\u00b0 corner reflectors sending intense double-bounce echoes (+3 to +6 dB).",
+        "dielectric_mechanism": "Standing urban water (\u03b5r ~80) acts like a dielectric mirror base beneath vertical walls.",
+        "polarization_note": "Co-polarized VV maximizes sensitivity to vertical building walls surrounded by rising Gua\u00edba water.",
+        "frequency_comparison": "Combining C-band open water with L-band urban/tree double-bounce distinguishes city-block inundation cleanly."
+      },
+      "drivers": {
+        "natural_driver": "Stalled atmospheric river fed by Amazon moisture blocked by an anomalous subtropical heat dome.",
+        "human_driver": "Paved Gua\u00edba floodplain expansion & overwhelmed urban flood-pump levees across Greater Porto Alegre."
+      },
+      "comparison_pair": {
+        "before_label": "Pre-Flood Delta Baseline (2023-11-25)",
+        "after_label": "Gua\u00edba Historic Flood (2024-05-11)",
+        "delta_summary": "+14.3% farmland/airport submerged + 8.18% urban dihedral surge",
+        "histogram": [
+          {
+            "range_db": "-24..-21",
+            "mid_db": -22.5,
+            "before_pct": 0.0,
+            "after_pct": 1.5
+          },
+          {
+            "range_db": "-21..-18",
+            "mid_db": -19.5,
+            "before_pct": 1.1,
+            "after_pct": 10.5
+          },
+          {
+            "range_db": "-18..-15",
+            "mid_db": -16.5,
+            "before_pct": 10.9,
+            "after_pct": 7.2
+          },
+          {
+            "range_db": "-15..-12",
+            "mid_db": -13.5,
+            "before_pct": 6.5,
+            "after_pct": 5.0
+          },
+          {
+            "range_db": "-12..-9",
+            "mid_db": -10.5,
+            "before_pct": 16.4,
+            "after_pct": 8.5
+          },
+          {
+            "range_db": "-9..-6",
+            "mid_db": -7.5,
+            "before_pct": 43.2,
+            "after_pct": 36.6
+          },
+          {
+            "range_db": "-6..-3",
+            "mid_db": -4.5,
+            "before_pct": 18.1,
+            "after_pct": 21.4
+          },
+          {
+            "range_db": "-3..0",
+            "mid_db": -1.5,
+            "before_pct": 2.9,
+            "after_pct": 6.7
+          },
+          {
+            "range_db": "0..3",
+            "mid_db": 1.5,
+            "before_pct": 1.1,
+            "after_pct": 2.7
+          }
+        ]
+      },
+      "layers": [
+        {
+          "id": "crisis_rs_flood",
+          "title": "Open Floodwater & Urban Double-Bounce (\u0394VV)",
+          "role": "change",
+          "sensor": "Sentinel-1",
+          "band": "C-band (5.6 cm)",
+          "polarization": "\u0394VV",
+          "acquisition_date": "2024-05-11",
+          "granule_id": "S1A_IW_GRDH_1SDV_20240511T084943_20240511T085008_053821_068A6E_rtc",
+          "asset_path": "assets/crisis_brazil_rs_flood.png",
+          "bbox": [
+            -51.45,
+            -30.18,
+            -51.05,
+            -29.85
+          ],
+          "stats": {
+            "submerged_plain_pct": 14.3,
+            "urban_double_bounce_pct": 8.18
+          },
+          "legend": [
+            {
+              "label": "Submerged Delta & Cropland (\u0394VV \u2264 -2.5 dB)",
+              "color": "#00E5FF"
+            },
+            {
+              "label": "Flooded Urban Double-Bounce (\u0394VV \u2265 +2.2 dB)",
+              "color": "#F472B6"
+            }
+          ],
+          "source_id": "pc_s1_rtc"
+        },
+        {
+          "id": "crisis_rs_vv",
+          "title": "Porto Alegre Peak Flood Sentinel-1 VV",
+          "role": "after",
+          "sensor": "Sentinel-1",
+          "band": "C-band (5.6 cm)",
+          "polarization": "VV",
+          "acquisition_date": "2024-05-11",
+          "granule_id": "S1A_IW_GRDH_1SDV_20240511T084943_20240511T085008_053821_068A6E_rtc",
+          "asset_path": "assets/crisis_brazil_rs_vv.png",
+          "bbox": [
+            -51.45,
+            -30.18,
+            -51.05,
+            -29.85
+          ],
+          "stats": {
+            "p10_db": -18.64,
+            "median_db": -7.33,
+            "p90_db": -3.13
+          },
+          "legend": [
+            {
+              "label": "Deep Flooded Gua\u00edba Basin (<-16 dB)",
+              "color": "#111827"
+            },
+            {
+              "label": "Flooded Urban Blocks (>-4 dB)",
+              "color": "#F9FAFB"
+            }
+          ],
+          "source_id": "pc_s1_rtc"
+        }
+      ]
     },
     {
       "id": "drought_fires_2024",
